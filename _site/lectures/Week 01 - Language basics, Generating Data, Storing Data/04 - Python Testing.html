@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  
+
+  <title>04 - Python Testing - Data Focused Python</title>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/just-the-docs.css">
+
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-139655036-1', 'http://localhost:4000');
+      ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+  
+
+  
+    <script type="text/javascript" src="http://localhost:4000/assets/js/vendor/lunr.min.js"></script>
+  
+  <script type="text/javascript" src="http://localhost:4000/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>04 - Python Testing | Data Focused Python</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="04 - Python Testing" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/04%20-%20Python%20Testing.html" />
+<meta property="og:url" content="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/04%20-%20Python%20Testing.html" />
+<meta property="og:site_name" content="Data Focused Python" />
+<script type="application/ld+json">
+{"@type":"WebPage","url":"http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/04%20-%20Python%20Testing.html","headline":"04 - Python Testing","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+
+  <div class="page-wrap">
+    <div class="side-bar">
+      <a href="http://localhost:4000" class="site-title fs-6 lh-tight">Data Focused Python</a>
+      <span class="fs-3"><button class="js-main-nav-trigger navigation-list-toggle btn btn-outline" type="button" data-text-toggle="Hide">Menu</button></span>
+      <div class="navigation main-nav js-main-nav">
+        <nav role="navigation" aria-label="Main navigation">
+  <ul class="navigation-list">
+    
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/about.html" class="navigation-list-link"></a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/" class="navigation-list-link">Data Focused Python</a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/assignments" class="navigation-list-link">Assignments</a>
+            
+          </li>
+        
+      
+    
+      
+        
+          <li class="navigation-list-item active">
+            
+            <a href="http://localhost:4000/lectures" class="navigation-list-link">Lectures</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item  active">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data.html" class="navigation-list-link">Week 01 - Language basics, Generating Data, Storing Data</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/00%20-%20Getting%20Started.html" class="navigation-list-link">00 - Getting Started</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/01.a%20-%20Terminal%20Application.html" class="navigation-list-link">01.a - Terminal Application</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/01.b%20-%20Argparse.html" class="navigation-list-link">01.b - Argparse</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/02.a%20-%20Generating%20Synthetic%20Data.html" class="navigation-list-link">02.a - Generating Synthetic Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/02.b%20-%20Synthetic%20Data%20Generation.html" class="navigation-list-link">02.b - Synthetic Data Generation</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/02.c%20-%20Using%20Synthea.html" class="navigation-list-link">02.c - Using Synthea</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/03%20-%20Getting%20Data%20from%20a%20Database.html" class="navigation-list-link">03 - Getting Data from a Database</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/04%20-%20FHIR%20SQL.html" class="navigation-list-link">04 - FHIR SQL</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item  active">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/04%20-%20Python%20Testing.html" class="navigation-list-link active">04 - Python Testing</a>
+                              </li>
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/05%20-%20Start%20a%20process%20in%20Python.html" class="navigation-list-link">05 - Start a process in Python</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20unit%20testing,%20generating%20files.html" class="navigation-list-link">Week 01 - Language basics, unit testing, generating files</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries.html" class="navigation-list-link">Week 02 - Processing files using functions, classes, and libraries</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/01.a%20-%20File%20Processing.html" class="navigation-list-link">01.a - File Processing</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/01.b%20-%20CSV%20Files.html" class="navigation-list-link">01.b - CSV Files</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/01.c%20-%20JSON%20Files.html" class="navigation-list-link">01.c - JSON Files</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/01.d%20-%20XML%20Files.html" class="navigation-list-link">01.d - XML Files</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/02.a%20-%20Python%20Classes.html" class="navigation-list-link">02.a - Python Classes</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/02.b%20-%20Python%20Modules%20and%20Packages.html" class="navigation-list-link">02.b - Python Modules and Packages</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/03%20-%20Using%20fhirclient%20to%20parse%20data.html" class="navigation-list-link">03 - Using fhirclient to parse data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/04%20-%20Reading%20synthea%20data.html" class="navigation-list-link">04 - Reading synthea data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/05%20-%20Python%20Functions.html" class="navigation-list-link">05 - Python Functions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/06%20-%20Python%20Tuples.html" class="navigation-list-link">06 - Python Tuples</a>
+                              </li>
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/07%20-%20Getting%20Data%20from%20Web%20APIs.html" class="navigation-list-link">07 - Getting Data from Web APIs</a>
+                              </li>
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping.html" class="navigation-list-link">Week 03 - Comprehensions, Generators, and Grouping</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/01%20-%20Loops.html" class="navigation-list-link">01 - Loops</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/02%20-%20Lists%20and%20List%20Comprehensions.html" class="navigation-list-link">02 - Lists and List Comprehensions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/03%20-%20Sets%20and%20Set%20Comprehensions.html" class="navigation-list-link">03 - Sets and Set Comprehensions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/04.a%20-%20Dictionaries.html" class="navigation-list-link">04.a - Dictionaries</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/04.b%20-%20Dictionary%20Comprehensions.html" class="navigation-list-link">04.b - Dictionary Comprehensions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/05%20-%20Python%20Generators.html" class="navigation-list-link">05 - Python Generators</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/06%20-%20Cleaning%20and%20Transforming%20Data.html" class="navigation-list-link">06 - Cleaning and Transforming Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/07%20-%20Grouping%20Data.html" class="navigation-list-link">07 - Grouping Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization.html" class="navigation-list-link">Week 04 - Numpy, Pandas, Graphing & Visualization</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization/01%20-%20Descriptive%20Statistics.html" class="navigation-list-link">01 - Descriptive Statistics</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization/02%20-%20Basic%20Medical%20Data%20Visualization.html" class="navigation-list-link">02 - Basic Medical Data Visualization</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting.html" class="navigation-list-link">03 - Matplotlib Tutorial Python Plotting</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial.html" class="navigation-list-link">04 - The Ultimate Python Seaborn Tutorial</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth.html" class="navigation-list-link">Week 05 - Numpy & Pandas In-Depth</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/00%20-%20Additional%20Links.html" class="navigation-list-link">00 - Additional Links</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/01%20-%20NumPy%20Introduction.html" class="navigation-list-link">01 - NumPy Introduction</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/02%20-%20NumPy%20Data%20analysis.html" class="navigation-list-link">02 - NumPy Data analysis</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/03%20-%20Pandas%20Introduction.html" class="navigation-list-link">03 - Pandas Introduction</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/04.a%20-%20Pandas%20Data%20analysis%20Part%201.html" class="navigation-list-link">04.a - Pandas Data analysis Part 1</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/04.b%20-%20Pandas%20Data%20analysis%20Part%202.html" class="navigation-list-link">04.b - Pandas Data analysis Part 2</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping,%20Databases,%20and%20Other%20Data%20Sources.html" class="navigation-list-link">Week 06 - Web Scraping, Databases, and Other Data Sources</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping,%20Databases,%20and%20Other%20Data%20Sources/01.a%20-%20Getting%20Data%20from%20Web%20Pages.html" class="navigation-list-link">01.a - Getting Data from Web Pages</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping,%20Databases,%20and%20Other%20Data%20Sources/01.b%20-%20Getting%20Data%20from%20Web%20Pages.html" class="navigation-list-link">01.b - Getting Data from Web Pages</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/resources" class="navigation-list-link">Resources</a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  </ul>
+</nav>
+
+      </div>
+      <footer role="contentinfo" class="site-footer">
+        <p class="text-small text-grey-dk-000 mb-0">This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.</p>
+      </footer>
+    </div>
+    <div class="main-content-wrap js-main-content" tabindex="0">
+      <div class="page-header">
+        <div class="main-content">
+          
+          <div class="search js-search">
+            <div class="search-input-wrap">
+              <input type="text" class="js-search-input search-input" tabindex="0" placeholder="Search Data Focused Python" aria-label="Search Data Focused Python" autocomplete="off">
+              <svg width="14" height="14" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" class="search-icon"><title>Search</title><g fill-rule="nonzero"><path d="M17.332 20.735c-5.537 0-10-4.6-10-10.247 0-5.646 4.463-10.247 10-10.247 5.536 0 10 4.601 10 10.247s-4.464 10.247-10 10.247zm0-4c3.3 0 6-2.783 6-6.247 0-3.463-2.7-6.247-6-6.247s-6 2.784-6 6.247c0 3.464 2.7 6.247 6 6.247z"/><path d="M11.672 13.791L.192 25.271 3.02 28.1 14.5 16.62z"/></g></svg>
+            </div>
+            <div class="js-search-results search-results-wrap"></div>
+          </div>
+          
+          
+            <ul class="list-style-none text-small mt-md-1 mb-md-1 pb-4 pb-md-0 js-aux-nav aux-nav">
+              
+                <li class="d-inline-block my-0 mr-2"><a href="//github.com/BrianKolowitz/data-focused-python">Code</a></li>
+              
+                <li class="d-inline-block my-0"><a href="/data-focused-python/about.html">About</a></li>
+              
+            </ul>
+          
+        </div>
+      </div>
+      <div class="main-content">
+        
+          
+            <nav class="breadcrumb-nav">
+              <ol class="breadcrumb-nav-list">
+                
+                  <li class="breadcrumb-nav-list-item"><a href="http://localhost:4000/lectures">Lectures</a></li>
+                  <li class="breadcrumb-nav-list-item"><a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data.html">Week 01 - Language basics, Generating Data, Storing Data</a></li>
+                
+                <li class="breadcrumb-nav-list-item"><span>04 - Python Testing</span></li>
+              </ol>
+            </nav>
+          
+        
+        <div id="main-content" class="page-content" role="main">
+          <h1 id="8-benefis-of-unit-testing">8 Benefis of Unit Testing</h1>
+<p><a href="https://dzone.com/articles/top-8-benefits-of-unit-testing">8 benefits of unit testing</a></p>
+
+<p>The goal of unit testing is to segregate each part of the program and test that the individual parts are working correctly.</p>
+<ol>
+  <li>It isolates the smallest piece of testable software from the remainder of the code and determines whether it behaves exactly as you expect.</li>
+  <li>Unit testing has proven its value in that a large percentage of defects are identified during its use.</li>
+  <li>It allows automation of the testing process, reduces difficulties of discovering errors contained in more complex pieces of the application, and enhances test coverage because attention is given to each unit.</li>
+</ol>
+
+<h2 id="1-makes-the-process-agile">1. Makes the Process Agile</h2>
+<p>One of the main benefits of unit testing is that it makes the coding process more Agile. When you add more and more features to a software, you sometimes need to change old design and code. However, changing already-tested code is both risky and costly. If we have unit tests in place, then we can proceed for refactoring confidently.</p>
+
+<p>Unit testing really goes hand-in-hand with agile programming of all flavors because it builds in tests that allow you to make changes more easily. In other words, unit tests facilitate safe refactoring.</p>
+
+<h2 id="2-quality-of-code">2. Quality of Code</h2>
+<p>Unit testing improves the quality of the code. It identifies every defect that may have come up before code is sent further for integration testing. Writing tests before actual coding makes you think harder about the problem. It exposes the edge cases and makes you write better code.</p>
+
+<h2 id="3-finds-software-bugs-early">3. Finds Software Bugs Early</h2>
+<p>Issues are found at an early stage. Since unit testing is carried out by developers who test individual code before integration, issues can be found very early and can be resolved then and there without impacting the other pieces of the code. This includes both bugs in the programmer’s implementation and flaws or missing parts of the specification for the unit.</p>
+
+<h2 id="4-facilitates-changes-and-simplifies-integration">4. Facilitates Changes and Simplifies Integration</h2>
+<p>Unit testing allows the programmer to refactor code or upgrade system libraries at a later date and make sure the module still works correctly. Unit tests detect changes that may break a design contract. They help with maintaining and changing the code.</p>
+
+<p>Unit testing reduces defects in the newly developed features or reduces bugs when changing the existing functionality.</p>
+
+<p>Unit testing verifies the accuracy of the each unit. Afterward, the units are integrated into an application by testing parts of the application via unit testing. Later testing of the application during the integration process is easier due to the verification of the individual units.</p>
+
+<h2 id="5-provides-documentation">5. Provides Documentation</h2>
+<p>Unit testing provides documentation of the system. Developers looking to learn what functionality is provided by a unit and how to use it can look at the unit tests to gain a basic understanding of the unit’s interface (API).</p>
+
+<h2 id="6-debugging-process">6. Debugging Process</h2>
+<p>Unit testing helps simplify the debugging process. If a test fails, then only the latest changes made in the code need to be debugged.</p>
+
+<h2 id="7-design">7. Design</h2>
+<p>Writing the test first forces you to think through your design and what it must accomplish before you write the code. This not only keeps you focused; it makes you create better designs. Testing a piece of code forces you to define what that code is responsible for. If you can do this easily, that means the code’s responsibility is well-defined and therefore that it has high cohesion.</p>
+
+<h2 id="8-reduce-costs">8. Reduce Costs</h2>
+<p>Since the bugs are found early, unit testing helps reduce the cost of bug fixes. Just imagine the cost of a bug found during the later stages of development, like during system testing or during acceptance testing. Of course, bugs detected earlier are easier to fix because bugs detected later are usually the result of many changes, and you don’t really know which one caused the bug.</p>
+
+<h1 id="getting-started-with-testing-in-python">Getting Started With Testing in Python</h1>
+<p><a href="https://realpython.com/python-testing/">Getting Started With Testing in Python
+</a></p>
+
+<h2 id="automated-vs-manual-testing">Automated vs. Manual Testing</h2>
+
+<ul>
+  <li>To have a complete set of manual tests, all you need to do is make a list of all the features your application has, the different types of input it can accept, and the expected results. Now, every time you make a change to your code, you need to go through every single item on that list and check it.</li>
+  <li>Automated testing is the execution of your test plan (the parts of your application you want to test, the order in which you want to test them, and the expected responses) by a script instead of a human. Python already comes with a set of tools and libraries to help you create automated tests for your application.</li>
+</ul>
+
+<h2 id="unit-tests-vs-integration-tests">Unit Tests vs. Integration Tests</h2>
+
+<ul>
+  <li>Think of how you might test the lights on a car. You would turn on the lights (known as the test step) and go outside the car or ask a friend to check that the lights are on (known as the test assertion). Testing multiple components is known as integration testing.</li>
+  <li>Think of all the things that need to work correctly in order for a simple task to give the right result. These components are like the parts to your application, all of those classes, functions, and modules you’ve written.</li>
+</ul>
+
+<p>You have just seen two types of tests:</p>
+
+<ol>
+  <li>An integration test checks that components in your application operate with each other.</li>
+  <li>A unit test checks a small component in your application.</li>
+</ol>
+
+<p>You can write both integration tests and unit tests in Python.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># To write a unit test for the built-in function sum(), you would check the output of sum() against a known output.</span>
+<span class="k">assert</span> <span class="nb">sum</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="mi">6</span><span class="p">,</span> <span class="s">"Should be 6"</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># If the result from sum() is incorrect, this will fail with an AssertionError and the message "Should be 6".</span>
+<span class="k">assert</span> <span class="nb">sum</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="mi">6</span><span class="p">,</span> <span class="s">"Should be 6"</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
+
+AssertionError                            Traceback (most recent call last)
+
+&lt;ipython-input-19-bebf0a559570&gt; in &lt;module&gt;()
+      1 # If the result from sum() is incorrect, this will fail with an AssertionError and the message "Should be 6".
+----&gt; 2 assert sum([1, 1, 1]) == 6, "Should be 6"
+
+
+AssertionError: Should be 6
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instead of testing on the REPL, you’ll want to put this into a new Python file called test_sum.py and execute it again:</span>
+<span class="k">def</span> <span class="nf">test_sum</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="nb">sum</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="mi">6</span><span class="p">,</span> <span class="s">"Should be 6"</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_sum</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Everything passed"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_sum_tuple</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="nb">sum</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">==</span> <span class="mi">6</span><span class="p">,</span> <span class="s">"Should be 6"</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_sum</span><span class="p">()</span>
+<span class="n">test_sum_tuple</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Everything passed"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h1 id="choosing-a-test-runner">Choosing a Test Runner</h1>
+<ul>
+  <li><a href="https://docs.pytest.org/en/latest/">Pytest</a></li>
+  <li><a href="https://docs.pytest.org/en/latest/getting-started.html">Getting Started with Pytest</a></li>
+</ul>
+
+<p>There are many test runners available for Python. The one built into the Python standard library is called unittest. In this tutorial, you will be using unittest test cases and the unittest test runner. The principles of unittest are easily portable to other frameworks. The three most popular test runners are:</p>
+
+<ul>
+  <li>unittest</li>
+  <li>nose or nose2</li>
+  <li><strong>pytest</strong> <em>(we’ll use pytest)</em></li>
+</ul>
+
+<p>content of <a href="/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/test_sample.py">test_sample.py</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">inc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+<span class="k">def</span> <span class="nf">test_answer</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">inc</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">pytest</span> <span class="n">test_sample</span><span class="o">.</span><span class="n">py</span>
+</code></pre></div></div>
+
+<p>contents of <a href="/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/test_sysexit.py">test_sysexit.py</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># content of test_sysexit.py</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="nb">SystemExit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_mytest</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="nb">SystemExit</span><span class="p">):</span>
+        <span class="n">f</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Execute the test function with “quiet” reporting mode:</span>
+<span class="err">!</span><span class="n">pytest</span> <span class="o">-</span><span class="n">q</span> <span class="n">test_sysexit</span><span class="o">.</span><span class="n">py</span>
+</code></pre></div></div>
+
+<h2 id="group-multiple-tests-in-a-class">Group multiple tests in a class</h2>
+
+<p>Once you develop multiple tests, you may want to group them into a class. pytest makes it easy to create a class containing more than one test.</p>
+
+<p>pytest discovers all tests following its Conventions for Python test discovery, so it finds both test_ prefixed functions. There is no need to subclass anything. We can simply run the module by passing its filename:</p>
+
+<p>contentx of <a href="/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/test_class.py">test_class.py</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># content of test_class.py</span>
+<span class="k">class</span> <span class="nc">TestClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_one</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="s">"this"</span>
+        <span class="k">assert</span> <span class="s">'h'</span> <span class="ow">in</span> <span class="n">x</span>
+
+    <span class="k">def</span> <span class="nf">test_two</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="s">"hello"</span>
+        <span class="k">assert</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s">'check'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">pytest</span> <span class="o">-</span><span class="n">q</span> <span class="n">test_class</span><span class="o">.</span><span class="n">py</span>
+</code></pre></div></div>
+
+<h2 id="request-a-unique-temporary-directory-for-functional-tests">Request a unique temporary directory for functional tests¶</h2>
+
+<p>pytest provides Builtin fixtures/function arguments to request arbitrary resources, like a unique temporary directory:</p>
+
+<p>contents of <a href="/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/test_tmpdir.py">test_tmpdir.py</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># content of test_tmpdir.py</span>
+<span class="k">def</span> <span class="nf">test_needsfiles</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="mi">0</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">pytest</span> <span class="o">-</span><span class="n">q</span> <span class="n">test_tmpdir</span><span class="o">.</span><span class="n">py</span>
+</code></pre></div></div>
+
+<p>You can use the tmp_path fixture which will provide a temporary directory unique to the test invocation, created in the base temporary directory.</p>
+
+<p>contents of <a href="/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/test_tmppath.py">test_tmppath.py</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># content of test_tmp_path.py</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">CONTENT</span> <span class="o">=</span> <span class="s">u"content"</span>
+
+
+<span class="k">def</span> <span class="nf">test_create_file</span><span class="p">(</span><span class="n">tmp_path</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">tmp_path</span> <span class="o">/</span> <span class="s">"sub"</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">d</span> <span class="o">/</span> <span class="s">"hello.txt"</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">CONTENT</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">p</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span> <span class="o">==</span> <span class="n">CONTENT</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">tmp_path</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()))</span> <span class="o">==</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,2608 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  
+
+  <title>04.b - Pandas Data analysis Part 2 - Data Focused Python</title>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/just-the-docs.css">
+
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-139655036-1', 'http://localhost:4000');
+      ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+  
+
+  
+    <script type="text/javascript" src="http://localhost:4000/assets/js/vendor/lunr.min.js"></script>
+  
+  <script type="text/javascript" src="http://localhost:4000/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>04.b - Pandas Data analysis Part 2 | Data Focused Python</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="04.b - Pandas Data analysis Part 2" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/04.b%20-%20Pandas%20Data%20analysis%20Part%202.html" />
+<meta property="og:url" content="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/04.b%20-%20Pandas%20Data%20analysis%20Part%202.html" />
+<meta property="og:site_name" content="Data Focused Python" />
+<script type="application/ld+json">
+{"@type":"WebPage","url":"http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/04.b%20-%20Pandas%20Data%20analysis%20Part%202.html","headline":"04.b - Pandas Data analysis Part 2","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+
+  <div class="page-wrap">
+    <div class="side-bar">
+      <a href="http://localhost:4000" class="site-title fs-6 lh-tight">Data Focused Python</a>
+      <span class="fs-3"><button class="js-main-nav-trigger navigation-list-toggle btn btn-outline" type="button" data-text-toggle="Hide">Menu</button></span>
+      <div class="navigation main-nav js-main-nav">
+        <nav role="navigation" aria-label="Main navigation">
+  <ul class="navigation-list">
+    
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/about.html" class="navigation-list-link"></a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/" class="navigation-list-link">Data Focused Python</a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/assignments" class="navigation-list-link">Assignments</a>
+            
+          </li>
+        
+      
+    
+      
+        
+          <li class="navigation-list-item active">
+            
+            <a href="http://localhost:4000/lectures" class="navigation-list-link">Lectures</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data.html" class="navigation-list-link">Week 01 - Language basics, Generating Data, Storing Data</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/00%20-%20Getting%20Started.html" class="navigation-list-link">00 - Getting Started</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/01.a%20-%20Terminal%20Application.html" class="navigation-list-link">01.a - Terminal Application</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/01.b%20-%20Argparse.html" class="navigation-list-link">01.b - Argparse</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/02.a%20-%20Generating%20Synthetic%20Data.html" class="navigation-list-link">02.a - Generating Synthetic Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/02.b%20-%20Synthetic%20Data%20Generation.html" class="navigation-list-link">02.b - Synthetic Data Generation</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/02.c%20-%20Using%20Synthea.html" class="navigation-list-link">02.c - Using Synthea</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/03%20-%20Getting%20Data%20from%20a%20Database.html" class="navigation-list-link">03 - Getting Data from a Database</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/04%20-%20FHIR%20SQL.html" class="navigation-list-link">04 - FHIR SQL</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/04%20-%20Python%20Testing.html" class="navigation-list-link">04 - Python Testing</a>
+                              </li>
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/05%20-%20Start%20a%20process%20in%20Python.html" class="navigation-list-link">05 - Start a process in Python</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20unit%20testing,%20generating%20files.html" class="navigation-list-link">Week 01 - Language basics, unit testing, generating files</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries.html" class="navigation-list-link">Week 02 - Processing files using functions, classes, and libraries</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/01.a%20-%20File%20Processing.html" class="navigation-list-link">01.a - File Processing</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/01.b%20-%20CSV%20Files.html" class="navigation-list-link">01.b - CSV Files</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/01.c%20-%20JSON%20Files.html" class="navigation-list-link">01.c - JSON Files</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/01.d%20-%20XML%20Files.html" class="navigation-list-link">01.d - XML Files</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/02.a%20-%20Python%20Classes.html" class="navigation-list-link">02.a - Python Classes</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/02.b%20-%20Python%20Modules%20and%20Packages.html" class="navigation-list-link">02.b - Python Modules and Packages</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/03%20-%20Using%20fhirclient%20to%20parse%20data.html" class="navigation-list-link">03 - Using fhirclient to parse data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/04%20-%20Reading%20synthea%20data.html" class="navigation-list-link">04 - Reading synthea data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/05%20-%20Python%20Functions.html" class="navigation-list-link">05 - Python Functions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/06%20-%20Python%20Tuples.html" class="navigation-list-link">06 - Python Tuples</a>
+                              </li>
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/07%20-%20Getting%20Data%20from%20Web%20APIs.html" class="navigation-list-link">07 - Getting Data from Web APIs</a>
+                              </li>
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping.html" class="navigation-list-link">Week 03 - Comprehensions, Generators, and Grouping</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/01%20-%20Loops.html" class="navigation-list-link">01 - Loops</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/02%20-%20Lists%20and%20List%20Comprehensions.html" class="navigation-list-link">02 - Lists and List Comprehensions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/03%20-%20Sets%20and%20Set%20Comprehensions.html" class="navigation-list-link">03 - Sets and Set Comprehensions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/04.a%20-%20Dictionaries.html" class="navigation-list-link">04.a - Dictionaries</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/04.b%20-%20Dictionary%20Comprehensions.html" class="navigation-list-link">04.b - Dictionary Comprehensions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/05%20-%20Python%20Generators.html" class="navigation-list-link">05 - Python Generators</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/06%20-%20Cleaning%20and%20Transforming%20Data.html" class="navigation-list-link">06 - Cleaning and Transforming Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/07%20-%20Grouping%20Data.html" class="navigation-list-link">07 - Grouping Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization.html" class="navigation-list-link">Week 04 - Numpy, Pandas, Graphing & Visualization</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization/01%20-%20Descriptive%20Statistics.html" class="navigation-list-link">01 - Descriptive Statistics</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization/02%20-%20Basic%20Medical%20Data%20Visualization.html" class="navigation-list-link">02 - Basic Medical Data Visualization</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting.html" class="navigation-list-link">03 - Matplotlib Tutorial Python Plotting</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial.html" class="navigation-list-link">04 - The Ultimate Python Seaborn Tutorial</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item  active">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth.html" class="navigation-list-link">Week 05 - Numpy & Pandas In-Depth</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/00%20-%20Additional%20Links.html" class="navigation-list-link">00 - Additional Links</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/01%20-%20NumPy%20Introduction.html" class="navigation-list-link">01 - NumPy Introduction</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/02%20-%20NumPy%20Data%20analysis.html" class="navigation-list-link">02 - NumPy Data analysis</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/03%20-%20Pandas%20Introduction.html" class="navigation-list-link">03 - Pandas Introduction</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/04.a%20-%20Pandas%20Data%20analysis%20Part%201.html" class="navigation-list-link">04.a - Pandas Data analysis Part 1</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item  active">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/04.b%20-%20Pandas%20Data%20analysis%20Part%202.html" class="navigation-list-link active">04.b - Pandas Data analysis Part 2</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping,%20Databases,%20and%20Other%20Data%20Sources.html" class="navigation-list-link">Week 06 - Web Scraping, Databases, and Other Data Sources</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping,%20Databases,%20and%20Other%20Data%20Sources/01.a%20-%20Getting%20Data%20from%20Web%20Pages.html" class="navigation-list-link">01.a - Getting Data from Web Pages</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping,%20Databases,%20and%20Other%20Data%20Sources/01.b%20-%20Getting%20Data%20from%20Web%20Pages.html" class="navigation-list-link">01.b - Getting Data from Web Pages</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/resources" class="navigation-list-link">Resources</a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  </ul>
+</nav>
+
+      </div>
+      <footer role="contentinfo" class="site-footer">
+        <p class="text-small text-grey-dk-000 mb-0">This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.</p>
+      </footer>
+    </div>
+    <div class="main-content-wrap js-main-content" tabindex="0">
+      <div class="page-header">
+        <div class="main-content">
+          
+          <div class="search js-search">
+            <div class="search-input-wrap">
+              <input type="text" class="js-search-input search-input" tabindex="0" placeholder="Search Data Focused Python" aria-label="Search Data Focused Python" autocomplete="off">
+              <svg width="14" height="14" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" class="search-icon"><title>Search</title><g fill-rule="nonzero"><path d="M17.332 20.735c-5.537 0-10-4.6-10-10.247 0-5.646 4.463-10.247 10-10.247 5.536 0 10 4.601 10 10.247s-4.464 10.247-10 10.247zm0-4c3.3 0 6-2.783 6-6.247 0-3.463-2.7-6.247-6-6.247s-6 2.784-6 6.247c0 3.464 2.7 6.247 6 6.247z"/><path d="M11.672 13.791L.192 25.271 3.02 28.1 14.5 16.62z"/></g></svg>
+            </div>
+            <div class="js-search-results search-results-wrap"></div>
+          </div>
+          
+          
+            <ul class="list-style-none text-small mt-md-1 mb-md-1 pb-4 pb-md-0 js-aux-nav aux-nav">
+              
+                <li class="d-inline-block my-0 mr-2"><a href="//github.com/BrianKolowitz/data-focused-python">Code</a></li>
+              
+                <li class="d-inline-block my-0"><a href="/data-focused-python/about.html">About</a></li>
+              
+            </ul>
+          
+        </div>
+      </div>
+      <div class="main-content">
+        
+          
+            <nav class="breadcrumb-nav">
+              <ol class="breadcrumb-nav-list">
+                
+                  <li class="breadcrumb-nav-list-item"><a href="http://localhost:4000/lectures">Lectures</a></li>
+                  <li class="breadcrumb-nav-list-item"><a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth.html">Week 05 - Numpy & Pandas In-Depth</a></li>
+                
+                <li class="breadcrumb-nav-list-item"><span>04.b - Pandas Data analysis Part 2</span></li>
+              </ol>
+            </nav>
+          
+        
+        <div id="main-content" class="page-content" role="main">
+          <p><a href="https://www.dataquest.io/blog/pandas-tutorial-python-2/">Source</a></p>
+
+<p>In this tutorial, we’ll dive into one of the most powerful aspects of pandas — its grouping and aggregation functionality. With this functionality, it’s dead simple to compute group summary statistics, discover patterns, and slice up your data in various ways.</p>
+
+<p>Since Thanksgiving was just last week, we’ll use a dataset on what Americans typically eat for Thanksgiving dinner as we explore the pandas library. You can download the dataset <a href="https://github.com/fivethirtyeight/data/tree/master/thanksgiving-2015">here</a>.</p>
+
+<p>It contains 1058 online survey responses collected by FiveThirtyEight. Each survey respondent was asked questions about what they typically eat for Thanksgiving, along with some demographic questions, like their gender, income, and location. This dataset will allow us to discover regional and income-based patterns in what Americans eat for Thanksgiving dinner. As we explore the data and try to find patterns, we’ll be heavily using the grouping and aggregation functionality of pandas.</p>
+
+<h1 id="reading-in-and-summarizing-the-data">Reading in and summarizing the data</h1>
+
+<p>Our first step is to read in the data and do some preliminary exploration. This will help us figure out how we want to approach creating groups and finding patterns.</p>
+
+<p>As you may recall from part one of this tutorial, we can read in the data using the <code class="highlighter-rouge">pandas.read_csv</code> function. The data is stored using <code class="highlighter-rouge">Latin-1</code> encoding, so we additionally need to specify the encoding keyword argument. If we don’t, pandas won’t be able to load in the data, and we’ll get an error:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># disable warnings for lecture</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s">'ignore'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"thanksgiving-2015-poll-data.csv"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">"Latin-1"</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>RespondentID</th>
+      <th>Do you celebrate Thanksgiving?</th>
+      <th>What is typically the main dish at your Thanksgiving dinner?</th>
+      <th>What is typically the main dish at your Thanksgiving dinner? - Other (please specify)</th>
+      <th>How is the main dish typically cooked?</th>
+      <th>How is the main dish typically cooked? - Other (please specify)</th>
+      <th>What kind of stuffing/dressing do you typically have?</th>
+      <th>What kind of stuffing/dressing do you typically have? - Other (please specify)</th>
+      <th>What type of cranberry saucedo you typically have?</th>
+      <th>What type of cranberry saucedo you typically have? - Other (please specify)</th>
+      <th>...</th>
+      <th>Have you ever tried to meet up with hometown friends on Thanksgiving night?</th>
+      <th>Have you ever attended a "Friendsgiving?"</th>
+      <th>Will you shop any Black Friday sales on Thanksgiving Day?</th>
+      <th>Do you work in retail?</th>
+      <th>Will you employer make you work on Black Friday?</th>
+      <th>How would you describe where you live?</th>
+      <th>Age</th>
+      <th>What is your gender?</th>
+      <th>How much total combined money did all members of your HOUSEHOLD earn last year?</th>
+      <th>US Region</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4337954960</td>
+      <td>Yes</td>
+      <td>Turkey</td>
+      <td>NaN</td>
+      <td>Baked</td>
+      <td>NaN</td>
+      <td>Bread-based</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>NaN</td>
+      <td>Suburban</td>
+      <td>18 - 29</td>
+      <td>Male</td>
+      <td>$75,000 to $99,999</td>
+      <td>Middle Atlantic</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4337951949</td>
+      <td>Yes</td>
+      <td>Turkey</td>
+      <td>NaN</td>
+      <td>Baked</td>
+      <td>NaN</td>
+      <td>Bread-based</td>
+      <td>NaN</td>
+      <td>Other (please specify)</td>
+      <td>Homemade cranberry gelatin ring</td>
+      <td>...</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>NaN</td>
+      <td>Rural</td>
+      <td>18 - 29</td>
+      <td>Female</td>
+      <td>$50,000 to $74,999</td>
+      <td>East South Central</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4337935621</td>
+      <td>Yes</td>
+      <td>Turkey</td>
+      <td>NaN</td>
+      <td>Roasted</td>
+      <td>NaN</td>
+      <td>Rice-based</td>
+      <td>NaN</td>
+      <td>Homemade</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>NaN</td>
+      <td>Suburban</td>
+      <td>18 - 29</td>
+      <td>Male</td>
+      <td>$0 to $9,999</td>
+      <td>Mountain</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4337933040</td>
+      <td>Yes</td>
+      <td>Turkey</td>
+      <td>NaN</td>
+      <td>Baked</td>
+      <td>NaN</td>
+      <td>Bread-based</td>
+      <td>NaN</td>
+      <td>Homemade</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>NaN</td>
+      <td>Urban</td>
+      <td>30 - 44</td>
+      <td>Male</td>
+      <td>$200,000 and up</td>
+      <td>Pacific</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4337931983</td>
+      <td>Yes</td>
+      <td>Tofurkey</td>
+      <td>NaN</td>
+      <td>Baked</td>
+      <td>NaN</td>
+      <td>Bread-based</td>
+      <td>NaN</td>
+      <td>Canned</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>NaN</td>
+      <td>Urban</td>
+      <td>30 - 44</td>
+      <td>Male</td>
+      <td>$100,000 to $124,999</td>
+      <td>Pacific</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 65 columns</p>
+</div>
+
+<p>As you can see above, the data has 65 columns of mostly categorical data. For example, the first column appears to allow for Yes and No responses only. Let’s verify by using the <code class="highlighter-rouge">pandas.Series.unique</code> method to see what unique values are in the Do you celebrate Thanksgiving? column of data:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># investigate respondent values</span>
+<span class="n">data</span><span class="p">[</span><span class="s">"Do you celebrate Thanksgiving?"</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array(['Yes', 'No'], dtype=object)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># investigate respondent values</span>
+<span class="n">data</span><span class="p">[</span><span class="s">"What is typically the main dish at your Thanksgiving dinner?"</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array(['Turkey', 'Tofurkey', 'Other (please specify)', nan, 'Ham/Pork',
+       'Turducken', 'Roast beef', 'Chicken', "I don't know"], dtype=object)
+</code></pre></div></div>
+
+<p>We can also view all the column names to see all of the survey questions. We’ll truncate the output below to save you from having to scroll:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">50</span><span class="p">:]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Index(['Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Other (please specify).1',
+       'Do you typically pray before or after the Thanksgiving meal?',
+       'How far will you travel for Thanksgiving?',
+       'Will you watch any of the following programs on Thanksgiving? Please select all that apply. - Macy's Parade',
+       'What's the age cutoff at your "kids' table" at Thanksgiving?',
+       'Have you ever tried to meet up with hometown friends on Thanksgiving night?',
+       'Have you ever attended a "Friendsgiving?"',
+       'Will you shop any Black Friday sales on Thanksgiving Day?',
+       'Do you work in retail?',
+       'Will you employer make you work on Black Friday?',
+       'How would you describe where you live?', 'Age', 'What is your gender?',
+       'How much total combined money did all members of your HOUSEHOLD earn last year?',
+       'US Region'],
+      dtype='object')
+</code></pre></div></div>
+
+<p>Using this Thanksgiving survey data, we can answer quite a few interesting questions, like:</p>
+
+<ul>
+  <li>Do people in Suburban areas eat more Tofurkey than people in Rural areas?</li>
+  <li>Where do people go to Black Friday sales most often?</li>
+  <li>Is there a correlation between praying on Thanksgiving and income?</li>
+  <li>What income groups are most likely to have homemade cranberry sauce?</li>
+</ul>
+
+<p>In order to answer these questions and others, we’ll first need to become familiar with applying, grouping and aggregation in Pandas.</p>
+
+<h2 id="applying-functions-to-series-in-pandas">Applying functions to Series in pandas</h2>
+<p>There are times when we’re using pandas that we want to apply a function to every row or every column in the data. A good example is getting from the values in our What is your gender? column to numeric values. We’ll assign 0 to Male, and 1 to Female.</p>
+
+<p>Before we dive into transforming the values, let’s confirm that the values in the column are either Male or Female. We can use the <code class="highlighter-rouge">pandas.Series.value_counts</code> method to help us with this. We’ll pass the <code class="highlighter-rouge">dropna=False</code> keyword argument to also count missing values:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># investigate respondent values</span>
+<span class="n">data</span><span class="p">[</span><span class="s">"What is your gender?"</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array(['Male', 'Female', nan], dtype=object)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># get respondent counts per response</span>
+<span class="n">data</span><span class="p">[</span><span class="s">"What is your gender?"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">dropna</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Female    544
+Male      481
+NaN        33
+Name: What is your gender?, dtype: int64
+</code></pre></div></div>
+
+<p>As you can see, not all of the values are Male or Female. We’ll preserve any missing values in the final output when we transform our column. Here’s a diagram of the input and outputs we need:</p>
+
+<p><img src="/lectures/Week%2005%20-%20Numpy%20&amp;%20Pandas%20In-Depth/ditaa_diagram_1-2.png" alt="" />
+Source: https://www.dataquest.io/blog/content/images/2017/12/ditaa_diagram_1-2.png</p>
+
+<p>We’ll need to apply a custom function to each value in the What is your gender? column to get the output we want. Here’s a function that will do the transformation we want:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># print the integer representation of True and False</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">True</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="bp">False</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 0
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">def</span> <span class="nf">gender_code</span><span class="p">(</span><span class="n">gender_val</span><span class="p">):</span>
+    <span class="c"># check to see if the gender iss a float or not specified</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gender_val</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="n">math</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">gender_val</span><span class="p">):</span>
+        <span class="c"># if so return the float or nan value</span>
+        <span class="k">return</span> <span class="n">gender_val</span>
+    
+    <span class="c"># otherwise return 1 for female and 0 for male</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">gender_val</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s">"female"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In order to apply this function to each item in the What is your gender? column, we could either write a for loop, and loop across each element in the column, or we could use the <code class="highlighter-rouge">pandas.Series.apply</code> method.</p>
+
+<p>This method will take a function as input, then return a new pandas <code class="highlighter-rouge">Series</code> that contains the results of applying the function to each item in the Series. We can assign the result back to a column in the data <code class="highlighter-rouge">DataFrame</code>, then verify the results using <code class="highlighter-rouge">value_counts</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># calculate a new gender code column where 1 represents female and 0 represents male</span>
+<span class="n">gender_codes</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">"What is your gender?"</span><span class="p">]</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="n">gender_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">gender_codes</span><span class="p">),</span> <span class="n">gender_codes</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'pandas.core.series.Series'&gt; 0    0.0
+1    1.0
+2    0.0
+3    0.0
+4    0.0
+Name: What is your gender?, dtype: float64
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># add a new column containing the series gender_codes</span>
+<span class="n">data</span><span class="p">[</span><span class="s">"gender"</span><span class="p">]</span> <span class="o">=</span> <span class="n">gender_codes</span>
+
+<span class="c"># display the value counts</span>
+<span class="n">data</span><span class="p">[</span><span class="s">"gender"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">dropna</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 1.0    544
+ 0.0    481
+NaN      33
+Name: gender, dtype: int64
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># check the data type of the new column</span>
+<span class="n">data</span><span class="p">[</span><span class="s">"gender"</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dtype('float64')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># change the datatype to categorical</span>
+<span class="n">data</span><span class="p">[</span><span class="s">"gender"</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">"gender"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'category'</span><span class="p">)</span>
+
+<span class="c"># check the datatype</span>
+<span class="n">data</span><span class="p">[</span><span class="s">"gender"</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CategoricalDtype(categories=[0.0, 1.0], ordered=False)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># print the top 5 values</span>
+<span class="n">data</span><span class="p">[</span><span class="s">"gender"</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0    0.0
+1    1.0
+2    0.0
+3    0.0
+4    0.0
+Name: gender, dtype: category
+Categories (2, float64): [0.0, 1.0]
+</code></pre></div></div>
+
+<h2 id="applying-functions-to-dataframes-in-pandas">Applying functions to DataFrames in pandas</h2>
+
+<p>We can use the apply method on <code class="highlighter-rouge">DataFrames</code> as well as <code class="highlighter-rouge">Series</code>. When we use the <code class="highlighter-rouge">pandas.DataFrame.apply</code> method, an entire row or column will be passed into the function we specify. By default, apply will work across each column in the <code class="highlighter-rouge">DataFrame</code>. If we pass the <code class="highlighter-rouge">axis=1</code> keyword argument, it will work across each row.</p>
+
+<p>In the below example, we check the data type of each column in data using a <code class="highlighter-rouge">lambda</code> function. We also call the head method on the result to avoid having too much output:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># create a method to return the datatype of a row</span>
+<span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">row</span><span class="o">.</span><span class="n">dtype</span>
+
+<span class="c"># apply the method to all rows in the dataframe</span>
+<span class="n">data</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="n">get_type</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RespondentID                                                                              int64
+Do you celebrate Thanksgiving?                                                           object
+What is typically the main dish at your Thanksgiving dinner?                             object
+What is typically the main dish at your Thanksgiving dinner? - Other (please specify)    object
+How is the main dish typically cooked?                                                   object
+dtype: object
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># return data types with a lambda instead of a function</span>
+<span class="n">data</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RespondentID                                                                              int64
+Do you celebrate Thanksgiving?                                                           object
+What is typically the main dish at your Thanksgiving dinner?                             object
+What is typically the main dish at your Thanksgiving dinner? - Other (please specify)    object
+How is the main dish typically cooked?                                                   object
+dtype: object
+</code></pre></div></div>
+
+<h2 id="using-the-apply-method-to-clean-up-income">Using the apply method to clean up income</h2>
+
+<p>We can now use what we know about the apply method to clean up the How much total combined money did all members of your HOUSEHOLD earn last year? column.</p>
+
+<p>Cleaning up the income column will allow us to go from string values to numeric values. First, let’s see all the unique values that are in the How much total combined money did all members of your HOUSEHOLD earn last year?</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># specify the column by name</span>
+<span class="n">column_name</span> <span class="o">=</span> <span class="s">"How much total combined money did all members of your HOUSEHOLD earn last year?"</span>
+
+<span class="c"># get value counts for the specified column</span>
+<span class="n">data</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">dropna</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$25,000 to $49,999      180
+Prefer not to answer    136
+$50,000 to $74,999      135
+$75,000 to $99,999      133
+$100,000 to $124,999    111
+$200,000 and up          80
+$10,000 to $24,999       68
+$0 to $9,999             66
+$125,000 to $149,999     49
+$150,000 to $174,999     40
+NaN                      33
+$175,000 to $199,999     27
+Name: How much total combined money did all members of your HOUSEHOLD earn last year?, dtype: int64
+</code></pre></div></div>
+
+<p>Looking at this, there are 4 different patterns for the values in the column:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pattern</th>
+      <th>Example</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">X to Y</code></td>
+      <td>$25,000 to $49,999</td>
+      <td>We can convert this to a numeric value by extracting the numbers and averaging them.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">NaN</code></td>
+      <td> </td>
+      <td>We’ll preserve NaN values, and not convert them at all.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">X and up</code></td>
+      <td>$200,000 and up</td>
+      <td>We can convert this to a numeric value by extracting the number.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">Prefer not to answer</code></td>
+      <td> </td>
+      <td>We’ll turn this into an NaN value.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Here is how we want the transformations to work:</p>
+
+<p><img src="/lectures/Week%2005%20-%20Numpy%20&amp;%20Pandas%20In-Depth/ditaa_diagram_2-1.png" alt="" />
+Source: https://www.dataquest.io/blog/content/images/2017/12/ditaa_diagram_2-1.png</p>
+
+<p>We can write a function that covers all of these cases. In the below function, we:</p>
+
+<p>Take a string called value as input.</p>
+<ul>
+  <li>Check to see if value is <strong>$200,000 and up</strong>, and return <code class="highlighter-rouge">200000</code> if so.</li>
+  <li>Check if value is <strong>Prefer not to answer</strong>, and return <code class="highlighter-rouge">NaN</code> if so.</li>
+  <li>Check if value is <strong>NaN</strong>, and return <code class="highlighter-rouge">NaN</code> if so.</li>
+  <li>Clean up value by removing any dollar signs or commas.</li>
+  <li>Split the string to extract the incomes, then average them.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="k">def</span> <span class="nf">clean_income</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s">"$200,000 and up"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">200000</span>
+    <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="s">"Prefer not to answer"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="n">math</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    
+    <span class="c"># remove commas and $ with empty spaces</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">","</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"$"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+    
+    <span class="c"># split high and low income ranges</span>
+    <span class="n">income_low</span><span class="p">,</span> <span class="n">income_high</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">" to "</span><span class="p">)</span>
+    
+    <span class="c"># return the average between the ranges</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">income_high</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">income_low</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+</code></pre></div></div>
+
+<p>After creating the function, we can apply it to the How much total combined money did all members of your HOUSEHOLD earn last year? column:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">column_name</span> <span class="o">=</span> <span class="s">"How much total combined money did all members of your HOUSEHOLD earn last year?"</span>
+<span class="n">data</span><span class="p">[</span><span class="s">"income"</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="n">clean_income</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s">"income"</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0     87499.5
+1     62499.5
+2      4999.5
+3    200000.0
+4    112499.5
+Name: income, dtype: float64
+</code></pre></div></div>
+
+<h2 id="grouping-data-with-pandas">Grouping data with pandas</h2>
+
+<p>Now that we’ve covered applying functions, we can move on to grouping data using Pandas. When performing data analysis, it’s often useful to explore only a subset of the data.</p>
+
+<p>For example, what if we want to compare income between people who tend to eat homemade cranberry sauce for Thanksgiving vs people who eat canned cranberry sauce?</p>
+
+<p>First, let’s see what the unique values in the column are:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span><span class="p">[</span><span class="s">"What type of cranberry saucedo you typically have?"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Canned                    502
+Homemade                  301
+None                      146
+Other (please specify)     25
+Name: What type of cranberry saucedo you typically have?, dtype: int64
+</code></pre></div></div>
+
+<p>We can now filter data to get two DataFrames that only contain rows where the What type of cranberry saucedo you typically have? is Canned or Homemade, respectively:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">column_name</span> <span class="o">=</span> <span class="s">"What type of cranberry saucedo you typically have?"</span>
+<span class="n">homemade_mask</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span> <span class="o">==</span> <span class="s">"Homemade"</span>
+<span class="k">print</span><span class="p">(</span><span class="n">homemade_mask</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="n">homemade</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">homemade_mask</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0    False
+1    False
+2     True
+3     True
+4    False
+Name: What type of cranberry saucedo you typically have?, dtype: bool
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">canned</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span> <span class="o">==</span> <span class="s">"Canned"</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>Finally, we can use the <code class="highlighter-rouge">pandas.Series.mean</code> method to find the average income in homemade and canned:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">homemade</span><span class="p">[</span><span class="s">"income"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">canned</span><span class="p">[</span><span class="s">"income"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>94878.1072874494
+83823.40340909091
+</code></pre></div></div>
+
+<p>We get our answer, but it took more lines of code than it should have. What if we now want to compute the average income for people who didn’t have cranberry sauce?</p>
+
+<p>An easier way to find groupwise summary statistics with pandas is to use the <code class="highlighter-rouge">pandas.DataFrame.groupby</code> method. This method will split a <code class="highlighter-rouge">DataFrame</code> into groups based on a column or set of columns. We’ll then be able to perform computations on each group.</p>
+
+<p>Here’s how splitting data based on the What type of cranberry saucedo you typically have? column would look:</p>
+
+<p><img src="/lectures/Week%2005%20-%20Numpy%20&amp;%20Pandas%20In-Depth/ditaa_diagram_3-1.png" alt="" />
+Source: https://www.dataquest.io/blog/content/images/2017/12/ditaa_diagram_3-1.png</p>
+
+<p>Note how each resulting group only has a single unique value in the What type of cranberry saucedo you typically have? column. One group is created for each unique value in the column we choose to group by.</p>
+
+<p>Let’s create groups from the What type of cranberry saucedo you typically have? column:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">column_name</span> <span class="o">=</span> <span class="s">"What type of cranberry saucedo you typically have?"</span>
+<span class="n">grouped</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">column_name</span><span class="p">)</span>
+<span class="n">grouped</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;pandas.core.groupby.groupby.DataFrameGroupBy object at 0x11834ce48&gt;
+</code></pre></div></div>
+
+<p>As you can see above, the groupby method returns a <code class="highlighter-rouge">DataFrameGroupBy</code> object. We can call the <code class="highlighter-rouge">pandas.GroupBy.groups</code> method to see what value for the What type of cranberry saucedo you typically have? column is in each group:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped</span><span class="o">.</span><span class="n">groups</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'Canned': Int64Index([   4,    6,    8,   11,   12,   15,   18,   19,   26,   27,
+             ...
+             1040, 1041, 1042, 1044, 1045, 1046, 1047, 1051, 1054, 1057],
+            dtype='int64', length=502),
+ 'Homemade': Int64Index([   2,    3,    5,    7,   13,   14,   16,   20,   21,   23,
+             ...
+             1016, 1017, 1025, 1027, 1030, 1034, 1048, 1049, 1053, 1056],
+            dtype='int64', length=301),
+ 'None': Int64Index([   0,   17,   24,   29,   34,   36,   40,   47,   49,   51,
+             ...
+              980,  981,  997, 1015, 1018, 1031, 1037, 1043, 1050, 1055],
+            dtype='int64', length=146),
+ 'Other (please specify)': Int64Index([   1,    9,  154,  216,  221,  233,  249,  265,  301,  336,  380,
+              435,  444,  447,  513,  550,  749,  750,  784,  807,  860,  872,
+              905, 1000, 1007],
+            dtype='int64')}
+</code></pre></div></div>
+
+<p>We can call the <code class="highlighter-rouge">pandas.GroupBy.size</code> method to see how many rows are in each group. This is equivalent to the <code class="highlighter-rouge">value_counts</code> method on a <code class="highlighter-rouge">Series</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>What type of cranberry saucedo you typically have?
+Canned                    502
+Homemade                  301
+None                      146
+Other (please specify)     25
+dtype: int64
+</code></pre></div></div>
+
+<p>We can also use a loop to manually iterate through the groups:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\t</span><span class="s">'</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\t</span><span class="s">'</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">group</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Canned
+	 (502, 67)
+	 &lt;class 'pandas.core.frame.DataFrame'&gt;
+Homemade
+	 (301, 67)
+	 &lt;class 'pandas.core.frame.DataFrame'&gt;
+None
+	 (146, 67)
+	 &lt;class 'pandas.core.frame.DataFrame'&gt;
+Other (please specify)
+	 (25, 67)
+	 &lt;class 'pandas.core.frame.DataFrame'&gt;
+</code></pre></div></div>
+
+<p>As you can see above, each group is a <code class="highlighter-rouge">DataFrame</code>, and you can use any normal <code class="highlighter-rouge">DataFrame</code> methods on it.</p>
+
+<p>We can also extract a single column from a group. This will allow us to perform further computations just on that specific column:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped</span><span class="p">[</span><span class="s">"income"</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;pandas.core.groupby.groupby.SeriesGroupBy object at 0x11909f710&gt;
+</code></pre></div></div>
+
+<p>As you can see above, this gives us a <code class="highlighter-rouge">SeriesGroupBy</code> object. We can then call the normal methods we can call on a <code class="highlighter-rouge">DataFrameGroupBy</code> object:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped</span><span class="p">[</span><span class="s">"income"</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>What type of cranberry saucedo you typically have?
+Canned                    502
+Homemade                  301
+None                      146
+Other (please specify)     25
+Name: income, dtype: int64
+</code></pre></div></div>
+
+<h2 id="aggregating-values-in-groups">Aggregating values in groups</h2>
+
+<p>If all we could do was split a <code class="highlighter-rouge">DataFrame</code> into groups, it wouldn’t be of much use. The real power of groups is in the computations we can do after creating groups. We do these computations through the <code class="highlighter-rouge">pandas.GroupBy.aggregate</code> method, which we can abbreviate as <code class="highlighter-rouge">agg</code>. This method allows us to perform the same computation on every group.</p>
+
+<p>For example, we could find the average income for people who served each type of cranberry sauce for Thanksgiving (Canned, Homemade, None, etc).</p>
+
+<p>In the below code, we:</p>
+
+<ul>
+  <li>Extract just the income column from grouped, so we don’t find the average of every column.</li>
+  <li>Call the agg method with <code class="highlighter-rouge">np.mean</code> as input.
+    <ul>
+      <li>This will compute the mean for each group, then combine the results from each group.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped</span><span class="p">[</span><span class="s">"income"</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>What type of cranberry saucedo you typically have?
+Canned                    83823.403409
+Homemade                  94878.107287
+None                      78886.084034
+Other (please specify)    86629.978261
+Name: income, dtype: float64
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped</span><span class="p">[</span><span class="s">"income"</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>What type of cranberry saucedo you typically have?
+Canned                    55835.478014
+Homemade                  62251.937645
+None                      54562.750866
+Other (please specify)    54175.781001
+Name: income, dtype: float64
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped</span><span class="p">[</span><span class="s">"income"</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>What type of cranberry saucedo you typically have?
+Canned                    62499.5
+Homemade                  87499.5
+None                      62499.5
+Other (please specify)    87499.5
+Name: income, dtype: float64
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped</span><span class="p">[</span><span class="s">"income"</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>std</th>
+      <th>median</th>
+    </tr>
+    <tr>
+      <th>What type of cranberry saucedo you typically have?</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Canned</th>
+      <td>83823.403409</td>
+      <td>55835.478014</td>
+      <td>62499.5</td>
+    </tr>
+    <tr>
+      <th>Homemade</th>
+      <td>94878.107287</td>
+      <td>62251.937645</td>
+      <td>87499.5</td>
+    </tr>
+    <tr>
+      <th>None</th>
+      <td>78886.084034</td>
+      <td>54562.750866</td>
+      <td>62499.5</td>
+    </tr>
+    <tr>
+      <th>Other (please specify)</th>
+      <td>86629.978261</td>
+      <td>54175.781001</td>
+      <td>87499.5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>If we left out only selecting the income column, here’s what we’d get:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>RespondentID</th>
+      <th>income</th>
+    </tr>
+    <tr>
+      <th>What type of cranberry saucedo you typically have?</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Canned</th>
+      <td>4.336699e+09</td>
+      <td>83823.403409</td>
+    </tr>
+    <tr>
+      <th>Homemade</th>
+      <td>4.336792e+09</td>
+      <td>94878.107287</td>
+    </tr>
+    <tr>
+      <th>None</th>
+      <td>4.336765e+09</td>
+      <td>78886.084034</td>
+    </tr>
+    <tr>
+      <th>Other (please specify)</th>
+      <td>4.336763e+09</td>
+      <td>86629.978261</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>The above code will find the mean for each group for every column in data. However, most columns are string columns, not integer or float columns, so Pandas didn’t process them, since calling <code class="highlighter-rouge">np.mean</code> on them raised an error.</p>
+
+<h2 id="plotting-the-results-of-aggregation">Plotting the results of aggregation</h2>
+
+<p>We can make a plot using the results of our <code class="highlighter-rouge">agg</code> method. This will create a bar chart that shows the average income of each category.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="n">sauce</span> <span class="o">=</span> <span class="n">grouped</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span>
+<span class="n">sauce</span><span class="p">[</span><span class="s">"income"</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">"bar"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1187d0f98&gt;
+</code></pre></div></div>
+
+<p><img src="04.b%20-%20Pandas%20Data%20analysis%20Part%202_files/04.b%20-%20Pandas%20Data%20analysis%20Part%202_63_1.png" alt="png" /></p>
+
+<h2 id="aggregating-with-multiple-columns">Aggregating with multiple columns</h2>
+<p>We can call groupby with multiple columns as input to get more granular groups. If we use the What type of cranberry saucedo you typically have? and What is typically the main dish at your Thanksgiving dinner? columns as input, we’ll be able to find the average income of people who eat Homemade cranberry sauce and Tofurkey, for example:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span>
+    <span class="p">[</span><span class="s">"What type of cranberry saucedo you typically have?"</span><span class="p">,</span> 
+     <span class="s">"What is typically the main dish at your Thanksgiving dinner?"</span><span class="p">])</span>
+<span class="n">grouped</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>RespondentID</th>
+      <th>income</th>
+    </tr>
+    <tr>
+      <th>What type of cranberry saucedo you typically have?</th>
+      <th>What is typically the main dish at your Thanksgiving dinner?</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="7" valign="top">Canned</th>
+      <th>Chicken</th>
+      <td>4.336354e+09</td>
+      <td>80999.600000</td>
+    </tr>
+    <tr>
+      <th>Ham/Pork</th>
+      <td>4.336757e+09</td>
+      <td>77499.535714</td>
+    </tr>
+    <tr>
+      <th>I don't know</th>
+      <td>4.335987e+09</td>
+      <td>4999.500000</td>
+    </tr>
+    <tr>
+      <th>Other (please specify)</th>
+      <td>4.336682e+09</td>
+      <td>53213.785714</td>
+    </tr>
+    <tr>
+      <th>Roast beef</th>
+      <td>4.336254e+09</td>
+      <td>25499.500000</td>
+    </tr>
+    <tr>
+      <th>Tofurkey</th>
+      <td>4.337157e+09</td>
+      <td>100713.857143</td>
+    </tr>
+    <tr>
+      <th>Turkey</th>
+      <td>4.336705e+09</td>
+      <td>85242.682045</td>
+    </tr>
+    <tr>
+      <th rowspan="8" valign="top">Homemade</th>
+      <th>Chicken</th>
+      <td>4.336540e+09</td>
+      <td>19999.500000</td>
+    </tr>
+    <tr>
+      <th>Ham/Pork</th>
+      <td>4.337253e+09</td>
+      <td>96874.625000</td>
+    </tr>
+    <tr>
+      <th>I don't know</th>
+      <td>4.336084e+09</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Other (please specify)</th>
+      <td>4.336863e+09</td>
+      <td>55356.642857</td>
+    </tr>
+    <tr>
+      <th>Roast beef</th>
+      <td>4.336174e+09</td>
+      <td>33749.500000</td>
+    </tr>
+    <tr>
+      <th>Tofurkey</th>
+      <td>4.336790e+09</td>
+      <td>57916.166667</td>
+    </tr>
+    <tr>
+      <th>Turducken</th>
+      <td>4.337475e+09</td>
+      <td>200000.000000</td>
+    </tr>
+    <tr>
+      <th>Turkey</th>
+      <td>4.336791e+09</td>
+      <td>97690.147982</td>
+    </tr>
+    <tr>
+      <th rowspan="8" valign="top">None</th>
+      <th>Chicken</th>
+      <td>4.336151e+09</td>
+      <td>11249.500000</td>
+    </tr>
+    <tr>
+      <th>Ham/Pork</th>
+      <td>4.336680e+09</td>
+      <td>61249.500000</td>
+    </tr>
+    <tr>
+      <th>I don't know</th>
+      <td>4.336412e+09</td>
+      <td>33749.500000</td>
+    </tr>
+    <tr>
+      <th>Other (please specify)</th>
+      <td>4.336688e+09</td>
+      <td>119106.678571</td>
+    </tr>
+    <tr>
+      <th>Roast beef</th>
+      <td>4.337424e+09</td>
+      <td>162499.500000</td>
+    </tr>
+    <tr>
+      <th>Tofurkey</th>
+      <td>4.336950e+09</td>
+      <td>112499.500000</td>
+    </tr>
+    <tr>
+      <th>Turducken</th>
+      <td>4.336739e+09</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Turkey</th>
+      <td>4.336784e+09</td>
+      <td>74606.275281</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">Other (please specify)</th>
+      <th>Ham/Pork</th>
+      <td>4.336465e+09</td>
+      <td>87499.500000</td>
+    </tr>
+    <tr>
+      <th>Other (please specify)</th>
+      <td>4.337335e+09</td>
+      <td>124999.666667</td>
+    </tr>
+    <tr>
+      <th>Tofurkey</th>
+      <td>4.336122e+09</td>
+      <td>37499.500000</td>
+    </tr>
+    <tr>
+      <th>Turkey</th>
+      <td>4.336724e+09</td>
+      <td>82916.194444</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>As you can see above, we get a nice table that shows us the mean of each column for each group. This enables us to find some interesting patterns, such as:</p>
+
+<ul>
+  <li>People who have Turducken and Homemade cranberry sauce seem to have high household incomes.</li>
+  <li>People who eat Canned cranberry sauce tend to have lower incomes, but those who also have Roast Beef have the lowest incomes.</li>
+  <li>It looks like there’s one person who has Canned cranberry sauce and doesn’t know what type of main dish he’s having.</li>
+</ul>
+
+<h2 id="aggregating-with-multiple-functions">Aggregating with multiple functions</h2>
+<p>We can also perform aggregation with multiple functions. This enables us to calculate the mean and standard deviation of a group, for example. In the below code, we find the sum, standard deviation, and mean of each group in the income column:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped</span><span class="p">[</span><span class="s">"income"</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="nb">sum</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>mean</th>
+      <th>sum</th>
+      <th>std</th>
+    </tr>
+    <tr>
+      <th>What type of cranberry saucedo you typically have?</th>
+      <th>What is typically the main dish at your Thanksgiving dinner?</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="7" valign="top">Canned</th>
+      <th>Chicken</th>
+      <td>80999.600000</td>
+      <td>404998.0</td>
+      <td>75779.481062</td>
+    </tr>
+    <tr>
+      <th>Ham/Pork</th>
+      <td>77499.535714</td>
+      <td>1084993.5</td>
+      <td>56645.063944</td>
+    </tr>
+    <tr>
+      <th>I don't know</th>
+      <td>4999.500000</td>
+      <td>4999.5</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Other (please specify)</th>
+      <td>53213.785714</td>
+      <td>372496.5</td>
+      <td>29780.946290</td>
+    </tr>
+    <tr>
+      <th>Roast beef</th>
+      <td>25499.500000</td>
+      <td>127497.5</td>
+      <td>24584.039538</td>
+    </tr>
+    <tr>
+      <th>Tofurkey</th>
+      <td>100713.857143</td>
+      <td>704997.0</td>
+      <td>61351.484439</td>
+    </tr>
+    <tr>
+      <th>Turkey</th>
+      <td>85242.682045</td>
+      <td>34182315.5</td>
+      <td>55687.436102</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">Homemade</th>
+      <th>Chicken</th>
+      <td>19999.500000</td>
+      <td>59998.5</td>
+      <td>16393.596311</td>
+    </tr>
+    <tr>
+      <th>Ham/Pork</th>
+      <td>96874.625000</td>
+      <td>387498.5</td>
+      <td>77308.452805</td>
+    </tr>
+    <tr>
+      <th>I don't know</th>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="using-apply-on-groups">Using apply on groups</h2>
+<p>One of the limitations of aggregation is that each function has to return a single number. While we can perform computations like finding the mean, we can’t for example, call <code class="highlighter-rouge">value_counts</code> to get the exact count of a category. We can do this using the <code class="highlighter-rouge">pandas.GroupBy.apply</code> method. This method will apply a function to each group, then combine the results.</p>
+
+<p>In the below code, we’ll apply value_counts to find the number of people who live in each area type (Rural, Suburban, etc) who eat different kinds of main dishes for Thanksgiving:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">"How would you describe where you live?"</span><span class="p">)[</span><span class="s">"What is typically the main dish at your Thanksgiving dinner?"</span><span class="p">]</span>
+<span class="n">grouped</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>How would you describe where you live?                        
+Rural                                   Turkey                    189
+                                        Other (please specify)      9
+                                        Ham/Pork                    7
+                                        Tofurkey                    3
+                                        I don't know                3
+                                        Turducken                   2
+                                        Chicken                     2
+                                        Roast beef                  1
+Suburban                                Turkey                    449
+                                        Ham/Pork                   17
+                                        Other (please specify)     13
+                                        Tofurkey                    9
+                                        Chicken                     3
+                                        Roast beef                  3
+                                        Turducken                   1
+                                        I don't know                1
+Urban                                   Turkey                    198
+                                        Other (please specify)     13
+                                        Tofurkey                    8
+                                        Chicken                     7
+                                        Roast beef                  6
+                                        Ham/Pork                    4
+Name: What is typically the main dish at your Thanksgiving dinner?, dtype: int64
+</code></pre></div></div>
+
+<p>The above table shows us that people who live in different types of areas eat different Thanksgiving main dishes at about the same rate.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
