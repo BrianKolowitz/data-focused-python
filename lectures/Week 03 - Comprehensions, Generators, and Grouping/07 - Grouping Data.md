@@ -27,46 +27,46 @@ with open('../data/csv/patients.csv') as f:
             break
 ```
 
-    OrderedDict([('Id', 'c09181f8-6526-4de7-87c7-25c95ccdbdea'),
-                 ('BIRTHDATE', '2014-06-06'),
+    OrderedDict([('Id', 'a1f26fb1-05aa-4991-8cf3-78d5dbc7853a'),
+                 ('BIRTHDATE', '1994-08-22'),
                  ('DEATHDATE', ''),
-                 ('SSN', '999-26-1662'),
-                 ('DRIVERS', ''),
-                 ('PASSPORT', ''),
-                 ('PREFIX', ''),
-                 ('FIRST', 'Lizbeth716'),
-                 ('LAST', 'Hackett68'),
+                 ('SSN', '999-81-6585'),
+                 ('DRIVERS', 'S99916284'),
+                 ('PASSPORT', 'X62883440X'),
+                 ('PREFIX', 'Mr.'),
+                 ('FIRST', 'Gregory545'),
+                 ('LAST', 'Zulauf375'),
+                 ('SUFFIX', ''),
+                 ('MAIDEN', ''),
+                 ('MARITAL', ''),
+                 ('RACE', 'white'),
+                 ('ETHNICITY', 'italian'),
+                 ('GENDER', 'M'),
+                 ('BIRTHPLACE', 'Worcester  Massachusetts  US'),
+                 ('ADDRESS', '448 Bahringer Junction Apt 97'),
+                 ('CITY', 'North Reading'),
+                 ('STATE', 'Massachusetts'),
+                 ('ZIP', '01864')])
+    OrderedDict([('Id', '112942a0-dca9-4a07-983f-9e9cabcc6fe0'),
+                 ('BIRTHDATE', '1993-10-28'),
+                 ('DEATHDATE', ''),
+                 ('SSN', '999-93-5205'),
+                 ('DRIVERS', 'S99938900'),
+                 ('PASSPORT', 'X13004759X'),
+                 ('PREFIX', 'Ms.'),
+                 ('FIRST', 'Tena12'),
+                 ('LAST', 'Ryan260'),
                  ('SUFFIX', ''),
                  ('MAIDEN', ''),
                  ('MARITAL', ''),
                  ('RACE', 'white'),
                  ('ETHNICITY', 'irish'),
                  ('GENDER', 'F'),
-                 ('BIRTHPLACE', 'Denver  Pennsylvania  US'),
-                 ('ADDRESS', '742 Parisian Run Suite 87'),
-                 ('CITY', 'Pittsburgh'),
-                 ('STATE', 'Pennsylvania'),
-                 ('ZIP', '15106')])
-    OrderedDict([('Id', '8d1c4f3b-3d44-4daf-8962-cc260bad8c87'),
-                 ('BIRTHDATE', '1969-05-10'),
-                 ('DEATHDATE', ''),
-                 ('SSN', '999-64-1895'),
-                 ('DRIVERS', 'S99989200'),
-                 ('PASSPORT', 'X16155415X'),
-                 ('PREFIX', 'Mrs.'),
-                 ('FIRST', 'Augustine565'),
-                 ('LAST', 'Conroy74'),
-                 ('SUFFIX', ''),
-                 ('MAIDEN', 'Cremin516'),
-                 ('MARITAL', 'M'),
-                 ('RACE', 'asian'),
-                 ('ETHNICITY', 'asian_indian'),
-                 ('GENDER', 'F'),
-                 ('BIRTHPLACE', 'Unityship  Pennsylvania  US'),
-                 ('ADDRESS', '931 Watsica Lock'),
-                 ('CITY', 'Pittsburgh'),
-                 ('STATE', 'Pennsylvania'),
-                 ('ZIP', '15106')])
+                 ('BIRTHPLACE', 'Revere  Massachusetts  US'),
+                 ('ADDRESS', '880 Bartell Trafficway'),
+                 ('CITY', 'Tyngsborough'),
+                 ('STATE', 'Massachusetts'),
+                 ('ZIP', '')])
 
 
 
@@ -82,7 +82,7 @@ with open('../data/csv/patients.csv') as f:
             break
 ```
 
-    F
+    M
     F
     M
 
@@ -101,7 +101,7 @@ with open('../data/csv/patients.csv') as f:
 print(patient_genders)
 ```
 
-    {'M', 'F'}
+    {'F', 'M'}
 
 
 
@@ -125,48 +125,46 @@ pprint(male_patients[0])
 pprint(female_patients[0])
 ```
 
-    OrderedDict([('Id', 'cb115d2a-56b5-42a7-bf64-0362505df9f2'),
-                 ('BIRTHDATE', '1969-05-30'),
+    OrderedDict([('Id', 'a1f26fb1-05aa-4991-8cf3-78d5dbc7853a'),
+                 ('BIRTHDATE', '1994-08-22'),
                  ('DEATHDATE', ''),
-                 ('SSN', '999-28-4068'),
-                 ('DRIVERS', 'S99947751'),
-                 ('PASSPORT', 'X52116181X'),
+                 ('SSN', '999-81-6585'),
+                 ('DRIVERS', 'S99916284'),
+                 ('PASSPORT', 'X62883440X'),
                  ('PREFIX', 'Mr.'),
-                 ('FIRST', 'Rhett759'),
-                 ('LAST', 'Mosciski958'),
+                 ('FIRST', 'Gregory545'),
+                 ('LAST', 'Zulauf375'),
                  ('SUFFIX', ''),
                  ('MAIDEN', ''),
-                 ('MARITAL', 'M'),
-                 ('RACE', 'asian'),
-                 ('ETHNICITY', 'chinese'),
+                 ('MARITAL', ''),
+                 ('RACE', 'white'),
+                 ('ETHNICITY', 'italian'),
                  ('GENDER', 'M'),
-                 ('BIRTHPLACE',
-                  "Macau  Macao Special Administrative Region of the People's "
-                  'Republic of China  CN'),
-                 ('ADDRESS', '370 Gleichner Parade'),
-                 ('CITY', 'Pittsburgh'),
-                 ('STATE', 'Pennsylvania'),
-                 ('ZIP', '15106')])
-    OrderedDict([('Id', 'c09181f8-6526-4de7-87c7-25c95ccdbdea'),
-                 ('BIRTHDATE', '2014-06-06'),
+                 ('BIRTHPLACE', 'Worcester  Massachusetts  US'),
+                 ('ADDRESS', '448 Bahringer Junction Apt 97'),
+                 ('CITY', 'North Reading'),
+                 ('STATE', 'Massachusetts'),
+                 ('ZIP', '01864')])
+    OrderedDict([('Id', '112942a0-dca9-4a07-983f-9e9cabcc6fe0'),
+                 ('BIRTHDATE', '1993-10-28'),
                  ('DEATHDATE', ''),
-                 ('SSN', '999-26-1662'),
-                 ('DRIVERS', ''),
-                 ('PASSPORT', ''),
-                 ('PREFIX', ''),
-                 ('FIRST', 'Lizbeth716'),
-                 ('LAST', 'Hackett68'),
+                 ('SSN', '999-93-5205'),
+                 ('DRIVERS', 'S99938900'),
+                 ('PASSPORT', 'X13004759X'),
+                 ('PREFIX', 'Ms.'),
+                 ('FIRST', 'Tena12'),
+                 ('LAST', 'Ryan260'),
                  ('SUFFIX', ''),
                  ('MAIDEN', ''),
                  ('MARITAL', ''),
                  ('RACE', 'white'),
                  ('ETHNICITY', 'irish'),
                  ('GENDER', 'F'),
-                 ('BIRTHPLACE', 'Denver  Pennsylvania  US'),
-                 ('ADDRESS', '742 Parisian Run Suite 87'),
-                 ('CITY', 'Pittsburgh'),
-                 ('STATE', 'Pennsylvania'),
-                 ('ZIP', '15106')])
+                 ('BIRTHPLACE', 'Revere  Massachusetts  US'),
+                 ('ADDRESS', '880 Bartell Trafficway'),
+                 ('CITY', 'Tyngsborough'),
+                 ('STATE', 'Massachusetts'),
+                 ('ZIP', '')])
 
 
 ## Can we do better?
@@ -258,7 +256,7 @@ with open('../data/csv/patients.csv') as f:
 print(patients_by_gender.keys())
 ```
 
-    dict_keys(['F', 'M'])
+    dict_keys(['M', 'F'])
 
 
 
@@ -266,46 +264,46 @@ print(patients_by_gender.keys())
 pprint(patients_by_gender['F'][0:2])
 ```
 
-    [OrderedDict([('Id', 'c09181f8-6526-4de7-87c7-25c95ccdbdea'),
-                  ('BIRTHDATE', '2014-06-06'),
+    [OrderedDict([('Id', '112942a0-dca9-4a07-983f-9e9cabcc6fe0'),
+                  ('BIRTHDATE', '1993-10-28'),
                   ('DEATHDATE', ''),
-                  ('SSN', '999-26-1662'),
-                  ('DRIVERS', ''),
-                  ('PASSPORT', ''),
-                  ('PREFIX', ''),
-                  ('FIRST', 'Lizbeth716'),
-                  ('LAST', 'Hackett68'),
+                  ('SSN', '999-93-5205'),
+                  ('DRIVERS', 'S99938900'),
+                  ('PASSPORT', 'X13004759X'),
+                  ('PREFIX', 'Ms.'),
+                  ('FIRST', 'Tena12'),
+                  ('LAST', 'Ryan260'),
                   ('SUFFIX', ''),
                   ('MAIDEN', ''),
                   ('MARITAL', ''),
                   ('RACE', 'white'),
                   ('ETHNICITY', 'irish'),
                   ('GENDER', 'F'),
-                  ('BIRTHPLACE', 'Denver  Pennsylvania  US'),
-                  ('ADDRESS', '742 Parisian Run Suite 87'),
-                  ('CITY', 'Pittsburgh'),
-                  ('STATE', 'Pennsylvania'),
-                  ('ZIP', '15106')]),
-     OrderedDict([('Id', '8d1c4f3b-3d44-4daf-8962-cc260bad8c87'),
-                  ('BIRTHDATE', '1969-05-10'),
+                  ('BIRTHPLACE', 'Revere  Massachusetts  US'),
+                  ('ADDRESS', '880 Bartell Trafficway'),
+                  ('CITY', 'Tyngsborough'),
+                  ('STATE', 'Massachusetts'),
+                  ('ZIP', '')]),
+     OrderedDict([('Id', '893ba78c-4633-4707-a11a-bf7f6c6fc827'),
+                  ('BIRTHDATE', '2003-08-16'),
                   ('DEATHDATE', ''),
-                  ('SSN', '999-64-1895'),
-                  ('DRIVERS', 'S99989200'),
-                  ('PASSPORT', 'X16155415X'),
-                  ('PREFIX', 'Mrs.'),
-                  ('FIRST', 'Augustine565'),
-                  ('LAST', 'Conroy74'),
+                  ('SSN', '999-46-3420'),
+                  ('DRIVERS', 'S99923748'),
+                  ('PASSPORT', ''),
+                  ('PREFIX', ''),
+                  ('FIRST', 'Casandra937'),
+                  ('LAST', 'Reynolds644'),
                   ('SUFFIX', ''),
-                  ('MAIDEN', 'Cremin516'),
-                  ('MARITAL', 'M'),
-                  ('RACE', 'asian'),
-                  ('ETHNICITY', 'asian_indian'),
+                  ('MAIDEN', ''),
+                  ('MARITAL', ''),
+                  ('RACE', 'white'),
+                  ('ETHNICITY', 'russian'),
                   ('GENDER', 'F'),
-                  ('BIRTHPLACE', 'Unityship  Pennsylvania  US'),
-                  ('ADDRESS', '931 Watsica Lock'),
-                  ('CITY', 'Pittsburgh'),
-                  ('STATE', 'Pennsylvania'),
-                  ('ZIP', '15106')])]
+                  ('BIRTHPLACE', 'Boston  Massachusetts  US'),
+                  ('ADDRESS', '1048 Botsford Skyway Apt 45'),
+                  ('CITY', 'Fairhaven'),
+                  ('STATE', 'Massachusetts'),
+                  ('ZIP', '02719')])]
 
 
 
@@ -313,7 +311,7 @@ pprint(patients_by_gender['F'][0:2])
 print(patients_by_gender['F'][0]['LAST'])
 ```
 
-    Hackett68
+    Ryan260
 
 
 ## Let's make the code reusable
@@ -373,46 +371,46 @@ patients_by_gender = group_patient('../data/csv/patients.csv', 'GENDER')
 pprint(patients_by_gender['F'][0:2])
 ```
 
-    [OrderedDict([('Id', 'c09181f8-6526-4de7-87c7-25c95ccdbdea'),
-                  ('BIRTHDATE', '2014-06-06'),
+    [OrderedDict([('Id', '112942a0-dca9-4a07-983f-9e9cabcc6fe0'),
+                  ('BIRTHDATE', '1993-10-28'),
                   ('DEATHDATE', ''),
-                  ('SSN', '999-26-1662'),
-                  ('DRIVERS', ''),
-                  ('PASSPORT', ''),
-                  ('PREFIX', ''),
-                  ('FIRST', 'Lizbeth716'),
-                  ('LAST', 'Hackett68'),
+                  ('SSN', '999-93-5205'),
+                  ('DRIVERS', 'S99938900'),
+                  ('PASSPORT', 'X13004759X'),
+                  ('PREFIX', 'Ms.'),
+                  ('FIRST', 'Tena12'),
+                  ('LAST', 'Ryan260'),
                   ('SUFFIX', ''),
                   ('MAIDEN', ''),
                   ('MARITAL', ''),
                   ('RACE', 'white'),
                   ('ETHNICITY', 'irish'),
                   ('GENDER', 'F'),
-                  ('BIRTHPLACE', 'Denver  Pennsylvania  US'),
-                  ('ADDRESS', '742 Parisian Run Suite 87'),
-                  ('CITY', 'Pittsburgh'),
-                  ('STATE', 'Pennsylvania'),
-                  ('ZIP', '15106')]),
-     OrderedDict([('Id', '8d1c4f3b-3d44-4daf-8962-cc260bad8c87'),
-                  ('BIRTHDATE', '1969-05-10'),
+                  ('BIRTHPLACE', 'Revere  Massachusetts  US'),
+                  ('ADDRESS', '880 Bartell Trafficway'),
+                  ('CITY', 'Tyngsborough'),
+                  ('STATE', 'Massachusetts'),
+                  ('ZIP', '')]),
+     OrderedDict([('Id', '893ba78c-4633-4707-a11a-bf7f6c6fc827'),
+                  ('BIRTHDATE', '2003-08-16'),
                   ('DEATHDATE', ''),
-                  ('SSN', '999-64-1895'),
-                  ('DRIVERS', 'S99989200'),
-                  ('PASSPORT', 'X16155415X'),
-                  ('PREFIX', 'Mrs.'),
-                  ('FIRST', 'Augustine565'),
-                  ('LAST', 'Conroy74'),
+                  ('SSN', '999-46-3420'),
+                  ('DRIVERS', 'S99923748'),
+                  ('PASSPORT', ''),
+                  ('PREFIX', ''),
+                  ('FIRST', 'Casandra937'),
+                  ('LAST', 'Reynolds644'),
                   ('SUFFIX', ''),
-                  ('MAIDEN', 'Cremin516'),
-                  ('MARITAL', 'M'),
-                  ('RACE', 'asian'),
-                  ('ETHNICITY', 'asian_indian'),
+                  ('MAIDEN', ''),
+                  ('MARITAL', ''),
+                  ('RACE', 'white'),
+                  ('ETHNICITY', 'russian'),
                   ('GENDER', 'F'),
-                  ('BIRTHPLACE', 'Unityship  Pennsylvania  US'),
-                  ('ADDRESS', '931 Watsica Lock'),
-                  ('CITY', 'Pittsburgh'),
-                  ('STATE', 'Pennsylvania'),
-                  ('ZIP', '15106')])]
+                  ('BIRTHPLACE', 'Boston  Massachusetts  US'),
+                  ('ADDRESS', '1048 Botsford Skyway Apt 45'),
+                  ('CITY', 'Fairhaven'),
+                  ('STATE', 'Massachusetts'),
+                  ('ZIP', '02719')])]
 
 
 
@@ -438,26 +436,26 @@ patients_by_gender = group('../data/csv/patients.csv', 'GENDER')
 pprint(patients_by_gender['F'][0])
 ```
 
-    OrderedDict([('Id', 'c09181f8-6526-4de7-87c7-25c95ccdbdea'),
-                 ('BIRTHDATE', '2014-06-06'),
+    OrderedDict([('Id', '112942a0-dca9-4a07-983f-9e9cabcc6fe0'),
+                 ('BIRTHDATE', '1993-10-28'),
                  ('DEATHDATE', ''),
-                 ('SSN', '999-26-1662'),
-                 ('DRIVERS', ''),
-                 ('PASSPORT', ''),
-                 ('PREFIX', ''),
-                 ('FIRST', 'Lizbeth716'),
-                 ('LAST', 'Hackett68'),
+                 ('SSN', '999-93-5205'),
+                 ('DRIVERS', 'S99938900'),
+                 ('PASSPORT', 'X13004759X'),
+                 ('PREFIX', 'Ms.'),
+                 ('FIRST', 'Tena12'),
+                 ('LAST', 'Ryan260'),
                  ('SUFFIX', ''),
                  ('MAIDEN', ''),
                  ('MARITAL', ''),
                  ('RACE', 'white'),
                  ('ETHNICITY', 'irish'),
                  ('GENDER', 'F'),
-                 ('BIRTHPLACE', 'Denver  Pennsylvania  US'),
-                 ('ADDRESS', '742 Parisian Run Suite 87'),
-                 ('CITY', 'Pittsburgh'),
-                 ('STATE', 'Pennsylvania'),
-                 ('ZIP', '15106')])
+                 ('BIRTHPLACE', 'Revere  Massachusetts  US'),
+                 ('ADDRESS', '880 Bartell Trafficway'),
+                 ('CITY', 'Tyngsborough'),
+                 ('STATE', 'Massachusetts'),
+                 ('ZIP', '')])
 
 
 ## What if we want multiple grouping levels?
@@ -524,26 +522,26 @@ patients_by_gender = group_file('../data/csv/patients.csv', 'GENDER')
 pprint(patients_by_gender['F'][0])
 ```
 
-    OrderedDict([('Id', 'c09181f8-6526-4de7-87c7-25c95ccdbdea'),
-                 ('BIRTHDATE', '2014-06-06'),
+    OrderedDict([('Id', '112942a0-dca9-4a07-983f-9e9cabcc6fe0'),
+                 ('BIRTHDATE', '1993-10-28'),
                  ('DEATHDATE', ''),
-                 ('SSN', '999-26-1662'),
-                 ('DRIVERS', ''),
-                 ('PASSPORT', ''),
-                 ('PREFIX', ''),
-                 ('FIRST', 'Lizbeth716'),
-                 ('LAST', 'Hackett68'),
+                 ('SSN', '999-93-5205'),
+                 ('DRIVERS', 'S99938900'),
+                 ('PASSPORT', 'X13004759X'),
+                 ('PREFIX', 'Ms.'),
+                 ('FIRST', 'Tena12'),
+                 ('LAST', 'Ryan260'),
                  ('SUFFIX', ''),
                  ('MAIDEN', ''),
                  ('MARITAL', ''),
                  ('RACE', 'white'),
                  ('ETHNICITY', 'irish'),
                  ('GENDER', 'F'),
-                 ('BIRTHPLACE', 'Denver  Pennsylvania  US'),
-                 ('ADDRESS', '742 Parisian Run Suite 87'),
-                 ('CITY', 'Pittsburgh'),
-                 ('STATE', 'Pennsylvania'),
-                 ('ZIP', '15106')])
+                 ('BIRTHPLACE', 'Revere  Massachusetts  US'),
+                 ('ADDRESS', '880 Bartell Trafficway'),
+                 ('CITY', 'Tyngsborough'),
+                 ('STATE', 'Massachusetts'),
+                 ('ZIP', '')])
 
 
 
@@ -576,11 +574,9 @@ for gender in patients_by_gender_and_race.keys():
         print(gender, race)
 ```
 
-    F WHITE
-    F ASIAN
-    F BLACK
-    M ASIAN
     M WHITE
+    F WHITE
+    F NATIVE
 
 
 
@@ -597,7 +593,7 @@ with open('../data/csv/patients.csv') as f:
 print(gender, race)
 ```
 
-    {'M', 'F'} {'white', 'black', 'asian'}
+    {'F', 'M'} {'white', 'native'}
 
 
 
@@ -621,15 +617,13 @@ for gender in grouped_patients.keys():
             print(gender, race, ethnicity)
 ```
 
-    F WHITE IRISH
-    F WHITE AMERICAN
-    F WHITE GERMAN
-    F WHITE ITALIAN
-    F WHITE SCOTTISH
-    F ASIAN ASIAN_INDIAN
-    F BLACK DOMINICAN
-    M ASIAN CHINESE
     M WHITE ITALIAN
+    M WHITE ENGLISH
+    M WHITE GERMAN
+    F WHITE IRISH
+    F WHITE RUSSIAN
+    F WHITE AMERICAN
+    F NATIVE AMERICAN_INDIAN
 
 
 ## What about 4 levels of grouping?
@@ -668,15 +662,13 @@ for gender in grouped_patients.keys():
             print(gender, race, ethnicity)
 ```
 
-    F WHITE IRISH
-    F WHITE AMERICAN
-    F WHITE GERMAN
-    F WHITE ITALIAN
-    F WHITE SCOTTISH
-    F ASIAN ASIAN_INDIAN
-    F BLACK DOMINICAN
-    M ASIAN CHINESE
     M WHITE ITALIAN
+    M WHITE ENGLISH
+    M WHITE GERMAN
+    F WHITE IRISH
+    F WHITE RUSSIAN
+    F WHITE AMERICAN
+    F NATIVE AMERICAN_INDIAN
 
 
 
@@ -697,15 +689,13 @@ def print_keys2(d, l):
 print_keys(grouped_patients)
 ```
 
-    F WHITE IRISH
-    F WHITE AMERICAN
-    F WHITE GERMAN
-    F WHITE ITALIAN
-    F WHITE SCOTTISH
-    F ASIAN ASIAN_INDIAN
-    F BLACK DOMINICAN
-    M ASIAN CHINESE
     M WHITE ITALIAN
+    M WHITE ENGLISH
+    M WHITE GERMAN
+    F WHITE IRISH
+    F WHITE RUSSIAN
+    F WHITE AMERICAN
+    F NATIVE AMERICAN_INDIAN
 
 
 
@@ -719,8 +709,8 @@ grouped_patients = group_file_by_list('../data/csv/patients.csv', ['GENDER'])
 print_keys(grouped_patients)
 ```
 
-    F
     M
+    F
 
 
 
@@ -730,8 +720,7 @@ print_keys(grouped_patients)
 ```
 
     WHITE
-    ASIAN
-    BLACK
+    NATIVE
 
 
 
@@ -740,11 +729,9 @@ grouped_patients = group_file_by_list('../data/csv/patients.csv', ['GENDER', 'RA
 print_keys(grouped_patients)
 ```
 
-    F WHITE
-    F ASIAN
-    F BLACK
-    M ASIAN
     M WHITE
+    F WHITE
+    F NATIVE
 
 
 
@@ -753,11 +740,9 @@ grouped_patients = group_file_by_list('../data/csv/patients.csv', ['RACE', 'GEND
 print_keys(grouped_patients)
 ```
 
-    WHITE F
     WHITE M
-    ASIAN F
-    ASIAN M
-    BLACK F
+    WHITE F
+    NATIVE F
 
 
 
@@ -766,14 +751,13 @@ grouped_patients = group_file_by_list('../data/csv/patients.csv', ['ETHNICITY'])
 print_keys(grouped_patients)
 ```
 
-    IRISH
-    ASIAN_INDIAN
-    CHINESE
-    AMERICAN
-    DOMINICAN
-    GERMAN
     ITALIAN
-    SCOTTISH
+    IRISH
+    RUSSIAN
+    AMERICAN_INDIAN
+    ENGLISH
+    AMERICAN
+    GERMAN
 
 
 
@@ -782,14 +766,13 @@ grouped_patients = group_file_by_list('../data/csv/patients.csv', ['RACE', 'ETHN
 print_keys(grouped_patients)
 ```
 
+    WHITE ITALIAN
     WHITE IRISH
+    WHITE RUSSIAN
+    WHITE ENGLISH
     WHITE AMERICAN
     WHITE GERMAN
-    WHITE ITALIAN
-    WHITE SCOTTISH
-    ASIAN ASIAN_INDIAN
-    ASIAN CHINESE
-    BLACK DOMINICAN
+    NATIVE AMERICAN_INDIAN
 
 
 
@@ -798,19 +781,14 @@ grouped_patients = group_file_by_list('../data/csv/patients.csv', ['RACE', 'ETHN
 print_keys(grouped_patients)
 ```
 
-    WHITE IRISH DENVER  PENNSYLVANIA  US F
-    WHITE IRISH EAST EARLSHIP  PENNSYLVANIA  US F
-    WHITE AMERICAN READINGSHIP  PENNSYLVANIA  US F
-    WHITE GERMAN BROWNSVILLE  PENNSYLVANIA  US F
-    WHITE ITALIAN UPPER ALLENSHIP  PENNSYLVANIA  US F
-    WHITE ITALIAN BIRDSBORO  PENNSYLVANIA  US M
-    WHITE SCOTTISH LEHMANSHIP  PENNSYLVANIA  US F
-    ASIAN ASIAN_INDIAN UNITYSHIP  PENNSYLVANIA  US F
-    ASIAN CHINESE MACAU  MACAO SPECIAL ADMINISTRATIVE REGION OF THE PEOPLE'S REPUBLIC OF CHINA  CN M
-    BLACK DOMINICAN PHILADELPHIA  PENNSYLVANIA  US F
+    WHITE ITALIAN WORCESTER  MASSACHUSETTS  US M
+    WHITE ITALIAN MILFORD  MASSACHUSETTS  US M
+    WHITE IRISH REVERE  MASSACHUSETTS  US F
+    WHITE IRISH GROTON  MASSACHUSETTS  US F
+    WHITE IRISH TAUNTON  MASSACHUSETTS  US F
+    WHITE RUSSIAN BOSTON  MASSACHUSETTS  US F
+    WHITE ENGLISH BOSTON  MASSACHUSETTS  US M
+    WHITE AMERICAN FRAMINGHAM  MASSACHUSETTS  US F
+    WHITE GERMAN NANTUCKET  MASSACHUSETTS  US M
+    NATIVE AMERICAN_INDIAN HARWICH  MASSACHUSETTS  US F
 
-
-
-```python
-
-```
