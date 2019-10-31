@@ -1,0 +1,100 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:30ee89ff-1932-4e7d-8358-7f84527f622e",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "30ee89ff-1932-4e7d-8358-7f84527f622e",
+        "extension": [
+          {
+            "url": "http://synthetichealth.github.io/synthea/utilization-encounters-extension",
+            "valueInteger": 2501
+          }
+        ],
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "140"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "family": "Williamson769",
+            "given": [
+              "Del587"
+            ],
+            "prefix": [
+              "Dr."
+            ]
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "1400 LOCUST STREET"
+            ],
+            "city": "PITTSBURGH",
+            "state": "PA",
+            "postalCode": "15219",
+            "country": "US"
+          }
+        ],
+        "gender": "male"
+      },
+      "request": {
+        "method": "POST",
+        "url": "Practitioner"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2570b996-8b89-417a-a661-a66c22e84b07",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "2570b996-8b89-417a-a661-a66c22e84b07",
+        "extension": [
+          {
+            "url": "http://synthetichealth.github.io/synthea/utilization-encounters-extension",
+            "valueInteger": 8
+          }
+        ],
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "167390"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "family": "Windler79",
+            "given": [
+              "Bethany501"
+            ],
+            "prefix": [
+              "Dr."
+            ]
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "3459 5TH AVENUE"
+            ],
+            "city": "PITTSBURGH",
+            "state": "PA",
+            "postalCode": "15213",
+            "country": "US"
+          }
+        ],
+        "gender": "female"
+      },
+      "request": {
+        "method": "POST",
+        "url": "Practitioner"
+      }
+    }
+  ]
+}

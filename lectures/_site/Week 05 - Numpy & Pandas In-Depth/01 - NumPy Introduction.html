@@ -1,0 +1,1286 @@
+<h1 id="python-numpy-tutorial">Python Numpy Tutorial</h1>
+<p><a href="https://www.datacamp.com/community/tutorials/python-numpy-tutorial">Source</a></p>
+
+<p>A NumPy tutorial for beginners in which you’ll learn how to create a NumPy array, use broadcasting, access values, manipulate arrays, and much more.</p>
+
+<p>NumPy is, just like SciPy, Scikit-Learn, Pandas, etc. one of the packages that you just can’t miss when you’re learning data science, mainly because this library provides you with an array data structure that holds some benefits over Python lists, such as: being more compact, faster access in reading and writing items, being more convenient and more efficient.</p>
+
+<p>Today we’ll focus precisely on this. This NumPy tutorial will not only show you what NumPy arrays actually are and how you can install Python, but you’ll also learn how to make arrays (even when your data comes from files!), how broadcasting works, how you can ask for help, how to manipulate your arrays and how to visualize them.</p>
+
+<h2 id="content">Content</h2>
+<ul>
+  <li>What Is A Python Numpy Array?</li>
+  <li>How To Make NumPy Arrays</li>
+  <li>How NumPy Broadcasting Works</li>
+  <li>How Do Array Mathematics Work?</li>
+  <li>How To Subset, Slice, And Index Arrays</li>
+  <li>How To Manipulate Arrays</li>
+  <li>How To Visualize NumPy Arrays</li>
+  <li>Beyond Data Analysis with NumPy</li>
+</ul>
+
+<h2 id="what-is-a-python-numpy-array">What Is A Python Numpy Array?</h2>
+
+<p>You already read in the introduction that NumPy arrays are a bit like Python lists, but still very much different at the same time. For those of you who are new to the topic, let’s clarify what it exactly is and what it’s good for.</p>
+
+<p>As the name gives away, a NumPy array is a central data structure of the <code class="highlighter-rouge">numpy</code> library. The library’s name is short for “Numeric Python” or “Numerical Python”.</p>
+
+<p>This already gives an idea of what you’re dealing with, right?</p>
+
+<p>In other words, NumPy is a Python library that is the core library for scientific computing in Python. It contains a collection of tools and techniques that can be used to solve on a computer mathematical models of problems in Science and Engineering. One of these tools is a high-performance multidimensional array object that is a powerful data structure for efficient computation of arrays and matrices. To work with these arrays, there’s a vast amount of high-level mathematical functions operate on these matrices and arrays.</p>
+
+<p>Then, what is an array?</p>
+
+<p>When you look at the print of a couple of arrays, you could see it as a grid that contains values of the same type:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># import the library</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># create a 1-dimensional array</span>
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span> <span class="p">,</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_array</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ 1  2  3  4  5  6  7  8  9 10 11 12]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># create a 2-dimensional array</span>
+<span class="n">my_2d_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_2d_array</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[ 1  2  3  4]
+ [ 5  6  7  8]
+ [ 9 10 11 12]]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># create a 3-dimensional array</span>
+<span class="n">my_3d_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">]]])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_3d_array</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[[ 1  2  3  4]
+  [ 5  6  7  8]]
+
+ [[ 9 10 11 12]
+  [13 14 15 16]]]
+</code></pre></div></div>
+
+<p>You see that, in the example above, the data are integers. The array holds and represents any regular data in a structured way.</p>
+
+<p>However, you should know that, on a structural level, an array is basically nothing but pointers. It’s a combination of a memory address, a data type, a shape, and strides:</p>
+
+<ul>
+  <li>The <code class="highlighter-rouge">data</code> pointer indicates the memory address of the first byte in the array,</li>
+  <li>The data type or <code class="highlighter-rouge">dtype</code> pointer describes the kind of elements that are contained within the array,</li>
+  <li>The <code class="highlighter-rouge">shape</code> indicates the shape of the array, and</li>
+  <li>The <code class="highlighter-rouge">strides</code> are the number of bytes that should be skipped in memory to go to the next element. If your strides are (10,1), you need to proceed one byte to get to the next column and 10 bytes to locate the next row.</li>
+</ul>
+
+<p>Or, in other words, an array contains information about the raw data, how to locate an element and how to interpret an element.</p>
+
+<p>You can easily test this by exploring the numpy array attributes:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Print out memory address</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Memory Address'</span><span class="p">,</span> <span class="n">my_2d_array</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c"># Print out the shape of `my_array`</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Shape'</span><span class="p">,</span> <span class="n">my_2d_array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c"># Print out the data type of `my_array`</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Data Type'</span><span class="p">,</span> <span class="n">my_2d_array</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="c"># Print out the stride of `my_array`</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Strides'</span><span class="p">,</span> <span class="n">my_2d_array</span><span class="o">.</span><span class="n">strides</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Memory Address &lt;memory at 0x119c12dc8&gt;
+Shape (3, 4)
+Data Type int64
+Strides (32, 8)
+</code></pre></div></div>
+
+<p>You see that now, you get a lot more information: for example, the data type that is printed out is ‘int64’ or signed 32-bit integer type; This is a lot more detailed! That also means that the array is stored in memory as 64 bytes (as each integer takes up 8 bytes and you have an array of 8 integers). The strides of the array tell us that you have to skip 8 bytes (one value) to move to the next column, but 32 bytes (4 values) to get to the same position in the next row. As such, the strides for the array will be (32,8).</p>
+
+<p>Note that if you set the data type to <code class="highlighter-rouge">int32</code>, the strides tuple that you get back will be <code class="highlighter-rouge">(16, 4)</code>, as you will still need to move one value to the next column and 4 values to get the same position. The only thing that will have changed is the fact that each integer will take up 4 bytes instead of 8.</p>
+
+<p><img src="http://community.datacamp.com.s3.amazonaws.com/community/production/ckeditor_assets/pictures/332/content_arrays-axes.png" /></p>
+
+<p>The array that you see above is, as its name already suggested, a 2-dimensional array: you have rows and columns. The rows are indicated as the “axis 0”, while the columns are the “axis 1”. The number of the axis goes up accordingly with the number of the dimensions: in 3-D arrays, of which you have also seen an example in the previous code chunk, you’ll have an additional “axis 2”. Note that these axes are only valid for arrays that have at least 2 dimensions, as there is no point in having this for 1-D arrays;</p>
+
+<p>These axes will come in handy later when you’re manipulating the shape of your NumPy arrays.</p>
+
+<h2 id="how-to-make-numpy-arrays">How To Make NumPy Arrays</h2>
+
+<p>To make a numpy array, you can just use the <code class="highlighter-rouge">np.array()</code> function. All you need to do is pass a list to it, and optionally, you can also specify the data type of the data. If you want to know more about the possible data types that you can pick, <a href="https://docs.scipy.org/doc/numpy/user/basics.types.html">go</a> here or consider taking a brief look at <a href="https://www.datacamp.com/community/blog/python-numpy-cheat-sheet/">DataCamp’s NumPy cheat sheet</a>.</p>
+
+<p>There’s no need to go and memorize these NumPy data types if you’re a new user; But you do have to know and care what data you’re dealing with. The data types are there when you need more control over how your data is stored in memory and on disk. Especially in cases where you’re working with extensive data, it’s good that you know to control the storage type.</p>
+
+<p>Don’t forget that, in order to work with the <code class="highlighter-rouge">np.array()</code> function, you need to make sure that the <code class="highlighter-rouge">numpy</code> library is present in your environment. The NumPy library follows an import convention: when you import this library, you have to make sure that you import it as <code class="highlighter-rouge">np</code>. By doing this, you’ll make sure that other Pythonistas understand your code more easily.</p>
+
+<p>In the following example you’ll create the my_array array that you have already played around with above:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Import `numpy` as `np`</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="c"># Make the array `my_array`</span>
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+<span class="c"># Print `my_array`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="n">my_array</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[1 2 3 4]
+ [5 6 7 8]] int32
+</code></pre></div></div>
+
+<p>However, sometimes you don’t know what data you want to put in your array, or you want to import data into a numpy array from another source. In those cases, you’ll make use of initial placeholders or functions to load data from text into arrays, respectively.</p>
+
+<p>The following sections will show you how to do this.</p>
+
+<h3 id="how-to-make-an-empty-numpy-array">How To Make An “Empty” NumPy Array</h3>
+
+<p>What people often mean when they say that they are creating “empty” arrays is that they want to make use of initial placeholders, which you can fill up afterward. You can initialize arrays with ones or zeros, but you can also create arrays that get filled up with evenly spaced values, constant or random values.</p>
+
+<p>However, you can still make a totally empty array, too.</p>
+
+<p>Luckily for us, there are quite a lot of functions to make</p>
+
+<p>Try it all out below!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create an array of ones</span>
+<span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[1., 1., 1., 1.],
+       [1., 1., 1., 1.],
+       [1., 1., 1., 1.]])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create an array of zeros</span>
+<span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[[0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]],
+
+       [[0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]]], dtype=int16)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create an array with random values</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[0.49145717, 0.10493541],
+       [0.93962816, 0.64711331]])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create an empty array</span>
+<span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[0., 0.],
+       [0., 0.],
+       [0., 0.]])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create a full array</span>
+<span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">7</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[7, 7],
+       [7, 7]])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create an array of evenly-spaced values</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[10 15 20]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create an array of evenly-spaced values</span>
+<span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([0.  , 0.25, 0.5 , 0.75, 1.  , 1.25, 1.5 , 1.75, 2.  ])
+</code></pre></div></div>
+
+<ul>
+  <li>For some, such as <code class="highlighter-rouge">np.ones()</code>, <code class="highlighter-rouge">np.random.random()</code>, <code class="highlighter-rouge">np.empty()</code>, <code class="highlighter-rouge">np.full()</code> or <code class="highlighter-rouge">np.zeros()</code> the only thing that you need to do in order to make arrays with ones or zeros is pass the shape of the array that you want to make. As an option to <code class="highlighter-rouge">np.ones()</code> and <code class="highlighter-rouge">np.zeros()</code>, you can also specify the data type. In the case of <code class="highlighter-rouge">np.full()</code>, you also have to specify the constant value that you want to insert into the array.</li>
+  <li>With <code class="highlighter-rouge">np.linspace()</code> and <code class="highlighter-rouge">np.arange()</code> you can make arrays of evenly spaced values. The difference between these two functions is that the last value of the three that are passed in the code chunk above designates either the step value for np.linspace() or a number of samples for np.arange(). What happens in the first is that you want, for example, an array of 9 values that lie between 0 and 2. For the latter, you specify that you want an array to start at 10 and per steps of 5, generate values for the array that you’re creating.</li>
+  <li>Remember that NumPy also allows you to create an identity array or matrix with <code class="highlighter-rouge">np.eye()</code> and <code class="highlighter-rouge">np.identity()</code>. An identity matrix is a square matrix of which all elements in the principal diagonal are ones, and all other elements are zeros. When you multiply a matrix with an identity matrix, the given matrix is left unchanged.</li>
+</ul>
+
+<h3 id="how-to-load-numpy-arrays-from-text">How To Load NumPy Arrays From Text</h3>
+
+<p>Creating arrays with the help of initial placeholders or with some example data is an excellent way of getting started with <code class="highlighter-rouge">numpy</code>. But when you want to get started with data analysis, you’ll need to load data from text files.</p>
+
+<p>With that what you have seen up until now, you won’t really be able to do much. Make use of some specific functions to load data from your files, such as <code class="highlighter-rouge">loadtxt()</code> or <code class="highlighter-rouge">genfromtxt()</code>.</p>
+
+<p>Let’s say you have the following text files with data:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Import your data</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s">'data.txt'</span><span class="p">,</span>
+                    <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">unpack</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0.2536 0.4839 0.1292 0.1781 0.6253 0.6253]
+[0.1008 0.4536 0.6875 0.3049 0.3486 0.3486]
+[0.3857 0.3561 0.5929 0.8928 0.8791 0.8791]
+</code></pre></div></div>
+
+<p>In the code above, you use <code class="highlighter-rouge">loadtxt()</code> to load the data in your environment. You see that the first argument that both functions take is the text file <code class="highlighter-rouge">data.txt</code>. Next, there are some specific arguments for each: in the first statement, you skip the first row, and you return the columns as separate arrays with <code class="highlighter-rouge">unpack=TRUE</code>. This means that the values in column <code class="highlighter-rouge">Value1</code> will be put in <code class="highlighter-rouge">x</code>, and so on.</p>
+
+<p>Note that, in case you have comma-delimited data or if you want to specify the data type, there are also the arguments <code class="highlighter-rouge">delimiter</code> and <code class="highlighter-rouge">dtype</code> that you can add to the <code class="highlighter-rouge">loadtxt()</code> arguments.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_array2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s">'data2.txt'</span><span class="p">,</span>
+                      <span class="n">skip_header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                      <span class="n">filling_values</span><span class="o">=-</span><span class="mi">999</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_array2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[ 4.839e-01  4.536e-01  3.561e-01]
+ [ 1.292e-01  6.875e-01 -9.990e+02]
+ [ 1.781e-01  3.049e-01  8.928e-01]
+ [-9.990e+02  5.801e-01  2.038e-01]
+ [ 5.993e-01  4.357e-01  7.410e-01]]
+</code></pre></div></div>
+
+<p>You see that here, you resort to <code class="highlighter-rouge">genfromtxt()</code> to load the data. In this case, you have to handle some missing values that are indicated by the <code class="highlighter-rouge">'MISSING'</code> strings. Since the <code class="highlighter-rouge">genfromtxt()</code> function converts character strings in numeric columns to <code class="highlighter-rouge">nan</code>, you can convert these values to other ones by specifying the filling_values argument. In this case, you choose to set the value of these missing values to -999.</p>
+
+<p>If by any chance, you have values that don’t get converted to <code class="highlighter-rouge">nan</code> by <code class="highlighter-rouge">genfromtxt()</code>, there’s always the <code class="highlighter-rouge">missing_values</code> argument that allows you to specify what the missing values of your data exactly are.</p>
+
+<p>But this is not all.</p>
+
+<p>Tip: check out <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt">this page</a> to see what other arguments you can add to import your data successfully.</p>
+
+<p>You now might wonder what the difference between these two functions really is.</p>
+
+<p>The examples indicated this maybe implicitly, but, in general, <code class="highlighter-rouge">genfromtxt()</code> gives you a little bit more flexibility; It’s more robust than <code class="highlighter-rouge">loadtxt()</code>.</p>
+
+<p>Let’s make this difference a little bit more practical: the latter, loadtxt(), only works when each row in the text file has the same number of values; So when you want to handle missing values easily, you’ll typically find it easier to use genfromtxt().</p>
+
+<p>But this is definitely not the only reason.</p>
+
+<p>A brief look on the number of arguments that <code class="highlighter-rouge">genfromtxt()</code> has to offer will teach you that there is really a lot more things that you can specify in your import, such as the maximum number of rows to read or the option to automatically strip white spaces from variables.</p>
+
+<h3 id="how-to-save-numpy-arrays">How To Save NumPy Arrays</h3>
+<p>Once you have done everything that you need to do with your arrays, you can also save them to a file. If you want to save the array to a text file, you can use the <code class="highlighter-rouge">savetxt()</code> function to do this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s">'test.out'</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">','</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0. 1. 2. 3. 4.]
+</code></pre></div></div>
+
+<p>Remember that <code class="highlighter-rouge">np.arange()</code> creates a NumPy array of evenly-spaced values. The third value that you pass to this function is the step value.</p>
+
+<p>There are, of course, other ways to save your NumPy arrays to text files. Check out the functions in the table below if you want to get your data to binary files or archives:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">save()</code></td>
+      <td>Save an array to a binary file in NumPy .npy format</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">savez()</code></td>
+      <td>Save several arrays into an uncompressed .npz archive</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">savez_compressed()</code></td>
+      <td>Save several arrays into a compressed .npz archive</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="how-to-inspect-your-numpy-arrays">How To Inspect Your NumPy Arrays</h3>
+
+<p>Besides the array attributes that have been mentioned above, namely, data, shape, dtype and strides, there are some more that you can use to easily get to know more about your arrays. The ones that you might find interesting to use when you’re just starting out are the following:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Print the number of `my_array`'s dimensions</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_array</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Print the number of `my_array`'s elements</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_array</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>8
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Print information about `my_array`'s memory layout</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_array</span><span class="o">.</span><span class="n">flags</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  C_CONTIGUOUS : True
+  F_CONTIGUOUS : False
+  OWNDATA : True
+  WRITEABLE : True
+  ALIGNED : True
+  WRITEBACKIFCOPY : False
+  UPDATEIFCOPY : False
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Print the length of one array element in bytes</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_array</span><span class="o">.</span><span class="n">itemsize</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Print the total consumed bytes by `my_array`'s elements</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_array</span><span class="o">.</span><span class="n">nbytes</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>32
+</code></pre></div></div>
+
+<p>Also note that, besides the attributes, you also have some other ways of gaining more information on and even tweaking your array slightly:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Print the length of `my_array`</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">my_array</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Change the data type of `my_array`</span>
+<span class="n">my_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[1., 2., 3., 4.],
+       [5., 6., 7., 8.]])
+</code></pre></div></div>
+
+<h2 id="how-numpy-broadcasting-works">How NumPy Broadcasting Works</h2>
+
+<p>Before you go deeper into scientific computing, it might be a good idea to first go over what broadcasting exactly is: it’s a mechanism that allows NumPy to work with arrays of different shapes when you’re performing arithmetic operations.</p>
+
+<p>To put it in a more practical context, you often have an array that’s somewhat larger and another one that’s slightly smaller. Ideally, you want to use the smaller array multiple times to perform an operation (such as a sum, multiplication, etc.) on the larger array.</p>
+
+<p>To do this, you use the broadcasting mechanism.</p>
+
+<p>However, there are some rules if you want to use it. And, before you already sigh, you’ll see that these “rules” are very simple and kind of straightforward!</p>
+
+<ul>
+  <li>First off, to make sure that the broadcasting is successful, the dimensions of your arrays need to be compatible. Two dimensions are compatible when they are equal. Consider the following example:</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Initialize `x`</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c"># Check shape of `x`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c"># Initialize `y`</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c"># Check shape of `y`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c"># Add `x` and `y`</span>
+<span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(3, 4)
+[[1. 1. 1. 1.]
+ [1. 1. 1. 1.]
+ [1. 1. 1. 1.]]
+(3, 4)
+[[0.4511468  0.14481101 0.58802688 0.24370081]
+ [0.68376654 0.88216529 0.3002039  0.76107183]
+ [0.75735922 0.02989146 0.3326997  0.29215762]]
+
+
+
+
+
+array([[1.4511468 , 1.14481101, 1.58802688, 1.24370081],
+       [1.68376654, 1.88216529, 1.3002039 , 1.76107183],
+       [1.75735922, 1.02989146, 1.3326997 , 1.29215762]])
+</code></pre></div></div>
+
+<ul>
+  <li>Two dimensions are also compatible when one of them is 1:</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Initialize `x`</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c"># Check shape of `x`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c"># Initialize `y`</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c"># Check shape of `y`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c"># Subtract `x` and `y`</span>
+<span class="n">x</span> <span class="o">-</span> <span class="n">y</span> 
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(3, 4)
+[[1. 1. 1. 1.]
+ [1. 1. 1. 1.]
+ [1. 1. 1. 1.]]
+(4,)
+[0 1 2 3]
+
+
+
+
+
+array([[ 1.,  0., -1., -2.],
+       [ 1.,  0., -1., -2.],
+       [ 1.,  0., -1., -2.]])
+</code></pre></div></div>
+
+<p>Note that if the dimensions are not compatible, you will get a <code class="highlighter-rouge">ValueError</code>.</p>
+
+<p><em>Tip: also test what the size of the resulting array is after you have done the computations! You’ll see that the size is actually the maximum size along each dimension of the input arrays.</em></p>
+
+<p>In other words, you see that the result of <code class="highlighter-rouge">x-y</code> gives an array with shape <code class="highlighter-rouge">(3,4)</code>: <code class="highlighter-rouge">y</code> had a shape of <code class="highlighter-rouge">(4,)</code> and <code class="highlighter-rouge">x</code> had a shape of <code class="highlighter-rouge">(3,4)</code>. The maximum size along each dimension of x and y is taken to make up the shape of the new, resulting array.</p>
+
+<p>Lastly, the arrays can only be broadcast together if they are compatible in all dimensions. Consider the following example:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Initialize `x` and `y`</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="c"># Add `x` and `y`</span>
+<span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[[1.52733314, 1.4260942 , 1.80696314, 1.57838685],
+        [1.52733314, 1.4260942 , 1.80696314, 1.57838685],
+        [1.52733314, 1.4260942 , 1.80696314, 1.57838685]],
+
+       [[1.18964483, 1.24887704, 1.14078041, 1.68675731],
+        [1.18964483, 1.24887704, 1.14078041, 1.68675731],
+        [1.18964483, 1.24887704, 1.14078041, 1.68675731]],
+
+       [[1.11607086, 1.3413738 , 1.99441401, 1.73364435],
+        [1.11607086, 1.3413738 , 1.99441401, 1.73364435],
+        [1.11607086, 1.3413738 , 1.99441401, 1.73364435]],
+
+       [[1.15934104, 1.67822692, 1.79716903, 1.02368484],
+        [1.15934104, 1.67822692, 1.79716903, 1.02368484],
+        [1.15934104, 1.67822692, 1.79716903, 1.02368484]],
+
+       [[1.98791283, 1.91882578, 1.30496902, 1.92508811],
+        [1.98791283, 1.91882578, 1.30496902, 1.92508811],
+        [1.98791283, 1.91882578, 1.30496902, 1.92508811]]])
+</code></pre></div></div>
+
+<p>You see that, even though <code class="highlighter-rouge">x</code> and <code class="highlighter-rouge">y</code> seem to have somewhat different dimensions, the two can be added together.</p>
+
+<p>That is because they are compatible in all dimensions:</p>
+
+<ul>
+  <li>Array <code class="highlighter-rouge">x</code> has dimensions 3 X 4,</li>
+  <li>Array <code class="highlighter-rouge">y</code> has dimensions 5 X 1 X 4</li>
+</ul>
+
+<p>Since you have seen above that dimensions are also compatible if one of them is equal to 1, you see that these two arrays are indeed a good candidate for broadcasting!</p>
+
+<p>What you will notice is that in the dimension where <code class="highlighter-rouge">y</code> has size 1, and the other array has a size greater than 1 (that is, 3), the first array behaves as if it were copied along that dimension.</p>
+
+<p>Note that the shape of the resulting array will again be the maximum size along each dimension of <code class="highlighter-rouge">x</code> and <code class="highlighter-rouge">y</code>: the dimension of the result will be <code class="highlighter-rouge">(5,3,4)</code></p>
+
+<p>In short, if you want to make use of broadcasting, you will rely a lot on the shape and dimensions of the arrays with which you’re working.</p>
+
+<p>But what if the dimensions are not compatible?</p>
+
+<p>What if they are not equal or if one of them is not equal to 1?</p>
+
+<p>You’ll have to fix this by manipulating your array! You’ll see how to do this in one of the next sections.</p>
+
+<h2 id="how-do-array-mathematics-work">How Do Array Mathematics Work?</h2>
+
+<p>You’ve seen that broadcasting is handy when you’re doing arithmetic operations. In this section, you’ll discover some of the functions that you can use to do mathematics with arrays.</p>
+
+<p>As such, it probably won’t surprise you that you can just use <code class="highlighter-rouge">+</code>, <code class="highlighter-rouge">-</code>, <code class="highlighter-rouge">*</code>, <code class="highlighter-rouge">/</code> or <code class="highlighter-rouge">%</code> to add, subtract, multiply, divide or calculate the remainder of two (or more) arrays. However, a big part of why NumPy is so handy, is because it also has functions to do this. The equivalent functions of the operations that you have seen just now are, respectively, <code class="highlighter-rouge">np.add()</code>, <code class="highlighter-rouge">np.subtract()</code>, <code class="highlighter-rouge">np.multiply()</code>, <code class="highlighter-rouge">np.divide()</code> and <code class="highlighter-rouge">np.remainder()</code>.</p>
+
+<p>You can also easily do exponentiation and taking the square root of your arrays with <code class="highlighter-rouge">np.exp()</code> and <code class="highlighter-rouge">np.sqrt()</code>, or calculate the sines or cosines of your array with <code class="highlighter-rouge">np.sin()</code> and <code class="highlighter-rouge">np.cos()</code>. Lastly, its’ also useful to mention that there’s also a way for you to calculate the natural logarithm with <code class="highlighter-rouge">np.log()</code> or calculate the dot product by applying the <code class="highlighter-rouge">dot()</code> to your array.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Add `x` and `y`</span>
+<span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[[1.52733314, 1.4260942 , 1.80696314, 1.57838685],
+        [1.52733314, 1.4260942 , 1.80696314, 1.57838685],
+        [1.52733314, 1.4260942 , 1.80696314, 1.57838685]],
+
+       [[1.18964483, 1.24887704, 1.14078041, 1.68675731],
+        [1.18964483, 1.24887704, 1.14078041, 1.68675731],
+        [1.18964483, 1.24887704, 1.14078041, 1.68675731]],
+
+       [[1.11607086, 1.3413738 , 1.99441401, 1.73364435],
+        [1.11607086, 1.3413738 , 1.99441401, 1.73364435],
+        [1.11607086, 1.3413738 , 1.99441401, 1.73364435]],
+
+       [[1.15934104, 1.67822692, 1.79716903, 1.02368484],
+        [1.15934104, 1.67822692, 1.79716903, 1.02368484],
+        [1.15934104, 1.67822692, 1.79716903, 1.02368484]],
+
+       [[1.98791283, 1.91882578, 1.30496902, 1.92508811],
+        [1.98791283, 1.91882578, 1.30496902, 1.92508811],
+        [1.98791283, 1.91882578, 1.30496902, 1.92508811]]])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Subtract `x` and `y`</span>
+<span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[[0.47266686, 0.5739058 , 0.19303686, 0.42161315],
+        [0.47266686, 0.5739058 , 0.19303686, 0.42161315],
+        [0.47266686, 0.5739058 , 0.19303686, 0.42161315]],
+
+       [[0.81035517, 0.75112296, 0.85921959, 0.31324269],
+        [0.81035517, 0.75112296, 0.85921959, 0.31324269],
+        [0.81035517, 0.75112296, 0.85921959, 0.31324269]],
+
+       [[0.88392914, 0.6586262 , 0.00558599, 0.26635565],
+        [0.88392914, 0.6586262 , 0.00558599, 0.26635565],
+        [0.88392914, 0.6586262 , 0.00558599, 0.26635565]],
+
+       [[0.84065896, 0.32177308, 0.20283097, 0.97631516],
+        [0.84065896, 0.32177308, 0.20283097, 0.97631516],
+        [0.84065896, 0.32177308, 0.20283097, 0.97631516]],
+
+       [[0.01208717, 0.08117422, 0.69503098, 0.07491189],
+        [0.01208717, 0.08117422, 0.69503098, 0.07491189],
+        [0.01208717, 0.08117422, 0.69503098, 0.07491189]]])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Multiply `x` and `y`</span>
+<span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[[0.52733314, 0.4260942 , 0.80696314, 0.57838685],
+        [0.52733314, 0.4260942 , 0.80696314, 0.57838685],
+        [0.52733314, 0.4260942 , 0.80696314, 0.57838685]],
+
+       [[0.18964483, 0.24887704, 0.14078041, 0.68675731],
+        [0.18964483, 0.24887704, 0.14078041, 0.68675731],
+        [0.18964483, 0.24887704, 0.14078041, 0.68675731]],
+
+       [[0.11607086, 0.3413738 , 0.99441401, 0.73364435],
+        [0.11607086, 0.3413738 , 0.99441401, 0.73364435],
+        [0.11607086, 0.3413738 , 0.99441401, 0.73364435]],
+
+       [[0.15934104, 0.67822692, 0.79716903, 0.02368484],
+        [0.15934104, 0.67822692, 0.79716903, 0.02368484],
+        [0.15934104, 0.67822692, 0.79716903, 0.02368484]],
+
+       [[0.98791283, 0.91882578, 0.30496902, 0.92508811],
+        [0.98791283, 0.91882578, 0.30496902, 0.92508811],
+        [0.98791283, 0.91882578, 0.30496902, 0.92508811]]])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Divide `x` and `y`</span>
+<span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[[ 1.89633445,  2.34689889,  1.23921397,  1.72894664],
+        [ 1.89633445,  2.34689889,  1.23921397,  1.72894664],
+        [ 1.89633445,  2.34689889,  1.23921397,  1.72894664]],
+
+       [[ 5.2730149 ,  4.0180484 ,  7.10326094,  1.45611847],
+        [ 5.2730149 ,  4.0180484 ,  7.10326094,  1.45611847],
+        [ 5.2730149 ,  4.0180484 ,  7.10326094,  1.45611847]],
+
+       [[ 8.61542668,  2.92934023,  1.00561737,  1.36305826],
+        [ 8.61542668,  2.92934023,  1.00561737,  1.36305826],
+        [ 8.61542668,  2.92934023,  1.00561737,  1.36305826]],
+
+       [[ 6.27584701,  1.47443278,  1.25443909, 42.22109204],
+        [ 6.27584701,  1.47443278,  1.25443909, 42.22109204],
+        [ 6.27584701,  1.47443278,  1.25443909, 42.22109204]],
+
+       [[ 1.01223506,  1.08834561,  3.27902154,  1.08097811],
+        [ 1.01223506,  1.08834561,  3.27902154,  1.08097811],
+        [ 1.01223506,  1.08834561,  3.27902154,  1.08097811]]])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Calculate the remainder of `x` and `y`</span>
+<span class="n">np</span><span class="o">.</span><span class="n">remainder</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[[0.47266686, 0.1478116 , 0.19303686, 0.42161315],
+        [0.47266686, 0.1478116 , 0.19303686, 0.42161315],
+        [0.47266686, 0.1478116 , 0.19303686, 0.42161315]],
+
+       [[0.05177586, 0.00449183, 0.01453712, 0.31324269],
+        [0.05177586, 0.00449183, 0.01453712, 0.31324269],
+        [0.05177586, 0.00449183, 0.01453712, 0.31324269]],
+
+       [[0.0714331 , 0.3172524 , 0.00558599, 0.26635565],
+        [0.0714331 , 0.3172524 , 0.00558599, 0.26635565],
+        [0.0714331 , 0.3172524 , 0.00558599, 0.26635565]],
+
+       [[0.04395375, 0.32177308, 0.20283097, 0.00523653],
+        [0.04395375, 0.32177308, 0.20283097, 0.00523653],
+        [0.04395375, 0.32177308, 0.20283097, 0.00523653]],
+
+       [[0.01208717, 0.08117422, 0.08509293, 0.07491189],
+        [0.01208717, 0.08117422, 0.08509293, 0.07491189],
+        [0.01208717, 0.08117422, 0.08509293, 0.07491189]]])
+</code></pre></div></div>
+
+<p>Remember how broadcasting works? Check out the dimensions and the shapes of both x and y in your IPython shell. Are the rules of broadcasting respected?</p>
+
+<p>But there is more.</p>
+
+<p>Check out this small list of aggregate functions:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">a.sum()</code></td>
+      <td>Array-wise sum</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">a.min()</code></td>
+      <td>Array-wise minimum value</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">b.max(axis=0)</code></td>
+      <td>Maximum value of an array row</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">b.cumsum(axis=1)</code></td>
+      <td>Cumulative sum of the elements</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">a.mean()</code></td>
+      <td>Mean</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">b.median()</code></td>
+      <td>Median</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">a.corrcoef()</code></td>
+      <td>Correlation coefficient</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">np.std(b)</code></td>
+      <td>Standard deviation</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Besides all of these functions, you might also find it useful to know that there are mechanisms that allow you to compare array elements. For example, if you want to check whether the elements of two arrays are the same, you might use the <code class="highlighter-rouge">==</code> operator. To check whether the array elements are smaller or bigger, you use the <code class="highlighter-rouge">&lt;</code> or <code class="highlighter-rouge">&gt;</code> operators.</p>
+
+<p>This all seems quite straightforward, yes?</p>
+
+<p>However, you can also compare entire arrays with each other! In this case, you use the <code class="highlighter-rouge">np.array_equal()</code> function. Just pass in the two arrays that you want to compare with each other, and you’re done.</p>
+
+<p>Note that, besides comparing, you can also perform logical operations on your arrays. You can start with <code class="highlighter-rouge">np.logical_or()</code>, <code class="highlighter-rouge">np.logical_not()</code> and <code class="highlighter-rouge">np.logical_and()</code>. This basically works like your typical OR, NOT and AND logical operations;</p>
+
+<p>In the simplest example, you use OR to see whether your elements are the same (for example, 1), or if one of the two array elements is 1. If both of them are 0, you’ll return <code class="highlighter-rouge">FALSE</code>. You would use AND to see whether your second element is also 1 and NOT to see if the second element differs from 1.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># `x` AND `y` </span>
+<span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[[ True,  True,  True,  True],
+        [ True,  True,  True,  True],
+        [ True,  True,  True,  True]],
+
+       [[ True,  True,  True,  True],
+        [ True,  True,  True,  True],
+        [ True,  True,  True,  True]],
+
+       [[ True,  True,  True,  True],
+        [ True,  True,  True,  True],
+        [ True,  True,  True,  True]],
+
+       [[ True,  True,  True,  True],
+        [ True,  True,  True,  True],
+        [ True,  True,  True,  True]],
+
+       [[ True,  True,  True,  True],
+        [ True,  True,  True,  True],
+        [ True,  True,  True,  True]]])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># `x` OR `y` </span>
+<span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[[ True,  True,  True,  True],
+        [ True,  True,  True,  True],
+        [ True,  True,  True,  True]],
+
+       [[ True,  True,  True,  True],
+        [ True,  True,  True,  True],
+        [ True,  True,  True,  True]],
+
+       [[ True,  True,  True,  True],
+        [ True,  True,  True,  True],
+        [ True,  True,  True,  True]],
+
+       [[ True,  True,  True,  True],
+        [ True,  True,  True,  True],
+        [ True,  True,  True,  True]],
+
+       [[ True,  True,  True,  True],
+        [ True,  True,  True,  True],
+        [ True,  True,  True,  True]]])
+</code></pre></div></div>
+
+<h2 id="how-to-subset-slice-and-index-arrays">How To Subset, Slice, And Index Arrays</h2>
+
+<p>Besides mathematical operations, you might also consider taking just a part of the original array (or the resulting array) or just some array elements to use in further analysis or other operations. In such case, you will need to subset, slice and/or index your arrays.</p>
+
+<p>These operations are very similar to when you perform them on Python lists. If you want to check out the similarities for yourself, or if you want a more elaborate explanation, you might consider checking out DataCamp’s Python list tutorial.</p>
+
+<p>If you have no clue at all on how these operations work, it suffices for now to know these two basic things:</p>
+
+<ul>
+  <li>You use square brackets <code class="highlighter-rouge">[]</code> as the index operator, and</li>
+  <li>Generally, you pass integers to these square brackets, but you can also put a colon <code class="highlighter-rouge">:</code> or a combination of the colon with integers in it to designate the elements/rows/columns you want to select.</li>
+</ul>
+
+<p>Besides from these two points, the easiest way to see how this all fits together is by looking at some examples of subsetting:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Select the element at the 1st index</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_array</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[5 6 7 8]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Select the element at row 1 column 2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_2d_array</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>7
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Select the element at row 1 column 2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_2d_array</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>7
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Select the element at row 1, column 2 and </span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_3d_array</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>15
+</code></pre></div></div>
+
+<p>Something a little bit more advanced than subsetting, if you will, is slicing. Here, you consider not just particular values of your arrays, but you go to the level of rows and columns. You’re basically working with “regions” of data instead of pure “locations”.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Select items at index 0 and 1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_array</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[1 2 3 4]
+ [5 6 7 8]]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Select items at row 0 and 1, column 1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_2d_array</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[2 6]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Select items at row 1</span>
+<span class="c"># This is the same as saying `my_3d_array[1,:,:]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_3d_array</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">...</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[ 9 10 11 12]
+ [13 14 15 16]]
+</code></pre></div></div>
+
+<p>Lastly, there’s also indexing. When it comes to NumPy, there are boolean indexing and advanced or “fancy” indexing.</p>
+
+<p>First up is boolean indexing. Here, instead of selecting elements, rows or columns based on index number, you select those values from your array that fulfill a certain condition.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Try out a simple example</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">my_array</span> <span class="o">&lt;</span> <span class="mi">2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_array</span><span class="p">[</span><span class="n">mask</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[ True False False False]
+ [False False False False]]
+[1]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Try out a simple example</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">my_array</span> <span class="o">&gt;</span> <span class="mi">3</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_array</span><span class="p">[</span><span class="n">mask</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[False False False  True]
+ [ True  True  True  True]]
+[4 5 6 7 8]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Specify a condition</span>
+<span class="n">bigger_than_3</span> <span class="o">=</span> <span class="p">(</span><span class="n">my_3d_array</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c"># Use the condition to index our 3d array</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_3d_array</span><span class="p">[</span><span class="n">bigger_than_3</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ 3  4  5  6  7  8  9 10 11 12 13 14 15 16]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Specify a condition</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">my_3d_array</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">my_3d_array</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="c"># Use the condition to index our 3d array</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_3d_array</span><span class="p">[</span><span class="n">mask</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[3 4 5 6 7 8 9]
+</code></pre></div></div>
+
+<p>Note that, to specify a condition, you can also make use of the logical operators <code class="highlighter-rouge">|</code> (OR) and <code class="highlighter-rouge">&amp;</code> (AND). If you would want to rewrite the condition above in such a way (which would be inefficient, but I demonstrate it here for educational purposes :)), you would get <code class="highlighter-rouge">bigger_than_3 = (my_3d_array &gt; 3) | (my_3d_array == 3)</code>.</p>
+
+<p>With the arrays that have been loaded in, there aren’t too many possibilities, but with arrays that contain for example, names or capitals, the possibilities could be endless!</p>
+
+<p>When it comes to fancy indexing, that what you basically do with it is the following: you pass a list or an array of integers to specify the order of the subset of rows you want to select out of the original array.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Select elements at (1,0), (0,1), (1,2) and (0,0)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_2d_array</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[5 2 7 1]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Select a subset of the rows and columns</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_2d_array</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]][:,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[5 6 7 5]
+ [1 2 3 1]
+ [5 6 7 5]
+ [1 2 3 1]]
+</code></pre></div></div>
+
+<p>Now, the second statement might seem to make less sense to you at first sight. This is normal. It might make more sense if you break it down:</p>
+
+<ul>
+  <li>If you just execute <code class="highlighter-rouge">my_2d_array[[1,0,1,0]]</code>, the result is the following:</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_2d_array</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[5, 6, 7, 8],
+       [1, 2, 3, 4],
+       [5, 6, 7, 8],
+       [1, 2, 3, 4]])
+</code></pre></div></div>
+
+<ul>
+  <li>What the second part, namely, <code class="highlighter-rouge">[:,[0,1,2,0]]</code>, is tell you that you want to keep all the rows of this result, but that you want to change the order of the columns around a bit. You want to display the columns 0, 1, and 2 as they are right now, but you want to repeat column 0 as the last column instead of displaying column number 3. This will give you the following result:</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_2d_array</span><span class="p">[:,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[ 1,  2,  3,  1],
+       [ 5,  6,  7,  5],
+       [ 9, 10, 11,  9]])
+</code></pre></div></div>
+
+<h2 id="how-to-manipulate-arrays">How To Manipulate Arrays</h2>
+
+<p>Performing mathematical operations on your arrays is one of the things that you’ll be doing, but probably most importantly to make this and the broadcasting work is to know how to manipulate your arrays.</p>
+
+<p>Below are some of the most common manipulations that you’ll be doing.</p>
+
+<h3 id="how-to-transpose-your-arrays">How To Transpose Your Arrays</h3>
+
+<p>What transposing your arrays actually does is permuting the dimensions of it. Or, in other words, you switch around the shape of the array. Let’s take a small example to show you the effect of transposition:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Print `my_2d_array`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_2d_array</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[ 1  2  3  4]
+ [ 5  6  7  8]
+ [ 9 10 11 12]]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Transpose `my_2d_array`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">my_2d_array</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[ 1  5  9]
+ [ 2  6 10]
+ [ 3  7 11]
+ [ 4  8 12]]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Or use `T` to transpose `my_2d_array`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_2d_array</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[ 1  5  9]
+ [ 2  6 10]
+ [ 3  7 11]
+ [ 4  8 12]]
+</code></pre></div></div>
+
+<h3 id="reshaping-versus-resizing-your-arrays">Reshaping Versus Resizing Your Arrays</h3>
+
+<p>You might have read in the broadcasting section that the dimensions of your arrays need to be compatible if you want them to be good candidates for arithmetic operations. But the question of what you should do when that is not the case, was not answered yet.</p>
+
+<p>Well, this is where you get the answer!</p>
+
+<p>What you can do if the arrays don’t have the same dimensions, is resize your array. You will then return a new array that has the shape that you passed to the <code class="highlighter-rouge">np.resize()</code> function. If you pass your original array together with the new dimensions, and if that new array is larger than the one that you originally had, the new array will be filled with copies of the original array that are repeated as many times as is needed.</p>
+
+<p>However, if you just apply <code class="highlighter-rouge">np.resize()</code> to the array and you pass the new shape to it, the new array will be filled with zeros.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Print the shape of `x`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(3, 4)
+[[1. 1. 1. 1.]
+ [1. 1. 1. 1.]
+ [1. 1. 1. 1.]]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Resize `x` to ((6,4))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[1., 1., 1.],
+       [1., 1., 1.],
+       [1., 1., 1.],
+       [1., 1., 1.]])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[1., 1., 1., 1.],
+       [1., 1., 1., 1.],
+       [1., 1., 1., 1.]])
+</code></pre></div></div>
+
+<p>Besides resizing, you can also reshape your array. This means that you give a new shape to an array without changing its data. The key to reshaping is to make sure that the total size of the new array is unchanged. If you take the example of array <code class="highlighter-rouge">x</code> that was used above, which has a size of 3 X 4 or 12, you have to make sure that the new array also has a size of 12.</p>
+
+<p>If you want to calculate the size of an array with code, make sure to use the size attribute: <code class="highlighter-rouge">x.size</code> or <code class="highlighter-rouge">x.reshape((2,6)).size</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Print the size of `x` to see what's possible</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>12
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Flatten `x`</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+<span class="c"># Print `z`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+</code></pre></div></div>
+
+<p>If all else fails, you can also append an array to your original one or insert or delete array elements to make sure that your dimensions fit with the other array that you want to use for your computations.</p>
+
+<p>Another operation that you might keep handy when you’re changing the shape of arrays is <code class="highlighter-rouge">ravel()</code>. This function allows you to flatten your arrays. This means that if you ever have 2D, 3D or n-D arrays, you can just use this function to flatten it all out to a 1-D array.</p>
+
+<h3 id="how-to-append-arrays">How To Append Arrays</h3>
+<p>When you append arrays to your original array, they are “glued” to the end of that original array. If you want to make sure that what you append does not come at the end of the array, you might consider inserting it. Go to the next section if you want to know more.</p>
+
+<p>Appending is a pretty easy thing to do thanks to the NumPy library; You can just make use of the <code class="highlighter-rouge">np.append()</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Append a 1D array to your `my_array`</span>
+<span class="n">new_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">])</span>
+
+<span class="c"># Print `new_array`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_array</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">new_array</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[1 2 3 4]
+ [5 6 7 8]]
+[ 1  2  3  4  5  6  7  8  7  8  9 10 11 12]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Append an extra column to your `my_2d_array`</span>
+<span class="n">new_2d_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">my_2d_array</span><span class="p">,</span> <span class="p">[[</span><span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c"># Print `new_2d_array`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">new_2d_array</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[ 1  2  3  4  7]
+ [ 5  6  7  8  8]
+ [ 9 10 11 12  9]]
+</code></pre></div></div>
+
+<p>Note how, when you append an extra column to my_2d_array, the axis is specified. Remember that axis 1 indicates the columns, while axis 0 indicates the rows in 2-D arrays.</p>
+
+<h3 id="how-to-insert-and-delete-array-elements">How To Insert And Delete Array Elements</h3>
+
+<p>Next to appending, you can also insert and delete array elements. As you might have guessed by now, the functions that will allow you to do these operations are <code class="highlighter-rouge">np.insert()</code> and <code class="highlighter-rouge">np.delete()</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Insert `5` at index 1</span>
+<span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">my_array</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([1, 5, 2, 3, 4, 5, 6, 7, 8], dtype=int32)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Delete the value at index 1</span>
+<span class="c"># np.delete(my_array,[1])</span>
+</code></pre></div></div>
+
+<h3 id="how-to-join-and-split-arrays">How To Join And Split Arrays</h3>
+
+<p>You can also ‘merge’ or join your arrays. There are a bunch of functions that you can use for that purpose and most of them are listed below.</p>
+
+<p>Try them out, but also make sure to test out what the shape of the arrays is in the IPython shell. The arrays that have been loaded are <code class="highlighter-rouge">x</code>, <code class="highlighter-rouge">my_array</code>, <code class="highlighter-rouge">my_resized_array</code> and <code class="highlighter-rouge">my_2d_array</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Concatentate `my_array` and `x`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">my_array</span><span class="p">,</span> <span class="n">x</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[1. 2. 3. 4.]
+ [5. 6. 7. 8.]
+ [1. 1. 1. 1.]
+ [1. 1. 1. 1.]
+ [1. 1. 1. 1.]]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Stack arrays row-wise</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">my_array</span><span class="p">,</span> <span class="n">my_2d_array</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[ 1  2  3  4]
+ [ 5  6  7  8]
+ [ 1  2  3  4]
+ [ 5  6  7  8]
+ [ 9 10 11 12]]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_resized_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">91</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">93</span><span class="p">,</span> <span class="mi">94</span><span class="p">],</span> 
+                             <span class="p">[</span><span class="mi">91</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">93</span><span class="p">,</span> <span class="mi">94</span><span class="p">],</span> 
+                             <span class="p">[</span><span class="mi">91</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">93</span><span class="p">,</span> <span class="mi">94</span><span class="p">]])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_resized_array</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[91 92 93 94]
+ [91 92 93 94]
+ [91 92 93 94]]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Stack arrays row-wise</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">my_resized_array</span><span class="p">,</span> <span class="n">my_2d_array</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[91 92 93 94]
+ [91 92 93 94]
+ [91 92 93 94]
+ [ 1  2  3  4]
+ [ 5  6  7  8]
+ [ 9 10 11 12]]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Stack arrays horizontally</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">my_resized_array</span><span class="p">,</span> <span class="n">my_2d_array</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[91 92 93 94  1  2  3  4]
+ [91 92 93 94  5  6  7  8]
+ [91 92 93 94  9 10 11 12]]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Stack arrays column-wise</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">my_resized_array</span><span class="p">,</span> <span class="n">my_2d_array</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[91 92 93 94  1  2  3  4]
+ [91 92 93 94  5  6  7  8]
+ [91 92 93 94  9 10 11 12]]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Stack arrays column-wise</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">my_resized_array</span><span class="p">,</span> <span class="n">my_2d_array</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[91 92 93 94  1  2  3  4]
+ [91 92 93 94  5  6  7  8]
+ [91 92 93 94  9 10 11 12]]
+</code></pre></div></div>
+
+<p>You’ll note a few things as you go through the functions:</p>
+
+<ul>
+  <li>The number of dimensions needs to be the same if you want to concatenate two arrays with <code class="highlighter-rouge">np.concatenate()</code>. As such, if you want to concatenate an array with <code class="highlighter-rouge">my_array</code>, which is 1-D, you’ll need to make sure that the second array that you have, is also 1-D.</li>
+  <li>With <code class="highlighter-rouge">np.vstack()</code>, you effortlessly combine <code class="highlighter-rouge">my_array</code> with <code class="highlighter-rouge">my_2d_array</code>. You just have to make sure that, as you’re stacking the arrays row-wise, that the number of columns in both arrays is the same. As such, you could also add an array with shape <code class="highlighter-rouge">(2,4)</code> or <code class="highlighter-rouge">(3,4)</code> to <code class="highlighter-rouge">my_2d_array</code>, as long as the number of columns matches. Stated differently, the arrays must have the same shape along all but the first axis. The same holds also for when you want to use <code class="highlighter-rouge">np.r[]</code>.</li>
+  <li>For <code class="highlighter-rouge">np.hstack()</code>, you have to make sure that the number of dimensions is the same and that the number of rows in both arrays is the same. That means that you could stack arrays such as <code class="highlighter-rouge">(2,3)</code> or <code class="highlighter-rouge">(2,4)</code> to <code class="highlighter-rouge">my_2d_array</code>, which itself as a shape of (2,4). Anything is possible as long as you make sure that the number of rows matches. This function is still supported by NumPy, but you should prefer <code class="highlighter-rouge">np.concatenate()</code> or <code class="highlighter-rouge">np.stack()</code>.</li>
+  <li>With <code class="highlighter-rouge">np.column_stack()</code>, you have to make sure that the arrays that you input have the same first dimension. In this case, both shapes are the same, but if <code class="highlighter-rouge">my_resized_array</code> were to be <code class="highlighter-rouge">(2,1)</code> or <code class="highlighter-rouge">(2,)</code>, the arrays still would have been stacked.</li>
+  <li><code class="highlighter-rouge">np.c_[]</code> is another way to concatenate. Here also, the first dimension of both arrays needs to match.</li>
+</ul>
+
+<p>When you have joined arrays, you might also want to split them at some point. Just like you can stack them horizontally, you can also do the same but then vertically. You use <code class="highlighter-rouge">np.hsplit()</code> and <code class="highlighter-rouge">np.vsplit()</code>, respectively:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_stacked_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">my_resized_array</span><span class="p">,</span> <span class="n">my_2d_array</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Split `my_stacked_array` horizontally at the 2nd index</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">hsplit</span><span class="p">(</span><span class="n">my_stacked_array</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[array([[91, 92],
+       [91, 92],
+       [91, 92],
+       [ 1,  2],
+       [ 5,  6],
+       [ 9, 10]]), array([[93, 94],
+       [93, 94],
+       [93, 94],
+       [ 3,  4],
+       [ 7,  8],
+       [11, 12]])]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Split `my_stacked_array` vertically at the 2nd index</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vsplit</span><span class="p">(</span><span class="n">my_stacked_array</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[array([[91, 92, 93, 94],
+       [91, 92, 93, 94],
+       [91, 92, 93, 94]]), array([[ 1,  2,  3,  4],
+       [ 5,  6,  7,  8],
+       [ 9, 10, 11, 12]])]
+</code></pre></div></div>
+
+<p>What you need to keep in mind when you’re using both of these split functions is probably the shape of your array. Let’s take the above case as an example: <code class="highlighter-rouge">my_stacked_array</code> has a shape of <code class="highlighter-rouge">(2,8)</code>. If you want to select the index at which you want the split to occur, you have to keep the shape in mind.</p>
+
+<h2 id="how-to-visualize-numpy-arrays">How To Visualize NumPy Arrays</h2>
+<p>Lastly, something that will definitely come in handy is to know how you can plot your arrays. This can especially be handy in data exploration, but also in later stages of the data science workflow, when you want to visualize your arrays.</p>
+
+<h3 id="with-nphistogram">With np.histogram()</h3>
+<p>Contrary to what the function might suggest, the <code class="highlighter-rouge">np.histogram()</code> function doesn’t draw the histogram but it does compute the occurrences of the array that fall within each bin; This will determine the area that each bar of your histogram takes up.</p>
+
+<p>What you pass to the <code class="highlighter-rouge">np.histogram()</code> function then is first the input data or the array that you’re working with. The array will be flattened when the histogram is computed.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Initialize your array</span>
+<span class="n">my_3d_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">]]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Pass the array to `np.histogram()`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">my_3d_array</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(array([4, 2, 2, 1, 1, 1, 1, 1, 1, 2]), array([ 1. ,  2.1,  3.2,  4.3,  5.4,  6.5,  7.6,  8.7,  9.8, 10.9, 12. ]))
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Specify the number of bins</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">my_3d_array</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">13</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(array([0, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2]), array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]))
+</code></pre></div></div>
+
+<p>You’ll see that as a result, the histogram will be computed: the first array lists the frequencies for all the elements of your array, while the second array lists the bins that would be used if you don’t specify any bins.</p>
+
+<p>If you do specify a number of bins, the result of the computation will be different: the floats will be gone and you’ll see all integers for the bins.</p>
+
+<p>There are still some other arguments that you can specify that can influence the histogram that is computed. You can find all of them <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.histogram.html">here</a>.</p>
+
+<p>But what is the point of computing such a histogram if you can’t visualize it?</p>
+
+<p>Visualization is a piece of cake with the help of Matplotlib, but you don’t need <code class="highlighter-rouge">np.histogram()</code> to compute the histogram. <code class="highlighter-rouge">plt.hist()</code> does this for itself when you pass it the (flattened) data and the bins:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Import numpy and matplotlib</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="c"># Construct the histogram with a flattened 3d array and a range of bins</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">my_3d_array</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">13</span><span class="p">))</span>
+
+<span class="c"># Add a title to the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Frequency of My 3D Array Elements'</span><span class="p">)</span>
+
+<span class="c"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="01%20-%20NumPy%20Introduction_files/01%20-%20NumPy%20Introduction_113_0.png" alt="png" /></p>
+
+<h3 id="using-npmeshgrid">Using np.meshgrid()</h3>
+
+<p>Another way to (indirectly) visualize your array is by using <code class="highlighter-rouge">np.meshgrid()</code>. The problem that you face with arrays is that you need 2-D arrays of x and y coordinate values. With the above function, you can create a rectangular grid out of an array of x values and an array of y values: the <code class="highlighter-rouge">np.meshgrid()</code> function takes two 1D arrays and produces two 2D matrices corresponding to all pairs of (x, y) in the two arrays. Then, you can use these matrices to make all sorts of plots.</p>
+
+<p><code class="highlighter-rouge">np.meshgrid()</code> is particularly useful if you want to evaluate functions on a grid, as the code below demonstrates:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Import NumPy and Matplotlib</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="c"># Create an array</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+
+<span class="c"># Make a meshgrid</span>
+<span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xs</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">ys</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c"># Display the image on the axes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
+
+<span class="c"># Draw a color bar</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+
+<span class="c"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="01%20-%20NumPy%20Introduction_files/01%20-%20NumPy%20Introduction_115_0.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>

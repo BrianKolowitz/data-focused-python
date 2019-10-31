@@ -1,0 +1,2081 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  
+
+  <title>03 - Sets and Set Comprehensions - Data Focused Python</title>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/just-the-docs.css">
+
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-139655036-1', 'http://localhost:4000');
+      ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+  
+
+  
+    <script type="text/javascript" src="http://localhost:4000/assets/js/vendor/lunr.min.js"></script>
+  
+  <script type="text/javascript" src="http://localhost:4000/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>03 - Sets and Set Comprehensions | Data Focused Python</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="03 - Sets and Set Comprehensions" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/03%20-%20Sets%20and%20Set%20Comprehensions.html" />
+<meta property="og:url" content="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/03%20-%20Sets%20and%20Set%20Comprehensions.html" />
+<meta property="og:site_name" content="Data Focused Python" />
+<script type="application/ld+json">
+{"@type":"WebPage","url":"http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/03%20-%20Sets%20and%20Set%20Comprehensions.html","headline":"03 - Sets and Set Comprehensions","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+
+  <div class="page-wrap">
+    <div class="side-bar">
+      <a href="http://localhost:4000" class="site-title fs-6 lh-tight">Data Focused Python</a>
+      <span class="fs-3"><button class="js-main-nav-trigger navigation-list-toggle btn btn-outline" type="button" data-text-toggle="Hide">Menu</button></span>
+      <div class="navigation main-nav js-main-nav">
+        <nav role="navigation" aria-label="Main navigation">
+  <ul class="navigation-list">
+    
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/about.html" class="navigation-list-link"></a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/" class="navigation-list-link">Data Focused Python</a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/assignments" class="navigation-list-link">Assignments</a>
+            
+          </li>
+        
+      
+    
+      
+        
+          <li class="navigation-list-item active">
+            
+            <a href="http://localhost:4000/lectures" class="navigation-list-link">Lectures</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data.html" class="navigation-list-link">Week 01 - Language basics, Generating Data, Storing Data</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/00%20-%20Getting%20Started.html" class="navigation-list-link">00 - Getting Started</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/01.a%20-%20Terminal%20Application.html" class="navigation-list-link">01.a - Terminal Application</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/01.b%20-%20Argparse.html" class="navigation-list-link">01.b - Argparse</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/02.a%20-%20Generating%20Synthetic%20Data.html" class="navigation-list-link">02.a - Generating Synthetic Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/02.b%20-%20Synthetic%20Data%20Generation.html" class="navigation-list-link">02.b - Synthetic Data Generation</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/02.c%20-%20Using%20Synthea.html" class="navigation-list-link">02.c - Using Synthea</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/03%20-%20Getting%20Data%20from%20a%20Database.html" class="navigation-list-link">03 - Getting Data from a Database</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/04%20-%20FHIR%20SQL.html" class="navigation-list-link">04 - FHIR SQL</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/04%20-%20Python%20Testing.html" class="navigation-list-link">04 - Python Testing</a>
+                              </li>
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/05%20-%20Start%20a%20process%20in%20Python.html" class="navigation-list-link">05 - Start a process in Python</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20unit%20testing,%20generating%20files.html" class="navigation-list-link">Week 01 - Language basics, unit testing, generating files</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries.html" class="navigation-list-link">Week 02 - Processing files using functions, classes, and libraries</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/01.a%20-%20File%20Processing.html" class="navigation-list-link">01.a - File Processing</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/01.b%20-%20CSV%20Files.html" class="navigation-list-link">01.b - CSV Files</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/01.c%20-%20JSON%20Files.html" class="navigation-list-link">01.c - JSON Files</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/01.d%20-%20XML%20Files.html" class="navigation-list-link">01.d - XML Files</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/02.a%20-%20Python%20Classes.html" class="navigation-list-link">02.a - Python Classes</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/02.b%20-%20Python%20Modules%20and%20Packages.html" class="navigation-list-link">02.b - Python Modules and Packages</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/03%20-%20Using%20fhirclient%20to%20parse%20data.html" class="navigation-list-link">03 - Using fhirclient to parse data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/04%20-%20Reading%20synthea%20data.html" class="navigation-list-link">04 - Reading synthea data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/05%20-%20Python%20Functions.html" class="navigation-list-link">05 - Python Functions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/06%20-%20Python%20Tuples.html" class="navigation-list-link">06 - Python Tuples</a>
+                              </li>
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/07%20-%20Getting%20Data%20from%20Web%20APIs.html" class="navigation-list-link">07 - Getting Data from Web APIs</a>
+                              </li>
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item  active">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping.html" class="navigation-list-link">Week 03 - Comprehensions, Generators, and Grouping</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/01%20-%20Loops.html" class="navigation-list-link">01 - Loops</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/02%20-%20Lists%20and%20List%20Comprehensions.html" class="navigation-list-link">02 - Lists and List Comprehensions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item  active">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/03%20-%20Sets%20and%20Set%20Comprehensions.html" class="navigation-list-link active">03 - Sets and Set Comprehensions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/04.a%20-%20Dictionaries.html" class="navigation-list-link">04.a - Dictionaries</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/04.b%20-%20Dictionary%20Comprehensions.html" class="navigation-list-link">04.b - Dictionary Comprehensions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/05%20-%20Python%20Generators.html" class="navigation-list-link">05 - Python Generators</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/06%20-%20Cleaning%20and%20Transforming%20Data.html" class="navigation-list-link">06 - Cleaning and Transforming Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/07%20-%20Grouping%20Data.html" class="navigation-list-link">07 - Grouping Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization.html" class="navigation-list-link">Week 04 - Numpy, Pandas, Graphing & Visualization</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization/01%20-%20Descriptive%20Statistics.html" class="navigation-list-link">01 - Descriptive Statistics</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization/02%20-%20Basic%20Medical%20Data%20Visualization.html" class="navigation-list-link">02 - Basic Medical Data Visualization</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting.html" class="navigation-list-link">03 - Matplotlib Tutorial Python Plotting</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial.html" class="navigation-list-link">04 - The Ultimate Python Seaborn Tutorial</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth.html" class="navigation-list-link">Week 05 - Numpy & Pandas In-Depth</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/00%20-%20Additional%20Links.html" class="navigation-list-link">00 - Additional Links</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/01%20-%20NumPy%20Introduction.html" class="navigation-list-link">01 - NumPy Introduction</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/02%20-%20NumPy%20Data%20analysis.html" class="navigation-list-link">02 - NumPy Data analysis</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/03%20-%20Pandas%20Introduction.html" class="navigation-list-link">03 - Pandas Introduction</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/04.a%20-%20Pandas%20Data%20analysis%20Part%201.html" class="navigation-list-link">04.a - Pandas Data analysis Part 1</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/04.b%20-%20Pandas%20Data%20analysis%20Part%202.html" class="navigation-list-link">04.b - Pandas Data analysis Part 2</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping,%20Databases,%20and%20Other%20Data%20Sources.html" class="navigation-list-link">Week 06 - Web Scraping, Databases, and Other Data Sources</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping,%20Databases,%20and%20Other%20Data%20Sources/01.a%20-%20Getting%20Data%20from%20Web%20Pages.html" class="navigation-list-link">01.a - Getting Data from Web Pages</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping,%20Databases,%20and%20Other%20Data%20Sources/01.b%20-%20Getting%20Data%20from%20Web%20Pages.html" class="navigation-list-link">01.b - Getting Data from Web Pages</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/resources" class="navigation-list-link">Resources</a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  </ul>
+</nav>
+
+      </div>
+      <footer role="contentinfo" class="site-footer">
+        <p class="text-small text-grey-dk-000 mb-0">This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.</p>
+      </footer>
+    </div>
+    <div class="main-content-wrap js-main-content" tabindex="0">
+      <div class="page-header">
+        <div class="main-content">
+          
+          <div class="search js-search">
+            <div class="search-input-wrap">
+              <input type="text" class="js-search-input search-input" tabindex="0" placeholder="Search Data Focused Python" aria-label="Search Data Focused Python" autocomplete="off">
+              <svg width="14" height="14" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" class="search-icon"><title>Search</title><g fill-rule="nonzero"><path d="M17.332 20.735c-5.537 0-10-4.6-10-10.247 0-5.646 4.463-10.247 10-10.247 5.536 0 10 4.601 10 10.247s-4.464 10.247-10 10.247zm0-4c3.3 0 6-2.783 6-6.247 0-3.463-2.7-6.247-6-6.247s-6 2.784-6 6.247c0 3.464 2.7 6.247 6 6.247z"/><path d="M11.672 13.791L.192 25.271 3.02 28.1 14.5 16.62z"/></g></svg>
+            </div>
+            <div class="js-search-results search-results-wrap"></div>
+          </div>
+          
+          
+            <ul class="list-style-none text-small mt-md-1 mb-md-1 pb-4 pb-md-0 js-aux-nav aux-nav">
+              
+                <li class="d-inline-block my-0 mr-2"><a href="//github.com/BrianKolowitz/data-focused-python">Code</a></li>
+              
+                <li class="d-inline-block my-0"><a href="/data-focused-python/about.html">About</a></li>
+              
+            </ul>
+          
+        </div>
+      </div>
+      <div class="main-content">
+        
+          
+            <nav class="breadcrumb-nav">
+              <ol class="breadcrumb-nav-list">
+                
+                  <li class="breadcrumb-nav-list-item"><a href="http://localhost:4000/lectures">Lectures</a></li>
+                  <li class="breadcrumb-nav-list-item"><a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping.html">Week 03 - Comprehensions, Generators, and Grouping</a></li>
+                
+                <li class="breadcrumb-nav-list-item"><span>03 - Sets and Set Comprehensions</span></li>
+              </ol>
+            </nav>
+          
+        
+        <div id="main-content" class="page-content" role="main">
+          <h1 id="sets-and-set-comprehensions">Sets and Set Comprehensions</h1>
+
+<p><a href="https://realpython.com/python-sets/">Python Sets</a>
+<a href="https://python-reference.readthedocs.io/en/latest/docs/comprehensions/set_comprehension.html">Set Comprehensions</a></p>
+
+<p>Perhaps you recall learning about sets and set theory at some point in your mathematical education. Maybe you even remember Venn diagrams:</p>
+
+<p><img src="https://files.realpython.com/media/t.8b7abb515ae8.png" width="384px" /></p>
+
+<p>In mathematics, a rigorous definition of a set can be abstract and difficult to grasp. Practically though, a set can be thought of simply as a well-defined collection of distinct objects, typically called elements or members.</p>
+
+<p>Grouping objects into a set can be useful in programming as well, and Python provides a built-in set type to do so. Sets are distinguished from other object types by the unique operations that can be performed on them.</p>
+
+<p>Here’s what you’ll learn in this tutorial:</p>
+<ul>
+  <li>You’ll see how to define set objects in Python and discover the operations that they support.</li>
+  <li>You’ll also learn about frozen sets, which are similar to sets except for one important detail.</li>
+</ul>
+
+<h2 id="defining-a-set">Defining a Set</h2>
+
+<p>Python’s built-in set type has the following characteristics:</p>
+<ul>
+  <li>Sets are unordered.</li>
+  <li>Set elements are unique. Duplicate elements are not allowed.</li>
+  <li>A set itself may be modified, but the elements contained in the set must be of an immutable type.</li>
+</ul>
+
+<p>A set can be created in two ways. First, you can define a set with the built-in set() function:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="o">&lt;</span><span class="nb">iter</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'foo', 'baz', 'qux', 'bar'}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y</span> <span class="o">=</span> <span class="nb">set</span><span class="p">((</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'foo', 'baz', 'qux', 'bar'}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">z</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">z</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'set'&gt; set()
+</code></pre></div></div>
+
+<p>Strings are also iterable, so a string can be passed to set() as well. You have already seen that list(s) generates a list of the characters in the string s. Similarly, set(s) generates a set of the characters in s:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="s">'data focused python'</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data focused python
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['d', 'a', 't', 'a', ' ', 'f', 'o', 'c', 'u', 's', 'e', 'd', ' ', 'p', 'y', 't', 'h', 'o', 'n']
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'o', 'p', 'u', 'e', 'h', 'f', 'd', 'n', 'y', 'c', 't', 's', 'a', ' '}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="s">'data focused python is cool because we learn python and work with data'</span>
+<span class="n">words</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">words</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['data', 'focused', 'python', 'is', 'cool', 'because', 'we', 'learn', 'python', 'and', 'work', 'with', 'data']
+{'we', 'is', 'with', 'and', 'learn', 'cool', 'python', 'because', 'work', 'data', 'focused'}
+</code></pre></div></div>
+
+<p>You can see that the resulting sets are unordered: the original order, as specified in the definition, is not necessarily preserved. Additionally, duplicate values are only represented in the set once, as with the string ‘foo’ in the first two examples and the letter ‘u’ in the third.</p>
+
+<p>Alternately, a set can be defined with curly braces (<code class="highlighter-rouge">{}</code>):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="o">&lt;</span><span class="n">obj</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">obj</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">obj</span><span class="o">&gt;</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>When a set is defined this way, each <obj> becomes a distinct element of the set, even if it is an iterable. This behavior is similar to that of the ```.append()``` list method.</obj></p>
+
+<p>Thus, the sets shown above can also be defined like this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'set'&gt; {'foo', 'baz', 'qux', 'bar'}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y</span> <span class="o">=</span> <span class="p">{</span><span class="s">'q'</span><span class="p">,</span> <span class="s">'u'</span><span class="p">,</span> <span class="s">'u'</span><span class="p">,</span> <span class="s">'x'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'set'&gt; {'x', 'u', 'q'}
+</code></pre></div></div>
+
+<p>To recap:</p>
+<ul>
+  <li>The argument to set() is an iterable. It generates a list of elements to be placed into the set.</li>
+  <li>The objects in curly braces are placed into the set intact, even if they are iterable.</li>
+</ul>
+
+<p>Observe the difference between these two set definitions:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'set'&gt; {'foo'}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s">'foo'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'set'&gt; {'o', 'f'}
+</code></pre></div></div>
+
+<p>A set can be empty. However, recall that Python interprets empty curly braces (<code class="highlighter-rouge">{}</code>) as an empty dictionary, so the only way to define an empty set is with the <code class="highlighter-rouge">set()</code> function:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'dict'&gt;
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'set'&gt;
+</code></pre></div></div>
+
+<p>An empty set is falsy in Boolean context:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">bool</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="ow">or</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="ow">and</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set()
+</code></pre></div></div>
+
+<p>You might think the most intuitive sets would contain similar objects—for example, even numbers or surnames:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">}</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Smith'</span><span class="p">,</span> <span class="s">'McArthur'</span><span class="p">,</span> <span class="s">'Wilson'</span><span class="p">,</span> <span class="s">'Johansson'</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>Python does not require this, though. The elements in a set can be objects of different types:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="mi">42</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">,</span> <span class="mf">3.14159</span><span class="p">,</span> <span class="bp">None</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'foo', 42, 3.14159, None}
+</code></pre></div></div>
+
+<p>Don’t forget that set elements must be immutable. For example, a tuple may be included in a set:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="mi">42</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mf">3.14159</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'foo', 42, 3.14159, (1, 2, 3)}
+</code></pre></div></div>
+
+<p>But lists and dictionaries are mutable, so they can’t be set elements:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="n">a</span><span class="p">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-34-0c2e2fff221a&gt; in &lt;module&gt;
+      1 a = [1, 2, 3]
+----&gt; 2 x = {a}
+
+
+TypeError: unhashable type: 'list'
+</code></pre></div></div>
+
+<h2 id="set-size-and-membership">Set Size and Membership</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">'bar'</span> <span class="ow">in</span> <span class="n">x</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">'qux'</span> <span class="ow">in</span> <span class="n">x</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<h2 id="operating-on-a-set">Operating on a Set</h2>
+
+<p>Many of the operations that can be used for Python’s other composite data types don’t make sense for sets. For example, sets can’t be indexed or sliced. However, Python provides a whole host of operations on set objects that generally mimic the operations that are defined for mathematical sets.</p>
+
+<h3 id="operators-vs-methods">Operators vs. Methods</h3>
+<p>Most, though not quite all, set operations in Python can be performed in two different ways: by operator or by method. Let’s take a look at how these operators and methods work, using set union as an example.</p>
+
+<p>Given two sets, x1 and x2, the union of x1 and x2 is a set consisting of all elements in either set.</p>
+
+<p>Consider these two sets:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>The union of <code class="highlighter-rouge">x1</code> and <code class="highlighter-rouge">x2</code> is <code class="highlighter-rouge">{'foo', 'bar', 'baz', 'qux', 'quux'}</code>.</p>
+
+<p>In Python, set union can be performed with the <code class="highlighter-rouge">|</code> operator:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">union_x</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">|</span> <span class="n">x2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">union_x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'foo', 'bar', 'baz', 'qux', 'quux'}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># note : there aren't any duplicates</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">union_x</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5 3 3
+</code></pre></div></div>
+
+<p>Set union can also be obtained with the .union() method. The method is invoked on one of the sets, and the other is passed as an argument:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'bar', 'baz', 'foo', 'quux', 'qux'}
+</code></pre></div></div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>The way they are used in the examples above, the operator and method behave identically. But there is a subtle difference between them. When you use the</td>
+      <td>operator, both operands must be sets. The .union() method, on the other hand, will take any iterable as an argument, convert it to a set, and then perform the union.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Observe the difference between these two statements:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">|</span> <span class="p">(</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-44-d83d33f7fbad&gt; in &lt;module&gt;
+----&gt; 1 x1 | ('baz', 'qux', 'quux')
+
+
+TypeError: unsupported operand type(s) for |: 'set' and 'tuple'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span><span class="o">.</span><span class="n">union</span><span class="p">((</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'bar', 'baz', 'foo', 'quux', 'qux'}
+</code></pre></div></div>
+
+<h3 id="available-operators-and-methods">Available Operators and Methods</h3>
+
+<p>Below is a list of the set operations available in Python. Some are performed by operator, some by method, and some by both. The principle outlined above generally applies: where a set is expected, methods will typically accept any iterable as an argument, but operators require actual sets as operands.</p>
+
+<h4 id="union">Union</h4>
+<p><img src="https://files.realpython.com/media/t.ca57b915cec6.png" width="384px" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">|</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'foo', 'bar', 'baz', 'qux', 'quux'}
+{'foo', 'bar', 'baz', 'qux', 'quux'}
+</code></pre></div></div>
+
+<p>More than two sets may be specified with either the operator or the method:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span> <span class="o">|</span> <span class="n">c</span> <span class="o">|</span> <span class="n">d</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{1, 2, 3, 4, 5, 6, 7}
+{1, 2, 3, 4, 5, 6, 7}
+</code></pre></div></div>
+
+<h4 id="intersection">Intersection</h4>
+
+<p><img src="https://files.realpython.com/media/t.9c6d33717cdc.png" width="384px" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">&amp;</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'baz'}
+{'baz'}
+</code></pre></div></div>
+
+<p>You can specify multiple sets with the intersection method and operator, just like you can with set union:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span> <span class="o">&amp;</span> <span class="n">c</span> <span class="o">&amp;</span> <span class="n">d</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{4}
+{4}
+</code></pre></div></div>
+
+<h4 id="difference">Difference</h4>
+
+<p><img src="https://files.realpython.com/media/t.a90b4c323d99.png" width="384px" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'foo', 'bar'}
+{'foo', 'bar'}
+</code></pre></div></div>
+
+<p>Once again, you can specify more than two sets:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">300</span><span class="p">}</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">}</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">{</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{1, 2, 3}
+{1, 2, 3}
+</code></pre></div></div>
+
+<p>When multiple sets are specified, the operation is performed from left to right. In the example above, <code class="highlighter-rouge">a - b</code> is computed first, resulting in <code class="highlighter-rouge">{1, 2, 3, 300}</code>. Then <code class="highlighter-rouge">c</code> is subtracted from that set, leaving <code class="highlighter-rouge">{1, 2, 3}</code>:</p>
+
+<p><img src="https://files.realpython.com/media/t.b37d6f78f99a.png" width="768" /></p>
+
+<h4 id="symmetric-difference">Symmetric Difference</h4>
+
+<p><img src="https://files.realpython.com/media/t.604de51646cc.png" width="384px" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">^</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'foo', 'bar', 'qux', 'quux'}
+{'foo', 'bar', 'qux', 'quux'}
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">^</code> operator also allows more than two sets:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">50</span><span class="p">}</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">^</span> <span class="n">b</span> <span class="o">^</span> <span class="n">c</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{10, 100, 5}
+</code></pre></div></div>
+
+<h4 id="disjoint">Disjoint</h4>
+
+<p>Determines whether or not two sets have any elements in common.</p>
+
+<p><code class="highlighter-rouge">x1.isdisjoint(x2)</code> returns <code class="highlighter-rouge">True</code> if <code class="highlighter-rouge">x1</code> and <code class="highlighter-rouge">x2</code> have no elements in common:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x3</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">x3</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<p>If <code class="highlighter-rouge">x1.isdisjoint(x2)</code> is <code class="highlighter-rouge">True</code>, then <code class="highlighter-rouge">x1 &amp; x2</code> is the empty set:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">&amp;</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set()
+</code></pre></div></div>
+
+<h4 id="is-subset">Is Subset</h4>
+
+<p>Determine whether one set is a subset of the other.</p>
+
+<p>In set theory, a set <code class="highlighter-rouge">x1</code> is considered a subset of another set <code class="highlighter-rouge">x2</code> if every element of <code class="highlighter-rouge">x1</code> is in <code class="highlighter-rouge">x2</code>.</p>
+
+<p><code class="highlighter-rouge">x1.issubset(x2)</code> and <code class="highlighter-rouge">x1 &lt;= x2</code> return <code class="highlighter-rouge">True</code> if <code class="highlighter-rouge">x1</code> is a subset of <code class="highlighter-rouge">x2</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">issubset</span><span class="p">({</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">}))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">&lt;=</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<h4 id="is-proper-subset">Is Proper Subset</h4>
+
+<p>A proper subset is the same as a subset, except that the sets can’t be identical. A set <code class="highlighter-rouge">x1</code> is considered a proper subset of another set <code class="highlighter-rouge">x2</code> if every element of <code class="highlighter-rouge">x1</code> is in <code class="highlighter-rouge">x2</code>, and <code class="highlighter-rouge">x1</code> and <code class="highlighter-rouge">x2</code> are not equal.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">&lt;</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">&lt;</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<h4 id="is-superset">Is Superset</h4>
+
+<p>A superset is the reverse of a subset. A set <code class="highlighter-rouge">x1</code> is considered a superset of another set <code class="highlighter-rouge">x2</code> if <code class="highlighter-rouge">x1</code> contains every element of <code class="highlighter-rouge">x2</code>.</p>
+
+<p><code class="highlighter-rouge">x1.issuperset(x2)</code> and <code class="highlighter-rouge">x1 &gt;= x2</code> return True if <code class="highlighter-rouge">x1</code> is a superset of <code class="highlighter-rouge">x2</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">issuperset</span><span class="p">({</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">}))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">&gt;=</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<h4 id="is-proper-superset">Is Proper Superset</h4>
+
+<p>A proper superset is the same as a superset, except that the sets can’t be identical. A set <code class="highlighter-rouge">x1</code> is considered a proper superset of another set <code class="highlighter-rouge">x2</code> if <code class="highlighter-rouge">x1</code> contains every element of <code class="highlighter-rouge">x2</code>, and <code class="highlighter-rouge">x1</code> and <code class="highlighter-rouge">x2</code> are not equal.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">&gt;</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">&gt;</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<h2 id="frozen-sets">Frozen Sets</h2>
+
+<p>Python provides another built-in type called a frozenset, which is in all respects exactly like a set, except that a frozenset is immutable. You can perform non-modifying operations on a frozenset:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">([</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>frozenset({'foo', 'baz', 'bar'})
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">})</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>frozenset({'baz'})
+</code></pre></div></div>
+
+<p>But methods that attempt to modify a frozenset fail:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">'quux'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
+
+AttributeError                            Traceback (most recent call last)
+
+&lt;ipython-input-70-b02648b33e59&gt; in &lt;module&gt;
+----&gt; 1 x.add('quux')
+
+
+AttributeError: 'frozenset' object has no attribute 'add'
+</code></pre></div></div>
+
+<h2 id="set-comprehension">Set Comprehension</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seed</span> <span class="o">=</span> <span class="mi">1234</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[3, 0, 0, 0, 4, 0, 5, 5, 0, 0]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="n">randint</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{0, 3, 4, 5}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Even'</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="k">else</span> <span class="s">'Odd'</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['Odd', 'Even', 'Odd', 'Even', 'Odd', 'Even', 'Odd', 'Even', 'Odd', 'Even']
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Even'</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="k">else</span> <span class="s">'Odd'</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'Odd', 'Even'}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,1267 @@
+<h1 id="fhirclient">fhirclient</h1>
+
+<p><strong>Note: this example uses FHIR DSTU3 whereas synthea now supports FHIR R4 so you’ll need a different version of the fhirclient library to deal with each dataset</strong></p>
+
+<p><a href="https://pypi.org/project/fhirclient/">fhirclient 3.2.0</a></p>
+
+<p>The <em>fhirclient</em>, a flexible Python client for FHIR servers supporting the SMART on FHIR protocol.</p>
+
+<p><em>fhirclient</em> versioning is not identical to FHIR versioning, see the full table for reference.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Version</th>
+      <th>FHIR</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>4.0.0</strong></td>
+      <td><code class="highlighter-rouge">4.0.0</code></td>
+      <td>(R4)</td>
+    </tr>
+    <tr>
+      <td><strong>3.0.0</strong></td>
+      <td><code class="highlighter-rouge">3.0.0</code></td>
+      <td>(STU-3)</td>
+    </tr>
+    <tr>
+      <td><strong>1.0.3</strong></td>
+      <td><code class="highlighter-rouge">1.0.2</code></td>
+      <td>(DSTU 2)</td>
+    </tr>
+    <tr>
+      <td><strong>1.0</strong></td>
+      <td><code class="highlighter-rouge">1.0.1</code></td>
+      <td>(DSTU 2)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="installation">Installation</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install fhirclient
+</code></pre></div></div>
+
+<p>or</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install git+https://github.com/smart-on-fhir/client-py.git
+</code></pre></div></div>
+
+<h2 id="documentation">Documentation</h2>
+
+<p>Technical documentation is available at <a href="https://docs.smarthealthit.org/client-py/">docs</a>.</p>
+
+<h2 id="client-use">Client Use</h2>
+
+<p>To connect to a SMART on FHIR server (or any open FHIR server), you can use the <code class="highlighter-rouge">FHIRClient</code> class.
+It will initialize and handle a <code class="highlighter-rouge">FHIRServer</code> instance, your actual handle to the FHIR server you’d like to access.</p>
+
+<h3 id="read-data-from-server">Read Data from Server</h3>
+
+<p>To read a given patient from an open FHIR server, you can use:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="nn">fhirclient</span> <span class="kn">import</span> <span class="n">client</span>
+
+<span class="n">settings</span> <span class="o">=</span> <span class="p">{</span>
+<span class="s">'app_id'</span><span class="p">:</span> <span class="s">'my_web_app'</span><span class="p">,</span>
+<span class="s">'api_base'</span><span class="p">:</span> <span class="s">'http://hapi.fhir.org/baseDstu3'</span>
+<span class="p">}</span>
+
+<span class="n">smart</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">FHIRClient</span><span class="p">(</span><span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">fhirclient.models.patient</span> <span class="k">as</span> <span class="n">p</span>
+
+<span class="n">patient</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">Patient</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">'1693321'</span><span class="p">,</span> <span class="n">smart</span><span class="o">.</span><span class="n">server</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">patient</span><span class="o">.</span><span class="n">birthDate</span><span class="o">.</span><span class="n">isostring</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">smart</span><span class="o">.</span><span class="n">human_name</span><span class="p">(</span><span class="n">patient</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1951-02-15
+Jimmy McNutty
+</code></pre></div></div>
+
+<p>If this is a protected server, you will first have to send your user to the authorize endpoint to log in.</p>
+
+<ol>
+  <li>Call <code class="highlighter-rouge">smart.authorize_url</code> to obtain the correct URL.
+    <ol>
+      <li>You can use <code class="highlighter-rouge">smart.prepare()</code>, which will return <code class="highlighter-rouge">False</code> if the server is protected and you need to authorize.</li>
+      <li>The <code class="highlighter-rouge">smart.ready</code> property has the same purpose, it will however not retrieve the server’s <em>CapabilityStatement</em> resource and hence is only useful as a quick check whether the server instance is ready.</li>
+    </ol>
+  </li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">smart</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">FHIRClient</span><span class="p">(</span><span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">)</span>
+<span class="n">smart</span><span class="o">.</span><span class="n">ready</span>
+
+<span class="c"># prints False</span>
+<span class="k">print</span><span class="p">(</span><span class="n">smart</span><span class="o">.</span><span class="n">prepare</span><span class="p">())</span>
+
+<span class="c"># prints True after fetching CapabilityStatement</span>
+<span class="k">print</span><span class="p">(</span><span class="n">smart</span><span class="o">.</span><span class="n">ready</span><span class="p">)</span>
+
+<span class="c"># prints True</span>
+<span class="k">print</span><span class="p">(</span><span class="n">smart</span><span class="o">.</span><span class="n">prepare</span><span class="p">())</span>
+
+<span class="c"># prints True immediately</span>
+<span class="k">print</span><span class="p">(</span><span class="n">smart</span><span class="o">.</span><span class="n">authorize_url</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+True
+True
+None
+</code></pre></div></div>
+
+<p>You can work with the <code class="highlighter-rouge">FHIRServer</code> class directly, without using <code class="highlighter-rouge">FHIRClient</code>, but this is not recommended:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">fhirclient.server</span>
+
+<span class="n">smart</span> <span class="o">=</span> <span class="n">fhirclient</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">FHIRServer</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">'http://hapi.fhir.org/baseDstu3'</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">fhirclient.models.patient</span> <span class="k">as</span> <span class="n">p</span>
+
+<span class="n">patient</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">Patient</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">'1693321'</span><span class="p">,</span> <span class="n">smart</span><span class="p">)</span>
+<span class="n">patient</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">given</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['Jimmy']
+</code></pre></div></div>
+
+<h3 id="search-records-on-server">Search Records on Server</h3>
+
+<p>You can also search for resources matching a particular set of criteria:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">smart</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">FHIRClient</span><span class="p">(</span><span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">fhirclient.models.observation</span> <span class="k">as</span> <span class="n">o</span>
+
+<span class="n">search</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">Observation</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">struct</span><span class="o">=</span><span class="p">{</span><span class="s">'subject'</span><span class="p">:</span> <span class="s">'Patient/1913132'</span><span class="p">})</span>
+<span class="n">observations</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">perform_resources</span><span class="p">(</span><span class="n">smart</span><span class="o">.</span><span class="n">server</span><span class="p">)</span>
+<span class="c"># print(observations)</span>
+
+<span class="k">for</span> <span class="n">observation</span> <span class="ow">in</span> <span class="n">observations</span><span class="p">:</span>
+    <span class="n">pprint</span><span class="p">(</span><span class="n">observation</span><span class="o">.</span><span class="n">as_json</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '55284-4',
+                      'display': 'Blood Pressure',
+                      'system': 'http://loinc.org'}]},
+ 'component': [{'code': {'coding': [{'code': '8480-6',
+                                     'display': 'Systolic Blood Pressure',
+                                     'system': 'http://loinc.org'}],
+                         'text': 'Systolic Blood Pressure'},
+                'valueQuantity': {'code': 'mmHg',
+                                  'system': 'http://unitsofmeasure.org',
+                                  'unit': 'mmHg',
+                                  'value': 131}},
+               {'code': {'coding': [{'code': '8462-4',
+                                     'display': 'Diastolic Blood Pressure',
+                                     'system': 'http://loinc.org'}],
+                         'text': 'Diastolic Blood Pressure'},
+                'valueQuantity': {'code': 'mmHg',
+                                  'system': 'http://unitsofmeasure.org',
+                                  'unit': 'mmHg',
+                                  'value': 77}}],
+ 'context': {'reference': 'Encounter/1913241'},
+ 'effectiveDateTime': '2019-02-10T01:13:13-04:00',
+ 'id': '1913246',
+ 'issued': '2019-02-10T01:13:13-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BloodPressure'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'}}
+{'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '39156-5',
+                      'display': 'Body Mass Index',
+                      'system': 'http://loinc.org'}],
+          'text': 'Body Mass Index'},
+ 'context': {'reference': 'Encounter/1913241'},
+ 'effectiveDateTime': '2019-02-10T01:13:13-04:00',
+ 'id': '1913245',
+ 'issued': '2019-02-10T01:13:13-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyMassIndex'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'},
+ 'valueQuantity': {'code': 'kg/m2',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'kg/m2',
+                   'value': 38.35790913354118}}
+{'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '29463-7',
+                      'display': 'Body Weight',
+                      'system': 'http://loinc.org'}],
+          'text': 'Body Weight'},
+ 'context': {'reference': 'Encounter/1913241'},
+ 'effectiveDateTime': '2019-02-10T01:13:13-04:00',
+ 'id': '1913244',
+ 'issued': '2019-02-10T01:13:13-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyWeight'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'},
+ 'valueQuantity': {'code': 'kg',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'kg',
+                   'value': 114.11381988216317}}
+{'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '8302-2',
+                      'display': 'Body Height',
+                      'system': 'http://loinc.org'}],
+          'text': 'Body Height'},
+ 'context': {'reference': 'Encounter/1913241'},
+ 'effectiveDateTime': '2019-02-10T01:13:13-04:00',
+ 'id': '1913243',
+ 'issued': '2019-02-10T01:13:13-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyHeight'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'},
+ 'valueQuantity': {'code': 'cm',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'cm',
+                   'value': 172.4811577546544}}
+{'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '55284-4',
+                      'display': 'Blood Pressure',
+                      'system': 'http://loinc.org'}]},
+ 'component': [{'code': {'coding': [{'code': '8480-6',
+                                     'display': 'Systolic Blood Pressure',
+                                     'system': 'http://loinc.org'}],
+                         'text': 'Systolic Blood Pressure'},
+                'valueQuantity': {'code': 'mmHg',
+                                  'system': 'http://unitsofmeasure.org',
+                                  'unit': 'mmHg',
+                                  'value': 122}},
+               {'code': {'coding': [{'code': '8462-4',
+                                     'display': 'Diastolic Blood Pressure',
+                                     'system': 'http://loinc.org'}],
+                         'text': 'Diastolic Blood Pressure'},
+                'valueQuantity': {'code': 'mmHg',
+                                  'system': 'http://unitsofmeasure.org',
+                                  'unit': 'mmHg',
+                                  'value': 89}}],
+ 'context': {'reference': 'Encounter/1913141'},
+ 'effectiveDateTime': '2009-10-04T10:00:59-04:00',
+ 'id': '1913146',
+ 'issued': '2009-10-04T10:00:59-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BloodPressure'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'}}
+{'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '39156-5',
+                      'display': 'Body Mass Index',
+                      'system': 'http://loinc.org'}],
+          'text': 'Body Mass Index'},
+ 'context': {'reference': 'Encounter/1913141'},
+ 'effectiveDateTime': '2009-10-04T10:00:59-04:00',
+ 'id': '1913145',
+ 'issued': '2009-10-04T10:00:59-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyMassIndex'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'},
+ 'valueQuantity': {'code': 'kg/m2',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'kg/m2',
+                   'value': 40.74551734672138}}
+{'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '29463-7',
+                      'display': 'Body Weight',
+                      'system': 'http://loinc.org'}],
+          'text': 'Body Weight'},
+ 'context': {'reference': 'Encounter/1913141'},
+ 'effectiveDateTime': '2009-10-04T10:00:59-04:00',
+ 'id': '1913144',
+ 'issued': '2009-10-04T10:00:59-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyWeight'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'},
+ 'valueQuantity': {'code': 'kg',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'kg',
+                   'value': 121.21689457373371}}
+{'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '8302-2',
+                      'display': 'Body Height',
+                      'system': 'http://loinc.org'}],
+          'text': 'Body Height'},
+ 'context': {'reference': 'Encounter/1913141'},
+ 'effectiveDateTime': '2009-10-04T10:00:59-04:00',
+ 'id': '1913143',
+ 'issued': '2009-10-04T10:00:59-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyHeight'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'},
+ 'valueQuantity': {'code': 'cm',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'cm',
+                   'value': 172.4811577546544}}
+{'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '29463-7',
+                      'display': 'Body Weight',
+                      'system': 'http://loinc.org'}],
+          'text': 'Body Weight'},
+ 'context': {'reference': 'Encounter/1913156'},
+ 'effectiveDateTime': '2011-09-12T13:29:49-04:00',
+ 'id': '1913159',
+ 'issued': '2011-09-12T13:29:49-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyWeight'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'},
+ 'valueQuantity': {'code': 'kg',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'kg',
+                   'value': 121.21689457373371}}
+{'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '8302-2',
+                      'display': 'Body Height',
+                      'system': 'http://loinc.org'}],
+          'text': 'Body Height'},
+ 'context': {'reference': 'Encounter/1913156'},
+ 'effectiveDateTime': '2011-09-12T13:29:49-04:00',
+ 'id': '1913158',
+ 'issued': '2011-09-12T13:29:49-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyHeight'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'},
+ 'valueQuantity': {'code': 'cm',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'cm',
+                   'value': 172.4811577546544}}
+{'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '55284-4',
+                      'display': 'Blood Pressure',
+                      'system': 'http://loinc.org'}]},
+ 'component': [{'code': {'coding': [{'code': '8480-6',
+                                     'display': 'Systolic Blood Pressure',
+                                     'system': 'http://loinc.org'}],
+                         'text': 'Systolic Blood Pressure'},
+                'valueQuantity': {'code': 'mmHg',
+                                  'system': 'http://unitsofmeasure.org',
+                                  'unit': 'mmHg',
+                                  'value': 118}},
+               {'code': {'coding': [{'code': '8462-4',
+                                     'display': 'Diastolic Blood Pressure',
+                                     'system': 'http://loinc.org'}],
+                         'text': 'Diastolic Blood Pressure'},
+                'valueQuantity': {'code': 'mmHg',
+                                  'system': 'http://unitsofmeasure.org',
+                                  'unit': 'mmHg',
+                                  'value': 70}}],
+ 'context': {'reference': 'Encounter/1913148'},
+ 'effectiveDateTime': '2010-07-22T02:24:44-04:00',
+ 'id': '1913153',
+ 'issued': '2010-07-22T02:24:44-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BloodPressure'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'}}
+{'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '39156-5',
+                      'display': 'Body Mass Index',
+                      'system': 'http://loinc.org'}],
+          'text': 'Body Mass Index'},
+ 'context': {'reference': 'Encounter/1913148'},
+ 'effectiveDateTime': '2010-07-22T02:24:44-04:00',
+ 'id': '1913152',
+ 'issued': '2010-07-22T02:24:44-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyMassIndex'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'},
+ 'valueQuantity': {'code': 'kg/m2',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'kg/m2',
+                   'value': 40.74551734672138}}
+{'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '29463-7',
+                      'display': 'Body Weight',
+                      'system': 'http://loinc.org'}],
+          'text': 'Body Weight'},
+ 'context': {'reference': 'Encounter/1913148'},
+ 'effectiveDateTime': '2010-07-22T02:24:44-04:00',
+ 'id': '1913151',
+ 'issued': '2010-07-22T02:24:44-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyWeight'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'},
+ 'valueQuantity': {'code': 'kg',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'kg',
+                   'value': 121.21689457373371}}
+{'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '8302-2',
+                      'display': 'Body Height',
+                      'system': 'http://loinc.org'}],
+          'text': 'Body Height'},
+ 'context': {'reference': 'Encounter/1913148'},
+ 'effectiveDateTime': '2010-07-22T02:24:44-04:00',
+ 'id': '1913150',
+ 'issued': '2010-07-22T02:24:44-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyHeight'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'},
+ 'valueQuantity': {'code': 'cm',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'cm',
+                   'value': 172.4811577546544}}
+{'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '8331-1',
+                      'display': 'Oral temperature',
+                      'system': 'http://loinc.org'}],
+          'text': 'Oral temperature'},
+ 'context': {'reference': 'Encounter/1913199'},
+ 'effectiveDateTime': '2015-02-20T19:42:38-04:00',
+ 'id': '1913202',
+ 'issued': '2015-02-20T19:42:38-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'},
+ 'valueQuantity': {'code': 'Cel',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'Cel',
+                   'value': 37}}
+{'category': [{'coding': [{'code': 'laboratory',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '2085-9',
+                      'display': 'High Density Lipoprotein Cholesterol',
+                      'system': 'http://loinc.org'}],
+          'text': 'High Density Lipoprotein Cholesterol'},
+ 'context': {'reference': 'Encounter/1913156'},
+ 'effectiveDateTime': '2011-09-12T13:29:49-04:00',
+ 'id': '1913165',
+ 'issued': '2011-09-12T13:29:49-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'},
+ 'valueQuantity': {'code': 'mg/dL',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'mg/dL',
+                   'value': 60}}
+{'category': [{'coding': [{'code': 'laboratory',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '18262-6',
+                      'display': 'Low Density Lipoprotein Cholesterol',
+                      'system': 'http://loinc.org'}],
+          'text': 'Low Density Lipoprotein Cholesterol'},
+ 'context': {'reference': 'Encounter/1913156'},
+ 'effectiveDateTime': '2011-09-12T13:29:49-04:00',
+ 'id': '1913164',
+ 'issued': '2011-09-12T13:29:49-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'},
+ 'valueQuantity': {'code': 'mg/dL',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'mg/dL',
+                   'value': 116}}
+{'category': [{'coding': [{'code': 'laboratory',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '2571-8',
+                      'display': 'Triglycerides',
+                      'system': 'http://loinc.org'}],
+          'text': 'Triglycerides'},
+ 'context': {'reference': 'Encounter/1913156'},
+ 'effectiveDateTime': '2011-09-12T13:29:49-04:00',
+ 'id': '1913163',
+ 'issued': '2011-09-12T13:29:49-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'},
+ 'valueQuantity': {'code': 'mg/dL',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'mg/dL',
+                   'value': 109}}
+{'category': [{'coding': [{'code': 'laboratory',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '2093-3',
+                      'display': 'Total Cholesterol',
+                      'system': 'http://loinc.org'}],
+          'text': 'Total Cholesterol'},
+ 'context': {'reference': 'Encounter/1913156'},
+ 'effectiveDateTime': '2011-09-12T13:29:49-04:00',
+ 'id': '1913162',
+ 'issued': '2011-09-12T13:29:49-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'},
+ 'valueQuantity': {'code': 'mg/dL',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'mg/dL',
+                   'value': 198}}
+{'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://hl7.org/fhir/observation-category'}]}],
+ 'code': {'coding': [{'code': '55284-4',
+                      'display': 'Blood Pressure',
+                      'system': 'http://loinc.org'}]},
+ 'component': [{'code': {'coding': [{'code': '8480-6',
+                                     'display': 'Systolic Blood Pressure',
+                                     'system': 'http://loinc.org'}],
+                         'text': 'Systolic Blood Pressure'},
+                'valueQuantity': {'code': 'mmHg',
+                                  'system': 'http://unitsofmeasure.org',
+                                  'unit': 'mmHg',
+                                  'value': 106}},
+               {'code': {'coding': [{'code': '8462-4',
+                                     'display': 'Diastolic Blood Pressure',
+                                     'system': 'http://loinc.org'}],
+                         'text': 'Diastolic Blood Pressure'},
+                'valueQuantity': {'code': 'mmHg',
+                                  'system': 'http://unitsofmeasure.org',
+                                  'unit': 'mmHg',
+                                  'value': 80}}],
+ 'context': {'reference': 'Encounter/1913156'},
+ 'effectiveDateTime': '2011-09-12T13:29:49-04:00',
+ 'id': '1913161',
+ 'issued': '2011-09-12T13:29:49-04:00',
+ 'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+          'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                      'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BloodPressure'],
+          'versionId': '1'},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'reference': 'Patient/1913132'}}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># to get the raw Bundle instead of resources only, you can use:</span>
+<span class="n">bundle</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">perform</span><span class="p">(</span><span class="n">smart</span><span class="o">.</span><span class="n">server</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">bundle</span><span class="o">.</span><span class="n">as_json</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'entry': [{'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913246',
+            'resource': {'category': [{'coding': [{'code': 'vital-signs',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '55284-4',
+                                              'display': 'Blood Pressure',
+                                              'system': 'http://loinc.org'}]},
+                         'component': [{'code': {'coding': [{'code': '8480-6',
+                                                             'display': 'Systolic '
+                                                                        'Blood '
+                                                                        'Pressure',
+                                                             'system': 'http://loinc.org'}],
+                                                 'text': 'Systolic Blood '
+                                                         'Pressure'},
+                                        'valueQuantity': {'code': 'mmHg',
+                                                          'system': 'http://unitsofmeasure.org',
+                                                          'unit': 'mmHg',
+                                                          'value': 131}},
+                                       {'code': {'coding': [{'code': '8462-4',
+                                                             'display': 'Diastolic '
+                                                                        'Blood '
+                                                                        'Pressure',
+                                                             'system': 'http://loinc.org'}],
+                                                 'text': 'Diastolic Blood '
+                                                         'Pressure'},
+                                        'valueQuantity': {'code': 'mmHg',
+                                                          'system': 'http://unitsofmeasure.org',
+                                                          'unit': 'mmHg',
+                                                          'value': 77}}],
+                         'context': {'reference': 'Encounter/1913241'},
+                         'effectiveDateTime': '2019-02-10T01:13:13-04:00',
+                         'id': '1913246',
+                         'issued': '2019-02-10T01:13:13-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BloodPressure'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913245',
+            'resource': {'category': [{'coding': [{'code': 'vital-signs',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '39156-5',
+                                              'display': 'Body Mass Index',
+                                              'system': 'http://loinc.org'}],
+                                  'text': 'Body Mass Index'},
+                         'context': {'reference': 'Encounter/1913241'},
+                         'effectiveDateTime': '2019-02-10T01:13:13-04:00',
+                         'id': '1913245',
+                         'issued': '2019-02-10T01:13:13-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyMassIndex'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'},
+                         'valueQuantity': {'code': 'kg/m2',
+                                           'system': 'http://unitsofmeasure.org',
+                                           'unit': 'kg/m2',
+                                           'value': 38.35790913354118}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913244',
+            'resource': {'category': [{'coding': [{'code': 'vital-signs',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '29463-7',
+                                              'display': 'Body Weight',
+                                              'system': 'http://loinc.org'}],
+                                  'text': 'Body Weight'},
+                         'context': {'reference': 'Encounter/1913241'},
+                         'effectiveDateTime': '2019-02-10T01:13:13-04:00',
+                         'id': '1913244',
+                         'issued': '2019-02-10T01:13:13-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyWeight'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'},
+                         'valueQuantity': {'code': 'kg',
+                                           'system': 'http://unitsofmeasure.org',
+                                           'unit': 'kg',
+                                           'value': 114.11381988216317}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913243',
+            'resource': {'category': [{'coding': [{'code': 'vital-signs',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '8302-2',
+                                              'display': 'Body Height',
+                                              'system': 'http://loinc.org'}],
+                                  'text': 'Body Height'},
+                         'context': {'reference': 'Encounter/1913241'},
+                         'effectiveDateTime': '2019-02-10T01:13:13-04:00',
+                         'id': '1913243',
+                         'issued': '2019-02-10T01:13:13-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyHeight'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'},
+                         'valueQuantity': {'code': 'cm',
+                                           'system': 'http://unitsofmeasure.org',
+                                           'unit': 'cm',
+                                           'value': 172.4811577546544}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913146',
+            'resource': {'category': [{'coding': [{'code': 'vital-signs',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '55284-4',
+                                              'display': 'Blood Pressure',
+                                              'system': 'http://loinc.org'}]},
+                         'component': [{'code': {'coding': [{'code': '8480-6',
+                                                             'display': 'Systolic '
+                                                                        'Blood '
+                                                                        'Pressure',
+                                                             'system': 'http://loinc.org'}],
+                                                 'text': 'Systolic Blood '
+                                                         'Pressure'},
+                                        'valueQuantity': {'code': 'mmHg',
+                                                          'system': 'http://unitsofmeasure.org',
+                                                          'unit': 'mmHg',
+                                                          'value': 122}},
+                                       {'code': {'coding': [{'code': '8462-4',
+                                                             'display': 'Diastolic '
+                                                                        'Blood '
+                                                                        'Pressure',
+                                                             'system': 'http://loinc.org'}],
+                                                 'text': 'Diastolic Blood '
+                                                         'Pressure'},
+                                        'valueQuantity': {'code': 'mmHg',
+                                                          'system': 'http://unitsofmeasure.org',
+                                                          'unit': 'mmHg',
+                                                          'value': 89}}],
+                         'context': {'reference': 'Encounter/1913141'},
+                         'effectiveDateTime': '2009-10-04T10:00:59-04:00',
+                         'id': '1913146',
+                         'issued': '2009-10-04T10:00:59-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BloodPressure'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913145',
+            'resource': {'category': [{'coding': [{'code': 'vital-signs',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '39156-5',
+                                              'display': 'Body Mass Index',
+                                              'system': 'http://loinc.org'}],
+                                  'text': 'Body Mass Index'},
+                         'context': {'reference': 'Encounter/1913141'},
+                         'effectiveDateTime': '2009-10-04T10:00:59-04:00',
+                         'id': '1913145',
+                         'issued': '2009-10-04T10:00:59-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyMassIndex'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'},
+                         'valueQuantity': {'code': 'kg/m2',
+                                           'system': 'http://unitsofmeasure.org',
+                                           'unit': 'kg/m2',
+                                           'value': 40.74551734672138}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913144',
+            'resource': {'category': [{'coding': [{'code': 'vital-signs',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '29463-7',
+                                              'display': 'Body Weight',
+                                              'system': 'http://loinc.org'}],
+                                  'text': 'Body Weight'},
+                         'context': {'reference': 'Encounter/1913141'},
+                         'effectiveDateTime': '2009-10-04T10:00:59-04:00',
+                         'id': '1913144',
+                         'issued': '2009-10-04T10:00:59-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyWeight'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'},
+                         'valueQuantity': {'code': 'kg',
+                                           'system': 'http://unitsofmeasure.org',
+                                           'unit': 'kg',
+                                           'value': 121.21689457373371}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913143',
+            'resource': {'category': [{'coding': [{'code': 'vital-signs',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '8302-2',
+                                              'display': 'Body Height',
+                                              'system': 'http://loinc.org'}],
+                                  'text': 'Body Height'},
+                         'context': {'reference': 'Encounter/1913141'},
+                         'effectiveDateTime': '2009-10-04T10:00:59-04:00',
+                         'id': '1913143',
+                         'issued': '2009-10-04T10:00:59-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyHeight'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'},
+                         'valueQuantity': {'code': 'cm',
+                                           'system': 'http://unitsofmeasure.org',
+                                           'unit': 'cm',
+                                           'value': 172.4811577546544}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913159',
+            'resource': {'category': [{'coding': [{'code': 'vital-signs',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '29463-7',
+                                              'display': 'Body Weight',
+                                              'system': 'http://loinc.org'}],
+                                  'text': 'Body Weight'},
+                         'context': {'reference': 'Encounter/1913156'},
+                         'effectiveDateTime': '2011-09-12T13:29:49-04:00',
+                         'id': '1913159',
+                         'issued': '2011-09-12T13:29:49-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyWeight'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'},
+                         'valueQuantity': {'code': 'kg',
+                                           'system': 'http://unitsofmeasure.org',
+                                           'unit': 'kg',
+                                           'value': 121.21689457373371}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913158',
+            'resource': {'category': [{'coding': [{'code': 'vital-signs',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '8302-2',
+                                              'display': 'Body Height',
+                                              'system': 'http://loinc.org'}],
+                                  'text': 'Body Height'},
+                         'context': {'reference': 'Encounter/1913156'},
+                         'effectiveDateTime': '2011-09-12T13:29:49-04:00',
+                         'id': '1913158',
+                         'issued': '2011-09-12T13:29:49-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyHeight'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'},
+                         'valueQuantity': {'code': 'cm',
+                                           'system': 'http://unitsofmeasure.org',
+                                           'unit': 'cm',
+                                           'value': 172.4811577546544}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913153',
+            'resource': {'category': [{'coding': [{'code': 'vital-signs',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '55284-4',
+                                              'display': 'Blood Pressure',
+                                              'system': 'http://loinc.org'}]},
+                         'component': [{'code': {'coding': [{'code': '8480-6',
+                                                             'display': 'Systolic '
+                                                                        'Blood '
+                                                                        'Pressure',
+                                                             'system': 'http://loinc.org'}],
+                                                 'text': 'Systolic Blood '
+                                                         'Pressure'},
+                                        'valueQuantity': {'code': 'mmHg',
+                                                          'system': 'http://unitsofmeasure.org',
+                                                          'unit': 'mmHg',
+                                                          'value': 118}},
+                                       {'code': {'coding': [{'code': '8462-4',
+                                                             'display': 'Diastolic '
+                                                                        'Blood '
+                                                                        'Pressure',
+                                                             'system': 'http://loinc.org'}],
+                                                 'text': 'Diastolic Blood '
+                                                         'Pressure'},
+                                        'valueQuantity': {'code': 'mmHg',
+                                                          'system': 'http://unitsofmeasure.org',
+                                                          'unit': 'mmHg',
+                                                          'value': 70}}],
+                         'context': {'reference': 'Encounter/1913148'},
+                         'effectiveDateTime': '2010-07-22T02:24:44-04:00',
+                         'id': '1913153',
+                         'issued': '2010-07-22T02:24:44-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BloodPressure'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913152',
+            'resource': {'category': [{'coding': [{'code': 'vital-signs',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '39156-5',
+                                              'display': 'Body Mass Index',
+                                              'system': 'http://loinc.org'}],
+                                  'text': 'Body Mass Index'},
+                         'context': {'reference': 'Encounter/1913148'},
+                         'effectiveDateTime': '2010-07-22T02:24:44-04:00',
+                         'id': '1913152',
+                         'issued': '2010-07-22T02:24:44-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyMassIndex'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'},
+                         'valueQuantity': {'code': 'kg/m2',
+                                           'system': 'http://unitsofmeasure.org',
+                                           'unit': 'kg/m2',
+                                           'value': 40.74551734672138}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913151',
+            'resource': {'category': [{'coding': [{'code': 'vital-signs',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '29463-7',
+                                              'display': 'Body Weight',
+                                              'system': 'http://loinc.org'}],
+                                  'text': 'Body Weight'},
+                         'context': {'reference': 'Encounter/1913148'},
+                         'effectiveDateTime': '2010-07-22T02:24:44-04:00',
+                         'id': '1913151',
+                         'issued': '2010-07-22T02:24:44-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyWeight'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'},
+                         'valueQuantity': {'code': 'kg',
+                                           'system': 'http://unitsofmeasure.org',
+                                           'unit': 'kg',
+                                           'value': 121.21689457373371}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913150',
+            'resource': {'category': [{'coding': [{'code': 'vital-signs',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '8302-2',
+                                              'display': 'Body Height',
+                                              'system': 'http://loinc.org'}],
+                                  'text': 'Body Height'},
+                         'context': {'reference': 'Encounter/1913148'},
+                         'effectiveDateTime': '2010-07-22T02:24:44-04:00',
+                         'id': '1913150',
+                         'issued': '2010-07-22T02:24:44-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BodyHeight'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'},
+                         'valueQuantity': {'code': 'cm',
+                                           'system': 'http://unitsofmeasure.org',
+                                           'unit': 'cm',
+                                           'value': 172.4811577546544}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913202',
+            'resource': {'category': [{'coding': [{'code': 'vital-signs',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '8331-1',
+                                              'display': 'Oral temperature',
+                                              'system': 'http://loinc.org'}],
+                                  'text': 'Oral temperature'},
+                         'context': {'reference': 'Encounter/1913199'},
+                         'effectiveDateTime': '2015-02-20T19:42:38-04:00',
+                         'id': '1913202',
+                         'issued': '2015-02-20T19:42:38-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-VitalSign'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'},
+                         'valueQuantity': {'code': 'Cel',
+                                           'system': 'http://unitsofmeasure.org',
+                                           'unit': 'Cel',
+                                           'value': 37}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913165',
+            'resource': {'category': [{'coding': [{'code': 'laboratory',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '2085-9',
+                                              'display': 'High Density '
+                                                         'Lipoprotein '
+                                                         'Cholesterol',
+                                              'system': 'http://loinc.org'}],
+                                  'text': 'High Density Lipoprotein '
+                                          'Cholesterol'},
+                         'context': {'reference': 'Encounter/1913156'},
+                         'effectiveDateTime': '2011-09-12T13:29:49-04:00',
+                         'id': '1913165',
+                         'issued': '2011-09-12T13:29:49-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'},
+                         'valueQuantity': {'code': 'mg/dL',
+                                           'system': 'http://unitsofmeasure.org',
+                                           'unit': 'mg/dL',
+                                           'value': 60}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913164',
+            'resource': {'category': [{'coding': [{'code': 'laboratory',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '18262-6',
+                                              'display': 'Low Density '
+                                                         'Lipoprotein '
+                                                         'Cholesterol',
+                                              'system': 'http://loinc.org'}],
+                                  'text': 'Low Density Lipoprotein '
+                                          'Cholesterol'},
+                         'context': {'reference': 'Encounter/1913156'},
+                         'effectiveDateTime': '2011-09-12T13:29:49-04:00',
+                         'id': '1913164',
+                         'issued': '2011-09-12T13:29:49-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'},
+                         'valueQuantity': {'code': 'mg/dL',
+                                           'system': 'http://unitsofmeasure.org',
+                                           'unit': 'mg/dL',
+                                           'value': 116}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913163',
+            'resource': {'category': [{'coding': [{'code': 'laboratory',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '2571-8',
+                                              'display': 'Triglycerides',
+                                              'system': 'http://loinc.org'}],
+                                  'text': 'Triglycerides'},
+                         'context': {'reference': 'Encounter/1913156'},
+                         'effectiveDateTime': '2011-09-12T13:29:49-04:00',
+                         'id': '1913163',
+                         'issued': '2011-09-12T13:29:49-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'},
+                         'valueQuantity': {'code': 'mg/dL',
+                                           'system': 'http://unitsofmeasure.org',
+                                           'unit': 'mg/dL',
+                                           'value': 109}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913162',
+            'resource': {'category': [{'coding': [{'code': 'laboratory',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '2093-3',
+                                              'display': 'Total Cholesterol',
+                                              'system': 'http://loinc.org'}],
+                                  'text': 'Total Cholesterol'},
+                         'context': {'reference': 'Encounter/1913156'},
+                         'effectiveDateTime': '2011-09-12T13:29:49-04:00',
+                         'id': '1913162',
+                         'issued': '2011-09-12T13:29:49-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'},
+                         'valueQuantity': {'code': 'mg/dL',
+                                           'system': 'http://unitsofmeasure.org',
+                                           'unit': 'mg/dL',
+                                           'value': 198}},
+            'search': {'mode': 'match'}},
+           {'fullUrl': 'http://hapi.fhir.org/baseDstu3/Observation/1913161',
+            'resource': {'category': [{'coding': [{'code': 'vital-signs',
+                                                   'system': 'http://hl7.org/fhir/observation-category'}]}],
+                         'code': {'coding': [{'code': '55284-4',
+                                              'display': 'Blood Pressure',
+                                              'system': 'http://loinc.org'}]},
+                         'component': [{'code': {'coding': [{'code': '8480-6',
+                                                             'display': 'Systolic '
+                                                                        'Blood '
+                                                                        'Pressure',
+                                                             'system': 'http://loinc.org'}],
+                                                 'text': 'Systolic Blood '
+                                                         'Pressure'},
+                                        'valueQuantity': {'code': 'mmHg',
+                                                          'system': 'http://unitsofmeasure.org',
+                                                          'unit': 'mmHg',
+                                                          'value': 106}},
+                                       {'code': {'coding': [{'code': '8462-4',
+                                                             'display': 'Diastolic '
+                                                                        'Blood '
+                                                                        'Pressure',
+                                                             'system': 'http://loinc.org'}],
+                                                 'text': 'Diastolic Blood '
+                                                         'Pressure'},
+                                        'valueQuantity': {'code': 'mmHg',
+                                                          'system': 'http://unitsofmeasure.org',
+                                                          'unit': 'mmHg',
+                                                          'value': 80}}],
+                         'context': {'reference': 'Encounter/1913156'},
+                         'effectiveDateTime': '2011-09-12T13:29:49-04:00',
+                         'id': '1913161',
+                         'issued': '2011-09-12T13:29:49-04:00',
+                         'meta': {'lastUpdated': '2019-05-09T10:09:50.460+00:00',
+                                  'profile': ['http://standardhealthrecord.org/fhir/StructureDefinition/shr-observation-Observation',
+                                              'http://standardhealthrecord.org/fhir/StructureDefinition/shr-vital-BloodPressure'],
+                                  'versionId': '1'},
+                         'resourceType': 'Observation',
+                         'status': 'final',
+                         'subject': {'reference': 'Patient/1913132'}},
+            'search': {'mode': 'match'}}],
+ 'id': '77f5bd27-846f-4104-a175-78bd0c159f35',
+ 'link': [{'relation': 'self',
+           'url': 'http://hapi.fhir.org/baseDstu3/Observation?subject=Patient%2F1913132'},
+          {'relation': 'next',
+           'url': 'http://hapi.fhir.org/baseDstu3?_getpages=77f5bd27-846f-4104-a175-78bd0c159f35&amp;_getpagesoffset=20&amp;_count=20&amp;_pretty=true&amp;_bundletype=searchset'}],
+ 'meta': {'lastUpdated': '2019-05-31T00:18:05.550+00:00'},
+ 'resourceType': 'Bundle',
+ 'total': 53,
+ 'type': 'searchset'}
+</code></pre></div></div>
+
+<h2 id="data-model-use">Data Model Use</h2>
+
+<p>The client contains data model classes, built using <code class="highlighter-rouge">fhir-parser</code>, that handle (de)serialization and allow to work with FHIR data in a Pythonic way.</p>
+
+<h3 id="initialize-data-model">Initialize Data Model</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">fhirclient.models.patient</span>
+<span class="kn">import</span> <span class="nn">fhirclient.models.humanname</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'id'</span><span class="p">:</span> <span class="s">'patient-1'</span><span class="p">}</span>
+<span class="n">patient</span> <span class="o">=</span> <span class="n">fhirclient</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">patient</span><span class="o">.</span><span class="n">Patient</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">patient</span><span class="o">.</span><span class="nb">id</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>patient-1
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">name</span> <span class="o">=</span> <span class="n">fhirclient</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">humanname</span><span class="o">.</span><span class="n">HumanName</span><span class="p">()</span>
+<span class="n">name</span><span class="o">.</span><span class="n">given</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Peter'</span><span class="p">]</span>
+<span class="n">name</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="s">'Parker'</span>
+
+<span class="n">patient</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="p">]</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">patient</span><span class="o">.</span><span class="n">as_json</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'id': 'patient-1',
+ 'name': [{'family': 'Parker', 'given': ['Peter']}],
+ 'resourceType': 'Patient'}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">name</span><span class="o">.</span><span class="n">given</span> <span class="o">=</span> <span class="s">'Peter'</span>
+<span class="n">patient</span><span class="o">.</span><span class="n">as_json</span><span class="p">()</span> <span class="c"># throws FHIRValidationError: because we incorrectly set the name to a string</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
+
+FHIRValidationError                       Traceback (most recent call last)
+
+&lt;ipython-input-22-814c163e63cc&gt; in &lt;module&gt;
+      1 name.given = 'Peter'
+----&gt; 2 patient.as_json() # throws FHIRValidationError: because we incorrectly set the name to a string
+
+
+~/anaconda/envs/cmu3/lib/python3.6/site-packages/fhirclient/models/fhirabstractresource.py in as_json(self)
+     40 
+     41     def as_json(self):
+---&gt; 42         js = super(FHIRAbstractResource, self).as_json()
+     43         js['resourceType'] = self.resource_type
+     44         return js
+
+
+~/anaconda/envs/cmu3/lib/python3.6/site-packages/fhirclient/models/fhirabstractbase.py in as_json(self)
+    295 
+    296         if len(errs) &gt; 0:
+--&gt; 297             raise FHIRValidationError(errs)
+    298         return js
+    299 
+
+
+FHIRValidationError: {root}:
+  name.0:
+    given:
+      Expecting property "given" on &lt;class 'fhirclient.models.humanname.HumanName'&gt; to be list, but is &lt;class 'str'&gt;
+</code></pre></div></div>
+
+<h3 id="initialize-from-json-file">Initialize from JSON file</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">fhirclient.models.patient</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'patient.json'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">h</span><span class="p">:</span>
+    <span class="n">pjs</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+    <span class="n">patient</span> <span class="o">=</span> <span class="n">fhirclient</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">patient</span><span class="o">.</span><span class="n">Patient</span><span class="p">(</span><span class="n">pjs</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">patient</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">family</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">patient</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">given</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">patient</span><span class="o">.</span><span class="n">gender</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">patient</span><span class="o">.</span><span class="n">birthDate</span><span class="o">.</span><span class="n">isostring</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>McNutty
+Jimmy
+male
+1951-02-15
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>

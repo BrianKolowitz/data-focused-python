@@ -1,0 +1,437 @@
+<h1 id="python-list-comprehensions">Python List Comprehensions</h1>
+<p><a href="https://www.datacamp.com/community/tutorials/python-list-comprehension">Python List Comprehension Tutorial</a></p>
+
+<p>When doing data science, you might find yourself wanting to read lists of lists, filtering column names, removing vowels from a list or flattening a matrix. You can easily use a lambda function or a for loop; As you well know, there are multiple ways to go about this. One other way to do this is by using list comprehensions.</p>
+
+<h2 id="python-list-comprehension">Python List Comprehension</h2>
+
+<p>List comprehensions are used to create lists programatically. List comprehensions in Python are constructed as follows:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list_variable</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="list-comprehension-in-python-the-mathematics">List Comprehension in Python: The Mathematics</h3>
+
+<p>Remember in maths, the common ways to describe lists (or sets, or tuples, or vectors) are:</p>
+
+<div class="language-latex highlighter-rouge"><div class="highlight"><pre class="highlight"><code>S = <span class="p">{</span>x² : x in <span class="p">{</span>0 ... 9<span class="p">}}</span>
+V = (1, 2, 4, 8, ..., 2¹²)
+M = <span class="p">{</span>x | x in S and x even<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In other words, you’ll find that the above definitions actually tell you the following:</p>
+
+<ul>
+  <li>The sequence S is actually a sequence that contains values between 0 and 9 included that are raised to the power of two.</li>
+  <li>The sequence V, on the other hand, contains the value 2 that is raised to a certain power. For the first element in the sequence, this is 0, for the second this is 1, and so on, until you reach 12.</li>
+  <li>Lastly, the sequence M contains elements from the sequence S, but only the even ones.</li>
+</ul>
+
+<p>If the above definitions give you a headache, take a look at the actual lists that these definitions would produce:</p>
+
+<div class="language-latex highlighter-rouge"><div class="highlight"><pre class="highlight"><code>S = <span class="p">{</span>0, 1, 4, 9, 16, 25, 36, 49, 64, 81<span class="p">}</span>
+V = <span class="p">{</span>1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096<span class="p">}</span>
+M = <span class="p">{</span>0, 4, 16, 36, 64<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># S = {x² : x in {0 ... 9}}</span>
+<span class="n">S</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">S</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># S = {x² : x in {0 ... 9}}</span>
+<span class="n">S</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+</code></pre></div></div>
+
+<p><em>The list S is built up with the square brackets that you read above in the first section. In those brackets, you see that there is an element x, which is raised to the power of 10. Now, you just need to know for how many values (and which values!) you need to raise to the power of 2. This is determined in range(10). Considering all of this, you can derive that you’ll raise all numbers, going from 0 to 9, to the power of 2.</em></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># V = (1, 2, 4, 8, ..., 2¹²)</span>
+<span class="n">V</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">13</span><span class="p">):</span>
+    <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># V = (1, 2, 4, 8, ..., 2¹²)</span>
+<span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">13</span><span class="p">)]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096]
+</code></pre></div></div>
+
+<p><em>The list V contains the base value 2, which is raised to a certain power. Just like before, now you need to know which power or i is exactly going to be used to do this. You see that i in this case is part of range(13), which means that you start from 0 and go until 12. All of this means that your list is going to have 13 values - those values will be 2 raised to the power 0, 1, 2, … all the way up to 12.</em></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># M = {x | x in S and x even}</span>
+<span class="n">M</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">M</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0, 4, 16, 36, 64]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># M = {x | x in S and x even}</span>
+<span class="n">M</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">S</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0, 4, 16, 36, 64]
+</code></pre></div></div>
+
+<p><em>Lastly, the list M contains elements that are part of S if -and only if- they can be divided by 2 without having any leftovers. The modulo needs to be 0. In other words, the list M is built up with the equal values that are stored in list S.</em></p>
+
+<h2 id="list-comprehension-as-an-alternative-to">List Comprehension as an Alternative to…</h2>
+
+<p>List comprehension is a complete substitute to for loops, lambda function as well as the functions <code class="highlighter-rouge">map()</code>, <code class="highlighter-rouge">filter()</code> and <code class="highlighter-rouge">reduce()</code>.</p>
+
+<h3 id="for-loops">For Loops</h3>
+
+<p>List comprehensions are actually good alternatives to for loops, as they are more compact.</p>
+
+<h4 id="for-loop-example">For Loop Example</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">numbers</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="c"># Initialize `new_list`</span>
+<span class="n">new_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c"># Add values to `new_list`</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">new_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c"># Print `new_list`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">new_list</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0, 4, 16, 36, 64]
+</code></pre></div></div>
+
+<h4 id="list-comprehension-alternative-to-for-loop">List Comprehension Alternative to For Loop</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">numbers</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="c"># Create `new_list` </span>
+<span class="n">new_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span> <span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c"># Print `new_list`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">new_list</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0, 4, 16, 36, 64]
+</code></pre></div></div>
+
+<h4 id="which-is-faster">Which is faster?</h4>
+
+<p>Let’s study the difference in performance between the list comprehension and the for loop with a small test: you can set this up very quickly with the timeit library, which you can use to time small bits of Python code in a simple way. In this case, the small pieces of code that you will test are the for loop, which you will put in a function called power_two() for your convenience, and the exact list comprehension which you have formulated above.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Import `timeit`</span>
+<span class="kn">import</span> <span class="nn">timeit</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Print the execution time</span>
+<span class="k">print</span><span class="p">(</span><span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s">'[n**2 for n in range(10) if n</span><span class="si">%2</span><span class="s">==0]'</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">10000</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.02252801500003443
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Define `power_two()` </span>
+<span class="k">def</span> <span class="nf">power_two</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">new_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_list</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s">'power_two(numbers)'</span><span class="p">,</span> <span class="nb">globals</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">number</span><span class="o">=</span><span class="mi">10000</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.02238564399999632
+</code></pre></div></div>
+
+<h3 id="lambda-functions-with-map-filter-and-reduce">Lambda Functions with map(), filter() and reduce()</h3>
+
+<p>Lambda functions are also called “anonymous functions” or “functions without name”. That means that you only use this type of functions when they are created. Lambda functions borrow their name from the lambda keyword in Python, which is used to declare these functions instead of the standard def keyword.</p>
+
+<p>You usually use these functions together with the <code class="highlighter-rouge">map()</code>, <code class="highlighter-rouge">filter()</code>, and <code class="highlighter-rouge">reduce()</code> functions.</p>
+
+<h3 id="replace-map-and-lambda-functions-with-list-comprehensions">Replace map() and Lambda Functions with List Comprehensions</h3>
+
+<h4 id="map-example">Map Example</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Initialize the `kilometer` list </span>
+<span class="n">kilometer</span> <span class="o">=</span> <span class="p">[</span><span class="mf">39.2</span><span class="p">,</span> <span class="mf">36.5</span><span class="p">,</span> <span class="mf">37.3</span><span class="p">,</span> <span class="mf">37.8</span><span class="p">]</span>
+
+<span class="c"># Construct `feet` with `map()`</span>
+<span class="n">feet</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="mf">3280.8399</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">kilometer</span><span class="p">)</span>
+
+<span class="c"># Print `feet` as a list </span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">feet</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">feet</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'map'&gt; [128608.92408000001, 119750.65635, 122375.32826999998, 124015.74822]
+</code></pre></div></div>
+
+<h4 id="list-comprehension-alternative-to-map">List Comprehension Alternative to Map</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Convert `kilometer` to `feet` </span>
+<span class="n">feet</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">kilometer</span><span class="p">:</span>
+    <span class="n">feet</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="mf">3280.8399</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">feet</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[128608.92408000001, 119750.65635, 122375.32826999998, 124015.74822]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Convert `kilometer` to `feet` </span>
+<span class="n">feet</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="mf">3280.8399</span><span class="p">)</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">kilometer</span><span class="p">]</span>
+
+<span class="c"># Print `feet`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">feet</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[128608.92408000001, 119750.65635, 122375.32826999998, 124015.74822]
+</code></pre></div></div>
+
+<h3 id="replace-filter-and-lambda-functions-with-list-comprehensions">Replace filter() and Lambda Functions with List Comprehensions</h3>
+
+<h4 id="filter-example">Filter Example</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Filter `feet` to only include uneven distances </span>
+<span class="n">uneven</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span><span class="p">,</span> <span class="n">feet</span><span class="p">)</span>
+
+<span class="c"># Check the type of `uneven`</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">uneven</span><span class="p">)</span>
+
+<span class="c"># Print `uneven` as a list</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">uneven</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[128608.92408000001, 119750.65635, 122375.32826999998, 124015.74822]
+</code></pre></div></div>
+
+<h4 id="list-comprehension-alternative-to-filter">List Comprehension Alternative to Filter</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Constructing `feet` </span>
+<span class="n">feet</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">feet</span><span class="p">]</span>
+
+<span class="c"># Print `feet`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">feet</span><span class="p">)</span>
+
+<span class="c"># Get all uneven distances</span>
+<span class="n">uneven</span> <span class="o">=</span> <span class="p">[</span><span class="bp">True</span> <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="mi">2</span> <span class="k">else</span> <span class="bp">False</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">feet</span><span class="p">]</span>
+
+<span class="c"># Print `uneven`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">uneven</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[128608, 119750, 122375, 124015]
+[False, False, True, True]
+</code></pre></div></div>
+
+<h3 id="replace-reduce-and-lambda-functions-with-list-comprehensions">Replace reduce() and Lambda Functions with List Comprehensions</h3>
+
+<h4 id="reduce-example">Reduce Example</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Import `reduce` from `functools` </span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
+
+<span class="c"># Reduce `feet` to `reduced_feet`</span>
+<span class="n">reduced_feet</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">,</span> <span class="n">feet</span><span class="p">)</span>
+
+<span class="c"># Print `reduced_feet`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">reduced_feet</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>494748
+</code></pre></div></div>
+
+<h4 id="list-comprehension-alternative-to-reduce">List Comprehension Alternative to Reduce</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Construct `reduced_feet`</span>
+<span class="n">reduced_feet</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="mf">3280.8399</span><span class="p">)</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">kilometer</span><span class="p">])</span>
+
+<span class="c"># Print `reduced_feet`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">reduced_feet</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>494750.65692000004
+</code></pre></div></div>
+
+<h2 id="list-comprehensions-with-conditionals">List Comprehensions with Conditionals</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Define `uneven`</span>
+<span class="n">uneven</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">feet</span> <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="c"># Print `uneven` </span>
+<span class="k">print</span><span class="p">(</span><span class="n">uneven</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[122375, 124015]
+</code></pre></div></div>
+
+<h2 id="multiple-if-conditions">Multiple If Conditions</h2>
+
+<h3 id="example">Example</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">divided</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">:</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="mi">6</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">divided</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">divided</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96]
+</code></pre></div></div>
+
+<h3 id="list-comprehension-alternative">List Comprehension Alternative</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">divided</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">6</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">divided</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96]
+</code></pre></div></div>
+
+<h2 id="ifelse-conditions">if…else Conditions</h2>
+
+<h3 id="example-1">Example</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">feet</span><span class="p">:</span>  
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">120000</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="n">x</span> <span class="o">+</span> <span class="mi">5</span>
+    <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[128608, 119750, 122375, 124015]
+</code></pre></div></div>
+
+<h3 id="list-comprehension-alternative-1">List Comprehension Alternative</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">120000</span> <span class="k">else</span> <span class="n">x</span><span class="o">+</span><span class="mi">5</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">feet</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[128609, 119755, 122376, 124016]
+</code></pre></div></div>
+
+<h2 id="nested-list-comprehensions">Nested List Comprehensions</h2>
+
+<p>Apart from conditionals, you can also adjust your list comprehensions by nesting them within other list comprehensions. This is handy when you want to work with lists of lists: generating lists of lists, transposing lists of lists or flattening lists of lists to regular lists, for example, becomes extremely easy with nested list comprehensions.</p>
+
+<p>You see that most of the keywords and elements that are used in the example of the nested list comprehension are similar to the ones that you used in the simple list comprehension examples:</p>
+
+<ul>
+  <li>Square brackets</li>
+  <li>Two for keywords, followed by a variable that symbolizes an item of the list of lists (x) and a list item of a nested list (y); And</li>
+  <li>Two in keywords, followed by a list of lists (list_of_list) and a list item (x).</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list_of_list</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list_of_list</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list_of_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list_of_list</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list_of_list</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list_of_list</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[1, 2, 3], [4, 5, 6], [7, 8]]
+[1, 2, 3]
+[4, 5, 6]
+5
+[7, 8]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Flatten `list_of_list`</span>
+<span class="n">flat</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">list_of_list</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+        <span class="n">flat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">flat</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[1, 2, 3, 4, 5, 6, 7, 8]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Flatten `list_of_list`</span>
+<span class="n">flat</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">list_of_list</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">flat</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[1, 2, 3, 4, 5, 6, 7, 8]
+</code></pre></div></div>
+
+<p>Let’s now consider another example, where you see that you can also use two pairs of square brackets to change the logic of your nested list comprehension:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]]</span>
+
+<span class="p">[[</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">))]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+</code></pre></div></div>
+
+<p>Now practice: rewrite the code chunk above to a nested for loop. If you need some pointers on how to tackle this exercise, go to one of the previous sections of this tutorial.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transposed</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">)):</span>
+     <span class="n">transposed_row</span> <span class="o">=</span> <span class="p">[]</span>
+     <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span><span class="p">:</span>
+            <span class="n">transposed_row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+     <span class="n">transposed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transposed_row</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">transposed</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+</code></pre></div></div>
+
+<p>You can also use nested list comprehensions when you need to create a list of lists that is actually a matrix. Check out the following example:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">matrix</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">nested</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">matrix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nested</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+        <span class="n">nested</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># rewritten as a list comprehension</span>
+<span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+<span class="n">matrix</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>

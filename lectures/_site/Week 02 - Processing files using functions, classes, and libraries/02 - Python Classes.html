@@ -1,0 +1,311 @@
+<h1 id="python-classes">Python Classes</h1>
+<p><a href="https://realpython.com/python3-object-oriented-programming/">Object-Oriented Programming (OOP) in Python</a></p>
+
+<h2 id="classes-in-python">Classes in Python</h2>
+
+<p>Focusing first on the data, each thing or object is an instance of some class.</p>
+
+<p>Classes are used to create new user-defined data structures that contain arbitrary information about something. In the case of an person, we could create a Person() class to track properties about the Person like the name and age.</p>
+
+<p>It’s important to note that a class just provides structure—it’s a blueprint for how something should be defined, but it doesn’t actually provide any real content itself. The Person() class may specify that the name and age are necessary for defining an person, but it will not actually state what a specific person’s name or age is.</p>
+
+<p>It may help to think of a class as an idea for how something should be defined.</p>
+
+<h2 id="python-objects-instances">Python Objects (Instances)</h2>
+
+<p>While the class is the blueprint, an instance is a copy of the class with actual values, literally an object belonging to a specific class. It’s not an idea anymore; it’s an actual person, like a person named Bill who’s twenty years old.</p>
+
+<p>Put another way, a class is like a form or questionnaire. It defines the needed information. After you fill out the form, your specific copy is an instance of the class; it contains actual information relevant to you.</p>
+
+<p>You can fill out multiple copies to create many different instances, but without the form as a guide, you would be lost, not knowing what information is required. Thus, before you can create individual instances of an object, we must first specify what is needed by defining a class.</p>
+
+<h2 id="how-to-define-a-class-in-python">How To Define a Class in Python</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+    <span class="k">pass</span>
+</code></pre></div></div>
+
+<h2 id="instance-attributes">Instance Attributes</h2>
+
+<p>All classes create objects, and all objects contain characteristics called attributes (referred to as properties in the opening paragraph). Use the <code class="highlighter-rouge">__init__()</code> method to initialize (e.g., specify) an object’s initial attributes by giving them their default value (or state). This method must have at least one argument as well as the self variable, which refers to the object itself (e.g., Person).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+    <span class="c"># Initializer / Instance Attributes</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+</code></pre></div></div>
+
+<p>In the case of our Person() class:</p>
+<ul>
+  <li>each person has a specific name and age, which is obviously important to know for when you start actually creating different persons. <em>Remember: the class is just for defining the Person, not actually creating instances of individual persons with specific names and ages; we’ll get to that shortly.</em></li>
+  <li>Similarly, the <code class="highlighter-rouge">self</code> variable is also an instance of the class. Since instances of a class have varying values we could state Person.name = name rather than self.name = name. But since not all persons share the same name, we need to be able to assign different values to different instances. Hence the need for the special self variable, which will help to keep track of individual instances of each class.</li>
+</ul>
+
+<p><em>Note: You will never have to call the <code class="highlighter-rouge">__init__()</code> method; it gets called automatically when you create a new ‘Person’ instance.</em></p>
+
+<h2 id="class-attributes">Class Attributes</h2>
+
+<p>While instance attributes are specific to each object, class attributes are the same for all instances—which in this case is all persons. So while each person has a unique name and age, every person is a homo sapien.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+    
+    <span class="c"># Class Attribute</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="s">'homo sapien'</span>
+
+    <span class="c"># Initializer / Instance Attributes</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+</code></pre></div></div>
+
+<h2 id="instantiating-objects">Instantiating Objects</h2>
+
+<p>Instantiating is a fancy term for creating a new, unique instance of a class.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+    <span class="k">pass</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'a is type'</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="s">'value'</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'b is type'</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="s">'value'</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">b</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a is type &lt;class '__main__.Animal'&gt; value &lt;__main__.Animal object at 0x10f6547b8&gt;
+b is type &lt;class '__main__.Animal'&gt; value &lt;__main__.Animal object at 0x10f6547f0&gt;
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instantiate the Person object</span>
+<span class="n">ben</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s">"Ben"</span><span class="p">,</span> <span class="mi">37</span><span class="p">)</span>
+<span class="n">geno</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s">"Geno"</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+
+<span class="c"># Access the instance attributes</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"{ben.name} is {ben.age} and {geno.name} is {geno.age}."</span><span class="p">)</span>
+
+<span class="c"># Is Ben a mammal?</span>
+<span class="k">if</span> <span class="n">ben</span><span class="o">.</span><span class="n">species</span> <span class="o">==</span> <span class="s">"homo sapien"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"{ben.name} is a {ben.species}!"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Ben is 37 and Geno is 32.
+Ben is a homo sapien!
+</code></pre></div></div>
+
+<h2 id="instance-methods">Instance Methods</h2>
+
+<p>Instance methods are defined inside a class and are used to get the contents of an instance. They can also be used to perform operations with the attributes of our objects. Like the <code class="highlighter-rouge">__init__</code> method, the first argument is always self:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+    <span class="c"># Class Attribute</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="s">'mammal'</span>
+
+    <span class="c"># Initializer / Instance Attributes</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="c"># instance method</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">"{} is {} years old"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>
+
+    <span class="c"># instance method</span>
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sound</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">"{} says {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">sound</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instantiate the Dog object</span>
+<span class="n">mikey</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s">"Mikey"</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># call our instance methods</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mikey</span><span class="o">.</span><span class="n">description</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mikey</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="s">"Gruff Gruff"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Mikey is 6 years old
+Mikey says Gruff Gruff
+</code></pre></div></div>
+
+<h3 id="modifying-attributes">Modifying Attributes</h3>
+
+<p>You can change the value of attributes based on some behavior:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Email</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_sent</span> <span class="o">=</span> <span class="bp">False</span>
+    
+    <span class="k">def</span> <span class="nf">send_email</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_sent</span> <span class="o">=</span> <span class="bp">True</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_email</span> <span class="o">=</span> <span class="n">Email</span><span class="p">()</span>
+<span class="n">my_email</span><span class="o">.</span><span class="n">is_sent</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_email</span><span class="o">.</span><span class="n">send_email</span><span class="p">()</span>
+<span class="n">my_email</span><span class="o">.</span><span class="n">is_sent</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<h2 id="python-object-inheritance">Python Object Inheritance</h2>
+
+<p>Inheritance is the process by which one class takes on the attributes and methods of another. Newly formed classes are called child classes, and the classes that child classes are derived from are called parent classes.</p>
+
+<p>It’s important to note that child classes override or extend the functionality (e.g., attributes and behaviors) of parent classes. In other words, child classes inherit all of the parent’s attributes and behaviors but can also specify different behavior to follow. The most basic type of class is an object, which generally all other classes inherit as their parent.</p>
+
+<h2 id="dog-park-example"><a href="https://realpython.com/python3-object-oriented-programming/">Dog Park Example</a></h2>
+
+<p>Let’s pretend that we’re at a dog park. There are multiple Dog objects engaging in Dog behaviors, each with different attributes. In regular-speak that means some dogs are running, while some are stretching and some are just watching other dogs. Furthermore, each dog has been named by its owner and, since each dog is living and breathing, each ages.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">breed</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breed</span> <span class="o">=</span> <span class="n">breed</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">spencer</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s">"German Shepard"</span><span class="p">)</span>
+<span class="n">spencer</span><span class="o">.</span><span class="n">breed</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'German Shepard'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sara</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s">"Boston Terrier"</span><span class="p">)</span>
+<span class="n">sara</span><span class="o">.</span><span class="n">breed</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'Boston Terrier'
+</code></pre></div></div>
+
+<h3 id="extending-the-functionality-of-a-parent-class">Extending the Functionality of a Parent Class</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Parent class</span>
+<span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+
+    <span class="c"># Class attribute</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="s">'mammal'</span>
+
+    <span class="c"># Initializer / Instance attributes</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="c"># instance method</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">"{} is {} years old"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>
+
+    <span class="c"># instance method</span>
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sound</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">"{} says {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">sound</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Child class (inherits from Dog class)</span>
+<span class="k">class</span> <span class="nc">RussellTerrier</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">"{} runs {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Child class (inherits from Dog class)</span>
+<span class="k">class</span> <span class="nc">Bulldog</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">"{} runs {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Child classes inherit attributes and</span>
+<span class="c"># behaviors from the parent class</span>
+<span class="n">jim</span> <span class="o">=</span> <span class="n">Bulldog</span><span class="p">(</span><span class="s">"Jim"</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">jim</span><span class="o">.</span><span class="n">description</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Jim is 12 years old
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Child classes have specific attributes</span>
+<span class="c"># and behaviors as well</span>
+<span class="k">print</span><span class="p">(</span><span class="n">jim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s">"slowly"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Jim runs slowly
+</code></pre></div></div>
+
+<h2 id="parent-vs-child-classes">Parent vs. Child Classes</h2>
+
+<p>The <code class="highlighter-rouge">isinstance()</code> function is used to determine if an instance is also an instance of a certain parent class.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Child classes inherit attributes and</span>
+<span class="c"># behaviors from the parent class</span>
+<span class="n">jim</span> <span class="o">=</span> <span class="n">Bulldog</span><span class="p">(</span><span class="s">"Jim"</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+
+<span class="c"># Is jim an instance of Dog()?</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">jim</span><span class="p">,</span> <span class="n">Dog</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">jim</span><span class="p">,</span> <span class="n">Bulldog</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">jim</span><span class="p">,</span> <span class="n">RussellTerrier</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<h2 id="overriding-the-functionality-of-a-parent-class">Overriding the Functionality of a Parent Class</h2>
+
+<p>Remember that child classes can also override attributes and behaviors from the parent class. For examples:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">FrenchBulldog</span><span class="p">(</span><span class="n">Bulldog</span><span class="p">):</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="s">'french bulldog'</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sleepy</span> <span class="o">=</span> <span class="n">FrenchBulldog</span><span class="p">(</span><span class="s">'sleepy'</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">sleepy</span><span class="o">.</span><span class="n">species</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>french bulldog
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">sleepy</span><span class="p">,</span> <span class="n">Bulldog</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">sleepy</span><span class="p">,</span> <span class="n">FrenchBulldog</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>

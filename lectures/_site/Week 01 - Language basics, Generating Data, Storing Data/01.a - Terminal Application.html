@@ -1,0 +1,150 @@
+<h1 id="basic-terminal-apps">Basic Terminal Apps</h1>
+
+<p><a href="http://introtopython.org/terminal_apps.html">Basic Terminal Apps</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Show a simple message</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'hello class'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hello class
+</code></pre></div></div>
+
+<h2 id="print-a-title-bar">Print a title bar</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c"># Display a title bar.</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"**********************************************"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"***  Hello to everyone in class today!     ***"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"**********************************************"</span><span class="p">)</span>
+
+<span class="c"># Display a bunch of output, representing a long-running program.</span>
+<span class="k">for</span> <span class="n">week</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"We will learn interesting things in Week {week:02}"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"We will learn interesting things in Week {week:02}"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**********************************************
+***  Hello to everyone in class today!     ***
+**********************************************
+We will learn interesting things in Week 01
+We will learn interesting things in Week 01
+We will learn interesting things in Week 02
+We will learn interesting things in Week 02
+We will learn interesting things in Week 03
+We will learn interesting things in Week 03
+We will learn interesting things in Week 04
+We will learn interesting things in Week 04
+We will learn interesting things in Week 05
+We will learn interesting things in Week 05
+We will learn interesting things in Week 06
+We will learn interesting things in Week 06
+We will learn interesting things in Week 07
+We will learn interesting things in Week 07
+</code></pre></div></div>
+
+<h2 id="the-sleep-function">The sleep function</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+<span class="c"># Display a title bar.</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"**********************************************"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"***  Hello to everyone in class today!     ***"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"**********************************************"</span><span class="p">)</span>
+
+<span class="c"># Display a bunch of output, representing a long-running program.</span>
+<span class="k">for</span> <span class="n">week</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"We will learn interesting things in Week {week:02}"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**********************************************
+***  Hello to everyone in class today!     ***
+**********************************************
+We will learn interesting things in Week 01
+We will learn interesting things in Week 02
+We will learn interesting things in Week 03
+We will learn interesting things in Week 04
+We will learn interesting things in Week 05
+We will learn interesting things in Week 06
+We will learn interesting things in Week 07
+</code></pre></div></div>
+
+<h2 id="accepting-arguments">Accepting arguments</h2>
+
+<p>You can pass arguments into your application to dynamically change the behavior at run time.</p>
+
+<p>See <a href="terminal_1.py">terminal_1.py</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+<span class="n">adjective</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">num_weeks</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    
+<span class="k">print</span><span class="p">(</span><span class="s">"**********************************************"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"***  Hello to everyone in class today!     ***"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"**********************************************"</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">week</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_weeks</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"We will learn {adjective} things in Week {week:02}"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Note:</p>
+<ul>
+  <li>sys.argv[1] is the 1st parameter passed in.</li>
+  <li>sys.argv[0] represents the path of the file being run</li>
+  <li>all arguments are strings by default, you can cast these to other data types</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">terminal_1</span><span class="o">.</span><span class="n">py</span> <span class="n">fun</span> <span class="mi">3</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**********************************************
+***  Hello to everyone in class today!     ***
+**********************************************
+We will learn fun things in Week 01
+We will learn fun things in Week 02
+We will learn fun things in Week 03
+</code></pre></div></div>
+
+<p>Here we slightly modify the code to process a list of arguments. Since all arguments are strings we’ll pass in a comma separated list of values.</p>
+
+<p>See <a href="terminal_2.py">terminal_2.py</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+<span class="n">adjectives</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+<span class="k">print</span><span class="p">(</span><span class="s">"**********************************************"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"***  Hello to everyone in class today!     ***"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"**********************************************"</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">week</span><span class="p">,</span> <span class="n">adjective</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">adjectives</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">','</span><span class="p">)):</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"We will learn {adjective} things in Week {(week + 1):02}"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Note:</p>
+<ul>
+  <li>adjectives is a string which we’ll split on commas to create a list</li>
+  <li>we use enumerate to keep track of the index we’re currently processing</li>
+  <li>since index is zero based, we’ll add 1 in the print statement to associate the index with the correct week</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">terminal_2</span><span class="o">.</span><span class="n">py</span> <span class="s">"fun,interesting,exciting"</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**********************************************
+***  Hello to everyone in class today!     ***
+**********************************************
+We will learn fun things in Week 01
+We will learn interesting things in Week 02
+We will learn exciting things in Week 03
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>

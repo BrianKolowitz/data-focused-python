@@ -1,0 +1,154 @@
+<h1 id="python-dictionaries">Python Dictionaries</h1>
+<p><a href="https://www.datacamp.com/community/tutorials/python-dictionary-tutorial">Python Dictionary Tutorial</a></p>
+
+<p>A dictionary in Python is a collection of items accessed by a specific key rather than by index. What does this mean?</p>
+
+<p>Imagine a dictionary in the real world… when you need to look up the meaning of a word, you try to find the meaning using the word itself and not the possible index of the word. Python dictionaries work with the same concept, the word whose meaning you are looking for is the key and the meaning of the word is the value, you do not need to know the index of the word in a dictionary to find its meaning.</p>
+
+<p>Note: The keys in a dictionary have to be hashable.</p>
+
+<p>Hashing is the process of running an item through a specific kind of function. This function is called a “hash function”. This hash function returns a unique output for a unique input value. Integers, floating point numbers, strings, tuples, and frozensets are hashable. While lists, dictionaries, and sets other than frozensets are not. Hashing is a somewhat complex topic and this is only the basic concept behind hashing.</p>
+
+<p>You can initialize a dictionary in Python a <a href="https://thispointer.com/python-6-different-ways-to-create-dictionaries/">variety of ways</a>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Creating an empty dict using empty brackets</span>
+<span class="n">word_frequency</span> <span class="o">=</span> <span class="p">{}</span>
+ 
+<span class="c"># Creating an empty dict using dict()</span>
+<span class="n">word_frequency</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">word_frequency</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Creating Dictionaries with literals</span>
+<span class="n">word_frequency</span> <span class="o">=</span> <span class="p">{</span>
+<span class="s">"Hello"</span> <span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+<span class="s">"hi"</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+<span class="s">"there"</span> <span class="p">:</span> <span class="mi">45</span><span class="p">,</span>
+<span class="s">"at"</span> <span class="p">:</span> <span class="mi">23</span><span class="p">,</span>
+<span class="s">"this"</span> <span class="p">:</span> <span class="mi">77</span>
+<span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">word_frequency</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'Hello': 7, 'hi': 10, 'there': 45, 'at': 23, 'this': 77}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Creating Dictionaries by passing parametrs in dict constructor</span>
+<span class="n">word_frequency</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">Hello</span> <span class="o">=</span>  <span class="mi">7</span><span class="p">,</span> 
+                     <span class="n">hi</span>    <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                     <span class="n">there</span>  <span class="o">=</span> <span class="mi">45</span><span class="p">,</span>
+                     <span class="n">at</span>    <span class="o">=</span> <span class="mi">23</span><span class="p">,</span>
+                     <span class="n">this</span>  <span class="o">=</span> <span class="mi">77</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">word_frequency</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'Hello': 7, 'hi': 10, 'there': 45, 'at': 23, 'this': 77}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Creating dictionaries with a List of tuples    </span>
+<span class="n">list_of_tuples</span> <span class="o">=</span> <span class="p">[(</span><span class="s">"Hello"</span> <span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s">"hi"</span> <span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s">"there"</span> <span class="p">,</span> <span class="mi">45</span><span class="p">),(</span><span class="s">"at"</span> <span class="p">,</span> <span class="mi">23</span><span class="p">),(</span><span class="s">"this"</span> <span class="p">,</span> <span class="mi">77</span><span class="p">)]</span>
+<span class="n">word_frequency</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">list_of_tuples</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">word_frequency</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'Hello': 7, 'hi': 10, 'there': 45, 'at': 23, 'this': 77}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># create and Initialize a dictionary by this list elements as keys and with same value 0</span>
+<span class="n">list_of_strings</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Hello"</span><span class="p">,</span> <span class="s">"hi"</span><span class="p">,</span> <span class="s">"there"</span><span class="p">,</span> <span class="s">"at"</span><span class="p">,</span> <span class="s">"this"</span><span class="p">]</span>
+<span class="n">word_frequency</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">list_of_strings</span><span class="p">,</span><span class="mi">0</span> <span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">word_frequency</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'Hello': 0, 'hi': 0, 'there': 0, 'at': 0, 'this': 0}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Creating a Dictionary by a two lists</span>
+<span class="n">list_of_strings</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Hello"</span><span class="p">,</span> <span class="s">"hi"</span><span class="p">,</span> <span class="s">"there"</span><span class="p">,</span> <span class="s">"at"</span><span class="p">,</span> <span class="s">"this"</span><span class="p">]</span>
+<span class="n">list_of_ints</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">101</span><span class="p">]</span>
+<span class="c"># Merge the two lists to create a dictionary</span>
+<span class="n">word_frequency</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">list_of_strings</span><span class="p">,</span> <span class="n">list_of_ints</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">word_frequency</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'Hello': 7, 'hi': 10, 'there': 45, 'at': 23, 'this': 77}
+</code></pre></div></div>
+
+<p>You can then access the values by specifying the dictionary key</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># or this way</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="s">'apple'</span><span class="p">:</span> <span class="s">'fruit'</span><span class="p">,</span> <span class="s">'beetroot'</span><span class="p">:</span> <span class="s">'vegetable'</span><span class="p">,</span> <span class="s">'cake'</span><span class="p">:</span> <span class="s">'dessert'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="s">'apple'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fruit
+</code></pre></div></div>
+
+<p>The items in a dictionary can have any data type. Check out some more examples of a dictionary to get a hang of it:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="s">'one'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">'two'</span><span class="p">:</span> <span class="s">'to'</span><span class="p">,</span> <span class="s">'three'</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s">'four'</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mf">4.0</span><span class="p">]}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'one': 1, 'two': 'to', 'three': 3.0, 'four': [4, 4.0]}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Update a dictionary</span>
+<span class="n">a</span><span class="p">[</span><span class="s">'one'</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> 
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'one': 1.0, 'two': 'to', 'three': 3.0, 'four': [4, 4.0]}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Delete a single element</span>
+<span class="k">del</span> <span class="n">a</span><span class="p">[</span><span class="s">'one'</span><span class="p">]</span> 
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'two': 'to', 'three': 3.0, 'four': [4, 4.0]}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Delete all elements in the dictionary</span>
+<span class="n">a</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Delete the dictionary</span>
+<span class="k">del</span> <span class="n">a</span> 
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
+
+NameError                                 Traceback (most recent call last)
+
+&lt;ipython-input-13-34aa67d4dc63&gt; in &lt;module&gt;
+      1 # Delete the dictionary
+      2 del a
+----&gt; 3 print(a)
+
+
+NameError: name 'a' is not defined
+</code></pre></div></div>
+
+<p>It is important to remember is that a key has to be unique in a dictionary, no duplicates are allowed. However, in case of duplicate keys rather than giving an error, Python will take the last instance of the key to be valid and simply ignore the first key-value pair.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sweet_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s">'a1'</span><span class="p">:</span> <span class="s">'cake'</span><span class="p">,</span> <span class="s">'a2'</span><span class="p">:</span><span class="s">'cookie'</span><span class="p">,</span> <span class="s">'a1'</span><span class="p">:</span> <span class="s">'icecream'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sweet_dict</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sweet_dict</span><span class="p">[</span><span class="s">'a1'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'a1': 'icecream', 'a2': 'cookie'}
+icecream
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>

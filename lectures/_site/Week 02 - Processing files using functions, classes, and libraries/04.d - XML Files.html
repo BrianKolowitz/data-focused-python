@@ -1,0 +1,189 @@
+<h1 id="xml-files">XML Files</h1>
+<p><a href="https://www.datacamp.com/community/tutorials/python-xml-elementtree">Python XML with ElementTree: Beginner’s Guide</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># scores dictionary</span>
+<span class="n">scores_xml</span> <span class="o">=</span> <span class="s">"""
+&lt;?xml version="1.0"?&gt;
+&lt;scores&gt;
+    &lt;score&gt;
+        &lt;date&gt;2019-05-01&lt;/date&gt;
+        &lt;home-team&gt;Pirates&lt;/home-team&gt;
+        &lt;home-score&gt;0&lt;/home-score&gt;
+        &lt;away-team&gt;Cubs&lt;/away-team&gt;
+        &lt;away-score&gt;10&lt;/away-score&gt;
+    &lt;/score&gt;
+    &lt;score&gt;
+        &lt;date&gt;2019-05-15&lt;/date&gt;
+        &lt;home-team&gt;Reds&lt;/home-team&gt;
+        &lt;home-score&gt;7&lt;/home-score&gt;
+        &lt;away-team&gt;Pirates&lt;/away-team&gt;
+        &lt;away-score&gt;0&lt;/away-score&gt;
+    &lt;/score&gt;
+&lt;/scores&gt;
+"""</span>
+<span class="k">print</span><span class="p">(</span><span class="n">scores_xml</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;scores&gt;</span>
+    <span class="nt">&lt;score&gt;</span>
+        <span class="nt">&lt;date&gt;</span>2019-05-01<span class="nt">&lt;/date&gt;</span>
+        <span class="nt">&lt;home-team&gt;</span>Pirates<span class="nt">&lt;/home-team&gt;</span>
+        <span class="nt">&lt;home-score&gt;</span>0<span class="nt">&lt;/home-score&gt;</span>
+        <span class="nt">&lt;away-team&gt;</span>Cubs<span class="nt">&lt;/away-team&gt;</span>
+        <span class="nt">&lt;away-score&gt;</span>10<span class="nt">&lt;/away-score&gt;</span>
+    <span class="nt">&lt;/score&gt;</span>
+    <span class="nt">&lt;score&gt;</span>
+        <span class="nt">&lt;date&gt;</span>2019-05-15<span class="nt">&lt;/date&gt;</span>
+        <span class="nt">&lt;home-team&gt;</span>Reds<span class="nt">&lt;/home-team&gt;</span>
+        <span class="nt">&lt;home-score&gt;</span>7<span class="nt">&lt;/home-score&gt;</span>
+        <span class="nt">&lt;away-team&gt;</span>Pirates<span class="nt">&lt;/away-team&gt;</span>
+        <span class="nt">&lt;away-score&gt;</span>0<span class="nt">&lt;/away-score&gt;</span>
+    <span class="nt">&lt;/score&gt;</span>
+<span class="nt">&lt;/scores&gt;</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scores_xsd</span> <span class="o">=</span> <span class="s">"""
+&lt;xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;xs:element name="scores"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:sequence&gt;
+        &lt;xs:element name="score" maxOccurs="unbounded" minOccurs="0"&gt;
+          &lt;xs:complexType&gt;
+            &lt;xs:sequence&gt;
+              &lt;xs:element type="xs:date" name="date"/&gt;
+              &lt;xs:element type="xs:string" name="home-team"/&gt;
+              &lt;xs:element type="xs:int" name="home-score"/&gt;
+              &lt;xs:element type="xs:string" name="away-team"/&gt;
+              &lt;xs:element type="xs:int" name="away-score"/&gt;
+            &lt;/xs:sequence&gt;
+          &lt;/xs:complexType&gt;
+        &lt;/xs:element&gt;
+      &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+&lt;/xs:schema&gt;
+"""</span>
+<span class="k">print</span><span class="p">(</span><span class="n">scores_xsd</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;xs:element name="scores"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:sequence&gt;
+        &lt;xs:element name="score" maxOccurs="unbounded" minOccurs="0"&gt;
+          &lt;xs:complexType&gt;
+            &lt;xs:sequence&gt;
+              &lt;xs:element type="xs:date" name="date"/&gt;
+              &lt;xs:element type="xs:string" name="home-team"/&gt;
+              &lt;xs:element type="xs:int" name="home-score"/&gt;
+              &lt;xs:element type="xs:string" name="away-team"/&gt;
+              &lt;xs:element type="xs:int" name="away-score"/&gt;
+            &lt;/xs:sequence&gt;
+          &lt;/xs:complexType&gt;
+        &lt;/xs:element&gt;
+      &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+&lt;/xs:schema&gt;
+</code></pre></div></div>
+
+<h2 id="parsing-using-elementtree">Parsing using ElementTree</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="n">ET</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">'scores.xml'</span><span class="p">)</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scores
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation': 'scores.xsd'}
+</code></pre></div></div>
+
+<h3 id="for-loops">for loops</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">root</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="n">child</span><span class="o">.</span><span class="n">attrib</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>score {}
+score {}
+</code></pre></div></div>
+
+<p>Typically it is helpful to know all the elements in the entire tree. A useful function for doing that is <code class="highlighter-rouge">root.iter()</code>. You can put this function into a “for” loop and it will iterate over the entire tree.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="nb">iter</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">elem</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scores
+score
+date
+home-team
+home-score
+away-team
+away-score
+score
+date
+home-team
+home-score
+away-team
+away-score
+</code></pre></div></div>
+
+<p>If you need to print the entire string you can use ElementTree.tostring(). However, you must specify both the encoding and decoding of the document you are displaying as the string because ElementTree is a powerful library that can interpret more than just XML, For XMLs, use <strong>utf8</strong> - this is the typical document format type for an XML.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">ET</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'utf8'</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='utf8'?&gt;</span>
+<span class="nt">&lt;scores</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="na">xsi:noNamespaceSchemaLocation=</span><span class="s">"scores.xsd"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;score&gt;</span>
+        <span class="nt">&lt;date&gt;</span>2019-05-01<span class="nt">&lt;/date&gt;</span>
+        <span class="nt">&lt;home-team&gt;</span>Pirates<span class="nt">&lt;/home-team&gt;</span>
+        <span class="nt">&lt;home-score&gt;</span>0<span class="nt">&lt;/home-score&gt;</span>
+        <span class="nt">&lt;away-team&gt;</span>Cubs<span class="nt">&lt;/away-team&gt;</span>
+        <span class="nt">&lt;away-score&gt;</span>10<span class="nt">&lt;/away-score&gt;</span>
+    <span class="nt">&lt;/score&gt;</span>
+    <span class="nt">&lt;score&gt;</span>
+        <span class="nt">&lt;date&gt;</span>2019-05-15<span class="nt">&lt;/date&gt;</span>
+        <span class="nt">&lt;home-team&gt;</span>Reds<span class="nt">&lt;/home-team&gt;</span>
+        <span class="nt">&lt;home-score&gt;</span>7<span class="nt">&lt;/home-score&gt;</span>
+        <span class="nt">&lt;away-team&gt;</span>Pirates<span class="nt">&lt;/away-team&gt;</span>
+        <span class="nt">&lt;away-score&gt;</span>0<span class="nt">&lt;/away-score&gt;</span>
+    <span class="nt">&lt;/score&gt;</span>
+<span class="nt">&lt;/scores&gt;</span>
+</code></pre></div></div>
+
+<h3 id="iterating-over-specific-elements">Iterating over specific elements</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">game_date</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="nb">iter</span><span class="p">(</span><span class="s">'date'</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">game_date</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2019-05-01
+2019-05-15
+</code></pre></div></div>
+
+<h3 id="xpath-expressions">XPath Expressions</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">'./score[date="2019-05-01"]/date'</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">score</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2019-05-01
+</code></pre></div></div>
+
+<h2 id="writing-xml-files">Writing xml files</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tree</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">"scores2.xml"</span><span class="p">)</span>
+</code></pre></div></div>

@@ -1,0 +1,155 @@
+<h1 id="json-files">JSON Files</h1>
+<p><a href="https://realpython.com/python-json/">Working With JSON Data in Python</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="c"># scores dictionary</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'scores'</span><span class="p">:[</span>
+        <span class="p">{</span>
+            <span class="s">'date'</span><span class="p">:</span> <span class="s">'2019-05-01'</span><span class="p">,</span> 
+            <span class="s">'home_team'</span><span class="p">:</span> <span class="s">'Pirates'</span><span class="p">,</span> 
+            <span class="s">'home_score'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> 
+            <span class="s">'away_team'</span><span class="p">:</span> <span class="s">'Cubs'</span><span class="p">,</span> 
+            <span class="s">'away_score'</span><span class="p">:</span> <span class="mi">10</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s">'date'</span><span class="p">:</span> <span class="s">'2019-05-15'</span><span class="p">,</span> 
+            <span class="s">'home_team'</span><span class="p">:</span> <span class="s">'Reds'</span><span class="p">,</span> 
+            <span class="s">'home_score'</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> 
+            <span class="s">'away_team'</span><span class="p">:</span> <span class="s">'Pirates'</span><span class="p">,</span> 
+            <span class="s">'away_score'</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'scores': [{'away_score': 10,
+             'away_team': 'Cubs',
+             'date': '2019-05-01',
+             'home_score': 0,
+             'home_team': 'Pirates'},
+            {'away_score': 0,
+             'away_team': 'Pirates',
+             'date': '2019-05-15',
+             'home_score': 7,
+             'home_team': 'Reds'}]}
+</code></pre></div></div>
+
+<h2 id="python-serialization">Python Serialization</h2>
+
+<p>In this instance, serialization is the process of converting the python objects to JSON. Python object types get serialized to the following JSON types.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Python</th>
+      <th>JSON</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>dict</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <td>list, tuple</td>
+      <td>array</td>
+    </tr>
+    <tr>
+      <td>str</td>
+      <td>string</td>
+    </tr>
+    <tr>
+      <td>int, long, float</td>
+      <td>number</td>
+    </tr>
+    <tr>
+      <td>True</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>False</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>None</td>
+      <td>null</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+
+<span class="n">scores_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">scores_json</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'scores': [{'away_score': 10,
+             'away_team': 'Cubs',
+             'date': '2019-05-01',
+             'home_score': 0,
+             'home_team': 'Pirates'},
+            {'away_score': 0,
+             'away_team': 'Pirates',
+             'date': '2019-05-15',
+             'home_score': 7,
+             'home_team': 'Reds'}]}
+('{"scores": [{"date": "2019-05-01", "home_team": "Pirates", "home_score": 0, '
+ '"away_team": "Cubs", "away_score": 10}, {"date": "2019-05-15", "home_team": '
+ '"Reds", "home_score": 7, "away_team": "Pirates", "away_score": 0}]}')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># changing whitespace</span>
+<span class="n">scores_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">scores_json</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+    "scores": [
+        {
+            "date": "2019-05-01",
+            "home_team": "Pirates",
+            "home_score": 0,
+            "away_team": "Cubs",
+            "away_score": 10
+        },
+        {
+            "date": "2019-05-15",
+            "home_team": "Reds",
+            "home_score": 7,
+            "away_team": "Pirates",
+            "away_score": 0
+        }
+    ]
+}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># compacting</span>
+<span class="n">scores_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s">', '</span><span class="p">,</span> <span class="s">':'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">scores_json</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"scores":[{"date":"2019-05-01", "home_team":"Pirates", "home_score":0, "away_team":"Cubs", "away_score":10}, {"date":"2019-05-15", "home_team":"Reds", "home_score":7, "away_team":"Pirates", "away_score":0}]}
+</code></pre></div></div>
+
+<h2 id="writing-json-files">Writing JSON files</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"scores.json"</span><span class="p">,</span> <span class="s">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="reading-json-files">Reading JSON files</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># open and print line by line</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'scores.json'</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'scores': [{'date': '2019-05-01', 'home_team': 'Pirates', 'home_score': 0, 'away_team': 'Cubs', 'away_score': 10}, {'date': '2019-05-15', 'home_team': 'Reds', 'home_score': 7, 'away_team': 'Pirates', 'away_score': 0}]}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>

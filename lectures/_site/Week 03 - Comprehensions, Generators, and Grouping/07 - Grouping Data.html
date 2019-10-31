@@ -1,0 +1,724 @@
+<h1 id="grouping-data-using-python">Grouping data using python</h1>
+
+<p>In this tutorial we’re going to learn how to use basic python funtionality to group datasets.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># recall, opening the file and reading the data</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reader</span><span class="p">):</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">break</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OrderedDict([('Id', 'c09181f8-6526-4de7-87c7-25c95ccdbdea'),
+             ('BIRTHDATE', '2014-06-06'),
+             ('DEATHDATE', ''),
+             ('SSN', '999-26-1662'),
+             ('DRIVERS', ''),
+             ('PASSPORT', ''),
+             ('PREFIX', ''),
+             ('FIRST', 'Lizbeth716'),
+             ('LAST', 'Hackett68'),
+             ('SUFFIX', ''),
+             ('MAIDEN', ''),
+             ('MARITAL', ''),
+             ('RACE', 'white'),
+             ('ETHNICITY', 'irish'),
+             ('GENDER', 'F'),
+             ('BIRTHPLACE', 'Denver  Pennsylvania  US'),
+             ('ADDRESS', '742 Parisian Run Suite 87'),
+             ('CITY', 'Pittsburgh'),
+             ('STATE', 'Pennsylvania'),
+             ('ZIP', '15106')])
+OrderedDict([('Id', '8d1c4f3b-3d44-4daf-8962-cc260bad8c87'),
+             ('BIRTHDATE', '1969-05-10'),
+             ('DEATHDATE', ''),
+             ('SSN', '999-64-1895'),
+             ('DRIVERS', 'S99989200'),
+             ('PASSPORT', 'X16155415X'),
+             ('PREFIX', 'Mrs.'),
+             ('FIRST', 'Augustine565'),
+             ('LAST', 'Conroy74'),
+             ('SUFFIX', ''),
+             ('MAIDEN', 'Cremin516'),
+             ('MARITAL', 'M'),
+             ('RACE', 'asian'),
+             ('ETHNICITY', 'asian_indian'),
+             ('GENDER', 'F'),
+             ('BIRTHPLACE', 'Unityship  Pennsylvania  US'),
+             ('ADDRESS', '931 Watsica Lock'),
+             ('CITY', 'Pittsburgh'),
+             ('STATE', 'Pennsylvania'),
+             ('ZIP', '15106')])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># then we're going to parse out a group, e.g. Gender</span>
+<span class="c"># recall, opening the file and reading the data</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reader</span><span class="p">):</span>
+        <span class="n">patient_gender</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s">'GENDER'</span><span class="p">]</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">patient_gender</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">break</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>F
+F
+M
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># how do we know what the unique genders are?</span>
+<span class="c"># let's iterate over them and create a set</span>
+<span class="n">patient_genders</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reader</span><span class="p">):</span>
+        <span class="n">patient_gender</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s">'GENDER'</span><span class="p">]</span>
+        <span class="n">patient_genders</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">patient_gender</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">patient_genders</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'M', 'F'}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># okay, we have 2 genders let's create 2 lists</span>
+<span class="n">male_patients</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">female_patients</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reader</span><span class="p">):</span>
+        <span class="n">patient_gender</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s">'GENDER'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">patient_gender</span> <span class="o">==</span> <span class="s">'M'</span><span class="p">:</span>
+            <span class="n">male_patients</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">patient_gender</span> <span class="o">==</span> <span class="s">'F'</span><span class="p">:</span>
+            <span class="n">female_patients</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">'Unknown Gender'</span><span class="p">)</span>
+
+<span class="n">pprint</span><span class="p">(</span><span class="n">male_patients</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">female_patients</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OrderedDict([('Id', 'cb115d2a-56b5-42a7-bf64-0362505df9f2'),
+             ('BIRTHDATE', '1969-05-30'),
+             ('DEATHDATE', ''),
+             ('SSN', '999-28-4068'),
+             ('DRIVERS', 'S99947751'),
+             ('PASSPORT', 'X52116181X'),
+             ('PREFIX', 'Mr.'),
+             ('FIRST', 'Rhett759'),
+             ('LAST', 'Mosciski958'),
+             ('SUFFIX', ''),
+             ('MAIDEN', ''),
+             ('MARITAL', 'M'),
+             ('RACE', 'asian'),
+             ('ETHNICITY', 'chinese'),
+             ('GENDER', 'M'),
+             ('BIRTHPLACE',
+              "Macau  Macao Special Administrative Region of the People's "
+              'Republic of China  CN'),
+             ('ADDRESS', '370 Gleichner Parade'),
+             ('CITY', 'Pittsburgh'),
+             ('STATE', 'Pennsylvania'),
+             ('ZIP', '15106')])
+OrderedDict([('Id', 'c09181f8-6526-4de7-87c7-25c95ccdbdea'),
+             ('BIRTHDATE', '2014-06-06'),
+             ('DEATHDATE', ''),
+             ('SSN', '999-26-1662'),
+             ('DRIVERS', ''),
+             ('PASSPORT', ''),
+             ('PREFIX', ''),
+             ('FIRST', 'Lizbeth716'),
+             ('LAST', 'Hackett68'),
+             ('SUFFIX', ''),
+             ('MAIDEN', ''),
+             ('MARITAL', ''),
+             ('RACE', 'white'),
+             ('ETHNICITY', 'irish'),
+             ('GENDER', 'F'),
+             ('BIRTHPLACE', 'Denver  Pennsylvania  US'),
+             ('ADDRESS', '742 Parisian Run Suite 87'),
+             ('CITY', 'Pittsburgh'),
+             ('STATE', 'Pennsylvania'),
+             ('ZIP', '15106')])
+</code></pre></div></div>
+
+<h2 id="can-we-do-better">Can we do better?</h2>
+
+<p>What’s wrong with the code above?</p>
+
+<ol>
+  <li>Multiple iterations over the file</li>
+  <li>Brittle… not resilient to new genders</li>
+</ol>
+
+<p>What can we do?</p>
+
+<ol>
+  <li>Use a dictionary to store the groupings</li>
+  <li>Make the code case insensitive</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># patients by gender</span>
+<span class="n">patients_by_gender</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">patients_by_gender</span><span class="p">[</span><span class="s">'F'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">'patient1'</span><span class="p">,</span> <span class="s">'patient3'</span><span class="p">]</span>
+<span class="n">patients_by_gender</span><span class="p">[</span><span class="s">'M'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">'patient2'</span><span class="p">,</span> <span class="s">'patient4'</span><span class="p">]</span>
+
+<span class="n">pprint</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'F': ['patient1', 'patient3'], 'M': ['patient2', 'patient4']}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dict_keys(['F', 'M'])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dict_values([['patient1', 'patient3'], ['patient2', 'patient4']])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dict_items([('F', ['patient1', 'patient3']), ('M', ['patient2', 'patient4'])])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># check if a gender is in the dictionary</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'F'</span> <span class="ow">in</span> <span class="n">patients_by_gender</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'f'</span> <span class="ow">in</span> <span class="n">patients_by_gender</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># let's group using a dictionary</span>
+<span class="n">patients_by_gender</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="n">patient_gender</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s">'GENDER'</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="c"># let's store the keys as uppercase</span>
+        
+        <span class="c"># check to see if the key exists, if not</span>
+        <span class="k">if</span> <span class="n">patient_gender</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">patients_by_gender</span><span class="p">:</span>
+            <span class="c"># add the key</span>
+            <span class="n">patients_by_gender</span><span class="p">[</span><span class="n">patient_gender</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># create an empty list</span>
+
+        <span class="c"># append the patient as a new row to the correct grouping</span>
+        <span class="n">patients_by_gender</span><span class="p">[</span><span class="n">patient_gender</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dict_keys(['F', 'M'])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">[</span><span class="s">'F'</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[OrderedDict([('Id', 'c09181f8-6526-4de7-87c7-25c95ccdbdea'),
+              ('BIRTHDATE', '2014-06-06'),
+              ('DEATHDATE', ''),
+              ('SSN', '999-26-1662'),
+              ('DRIVERS', ''),
+              ('PASSPORT', ''),
+              ('PREFIX', ''),
+              ('FIRST', 'Lizbeth716'),
+              ('LAST', 'Hackett68'),
+              ('SUFFIX', ''),
+              ('MAIDEN', ''),
+              ('MARITAL', ''),
+              ('RACE', 'white'),
+              ('ETHNICITY', 'irish'),
+              ('GENDER', 'F'),
+              ('BIRTHPLACE', 'Denver  Pennsylvania  US'),
+              ('ADDRESS', '742 Parisian Run Suite 87'),
+              ('CITY', 'Pittsburgh'),
+              ('STATE', 'Pennsylvania'),
+              ('ZIP', '15106')]),
+ OrderedDict([('Id', '8d1c4f3b-3d44-4daf-8962-cc260bad8c87'),
+              ('BIRTHDATE', '1969-05-10'),
+              ('DEATHDATE', ''),
+              ('SSN', '999-64-1895'),
+              ('DRIVERS', 'S99989200'),
+              ('PASSPORT', 'X16155415X'),
+              ('PREFIX', 'Mrs.'),
+              ('FIRST', 'Augustine565'),
+              ('LAST', 'Conroy74'),
+              ('SUFFIX', ''),
+              ('MAIDEN', 'Cremin516'),
+              ('MARITAL', 'M'),
+              ('RACE', 'asian'),
+              ('ETHNICITY', 'asian_indian'),
+              ('GENDER', 'F'),
+              ('BIRTHPLACE', 'Unityship  Pennsylvania  US'),
+              ('ADDRESS', '931 Watsica Lock'),
+              ('CITY', 'Pittsburgh'),
+              ('STATE', 'Pennsylvania'),
+              ('ZIP', '15106')])]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">[</span><span class="s">'F'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'LAST'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hackett68
+</code></pre></div></div>
+
+<h2 id="lets-make-the-code-reusable">Let’s make the code reusable</h2>
+
+<ol>
+  <li>Create a function</li>
+  <li>Externalize parameters that will change fromt the function</li>
+</ol>
+
+<p>What’s common?</p>
+<ol>
+  <li>The csv processing</li>
+  <li>The grouping logic</li>
+</ol>
+
+<p>What’s different?</p>
+<ol>
+  <li>The file name</li>
+  <li>The groupby parameters</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># define the function</span>
+<span class="k">def</span> <span class="nf">group_patient</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">groupby</span><span class="p">):</span>
+    <span class="k">pass</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># call the function</span>
+<span class="n">patients_by_gender</span> <span class="o">=</span> <span class="n">group_patient</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="s">'GENDER'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>None
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># now let's implement the function</span>
+<span class="k">def</span> <span class="nf">group_patient</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">groupby</span><span class="p">):</span>
+    <span class="n">patients_by_group</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+            <span class="c"># note : we renamed the variable to _attribute</span>
+            <span class="n">patient_attribute</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">groupby</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+            <span class="c"># check to see if the key exists, if not</span>
+            <span class="k">if</span> <span class="n">patient_attribute</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">patients_by_group</span><span class="p">:</span>
+                <span class="c"># add the key</span>
+                <span class="n">patients_by_group</span><span class="p">[</span><span class="n">patient_attribute</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># create an empty list</span>
+
+            <span class="c"># append the patient as a new row to the correct grouping</span>
+            <span class="n">patients_by_group</span><span class="p">[</span><span class="n">patient_attribute</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">patients_by_group</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">patients_by_gender</span> <span class="o">=</span> <span class="n">group_patient</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="s">'GENDER'</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">[</span><span class="s">'F'</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[OrderedDict([('Id', 'c09181f8-6526-4de7-87c7-25c95ccdbdea'),
+              ('BIRTHDATE', '2014-06-06'),
+              ('DEATHDATE', ''),
+              ('SSN', '999-26-1662'),
+              ('DRIVERS', ''),
+              ('PASSPORT', ''),
+              ('PREFIX', ''),
+              ('FIRST', 'Lizbeth716'),
+              ('LAST', 'Hackett68'),
+              ('SUFFIX', ''),
+              ('MAIDEN', ''),
+              ('MARITAL', ''),
+              ('RACE', 'white'),
+              ('ETHNICITY', 'irish'),
+              ('GENDER', 'F'),
+              ('BIRTHPLACE', 'Denver  Pennsylvania  US'),
+              ('ADDRESS', '742 Parisian Run Suite 87'),
+              ('CITY', 'Pittsburgh'),
+              ('STATE', 'Pennsylvania'),
+              ('ZIP', '15106')]),
+ OrderedDict([('Id', '8d1c4f3b-3d44-4daf-8962-cc260bad8c87'),
+              ('BIRTHDATE', '1969-05-10'),
+              ('DEATHDATE', ''),
+              ('SSN', '999-64-1895'),
+              ('DRIVERS', 'S99989200'),
+              ('PASSPORT', 'X16155415X'),
+              ('PREFIX', 'Mrs.'),
+              ('FIRST', 'Augustine565'),
+              ('LAST', 'Conroy74'),
+              ('SUFFIX', ''),
+              ('MAIDEN', 'Cremin516'),
+              ('MARITAL', 'M'),
+              ('RACE', 'asian'),
+              ('ETHNICITY', 'asian_indian'),
+              ('GENDER', 'F'),
+              ('BIRTHPLACE', 'Unityship  Pennsylvania  US'),
+              ('ADDRESS', '931 Watsica Lock'),
+              ('CITY', 'Pittsburgh'),
+              ('STATE', 'Pennsylvania'),
+              ('ZIP', '15106')])]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># but wait... is there anything patient specific???</span>
+<span class="c"># let's refactor the code to make it more extensible </span>
+<span class="c"># and easier to read</span>
+<span class="k">def</span> <span class="nf">group</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">groupby</span><span class="p">):</span>
+    <span class="n">grouped_data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+            <span class="n">attribute</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">groupby</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">attribute</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">grouped_data</span><span class="p">:</span>
+                <span class="n">grouped_data</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">grouped_data</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">grouped_data</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">patients_by_gender</span> <span class="o">=</span> <span class="n">group</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="s">'GENDER'</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">[</span><span class="s">'F'</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OrderedDict([('Id', 'c09181f8-6526-4de7-87c7-25c95ccdbdea'),
+             ('BIRTHDATE', '2014-06-06'),
+             ('DEATHDATE', ''),
+             ('SSN', '999-26-1662'),
+             ('DRIVERS', ''),
+             ('PASSPORT', ''),
+             ('PREFIX', ''),
+             ('FIRST', 'Lizbeth716'),
+             ('LAST', 'Hackett68'),
+             ('SUFFIX', ''),
+             ('MAIDEN', ''),
+             ('MARITAL', ''),
+             ('RACE', 'white'),
+             ('ETHNICITY', 'irish'),
+             ('GENDER', 'F'),
+             ('BIRTHPLACE', 'Denver  Pennsylvania  US'),
+             ('ADDRESS', '742 Parisian Run Suite 87'),
+             ('CITY', 'Pittsburgh'),
+             ('STATE', 'Pennsylvania'),
+             ('ZIP', '15106')])
+</code></pre></div></div>
+
+<h2 id="what-if-we-want-multiple-grouping-levels">What if we want multiple grouping levels?</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># single level grouping by gender</span>
+<span class="p">{</span>
+    <span class="s">"F"</span><span class="p">:</span> <span class="p">[</span> <span class="s">'patient1'</span><span class="p">,</span> <span class="s">'patient2'</span><span class="p">],</span>
+    <span class="s">"M"</span><span class="p">:</span> <span class="p">[</span> <span class="s">'patient3'</span><span class="p">,</span> <span class="s">'patient4'</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'F': ['patient1', 'patient2'], 'M': ['patient3', 'patient4']}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># multi level grouping by gender and race</span>
+<span class="p">{</span>
+    <span class="s">"F"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"WHITE"</span><span class="p">:</span> <span class="p">[</span><span class="s">'patient1'</span><span class="p">,</span> <span class="s">'patient2'</span><span class="p">],</span>
+        <span class="s">"HISPANIC"</span><span class="p">:</span> <span class="p">[</span><span class="s">'patient3'</span><span class="p">]</span> 
+    <span class="p">},</span>
+    <span class="s">"M"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"WHITE"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s">"HISPANIC"</span><span class="p">:</span> <span class="p">[</span><span class="s">'patient4'</span><span class="p">,</span> <span class="s">'patient5'</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'F': {'WHITE': ['patient1', 'patient2'], 'HISPANIC': ['patient3']},
+ 'M': {'WHITE': [], 'HISPANIC': ['patient4', 'patient5']}}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">group_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">groupby</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">group</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="n">groupby</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">group</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">groupby</span><span class="p">):</span>
+    <span class="n">grouped_data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+        <span class="n">attribute</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="n">groupby</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">attribute</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">grouped_data</span><span class="p">:</span>
+            <span class="n">grouped_data</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">grouped_data</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">grouped_data</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">patients_by_gender</span> <span class="o">=</span> <span class="n">group_file</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="s">'GENDER'</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">[</span><span class="s">'F'</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OrderedDict([('Id', 'c09181f8-6526-4de7-87c7-25c95ccdbdea'),
+             ('BIRTHDATE', '2014-06-06'),
+             ('DEATHDATE', ''),
+             ('SSN', '999-26-1662'),
+             ('DRIVERS', ''),
+             ('PASSPORT', ''),
+             ('PREFIX', ''),
+             ('FIRST', 'Lizbeth716'),
+             ('LAST', 'Hackett68'),
+             ('SUFFIX', ''),
+             ('MAIDEN', ''),
+             ('MARITAL', ''),
+             ('RACE', 'white'),
+             ('ETHNICITY', 'irish'),
+             ('GENDER', 'F'),
+             ('BIRTHPLACE', 'Denver  Pennsylvania  US'),
+             ('ADDRESS', '742 Parisian Run Suite 87'),
+             ('CITY', 'Pittsburgh'),
+             ('STATE', 'Pennsylvania'),
+             ('ZIP', '15106')])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># patients by gender and race</span>
+<span class="c"># here we'll use a dictionary to represent the 2nd level</span>
+<span class="n">patients_by_gender_and_race</span> <span class="o">=</span> <span class="n">group_file</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="s">'GENDER'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">gender</span> <span class="ow">in</span> <span class="n">patients_by_gender_and_race</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">patients_by_gender_and_race</span><span class="p">[</span><span class="n">gender</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">patients_by_gender_and_race</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'F': {}, 'M': {}}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># now let's perform the groupings</span>
+<span class="n">patients_by_gender_and_race</span> <span class="o">=</span> <span class="n">group_file</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="s">'GENDER'</span><span class="p">)</span>
+<span class="c"># print(patients_by_gender_and_race)</span>
+<span class="k">for</span> <span class="n">gender</span> <span class="ow">in</span> <span class="n">patients_by_gender</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">patients_by_gender_and_race</span><span class="p">[</span><span class="n">gender</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">[</span><span class="n">gender</span><span class="p">],</span> <span class="s">'RACE'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># finally let's print the unique genders and races</span>
+<span class="k">for</span> <span class="n">gender</span> <span class="ow">in</span> <span class="n">patients_by_gender_and_race</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">race</span> <span class="ow">in</span> <span class="n">patients_by_gender_and_race</span><span class="p">[</span><span class="n">gender</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">gender</span><span class="p">,</span> <span class="n">race</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>F WHITE
+F ASIAN
+F BLACK
+M ASIAN
+M WHITE
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># as a sanity check let's look over the dataset again</span>
+<span class="n">gender</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">race</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="n">gender</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s">'GENDER'</span><span class="p">])</span>
+        <span class="n">race</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s">'RACE'</span><span class="p">])</span>    
+<span class="k">print</span><span class="p">(</span><span class="n">gender</span><span class="p">,</span> <span class="n">race</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'M', 'F'} {'white', 'black', 'asian'}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># what about 3 levels of grouping?</span>
+<span class="n">grouped_patients</span> <span class="o">=</span> <span class="n">group_file</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="s">'GENDER'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">gender</span> <span class="ow">in</span> <span class="n">grouped_patients</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">grouped_patients</span><span class="p">[</span><span class="n">gender</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">[</span><span class="n">gender</span><span class="p">],</span> <span class="s">'RACE'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">race</span> <span class="ow">in</span> <span class="n">grouped_patients</span><span class="p">[</span><span class="n">gender</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">grouped_patients</span><span class="p">[</span><span class="n">gender</span><span class="p">][</span><span class="n">race</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">[</span><span class="n">gender</span><span class="p">][</span><span class="n">race</span><span class="p">],</span> <span class="s">'ETHNICITY'</span><span class="p">)</span>
+        
+<span class="c"># print(grouped_patients)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># let's print the unique genders and races</span>
+<span class="k">for</span> <span class="n">gender</span> <span class="ow">in</span> <span class="n">grouped_patients</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">race</span> <span class="ow">in</span> <span class="n">grouped_patients</span><span class="p">[</span><span class="n">gender</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">ethnicity</span> <span class="ow">in</span> <span class="n">grouped_patients</span><span class="p">[</span><span class="n">gender</span><span class="p">][</span><span class="n">race</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">gender</span><span class="p">,</span> <span class="n">race</span><span class="p">,</span> <span class="n">ethnicity</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>F WHITE IRISH
+F WHITE AMERICAN
+F WHITE GERMAN
+F WHITE ITALIAN
+F WHITE SCOTTISH
+F ASIAN ASIAN_INDIAN
+F BLACK DOMINICAN
+M ASIAN CHINESE
+M WHITE ITALIAN
+</code></pre></div></div>
+
+<h2 id="what-about-4-levels-of-grouping">What about 4 levels of grouping?</h2>
+
+<p>I think we should refactor again. This time using <a href="https://realpython.com/python-thinking-recursively/">recursion</a>. This time we’ll support any number of groupings.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">group_file_by_list</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">groupings</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">grouped_data</span> <span class="o">=</span> <span class="n">group</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="n">groupings</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">groupings</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">group_by_list</span><span class="p">(</span><span class="n">grouped_data</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">grouped_data</span><span class="p">,</span> <span class="n">groupings</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="k">return</span> <span class="n">grouped_data</span>
+    
+<span class="k">def</span> <span class="nf">group_by_list</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">grouped_data</span><span class="p">,</span> <span class="n">groupings</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+        <span class="n">grouped_data</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span><span class="p">(</span><span class="n">grouped_data</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="n">groupings</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">groupings</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">group_by_list</span><span class="p">(</span><span class="n">grouped_data</span><span class="p">[</span><span class="n">item</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">grouped_data</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="n">groupings</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="k">return</span> <span class="n">grouped_data</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">groupings</span> <span class="o">=</span> <span class="p">[</span><span class="s">'GENDER'</span><span class="p">,</span> <span class="s">'RACE'</span><span class="p">,</span> <span class="s">'ETHNICITY'</span><span class="p">]</span>
+<span class="n">grouped_patients</span> <span class="o">=</span> <span class="n">group_file_by_list</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="n">groupings</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">gender</span> <span class="ow">in</span> <span class="n">grouped_patients</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">race</span> <span class="ow">in</span> <span class="n">grouped_patients</span><span class="p">[</span><span class="n">gender</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">ethnicity</span> <span class="ow">in</span> <span class="n">grouped_patients</span><span class="p">[</span><span class="n">gender</span><span class="p">][</span><span class="n">race</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">gender</span><span class="p">,</span> <span class="n">race</span><span class="p">,</span> <span class="n">ethnicity</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>F WHITE IRISH
+F WHITE AMERICAN
+F WHITE GERMAN
+F WHITE ITALIAN
+F WHITE SCOTTISH
+F ASIAN ASIAN_INDIAN
+F BLACK DOMINICAN
+M ASIAN CHINESE
+M WHITE ITALIAN
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># let's create a recursive print</span>
+<span class="k">def</span> <span class="nf">print_keys</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">print_keys2</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">k</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">print_keys2</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">print_keys2</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">l</span> <span class="o">+</span> <span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">l</span><span class="p">))</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
+    
+<span class="n">print_keys</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>F WHITE IRISH
+F WHITE AMERICAN
+F WHITE GERMAN
+F WHITE ITALIAN
+F WHITE SCOTTISH
+F ASIAN ASIAN_INDIAN
+F BLACK DOMINICAN
+M ASIAN CHINESE
+M WHITE ITALIAN
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># lets try it out on a few examples</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped_patients</span> <span class="o">=</span> <span class="n">group_file_by_list</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="p">[</span><span class="s">'GENDER'</span><span class="p">])</span>
+<span class="n">print_keys</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>F
+M
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped_patients</span> <span class="o">=</span> <span class="n">group_file_by_list</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="p">[</span><span class="s">'RACE'</span><span class="p">])</span>
+<span class="n">print_keys</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WHITE
+ASIAN
+BLACK
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped_patients</span> <span class="o">=</span> <span class="n">group_file_by_list</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="p">[</span><span class="s">'GENDER'</span><span class="p">,</span> <span class="s">'RACE'</span><span class="p">])</span>
+<span class="n">print_keys</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>F WHITE
+F ASIAN
+F BLACK
+M ASIAN
+M WHITE
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped_patients</span> <span class="o">=</span> <span class="n">group_file_by_list</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="p">[</span><span class="s">'RACE'</span><span class="p">,</span> <span class="s">'GENDER'</span><span class="p">])</span>
+<span class="n">print_keys</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WHITE F
+WHITE M
+ASIAN F
+ASIAN M
+BLACK F
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped_patients</span> <span class="o">=</span> <span class="n">group_file_by_list</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="p">[</span><span class="s">'ETHNICITY'</span><span class="p">])</span>
+<span class="n">print_keys</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>IRISH
+ASIAN_INDIAN
+CHINESE
+AMERICAN
+DOMINICAN
+GERMAN
+ITALIAN
+SCOTTISH
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped_patients</span> <span class="o">=</span> <span class="n">group_file_by_list</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="p">[</span><span class="s">'RACE'</span><span class="p">,</span> <span class="s">'ETHNICITY'</span><span class="p">])</span>
+<span class="n">print_keys</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WHITE IRISH
+WHITE AMERICAN
+WHITE GERMAN
+WHITE ITALIAN
+WHITE SCOTTISH
+ASIAN ASIAN_INDIAN
+ASIAN CHINESE
+BLACK DOMINICAN
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped_patients</span> <span class="o">=</span> <span class="n">group_file_by_list</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="p">[</span><span class="s">'RACE'</span><span class="p">,</span> <span class="s">'ETHNICITY'</span><span class="p">,</span> <span class="s">'BIRTHPLACE'</span><span class="p">,</span> <span class="s">'GENDER'</span><span class="p">])</span>
+<span class="n">print_keys</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WHITE IRISH DENVER  PENNSYLVANIA  US F
+WHITE IRISH EAST EARLSHIP  PENNSYLVANIA  US F
+WHITE AMERICAN READINGSHIP  PENNSYLVANIA  US F
+WHITE GERMAN BROWNSVILLE  PENNSYLVANIA  US F
+WHITE ITALIAN UPPER ALLENSHIP  PENNSYLVANIA  US F
+WHITE ITALIAN BIRDSBORO  PENNSYLVANIA  US M
+WHITE SCOTTISH LEHMANSHIP  PENNSYLVANIA  US F
+ASIAN ASIAN_INDIAN UNITYSHIP  PENNSYLVANIA  US F
+ASIAN CHINESE MACAU  MACAO SPECIAL ADMINISTRATIVE REGION OF THE PEOPLE'S REPUBLIC OF CHINA  CN M
+BLACK DOMINICAN PHILADELPHIA  PENNSYLVANIA  US F
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>

@@ -1,0 +1,73 @@
+{
+  "resourceType": "Patient",
+  "id": "38",
+  "meta": {
+    "versionId": "32",
+    "lastUpdated": "2019-10-30T14:16:54.484+00:00",
+    "source": "#e0mm6ofqyX94cLL9"
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"> <div class=\"hapiHeaderText\">Hi <b>HELLO </b> </div> <table class=\"hapiPropertyTable\"> <tbody> <tr> <td>Identifier</td> <td>NCC-7676</td> </tr> <tr> <td>Address</td> <td> <span>Nowhere 42 </span> <br/> <span>Spöck </span> <span>Germany </span> </td> </tr> <tr> <td>Date of birth</td> <td> <span>24 October 1990</span> </td> </tr> </tbody> </table> </div>"
+  },
+  "identifier": [
+    {
+      "use": "usual",
+      "type": {
+        "coding": [
+          {
+            "system": "http://interopsante.org/fhir/valueset/fr-patient-identifier-type",
+            "version": "1.0",
+            "code": "INS-NIR",
+            "display": "NIR définitif"
+          }
+        ]
+      },
+      "system": "urn:oid:1.2.250.1.213.1.4.10",
+      "value": "1426354675483"
+    },
+    {
+      "system": "http://starfleet-hospital.ufp/NamingSystem/patient-identifier",
+      "value": "NCC-7676"
+    },
+    {
+      "system": "http://starfleet-hospital.ufp/fhir/",
+      "value": "6768"
+    }
+  ],
+  "name": [
+    {
+      "family": "Sky",
+      "given": [
+        "Luc"
+      ]
+    }
+  ],
+  "telecom": [
+    {
+      "system": "phone",
+      "value": "+49 (0)12345 - 123456"
+    }
+  ],
+  "gender": "male",
+  "birthDate": "1980-01-01",
+  "address": [
+    {
+      "line": [
+        "Nowhere 42"
+      ],
+      "city": "Spöck",
+      "postalCode": "76297",
+      "country": "Germany"
+    }
+  ],
+  "maritalStatus": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+        "code": "U",
+        "display": "unmarried"
+      }
+    ]
+  }
+}

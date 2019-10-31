@@ -1,0 +1,232 @@
+// @import "bourbon";
+@import "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css";
+
+$background-color: #f5f6fa; 
+  
+$orange: #ff6900;
+$blue: #3e6372;
+$gray: #e1e1e5;
+$purple: #7253ed;
+$green: #57D291;
+$yellow: #fad920;
+
+.profile-panel {
+  // width: 340px;
+  // margin: 50px auto;
+  background: $background-color;
+  border-radius: 4px;
+  text-align: center;
+  border-bottom: 4px solid $gray;
+  font-family: 'Consolas', sans-serif;
+  // box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  padding: 30px 0 0 0;
+  color: $blue;
+  
+  h1, h2, h3, h4, h5, h6 {
+    // font-size: 1.8em;
+    // line-height: 1.5;
+    margin: 0;
+  }
+}
+
+.profile-education {
+  p {
+    margin: 0px;
+    font-size: .8em
+  }
+}
+
+.profile-image {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 20px auto;
+  
+  img {
+    max-width: 100%;
+    border-radius: 100px;
+    border: 1px solid #fff;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.7);
+  }
+  
+  .profile-status {
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10%;
+    height: 10%;
+    background: #000;
+    border: 3px solid $background-color;
+    border-radius: 100%;
+    
+    &.profile-status-away {
+      background: $yellow;
+    }
+    &.profile-status-available {
+      background: $green;
+    }
+  }
+}
+
+.profile-social-links {
+  border-top: 1px solid $gray;
+  border-bottom: 1px solid $gray;
+  padding: 12px 0;
+}
+
+.social-btn {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  border: 1px solid $gray;
+  border-radius: 100%;
+  margin: 0 9px;
+  //transition: all ease 0.3s;
+  
+  i {
+    transition: transform ease 0.1s;
+  }
+  
+  &:hover i {
+    transform: scale(1.2);
+    color: #fff;
+  }
+
+//   &.twitter {
+//     color: #55acee;
+//     border-color: #55acee;
+    
+//     &:hover {
+//       background: #55acee;
+//     }
+//   }
+  
+  &.twitter {
+    color: #3f729b;
+    border-color: #3f729b;
+    
+    &:hover {
+      background: #3f729b;
+    }
+  }
+  
+  &.linkedin {
+    color: #3f729b;
+    border-color: #3f729b;
+    
+    &:hover {
+      background: #3f729b;
+    }
+  }
+  
+  &.github {
+    color: #3f729b;
+    border-color: #3f729b;
+    
+    &:hover {
+      background: #3f729b;
+    }
+  }
+  
+  &.dribbble {
+    color: #ea4c89;
+    border-color: #ea4c89;
+    
+    &:hover {
+      background: #ea4c89;
+    }
+  }
+  
+  &.instagram {
+    color: #3f729b;
+    border-color: #3f729b;
+    
+    &:hover {
+      background: #3f729b;
+    }
+  }
+  
+  &.facebook {
+    color: #3b5998;
+    border-color: #3b5998;
+    
+    &:hover {
+      background: #3b5998;
+    }
+  }
+}
+
+.profile-footer {
+  padding: 20px 0;
+}
+
+.profile-panel {
+  border-bottom-color: $purple;
+  
+  .btn {
+    background: $purple;
+    color: #ffffFF;
+    
+    &:hover {
+      background: lighten($purple, 5%);
+    }
+  }
+}
+
+.profile-tags {
+  margin: 20px;
+  .profile-tag {
+    background: $green;
+    font-weight: bold;
+    padding: 5px 7px;
+    margin: 0px 3px;
+    border-radius: 30px;
+    color: #fff;
+  }
+}
+
+.profile-skills {
+  // color: #666;
+  margin: 20px;
+  .profile-skill {
+    // font-size: 11px;
+    font-weight: bold;
+    padding: 5px 7px;
+    margin: 0px 3px;
+    border: 1px solid #3f729b;
+    color: #3f729b;
+    border-radius: 30px;
+    
+    // line-height: 30px;
+    // &:hover {
+    //   background: #54A7FF;
+    //   border: 1px solid #54A7FF;
+    //   color: #fff;
+    // }
+  }
+}
+
+.profile-hashtags {
+  // margin: 10px;
+  font-style: italic;
+}
+
+.btn {
+  display: inline-block;
+  min-width: 120px;
+  min-height: 50px;
+  line-height: 50px;
+  text-align: center;
+  background: $gray;
+  color: #fafaff;
+  font-size: 14px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all ease 0.3s;
+}

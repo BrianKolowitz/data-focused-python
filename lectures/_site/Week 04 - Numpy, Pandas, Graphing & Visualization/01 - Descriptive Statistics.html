@@ -1,0 +1,280 @@
+<h1 id="descriptive-statistics">Descriptive Statistics</h1>
+
+<ul>
+  <li>Min</li>
+  <li>Max</li>
+  <li>Mean</li>
+  <li>Median</li>
+  <li>Standard Deviation</li>
+  <li>Variance</li>
+</ul>
+
+<p>First we’re going to define a method to get the patient’s age from their birthdate and then use that function to create a list of patient ages.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">dateutil</span> <span class="kn">import</span> <span class="n">parser</span>
+
+<span class="k">def</span> <span class="nf">get_age</span><span class="p">(</span><span class="n">birth_date</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">birth_date</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">birth_date</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">birth_date</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+
+    <span class="n">age</span> <span class="o">=</span> <span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span> <span class="o">-</span> <span class="n">birth_date</span><span class="p">)</span> <span class="o">//</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">365</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">age</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># calculate a list of patient ages</span>
+<span class="n">patient_ages</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reader</span><span class="p">):</span>
+        <span class="n">date_of_birth</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s">'BIRTHDATE'</span><span class="p">]</span>
+        <span class="n">age</span> <span class="o">=</span> <span class="n">get_age</span><span class="p">(</span><span class="n">date_of_birth</span><span class="p">)</span>
+        <span class="n">patient_ages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[5, 50, 50, 41, 63, 52, 28, 72, 23, 31]
+</code></pre></div></div>
+
+<h2 id="min--max">Min &amp; Max</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># find min and max with a for loop:</span>
+<span class="n">min_age</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">max_age</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">age</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">min_age</span> <span class="o">=</span> <span class="n">age</span>
+        <span class="n">max_age</span> <span class="o">=</span> <span class="n">age</span>
+        
+    <span class="k">if</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">min_age</span><span class="p">:</span>
+        <span class="n">min_age</span> <span class="o">=</span> <span class="n">age</span>
+    <span class="k">if</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="n">max_age</span><span class="p">:</span>
+        <span class="n">max_age</span> <span class="o">=</span> <span class="n">age</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Min Age: {min_age}, Max Age: {max_age}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Min Age: 5, Max Age: 72
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># find min and max with a for loop:</span>
+<span class="n">min_age</span> <span class="o">=</span> <span class="n">patient_ages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">max_age</span> <span class="o">=</span> <span class="n">patient_ages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">age</span> <span class="ow">in</span> <span class="n">patient_ages</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">min_age</span><span class="p">:</span>
+        <span class="n">min_age</span> <span class="o">=</span> <span class="n">age</span>
+    <span class="k">if</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="n">max_age</span><span class="p">:</span>
+        <span class="n">max_age</span> <span class="o">=</span> <span class="n">age</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Min Age: {min_age}, Max Age: {max_age}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Min Age: 5, Max Age: 72
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># find min and max by sorting</span>
+<span class="n">sorted_ages</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span>
+<span class="n">min_age</span> <span class="o">=</span> <span class="n">sorted_ages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">max_age</span> <span class="o">=</span> <span class="n">sorted_ages</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Min Age: {min_age}, Max Age: {max_age}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Min Age: 5, Max Age: 72
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># find min and max with reduce</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
+
+<span class="n">min_age</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="p">:</span> <span class="n">a</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span> <span class="k">else</span> <span class="n">b</span><span class="p">,</span> <span class="n">patient_ages</span><span class="p">)</span>
+<span class="n">max_age</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="p">:</span> <span class="n">a</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="k">else</span> <span class="n">b</span><span class="p">,</span> <span class="n">patient_ages</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Min Age: {min_age}, Max Age: {max_age}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Min Age: 5, Max Age: 72
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># find min and max with min and max</span>
+<span class="n">min_age</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span>
+<span class="n">max_age</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Min Age: {min_age}, Max Age: {max_age}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Min Age: 5, Max Age: 72
+</code></pre></div></div>
+
+<h2 id="mean">Mean</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># calculate mean with a for loop</span>
+<span class="n">total_age</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">age_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">age</span> <span class="ow">in</span> <span class="n">patient_ages</span><span class="p">:</span>
+    <span class="n">total_age</span> <span class="o">+=</span> <span class="n">age</span>
+    <span class="n">age_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+<span class="n">mean_age</span> <span class="o">=</span> <span class="n">total_age</span> <span class="o">/</span> <span class="n">age_count</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Mean Age: {mean_age}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Mean Age: 41.5
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># calculate mean age with reduce </span>
+<span class="kn">import</span> <span class="nn">functools</span>
+<span class="n">total_age</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="n">patient_ages</span><span class="p">)</span>
+<span class="n">age_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span>
+
+<span class="n">mean_age</span> <span class="o">=</span> <span class="n">total_age</span> <span class="o">/</span> <span class="n">age_count</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Mean Age: {mean_age}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Mean Age: 41.5
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># calculate mean age with sum and len</span>
+<span class="n">mean_age</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Mean Age: {mean_age}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Mean Age: 41.5
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># calculate mean with statistics package</span>
+<span class="kn">from</span> <span class="nn">statistics</span> <span class="kn">import</span> <span class="n">mean</span>
+
+<span class="n">mean_age</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Mean Age: {mean_age}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Mean Age: 41.5
+</code></pre></div></div>
+
+<h2 id="median">Median</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># calculate median with a for loop</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">floor</span>
+
+<span class="n">sorted_ages</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span>
+
+<span class="n">midpoint</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sorted_ages</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="k">if</span> <span class="n">midpoint</span><span class="o">.</span><span class="n">is_integer</span><span class="p">():</span>
+    <span class="n">high_index</span> <span class="o">=</span> <span class="n">floor</span><span class="p">(</span><span class="n">midpoint</span><span class="p">)</span>
+    <span class="n">low_index</span> <span class="o">=</span> <span class="n">high_index</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">median_age</span> <span class="o">=</span> <span class="p">(</span><span class="n">sorted_ages</span><span class="p">[</span><span class="n">high_index</span><span class="p">]</span> <span class="o">+</span> <span class="n">sorted_ages</span><span class="p">[</span><span class="n">low_index</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">median_age</span> <span class="o">=</span> <span class="n">sorted_ages</span><span class="p">[</span><span class="n">floor</span><span class="p">(</span><span class="n">midpoint</span><span class="p">)]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Median Age: {median_age}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Median Age: 45.5
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># calculate median with statistics package</span>
+<span class="kn">from</span> <span class="nn">statistics</span> <span class="kn">import</span> <span class="n">median</span>
+
+<span class="n">median_age</span> <span class="o">=</span> <span class="n">median</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Median Age: {median_age}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Median Age: 45.5
+</code></pre></div></div>
+
+<h2 id="variance">Variance</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># calculate variance with a for loop</span>
+<span class="n">mean_age</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span>
+<span class="n">squares</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">age</span> <span class="ow">in</span> <span class="n">patient_ages</span><span class="p">:</span>
+    <span class="n">squares</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">age</span> <span class="o">-</span> <span class="n">mean_age</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    
+<span class="n">age_variance</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">squares</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Variance: {age_variance}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Variance: 361.45
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># calculate variance with a list comprehension</span>
+<span class="n">mean_age</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span>
+<span class="n">squares</span> <span class="o">=</span> <span class="p">[(</span><span class="n">age</span> <span class="o">-</span> <span class="n">mean_age</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">age</span> <span class="ow">in</span> <span class="n">patient_ages</span><span class="p">]</span>
+<span class="n">age_variance</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">squares</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Variance: {age_variance}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Variance: 361.45
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># calculate variance with map and reduce</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
+
+<span class="n">mean_age</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span>
+
+<span class="n">squares</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean_age</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">patient_ages</span><span class="p">)</span>
+<span class="n">age_variance</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="n">squares</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Variance: {age_variance}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Variance: 361.45
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># calculate variance with statistics package</span>
+<span class="kn">from</span> <span class="nn">statistics</span> <span class="kn">import</span> <span class="n">pvariance</span>
+<span class="n">age_variance</span> <span class="o">=</span> <span class="n">pvariance</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Populaiton Variance: {age_variance}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Populaiton Variance: 361.45
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># calculate variance with statistics package</span>
+<span class="kn">from</span> <span class="nn">statistics</span> <span class="kn">import</span> <span class="n">variance</span>
+<span class="n">age_variance</span> <span class="o">=</span> <span class="n">variance</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Saple Variance: {age_variance}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Saple Variance: 401.6111111111111
+</code></pre></div></div>
+
+<h2 id="standard-deviation">Standard Deviation</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># calculate variance with statistics package</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">statistics</span> <span class="kn">import</span> <span class="n">pvariance</span>
+
+<span class="n">age_variance</span> <span class="o">=</span> <span class="n">pvariance</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span>
+<span class="n">standard_devation</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">age_variance</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Standard Deviation: {standard_devation}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Standard Deviation: 19.011838417154717
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># calculate variance with statistics package</span>
+<span class="kn">from</span> <span class="nn">statistics</span> <span class="kn">import</span> <span class="n">pstdev</span>
+
+<span class="n">standard_devation</span> <span class="o">=</span> <span class="n">pstdev</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Standard Deviation: {standard_devation}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Standard Deviation: 19.011838417154717
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># calculate standard deviation with statistics package</span>
+<span class="kn">from</span> <span class="nn">statistics</span> <span class="kn">import</span> <span class="n">pstdev</span>
+
+<span class="n">standard_deviation</span> <span class="o">=</span> <span class="n">pstdev</span><span class="p">(</span><span class="n">patient_ages</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Standard Deviation: {standard_deviation}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Standard Deviation: 19.011838417154717
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>

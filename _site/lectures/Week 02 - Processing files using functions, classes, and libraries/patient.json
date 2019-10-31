@@ -1,0 +1,41 @@
+{
+    "resourceType": "Patient",
+    "id": "1693321",
+    "meta": {
+      "versionId": "1",
+      "lastUpdated": "2019-03-24T19:01:28.439+00:00"
+    },
+    "text": {
+      "status": "generated",
+      "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div class=\"hapiHeaderText\">Jimmy <b>MCNUTTY </b></div><table class=\"hapiPropertyTable\"><tbody><tr><td>Address</td><td><span>Jägargatan 20 </span><br/><span>Stockholm </span><span>Sweden </span></td></tr><tr><td>Date of birth</td><td><span>15 February 1951</span></td></tr></tbody></table></div>"
+    },
+    "name": [
+      {
+        "family": "McNutty",
+        "given": [
+          "Jimmy"
+        ]
+      }
+    ],
+    "gender": "male",
+    "birthDate": "1951-02-15",
+    "address": [
+      {
+        "line": [
+          "Jägargatan 20"
+        ],
+        "city": "Stockholm",
+        "postalCode": "118 67",
+        "country": "Sweden"
+      }
+    ],
+    "maritalStatus": {
+      "coding": [
+        {
+          "system": "http://hl7.org/fhir/ValueSet/marital-status",
+          "code": "D",
+          "display": "Divorced"
+        }
+      ]
+    }
+  }

@@ -1,0 +1,237 @@
+<h1 id="argparse">Argparse</h1>
+
+<h2 id="what-is-argparse">What is Argparse?</h2>
+
+<p><a href="https://www.pythonforbeginners.com/argparse/argparse-tutorial">Argparse Tutorial</a></p>
+
+<p>Argparse is a parser for command-line options, arguments and subcommands. This library makes it easy to write user-friendly command-line interfaces by:</p>
+
+<ul>
+  <li>defines what arguments it requires</li>
+  <li>and figuring out how to parse those out of sys.argv.</li>
+</ul>
+
+<p>The argparse module  automatically generates help and usage messages and issues errors when users give the program invalid arguments.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>See <a href="argparse_1.py">agrparse_1.py</a></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># import the library</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+
+<span class="c"># initialize the parser</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+
+<span class="c"># parse arguments from sys.argv</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># run the code and ask for help</span>
+<span class="err">!</span><span class="n">python</span> <span class="n">argparse_1</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">help</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usage: argparse_1.py [-h]
+
+optional arguments:
+  -h, --help  show this help message and exit
+</code></pre></div></div>
+
+<h3 id="positional-arguments">Positional Arguments</h3>
+
+<p>See <a href="argparse_2.py">argparse_2.py</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">argparse</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"name"</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"age"</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"city"</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">city</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">argparse_2</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">help</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usage: argparse_2.py [-h] name age city
+
+positional arguments:
+  name
+  age
+  city
+
+optional arguments:
+  -h, --help  show this help message and exit
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">argparse_2</span><span class="o">.</span><span class="n">py</span> <span class="n">Ben</span> <span class="mi">37</span> <span class="n">Pittsburgh</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Ben 37 Pittsburgh
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">argparse_2</span><span class="o">.</span><span class="n">py</span> <span class="n">Brian</span> <span class="s">"??"</span> <span class="n">Pittsburgh</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Brian ?? Pittsburgh
+</code></pre></div></div>
+
+<h3 id="extending-the-help-text">Extending the help text</h3>
+
+<p>See <a href="argparse_3.py">argparse_3.py</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">argparse</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"name"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">"the name of the person you want to find"</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"age"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">"the age of the person you'd like to find"</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"city"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">"the city you'd like to search"</span><span class="p">)</span>
+
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">argparse_3</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">help</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usage: argparse_3.py [-h] name age city
+
+positional arguments:
+  name        the name of the person you want to find
+  age         the age of the person you'd like to find
+  city        the city you'd like to search
+
+optional arguments:
+  -h, --help  show this help message and exit
+</code></pre></div></div>
+
+<h3 id="changing-the-default-argument-type">Changing the default argument type</h3>
+
+<p>Argparse treats all arguments as strings by default. You can change the expected data type when you add each argument.</p>
+
+<p>See <a href="argparse_4.py">argparse_4.py</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">argparse</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"name"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">"the name of the person you want to find"</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"age"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">"the age of the person you'd like to find"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"city"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">"the city you'd like to search"</span><span class="p">)</span>
+
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">argparse_4</span><span class="o">.</span><span class="n">py</span> <span class="n">Ben</span> <span class="n">abc</span> <span class="n">Pittsburgh</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usage: argparse_4.py [-h] name age city
+argparse_4.py: error: argument age: invalid int value: 'abc'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">argparse_4</span><span class="o">.</span><span class="n">py</span> <span class="n">Ben</span> <span class="mi">37</span> <span class="n">Pittsburgh</span>
+</code></pre></div></div>
+
+<h3 id="optional-arguments">Optional arguments</h3>
+
+<p>See <a href="argparse_5.py">argparse_5.py</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">argparse</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"--verbose"</span><span class="p">,</span> 
+                    <span class="n">help</span><span class="o">=</span><span class="s">"increase output verbosity"</span><span class="p">,</span>
+                    <span class="n">action</span><span class="o">=</span><span class="s">"store_true"</span><span class="p">)</span>
+
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"verbosity turned on"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>An optional argument (or option) is (by default) given None as a value when its
+not being used.</p>
+
+<ul>
+  <li>Using the –verbosity option, only two values are actually useful, True or False.</li>
+  <li>The keyword “action” is being given the value “store_true” which means that if the option is specifed, then assign the value “True” to args.verbose</li>
+  <li>Not specifying the option implies False.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">argparse_5</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">help</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usage: argparse_5.py [-h] [--verbose]
+
+optional arguments:
+  -h, --help  show this help message and exit
+  --verbose   increase output verbosity
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">argparse_5</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">verbose</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>verbosity turned on
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">argparse_5</span><span class="o">.</span><span class="n">py</span>
+</code></pre></div></div>
+
+<h3 id="short-options">Short options</h3>
+
+<p>See <a href="argparse_6.py">argparse_6.py</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">argparse</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"-n"</span><span class="p">,</span> <span class="s">"--name"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">"the name of the person you want to find"</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"-a"</span><span class="p">,</span> <span class="s">"--age"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">"the age of the person you'd like to find"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"-c"</span><span class="p">,</span> <span class="s">"--city"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">"the city you'd like to search"</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"-v"</span><span class="p">,</span> <span class="s">"--verbose"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">"increase output verbosity"</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">"store_true"</span><span class="p">)</span>
+
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"Searching for {args.name} {args.age} years of age in or around {args.city}"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"Searching for {args.name}"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">argparse_6</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">help</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usage: argparse_6.py [-h] [-n NAME] [-a AGE] [-c CITY] [-v]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -n NAME, --name NAME  the name of the person you want to find
+  -a AGE, --age AGE     the age of the person you'd like to find
+  -c CITY, --city CITY  the city you'd like to search
+  -v, --verbose         increase output verbosity
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">argparse_6</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">n</span> <span class="n">Ben</span> <span class="o">-</span><span class="n">a</span> <span class="mi">37</span> <span class="o">-</span><span class="n">c</span> <span class="n">Pittsburgh</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Searching for Ben
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">argparse_6</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">name</span> <span class="n">Ben</span> <span class="o">--</span><span class="n">age</span> <span class="mi">37</span> <span class="o">--</span><span class="n">city</span> <span class="n">Pittsburgh</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Searching for Ben
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">argparse_6</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">name</span> <span class="n">Ben</span> <span class="o">--</span><span class="n">age</span> <span class="mi">37</span> <span class="o">--</span><span class="n">city</span> <span class="n">Pittsburgh</span> <span class="o">--</span><span class="n">verbose</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Searching for Ben 37 years of age in or around Pittsburgh
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>

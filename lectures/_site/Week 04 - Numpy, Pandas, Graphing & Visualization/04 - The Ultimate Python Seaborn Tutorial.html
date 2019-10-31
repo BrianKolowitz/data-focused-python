@@ -1,0 +1,987 @@
+<h1 id="the-ultimate-python-seaborn-tutorial-gotta-catch-em-all">The Ultimate Python Seaborn Tutorial: Gotta Catch ‘Em All</h1>
+<p><a href="https://elitedatascience.com/python-seaborn-tutorial">Source</a></p>
+
+<p>In this step-by-step Seaborn tutorial, you’ll learn how to use one of Python’s most convenient libraries for data visualization.</p>
+
+<p>For those who’ve tinkered with Matplotlib before, you may have wondered, “why does it take me 10 lines of code just to make a decent-looking histogram?”</p>
+
+<p>Well, if you’re looking for a simpler way to plot attractive charts, then you’ll love Seaborn. We’ll walk you through everything you need to know to get started, and we’ll use a fun Pokémon dataset (which you can download below).</p>
+
+<h1 id="introduction-to-seaborn">Introduction to Seaborn</h1>
+
+<p>Seaborn provides a high-level interface to Matplotlib, a powerful but sometimes unwieldy Python visualization library.</p>
+
+<p>On Seaborn’s official website, they state:</p>
+
+<blockquote>
+  <p>If matplotlib “tries to make easy things easy and hard things possible”, seaborn tries to make a well-defined set of hard things easy too.</p>
+</blockquote>
+
+<p>We’ve found this to be a pretty good summary of Seaborn’s strengths. In practice, the “well-defined set of hard things” includes:</p>
+
+<ul>
+  <li>Using default themes that are aesthetically pleasing.</li>
+  <li>Setting custom color palettes.</li>
+  <li>Making attractive statistical plots.</li>
+  <li>Easily and flexibly displaying distributions.</li>
+  <li>Visualizing information from matrices and DataFrames.</li>
+</ul>
+
+<p>Those last three points are why <strong>Seaborn is our tool of choice for Exploratory Analysis</strong>. It makes it very easy to “get to know” your data quickly and efficiently.</p>
+
+<p>However, Seaborn is a complement, not a substitute, for Matplotlib. There are some tweaks that still require Matplotlib, and we’ll cover how to do that as well.</p>
+
+<h2 id="how-to-learn-seaborn-the-self-starter-way">How to Learn Seaborn, the Self-Starter Way:</h2>
+
+<p>While Seaborn simplifies data visualization in Python, it still has many features. Therefore, the best way to learn Seaborn is to learn by doing.</p>
+
+<ol>
+  <li>First, understand the basics and paradigms of the library.
+    <ul>
+      <li>Each library approaches data visualization differently, so it’s important to understand how Seaborn “thinks about” the problem.</li>
+    </ul>
+  </li>
+  <li>Then, fire up a dataset for practice.
+    <ul>
+      <li>Learning in context is the best way to master a new skill quickly.</li>
+    </ul>
+  </li>
+  <li>Finally, refer to galleries to spark ideas and documentation to customize your charts.
+    <ul>
+      <li>Since you’ve already learned the library’s paradigms and had some hands-on practice, you’ll easily find what you need.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>This process will give you intuition about what you can do with Seaborn, leaving documentation to serve as further guidance. This is the fastest way to go from zero to proficient.</p>
+
+<p><strong>A quick tip before we begin:</strong></p>
+
+<p>We tried to make this tutorial as streamlined as possible, which means we won’t go into too much detail for any one topic. It’s helpful to have the <a href="http://seaborn.pydata.org/api.html">Seaborn documentation</a> open beside you, in case you want to learn more about a feature.</p>
+
+<h2 id="seaborn-tutorial-contents">Seaborn Tutorial Contents</h2>
+
+<p>Instead of just showing you how to make a bunch of plots, we’re going to walk through the most important paradigms of the Seaborn library. Along the way, we’ll illustrate each concept with examples.</p>
+
+<p>Here are the steps we’ll cover in this tutorial:</p>
+
+<ol>
+  <li>Installing Seaborn.</li>
+  <li>Importing libraries and dataset.</li>
+  <li>Seaborn’s plotting functions.
+    <ul>
+      <li>Scatter Plot</li>
+    </ul>
+  </li>
+  <li>Customizing with Matplotlib.</li>
+  <li>The role of Pandas.
+    <ul>
+      <li>Box Plot</li>
+    </ul>
+  </li>
+  <li>Seaborn themes.
+    <ul>
+      <li>Violin Plot</li>
+    </ul>
+  </li>
+  <li>Color palettes.
+    <ul>
+      <li>Swarm Plot</li>
+    </ul>
+  </li>
+  <li>Overlaying plots.</li>
+  <li>Putting it all together.</li>
+  <li>Pokédex (mini-gallery).
+    <ul>
+      <li>Heatmap</li>
+      <li>Histogram</li>
+      <li>Bar Plot</li>
+      <li>Factor Plot</li>
+      <li>Density Plot</li>
+      <li>Joint Distribution Plot</li>
+    </ul>
+  </li>
+</ol>
+
+<h1 id="step-1-installing-seaborn">Step 1: Installing Seaborn.</h1>
+
+<ul>
+  <li>Python 3</li>
+  <li>Pandas</li>
+  <li>Matplotlib</li>
+  <li>Seaborn</li>
+  <li>Jupyter Notebook (optional, but recommended)</li>
+</ul>
+
+<p>We strongly recommend installing the <a href="https://www.continuum.io/downloads">Anaconda Distribution</a>, which comes with all of those packages. Simply follow the instructions on that download page.</p>
+
+<p>Once you have Anaconda installed, simply start Jupyter (either through the command line or the Navigator app) and open a new notebook</p>
+
+<h2 id="step-2-importing-libraries-and-dataset">Step 2: Importing libraries and dataset.</h2>
+
+<p>Let’s start by importing Pandas, which is a great library for managing relational (i.e. table-format) datasets:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># disable warnings for lecture</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s">'ignore'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Pandas for managing datasets</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+</code></pre></div></div>
+
+<p>Next, we’ll import Matplotlib, which will help us customize our plots further.</p>
+
+<ul>
+  <li>Tip: In Jupyter Notebook, you can also include <code class="highlighter-rouge">%matplotlib inline</code> to display your plots inside your notebook.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Matplotlib for additional customization</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</code></pre></div></div>
+
+<p>Then, we’ll import the Seaborn library, which is the star of today’s show.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Seaborn for plotting and styling</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+</code></pre></div></div>
+
+<p>Now we’re ready to import our dataset.</p>
+
+<ul>
+  <li>Tip: we gave each of our imported libraries an <strong>alias</strong>. Later, we can invoke Pandas with <code class="highlighter-rouge">pd</code>, Matplotlib with <code class="highlighter-rouge">plt</code>, and Seaborn with <code class="highlighter-rouge">sns</code>.</li>
+</ul>
+
+<p>Today, we’ll be using a cool Pokémon dataset (first generation). Here’s the free download:</p>
+
+<p>Dataset for this tutorial.</p>
+<ul>
+  <li><a href="files/Pokemon.csv">Pokemon.csv</a></li>
+</ul>
+
+<p>Once you’ve downloaded the CSV file, you can import it with Pandas.</p>
+
+<ul>
+  <li>Tip: The argument <code class="highlighter-rouge">index_col=0</code> simply means we’ll treat the first column of the dataset as the ID column.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Read dataset</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'Pokemon.csv'</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Display first 5 observations</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Type 1</th>
+      <th>Type 2</th>
+      <th>Total</th>
+      <th>HP</th>
+      <th>Attack</th>
+      <th>Defense</th>
+      <th>Sp. Atk</th>
+      <th>Sp. Def</th>
+      <th>Speed</th>
+      <th>Stage</th>
+      <th>Legendary</th>
+    </tr>
+    <tr>
+      <th>#</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Bulbasaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>318</td>
+      <td>45</td>
+      <td>49</td>
+      <td>49</td>
+      <td>65</td>
+      <td>65</td>
+      <td>45</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Ivysaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>405</td>
+      <td>60</td>
+      <td>62</td>
+      <td>63</td>
+      <td>80</td>
+      <td>80</td>
+      <td>60</td>
+      <td>2</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Venusaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>525</td>
+      <td>80</td>
+      <td>82</td>
+      <td>83</td>
+      <td>100</td>
+      <td>100</td>
+      <td>80</td>
+      <td>3</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Charmander</td>
+      <td>Fire</td>
+      <td>NaN</td>
+      <td>309</td>
+      <td>39</td>
+      <td>52</td>
+      <td>43</td>
+      <td>60</td>
+      <td>50</td>
+      <td>65</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Charmeleon</td>
+      <td>Fire</td>
+      <td>NaN</td>
+      <td>405</td>
+      <td>58</td>
+      <td>64</td>
+      <td>58</td>
+      <td>80</td>
+      <td>65</td>
+      <td>80</td>
+      <td>2</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h1 id="step-3-seaborns-plotting-functions">Step 3: Seaborn’s plotting functions.</h1>
+
+<p>One of Seaborn’s greatest strengths is its diversity of plotting functions. For instance, making a <strong>scatter plot</strong> is just one line of code using the <code class="highlighter-rouge">lmplot()</code> function.</p>
+
+<p>There are two ways you can do so.</p>
+
+<ul>
+  <li>The first way (recommended) is to pass your DataFrame to the <code class="highlighter-rouge">data=</code> argument, while passing column names to the axes arguments, <code class="highlighter-rouge">x=</code> and <code class="highlighter-rouge">y=</code>.</li>
+  <li>The second way is to directly pass in Series of data to the axes arguments.</li>
+</ul>
+
+<p>For example, let’s compare the Attack and Defense stats for our Pokémon:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Recommended way</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'Attack'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'Defense'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;seaborn.axisgrid.FacetGrid at 0x11e0f2d68&gt;
+</code></pre></div></div>
+
+<p><img src="04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_17_1.png" alt="png" /></p>
+
+<p>By the way, Seaborn doesn’t have a dedicated scatter plot function, which is why you see a diagonal line. We actually used Seaborn’s function for fitting and plotting a <strong>regression line</strong>.</p>
+
+<p>Thankfully, each plotting function has several useful options that you can set. Here’s how we can tweak the <code class="highlighter-rouge">lmplot()</code>:</p>
+
+<ul>
+  <li>First, we’ll set <code class="highlighter-rouge">fit_reg=False</code> to remove the regression line, since we only want a scatter plot.</li>
+  <li>Then, we’ll set <code class="highlighter-rouge">hue='Stage'</code> to color our points by the Pokémon’s evolution stage. This <strong>hue</strong> argument is very useful because it allows you to express a third dimension of information using color.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Scatterplot arguments</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'Attack'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'Defense'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+           <span class="n">fit_reg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="c"># No regression line</span>
+           <span class="n">hue</span><span class="o">=</span><span class="s">'Stage'</span><span class="p">)</span>   <span class="c"># Color by evolution stage</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;seaborn.axisgrid.FacetGrid at 0x125183fd0&gt;
+</code></pre></div></div>
+
+<p><img src="04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_19_1.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Scatterplot arguments</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'Attack'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'Defense'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+           <span class="n">fit_reg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="c"># No regression line</span>
+           <span class="n">hue</span><span class="o">=</span><span class="s">'Type 1'</span><span class="p">)</span>   <span class="c"># Color by evolution stage</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;seaborn.axisgrid.FacetGrid at 0x12023ca58&gt;
+</code></pre></div></div>
+
+<p><img src="04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_20_1.png" alt="png" /></p>
+
+<p>Looking better, but we can improve this scatter plot further. For example, all of our Pokémon have positive Attack and Defense values, yet our <strong>axes limits</strong> fall below zero.</p>
+
+<p>Let’s see how we can fix that…</p>
+
+<h1 id="step-4-customizing-with-matplotlib">Step 4: Customizing with Matplotlib.</h1>
+
+<p>Remember, Seaborn is a high-level interface to Matplotlib. From our experience, Seaborn will get you <em>most</em> of the way there, but you’ll sometimes need to bring in Matplotlib.</p>
+
+<p>Setting your axes limits is one of those times, but the process is pretty simple:</p>
+
+<ol>
+  <li>First, invoke your Seaborn plotting function as normal.</li>
+  <li>Then, invoke Matplotlib’s customization functions. In this case, we’ll use its <code class="highlighter-rouge">ylim()</code> and <code class="highlighter-rouge">xlim()</code> functions.</li>
+</ol>
+
+<p>Here’s our new scatter plot with sensible axes limits:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Plot using Seaborn</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'Attack'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'Defense'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+           <span class="n">fit_reg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> 
+           <span class="n">hue</span><span class="o">=</span><span class="s">'Stage'</span><span class="p">)</span>
+ 
+<span class="c"># Tweak using Matplotlib</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(0, 141.9881096001028)
+</code></pre></div></div>
+
+<p><img src="04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_23_1.png" alt="png" /></p>
+
+<h1 id="step-5-the-role-of-pandas">Step 5: The role of Pandas.</h1>
+
+<p>Even though this is a Seaborn tutorial, Pandas actually plays a very important role. You see, Seaborn’s plotting functions benefit from a base DataFrame that’s reasonably formatted.</p>
+
+<p>For example, let’s say we wanted to make a <strong>box plot</strong> for our Pokémon’s combat stats:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c"># Boxplot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x120c257f0&gt;
+</code></pre></div></div>
+
+<p><img src="04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_25_1.png" alt="png" /></p>
+
+<p>Well, that’s a reasonable start, but there are some columns we’d probably like to remove:</p>
+
+<ul>
+  <li>We can remove the Total since we have individual stats.</li>
+  <li>We can remove the Stage and Legendary columns because they aren’t combat stats.</li>
+</ul>
+
+<p>In turns out that this isn’t easy to do within Seaborn alone. Instead, it’s much simpler to <strong>pre-format</strong> your DataFrame.</p>
+
+<p>Let’s create a new DataFrame called <code class="highlighter-rouge">stats_df</code> that only keeps the stats columns:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c"># Pre-format DataFrame</span>
+<span class="n">stats_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s">'Total'</span><span class="p">,</span> <span class="s">'Stage'</span><span class="p">,</span> <span class="s">'Legendary'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+ 
+<span class="c"># New boxplot using stats_df</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">stats_df</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1093ec128&gt;
+</code></pre></div></div>
+
+<p><img src="04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_27_1.png" alt="png" /></p>
+
+<h1 id="step-6-seaborn-themes">Step 6: Seaborn themes.</h1>
+
+<p>Another advantage of Seaborn is that it comes with decent style themes right out of the box. The default theme is called <em>‘darkgrid’</em>.</p>
+
+<p>Next, we’ll change the theme to <em>‘whitegrid’</em> while making a <strong>violin plot</strong>.</p>
+
+<ul>
+  <li>Violin plots are useful alternatives to box plots.</li>
+  <li>They show the distribution (through the thickness of the violin) instead of only the summary statistics.</li>
+</ul>
+
+<p>For example, we can visualize the distribution of Attack by Pokémon’s primary type:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+<span class="c"># Set theme</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s">'whitegrid'</span><span class="p">)</span>
+ 
+<span class="c"># Violin plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'Type 1'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'Attack'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1212f76d8&gt;
+</code></pre></div></div>
+
+<p><img src="04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_29_1.png" alt="png" /></p>
+
+<p>As you can see, Dragon types tend to have higher Attack stats than Ghost types, but they also have greater variance.</p>
+
+<p>Now, Pokémon fans might find something quite jarring about that plot: The colors are nonsensical. Why is the Grass type colored pink or the Water type colored orange? We must fix this!</p>
+
+<h1 id="step-7-color-palettes">Step 7: Color palettes.</h1>
+<p>Fortunately, Seaborn allows us to set custom color palettes. We can simply create an ordered Python list of color hex values.</p>
+
+<p>Let’s use <a href="http://bulbapedia.bulbagarden.net/wiki/Category:Type_color_templates">Bulbapedia</a> to help us create a new color palette:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pkmn_type_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s">'#78C850'</span><span class="p">,</span>  <span class="c"># Grass</span>
+                    <span class="s">'#F08030'</span><span class="p">,</span>  <span class="c"># Fire</span>
+                    <span class="s">'#6890F0'</span><span class="p">,</span>  <span class="c"># Water</span>
+                    <span class="s">'#A8B820'</span><span class="p">,</span>  <span class="c"># Bug</span>
+                    <span class="s">'#A8A878'</span><span class="p">,</span>  <span class="c"># Normal</span>
+                    <span class="s">'#A040A0'</span><span class="p">,</span>  <span class="c"># Poison</span>
+                    <span class="s">'#F8D030'</span><span class="p">,</span>  <span class="c"># Electric</span>
+                    <span class="s">'#E0C068'</span><span class="p">,</span>  <span class="c"># Ground</span>
+                    <span class="s">'#EE99AC'</span><span class="p">,</span>  <span class="c"># Fairy</span>
+                    <span class="s">'#C03028'</span><span class="p">,</span>  <span class="c"># Fighting</span>
+                    <span class="s">'#F85888'</span><span class="p">,</span>  <span class="c"># Psychic</span>
+                    <span class="s">'#B8A038'</span><span class="p">,</span>  <span class="c"># Rock</span>
+                    <span class="s">'#705898'</span><span class="p">,</span>  <span class="c"># Ghost</span>
+                    <span class="s">'#98D8D8'</span><span class="p">,</span>  <span class="c"># Ice</span>
+                    <span class="s">'#7038F8'</span><span class="p">,</span>  <span class="c"># Dragon</span>
+                   <span class="p">]</span>
+</code></pre></div></div>
+
+<p>Wonderful. Now we can simply use the <code class="highlighter-rouge">palette=</code> argument to recolor our chart.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c"># Violin plot with Pokemon color palette</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'Type 1'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'Attack'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> 
+               <span class="n">palette</span><span class="o">=</span><span class="n">pkmn_type_colors</span><span class="p">)</span> <span class="c"># Set color palette</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x121a6c048&gt;
+</code></pre></div></div>
+
+<p><img src="04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_34_1.png" alt="png" /></p>
+
+<p>Much better!</p>
+
+<p>Violin plots are great for visualizing distributions. However, since we only have 151 Pokémon in our dataset, we may want to simply display each point.</p>
+
+<p>That’s where the <strong>swarm plot</strong> comes in. This visualization will show each point, while “stacking” those with similar values:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c"># Swarm plot with Pokemon color palette</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">swarmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'Type 1'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'Attack'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> 
+              <span class="n">palette</span><span class="o">=</span><span class="n">pkmn_type_colors</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x121a5bd68&gt;
+</code></pre></div></div>
+
+<p><img src="04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_36_1.png" alt="png" /></p>
+
+<p>That’s handy, but can’t we combine our swarm plot and the violin plot? After all, they display similar information, right?</p>
+
+<h1 id="step-8-overlaying-plots">Step 8: Overlaying plots.</h1>
+
+<p>The answer is yes.</p>
+
+<p>It’s pretty straightforward to overlay plots using Seaborn, and it works the same way as with Matplotlib. Here’s what we’ll do:</p>
+
+<ol>
+  <li>First, we’ll make our figure larger using Matplotlib.</li>
+  <li>Then, we’ll plot the violin plot. However, we’ll set <code class="highlighter-rouge">inner=None</code> to remove the bars inside the violins.</li>
+  <li>Next, we’ll plot the swarm plot. This time, we’ll make the points black so they pop out more.</li>
+  <li>Finally, we’ll set a title using Matplotlib.</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Set figure size with matplotlib</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+ 
+<span class="c"># Create plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'Type 1'</span><span class="p">,</span>
+               <span class="n">y</span><span class="o">=</span><span class="s">'Attack'</span><span class="p">,</span> 
+               <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> 
+               <span class="n">inner</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="c"># Remove the bars inside the violins</span>
+               <span class="n">palette</span><span class="o">=</span><span class="n">pkmn_type_colors</span><span class="p">)</span>
+ 
+<span class="n">sns</span><span class="o">.</span><span class="n">swarmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'Type 1'</span><span class="p">,</span> 
+              <span class="n">y</span><span class="o">=</span><span class="s">'Attack'</span><span class="p">,</span> 
+              <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> 
+              <span class="n">color</span><span class="o">=</span><span class="s">'k'</span><span class="p">,</span> <span class="c"># Make points black</span>
+              <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span> <span class="c"># and slightly transparent</span>
+ 
+<span class="c"># Set title with matplotlib</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Attack by Type'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Text(0.5,1,'Attack by Type')
+</code></pre></div></div>
+
+<p><img src="04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_39_1.png" alt="png" /></p>
+
+<p>Awesome, now we have a pretty chart that tells us how Attack values are distributed across different Pokémon types. But what it we want to see all of the other stats as well?</p>
+
+<h1 id="step-9-putting-it-all-together">Step 9: Putting it all together.</h1>
+
+<p>Well, we could certainly repeat that chart for each stat. But we can also combine the information into one chart… we just have to do some <strong>data wrangling</strong> with Pandas beforehand.</p>
+
+<p>First, here’s a reminder of our data format:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stats_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Type 1</th>
+      <th>Type 2</th>
+      <th>HP</th>
+      <th>Attack</th>
+      <th>Defense</th>
+      <th>Sp. Atk</th>
+      <th>Sp. Def</th>
+      <th>Speed</th>
+    </tr>
+    <tr>
+      <th>#</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Bulbasaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>45</td>
+      <td>49</td>
+      <td>49</td>
+      <td>65</td>
+      <td>65</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Ivysaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>60</td>
+      <td>62</td>
+      <td>63</td>
+      <td>80</td>
+      <td>80</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Venusaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>80</td>
+      <td>82</td>
+      <td>83</td>
+      <td>100</td>
+      <td>100</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Charmander</td>
+      <td>Fire</td>
+      <td>NaN</td>
+      <td>39</td>
+      <td>52</td>
+      <td>43</td>
+      <td>60</td>
+      <td>50</td>
+      <td>65</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Charmeleon</td>
+      <td>Fire</td>
+      <td>NaN</td>
+      <td>58</td>
+      <td>64</td>
+      <td>58</td>
+      <td>80</td>
+      <td>65</td>
+      <td>80</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>As you can see, all of our stats are in separate columns. Instead, we want to “melt” them into one column.</p>
+
+<p>To do so, we’ll use Pandas’s <code class="highlighter-rouge">melt()</code> function. It takes 3 arguments:</p>
+
+<ul>
+  <li>First, the DataFrame to melt.</li>
+  <li>Second, ID variables to keep (Pandas will melt all of the other ones).</li>
+  <li>Finally, a name for the new, melted variable.</li>
+</ul>
+
+<p>Here’s the output:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Melt DataFrame</span>
+<span class="n">melted_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">stats_df</span><span class="p">,</span> 
+                    <span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s">"Name"</span><span class="p">,</span> <span class="s">"Type 1"</span><span class="p">,</span> <span class="s">"Type 2"</span><span class="p">],</span> <span class="c"># Variables to keep</span>
+                    <span class="n">var_name</span><span class="o">=</span><span class="s">"Stat"</span><span class="p">)</span> <span class="c"># Name of melted variable</span>
+<span class="n">melted_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s">'Name'</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Type 1</th>
+      <th>Type 2</th>
+      <th>Stat</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>364</th>
+      <td>Abra</td>
+      <td>Psychic</td>
+      <td>NaN</td>
+      <td>Defense</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>213</th>
+      <td>Abra</td>
+      <td>Psychic</td>
+      <td>NaN</td>
+      <td>Attack</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>817</th>
+      <td>Abra</td>
+      <td>Psychic</td>
+      <td>NaN</td>
+      <td>Speed</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>666</th>
+      <td>Abra</td>
+      <td>Psychic</td>
+      <td>NaN</td>
+      <td>Sp. Def</td>
+      <td>55</td>
+    </tr>
+    <tr>
+      <th>515</th>
+      <td>Abra</td>
+      <td>Psychic</td>
+      <td>NaN</td>
+      <td>Sp. Atk</td>
+      <td>105</td>
+    </tr>
+    <tr>
+      <th>62</th>
+      <td>Abra</td>
+      <td>Psychic</td>
+      <td>NaN</td>
+      <td>HP</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>443</th>
+      <td>Aerodactyl</td>
+      <td>Rock</td>
+      <td>Flying</td>
+      <td>Defense</td>
+      <td>65</td>
+    </tr>
+    <tr>
+      <th>594</th>
+      <td>Aerodactyl</td>
+      <td>Rock</td>
+      <td>Flying</td>
+      <td>Sp. Atk</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>745</th>
+      <td>Aerodactyl</td>
+      <td>Rock</td>
+      <td>Flying</td>
+      <td>Sp. Def</td>
+      <td>75</td>
+    </tr>
+    <tr>
+      <th>292</th>
+      <td>Aerodactyl</td>
+      <td>Rock</td>
+      <td>Flying</td>
+      <td>Attack</td>
+      <td>105</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>All 6 of the stat columns have been “melted” into one, and the new Stat column indicates the original stat (HP, Attack, Defense, Sp. Attack, Sp. Defense, or Speed). For example, it’s hard to see here, but Bulbasaur now has 6 rows of data.</p>
+
+<p>In fact, if you print the shape of these two DataFrames…</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span> <span class="n">stats_df</span><span class="o">.</span><span class="n">shape</span> <span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">melted_df</span><span class="o">.</span><span class="n">shape</span> <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(151, 9)
+(906, 5)
+</code></pre></div></div>
+
+<p>…you’ll find that <code class="highlighter-rouge">melted_df</code> has 6 times the number of rows as <code class="highlighter-rouge">stats_df</code>.</p>
+
+<p>Now we can make a swarm plot with <code class="highlighter-rouge">melted_df</code>.</p>
+
+<ul>
+  <li>But this time, we’re going to set <code class="highlighter-rouge">x='Stat'</code> and <code class="highlighter-rouge">y='value'</code> so our swarms are separated by stat.</li>
+  <li>Then, we’ll set <code class="highlighter-rouge">hue='Type 1'</code> to color our points by the Pokémon type.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="c"># Swarmplot with melted_df</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">swarmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'Stat'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'value'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">melted_df</span><span class="p">,</span> 
+              <span class="n">hue</span><span class="o">=</span><span class="s">'Type 1'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x121f24390&gt;
+</code></pre></div></div>
+
+<p><img src="04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_49_1.png" alt="png" /></p>
+
+<p>Finally, let’s make a few final tweaks for a more readable chart:</p>
+
+<ol>
+  <li>Enlarge the plot.</li>
+  <li>Separate points by hue using the argument <code class="highlighter-rouge">split=True</code>.</li>
+  <li>Use our custom Pokemon color palette.</li>
+  <li>Adjust the y-axis limits to end at 0.</li>
+  <li>Place the legend to the right.</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Enlarge the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+ 
+<span class="n">sns</span><span class="o">.</span><span class="n">swarmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'Stat'</span><span class="p">,</span> 
+              <span class="n">y</span><span class="o">=</span><span class="s">'value'</span><span class="p">,</span> 
+              <span class="n">data</span><span class="o">=</span><span class="n">melted_df</span><span class="p">,</span> 
+              <span class="n">hue</span><span class="o">=</span><span class="s">'Type 1'</span><span class="p">,</span> 
+              <span class="n">split</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="c"># 2. Separate points by hue</span>
+              <span class="n">palette</span><span class="o">=</span><span class="n">pkmn_type_colors</span><span class="p">)</span> <span class="c"># 3. Use Pokemon palette</span>
+ 
+<span class="c"># 4. Adjust the y-axis</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">260</span><span class="p">)</span>
+ 
+<span class="c"># 5. Place legend to the right</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.legend.Legend at 0x1224d1240&gt;
+</code></pre></div></div>
+
+<p><img src="04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_51_1.png" alt="png" /></p>
+
+<h1 id="step-10-pokédex-mini-gallery">Step 10: Pokédex (mini-gallery).</h1>
+
+<p>We’re going to conclude this tutorial with a few quick-fire data visualizations, just to give you a sense of what’s possible with Seaborn.</p>
+
+<h2 id="101---heatmap">10.1 - Heatmap</h2>
+
+<p>Heatmaps help you visualize matrix-like data.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="c"># Calculate correlations</span>
+<span class="n">corr</span> <span class="o">=</span> <span class="n">stats_df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+ 
+<span class="c"># Heatmap</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x122892908&gt;
+</code></pre></div></div>
+
+<p><img src="04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_53_1.png" alt="png" /></p>
+
+<h2 id="102---histogram">10.2 - Histogram</h2>
+
+<p>Histograms allow you to plot the distributions of numeric variables.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="c"># Distribution Plot (a.k.a. Histogram)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Attack</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x122ac08d0&gt;
+</code></pre></div></div>
+
+<p><img src="04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_55_1.png" alt="png" /></p>
+
+<h2 id="103---bar-plot">10.3 - Bar Plot</h2>
+
+<p>Bar plots help you visualize the distributions of categorical variables.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="c"># Count Plot (a.k.a. Bar Plot)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'Type 1'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="n">pkmn_type_colors</span><span class="p">)</span>
+ 
+<span class="c"># Rotate x-labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=-</span><span class="mi">45</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14]),
+ &lt;a list of 15 Text xticklabel objects&gt;)
+</code></pre></div></div>
+
+<p><img src="04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_57_1.png" alt="png" /></p>
+
+<h2 id="104---factor-plot">10.4 - Factor Plot</h2>
+
+<p>Factor plots make it easy to separate plots by categorical classes.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Factor Plot</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">factorplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'Type 1'</span><span class="p">,</span> 
+                   <span class="n">y</span><span class="o">=</span><span class="s">'Attack'</span><span class="p">,</span> 
+                   <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> 
+                   <span class="n">hue</span><span class="o">=</span><span class="s">'Stage'</span><span class="p">,</span>  <span class="c"># Color by stage</span>
+                   <span class="n">col</span><span class="o">=</span><span class="s">'Stage'</span><span class="p">,</span>  <span class="c"># Separate by stage</span>
+                   <span class="n">kind</span><span class="o">=</span><span class="s">'swarm'</span><span class="p">)</span> <span class="c"># Swarmplot</span>
+ 
+<span class="c"># Rotate x-axis labels</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">rotation</span><span class="o">=-</span><span class="mi">45</span><span class="p">)</span>
+ 
+<span class="c"># Doesn't work because only rotates last plot</span>
+<span class="c"># plt.xticks(rotation=-45)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;seaborn.axisgrid.FacetGrid at 0x121f0fac8&gt;
+</code></pre></div></div>
+
+<p><img src="04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_59_1.png" alt="png" /></p>
+
+<h2 id="105---density-plot">10.5 - Density Plot</h2>
+<p>Density plots display the distribution between two variables.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="c"># Density Plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Attack</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">Defense</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x122f6ba90&gt;
+</code></pre></div></div>
+
+<p><img src="04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_61_1.png" alt="png" /></p>
+
+<h2 id="106---joint-distribution-plot">10.6 - Joint Distribution Plot</h2>
+
+<p>Joint distribution plots combine information from scatter plots and histograms to give you detailed information for bi-variate distributions.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="c"># Joint Distribution Plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'Attack'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'Defense'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;seaborn.axisgrid.JointGrid at 0x122fc2e80&gt;
+
+
+
+
+&lt;Figure size 576x432 with 0 Axes&gt;
+</code></pre></div></div>
+
+<p><img src="04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_63_2.png" alt="png" /></p>
+
+<p>Congratulations… you’ve made it to the end of this Python Seaborn tutorial!</p>
+
+<p>We’ve just concluded a tour of key Seaborn paradigms and showed you many examples along the way. Feel free to use this page along with the <a href="http://seaborn.pydata.org/examples/">official Seaborn gallery</a> as references for your projects going forward.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>

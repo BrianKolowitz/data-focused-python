@@ -1,0 +1,242 @@
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['Id', 'BIRTHDATE', 'DEATHDATE', 'SSN', 'DRIVERS', 'PASSPORT', 'PREFIX', 'FIRST', 'LAST', 'SUFFIX', 'MAIDEN', 'MARITAL', 'RACE', 'ETHNICITY', 'GENDER', 'BIRTHPLACE', 'ADDRESS', 'CITY', 'STATE', 'ZIP']
+['c09181f8-6526-4de7-87c7-25c95ccdbdea', '2014-06-06', '', '999-26-1662', '', '', '', 'Lizbeth716', 'Hackett68', '', '', '', 'white', 'irish', 'F', 'Denver  Pennsylvania  US', '742 Parisian Run Suite 87', 'Pittsburgh', 'Pennsylvania', '15106']
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">dateutil</span> <span class="kn">import</span> <span class="n">parser</span>
+
+<span class="k">def</span> <span class="nf">get_age</span><span class="p">(</span><span class="n">birth_date</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">birth_date</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">birth_date</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">birth_date</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+
+    <span class="n">age</span> <span class="o">=</span> <span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>  <span class="o">-</span> <span class="n">birth_date</span><span class="p">)</span> <span class="o">//</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">365</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">age</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>datetime.date(2019, 6, 6)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>datetime.datetime(2019, 6, 6, 19, 56, 20, 846787)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">get_age</span><span class="p">(</span><span class="s">'2011-09-10'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>7
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">get_age</span><span class="p">(</span><span class="s">'2014-01-10'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ages</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_age</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">ages</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[4, 50, 50, 41, 63, 52, 28, 72, 23, 31]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">patients</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span><span class="s">'birth_date'</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">'age'</span><span class="p">:</span> <span class="n">get_age</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])}</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span> <span class="p">]</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">patients</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[{'age': 5, 'birth_date': '2014-06-06'},
+ {'age': 50, 'birth_date': '1969-05-10'},
+ {'age': 50, 'birth_date': '1969-05-30'},
+ {'age': 41, 'birth_date': '1978-02-04'},
+ {'age': 63, 'birth_date': '1955-11-01'},
+ {'age': 52, 'birth_date': '1966-10-13'},
+ {'age': 28, 'birth_date': '1990-08-20'},
+ {'age': 72, 'birth_date': '1947-01-31'},
+ {'age': 23, 'birth_date': '1995-07-03'},
+ {'age': 31, 'birth_date': '1987-10-01'}]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># filtering based on age</span>
+<span class="n">min_age</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">max_age</span> <span class="o">=</span> <span class="mi">79</span>
+<span class="n">patients</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span><span class="s">'birth_date'</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">'age'</span><span class="p">:</span> <span class="n">get_age</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])}</span> 
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span> <span class="k">if</span> <span class="n">get_age</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="n">min_age</span> <span class="ow">and</span> <span class="n">get_age</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">max_age</span> <span class="p">]</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">patients</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[{'age': 50, 'birth_date': '1969-05-10'},
+ {'age': 50, 'birth_date': '1969-05-30'},
+ {'age': 41, 'birth_date': '1978-02-04'},
+ {'age': 63, 'birth_date': '1955-11-01'},
+ {'age': 52, 'birth_date': '1966-10-13'},
+ {'age': 28, 'birth_date': '1990-08-20'},
+ {'age': 72, 'birth_date': '1947-01-31'},
+ {'age': 23, 'birth_date': '1995-07-03'},
+ {'age': 31, 'birth_date': '1987-10-01'}]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># another way to do it, add the age to the end</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+    <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_age</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['c09181f8-6526-4de7-87c7-25c95ccdbdea', '2014-06-06', '', '999-26-1662', '', '', '', 'Lizbeth716', 'Hackett68', '', '', '', 'white', 'irish', 'F', 'Denver  Pennsylvania  US', '742 Parisian Run Suite 87', 'Pittsburgh', 'Pennsylvania', '15106', 5]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">min_age</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">max_age</span> <span class="o">=</span> <span class="mi">79</span>
+<span class="n">patients</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span><span class="s">'birth_date'</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">'age'</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">20</span><span class="p">]}</span> 
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span> <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">min_age</span> <span class="ow">and</span> <span class="n">row</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">max_age</span> <span class="p">]</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">patients</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[{'age': 50, 'birth_date': '1969-05-10'},
+ {'age': 50, 'birth_date': '1969-05-30'},
+ {'age': 41, 'birth_date': '1978-02-04'},
+ {'age': 63, 'birth_date': '1955-11-01'},
+ {'age': 52, 'birth_date': '1966-10-13'},
+ {'age': 28, 'birth_date': '1990-08-20'},
+ {'age': 72, 'birth_date': '1947-01-31'},
+ {'age': 23, 'birth_date': '1995-07-03'},
+ {'age': 31, 'birth_date': '1987-10-01'}]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># deidentify the name</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">def</span> <span class="nf">fake_name_generator</span><span class="p">():</span>
+    <span class="n">fake_names</span> <span class="o">=</span> \
+<span class="s">"""Veronique Tippetts
+Sarah Santiago
+Eustolia Bushard
+Emanuel Riker
+Maybelle Denney
+Lilia Gobel
+Clarine Vandermeer
+Felicidad Joynes
+Rod Pixley
+Rashad Fukushima
+Marci Bakley
+Melvina Cichon
+Susy Sibert
+Oma Hoskins
+Lance Curnutte
+Mei Wooldridge
+Jillian Mccroy
+Darby Castellon
+Raul Pickney
+Loni Kaur"""</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">fake_names</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">fake_name_generator</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">fake_name_generator</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">fake_name_generator</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Lilia Gobel
+Emanuel Riker
+Clarine Vandermeer
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># don't reuse names</span>
+<span class="n">fake_names</span> <span class="o">=</span> \
+<span class="s">"""Veronique Tippetts
+Sarah Santiago
+Eustolia Bushard
+Emanuel Riker
+Maybelle Denney
+Lilia Gobel
+Clarine Vandermeer
+Felicidad Joynes
+Rod Pixley
+Rashad Fukushima
+Marci Bakley
+Melvina Cichon
+Susy Sibert
+Oma Hoskins
+Lance Curnutte
+Mei Wooldridge
+Jillian Mccroy
+Darby Castellon
+Raul Pickney
+Loni Kaur"""</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">get_fake_name</span><span class="p">():</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fake_names</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fake_names</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">fake_names</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">del</span> <span class="n">fake_names</span><span class="p">[</span><span class="n">r</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">n</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">21</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">get_fake_name</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Melvina Cichon
+Marci Bakley
+Raul Pickney
+Maybelle Denney
+Lilia Gobel
+Loni Kaur
+Felicidad Joynes
+Susy Sibert
+Rod Pixley
+Oma Hoskins
+Jillian Mccroy
+Eustolia Bushard
+Lance Curnutte
+Clarine Vandermeer
+Veronique Tippetts
+Sarah Santiago
+Mei Wooldridge
+Rashad Fukushima
+Darby Castellon
+Emanuel Riker
+None
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">min_age</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">max_age</span> <span class="o">=</span> <span class="mi">79</span>
+<span class="n">patients</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span><span class="s">'birth_date'</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">'age'</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="s">'name'</span><span class="p">:</span> <span class="n">get_fake_name</span><span class="p">()</span> <span class="p">}</span> 
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span> <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">min_age</span> <span class="ow">and</span> <span class="n">row</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">max_age</span> <span class="p">]</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">patients</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[{'age': 50, 'birth_date': '1969-05-10', 'name': 'Oma Hoskins'},
+ {'age': 50, 'birth_date': '1969-05-30', 'name': 'Clarine Vandermeer'},
+ {'age': 41, 'birth_date': '1978-02-04', 'name': 'Darby Castellon'},
+ {'age': 63, 'birth_date': '1955-11-01', 'name': 'Loni Kaur'},
+ {'age': 52, 'birth_date': '1966-10-13', 'name': 'Rod Pixley'},
+ {'age': 28, 'birth_date': '1990-08-20', 'name': 'Jillian Mccroy'},
+ {'age': 72, 'birth_date': '1947-01-31', 'name': 'Raul Pickney'},
+ {'age': 23, 'birth_date': '1995-07-03', 'name': 'Felicidad Joynes'},
+ {'age': 31, 'birth_date': '1987-10-01', 'name': 'Marci Bakley'}]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>

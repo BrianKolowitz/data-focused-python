@@ -1,0 +1,441 @@
+<h1 id="python-functions">Python Functions</h1>
+<p><a href="https://www.datacamp.com/community/tutorials/functions-python-tutorial">Python Function Tutorial</a></p>
+
+<p>Functions are used to encapsulate a set of relatred instructions that you want to use within your program to carry out a specific task. This helps with the organization of your code as well as code reusability. Oftent times functions accept parameters and return values, but that’s not always the case.</p>
+
+<p>There are three types of functions in Python:</p>
+
+<ol>
+  <li>Built-in functions, such as help() to ask for help, min() to get the minimum value, print() to print an object to the terminal,… You can find an overview with more of these functions here.</li>
+  <li>User-Defined Functions (UDFs), which are functions that users create to help them out; And</li>
+  <li>Anonymous functions, which are also called lambda functions because they are not declared with the standard def keyword.</li>
+</ol>
+
+<h2 id="functions-vs-methods">Functions vs. Methods</h2>
+
+<p>A method is a function that’s part of a class which we’ll discuss in another lecture. Keep in mind all methods are functions but not all functions are methods.</p>
+
+<h2 id="parameters-vs-arguments">Parameters vs. Arguments</h2>
+
+<p>Parameters are the names used when defining a function or a method, and into which arguments will be mapped. In other words, arguments are the things which are supplied to any function or method call, while the function or method code refers to the arguments by their parameter names.</p>
+
+<p>Consider the function</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">sum</code> has 2 parameters <em>a</em> and <em>b</em>. If you call the <code class="highlighter-rouge">sum</code> function with values <strong>2</strong> and <strong>3</strong> then <strong>2</strong> and <strong>3</strong> are the arguments.</p>
+
+<h2 id="defining-user-functions">Defining User Functions</h2>
+
+<p>The four steps to defining a function in Python are the following:</p>
+
+<ol>
+  <li>Use the keyword <code class="highlighter-rouge">def</code> to declare the function and follow this up with the function name.</li>
+  <li>Add parameters to the function: they should be within the parentheses of the function. End your line with a colon.</li>
+  <li>Add statements that the functions should execute.</li>
+  <li>End your function with a return statement if the function should output something. Without the return statement, your function will return an object None.</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># takes no parameters, returns none</span>
+<span class="k">def</span> <span class="nf">say_hello</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'hello'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="n">say_hello</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hello
+&lt;class 'NoneType'&gt; None
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># takes parameters, returns none</span>
+<span class="k">def</span> <span class="nf">say_something</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="n">say_something</span><span class="p">(</span><span class="s">'hello class'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hello class
+&lt;class 'NoneType'&gt; None
+</code></pre></div></div>
+
+<h3 id="the-return-statement">The return Statement</h3>
+
+<p>Sometimes it’s useful to reuturn values from functions. We’ll refactor our code to return values.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_message</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s">'hello class'</span>
+
+<span class="k">def</span> <span class="nf">say_something</span><span class="p">():</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">get_message</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="n">get_message</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'str'&gt; hello class
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">say_something</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hello class
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">say_something</span><span class="p">()))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hello class
+&lt;class 'NoneType'&gt;
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="n">say_something</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hello class
+&lt;class 'NoneType'&gt; None
+</code></pre></div></div>
+
+<h4 id="returning-multiple-values">returning multiple values</h4>
+
+<p>In python you can return values in a variety of data types including <a href="https://www.datacamp.com/community/tutorials/data-structures-python#primitive">primitive data structures</a> such as integers, floats, strings, &amp; booleans as well as <a href="https://www.datacamp.com/community/tutorials/data-structures-python#nonprimitive">non-primitive data structures</a> such as arrays, lists, tuples, dictionaries, sets, and files.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># returning a list</span>
+<span class="k">def</span> <span class="nf">get_messages</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s">'hello class'</span><span class="p">,</span> <span class="s">'python is great'</span><span class="p">,</span> <span class="s">'here we</span><span class="se">\'</span><span class="s">re retuning a list'</span><span class="p">]</span>
+
+<span class="n">messages</span> <span class="o">=</span> <span class="n">get_messages</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">messages</span><span class="p">),</span> <span class="n">messages</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">message</span><span class="p">),</span> <span class="n">message</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'list'&gt; ['hello class', 'python is great', "here we're retuning a list"]
+&lt;class 'str'&gt; hello class
+&lt;class 'str'&gt; python is great
+&lt;class 'str'&gt; here we're retuning a list
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># returning a tuple... more on tuples later</span>
+<span class="k">def</span> <span class="nf">get_message</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">(</span><span class="s">'hello class'</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="n">message</span> <span class="o">=</span> <span class="n">get_message</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">message</span><span class="p">),</span> <span class="n">message</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">message</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">message</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'tuple'&gt; ('hello class', 3)
+hello class
+hello class
+hello class
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_message</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s">'hello class'</span><span class="p">,</span> <span class="mi">3</span> <span class="c"># ('s are optional</span>
+
+<span class="n">message</span> <span class="o">=</span> <span class="n">get_message</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">message</span><span class="p">),</span> <span class="n">message</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">message</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">message</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'tuple'&gt; ('hello class', 3)
+hello class
+hello class
+hello class
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">message</span><span class="p">,</span> <span class="n">iterations</span> <span class="o">=</span> <span class="n">get_message</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">message</span><span class="p">),</span> <span class="n">message</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">iterations</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'str'&gt; hello class
+hello class
+hello class
+hello class
+</code></pre></div></div>
+
+<h2 id="function-arguments-in-python">Function Arguments in Python</h2>
+
+<p>There are four types of arguments that Python functions can take:</p>
+
+<ol>
+  <li>Default arguments</li>
+  <li>Required arguments</li>
+  <li>Keyword arguments</li>
+  <li>Variable number of arguments</li>
+</ol>
+
+<h3 id="default-arguments">Default Arguments</h3>
+
+<p>Default arguments are those that take a default value if no argument value is passed during the function call. You can assign this default value by with the assignment operator =, just like in the following example:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">def</span> <span class="nf">get_random_numbers</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">numbers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="n">numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">numbers</span>
+    
+<span class="n">w</span> <span class="o">=</span> <span class="n">get_random_numbers</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'w:'</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">w</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">get_random_numbers</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'x:'</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">get_random_numbers</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'y:'</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="n">get_random_numbers</span><span class="p">(</span><span class="n">n</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'z:'</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">z</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>w: &lt;class 'float'&gt; 0.9219223837765171
+x: &lt;class 'float'&gt; 0.04048894892475918
+y: &lt;class 'list'&gt; [0.301309389077302, 0.8513163130317707, 0.5066023194791178]
+z: &lt;class 'NoneType'&gt; None
+</code></pre></div></div>
+
+<h3 id="required-arguments">Required Arguments</h3>
+
+<p>Required arguments are mandatory and you will generate an error if they’re not present. Required arguments must be passed in precisely the right order, just like in the following example:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">say_something</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">number_of_times</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">number_of_times</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+<span class="c"># arguments passed in the proper order</span>
+<span class="n">say_something</span><span class="p">(</span><span class="s">'hello'</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hello
+hello
+hello
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># arguments passed incorrectly</span>
+<span class="n">say_something</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">'hello'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-19-6d75745f7452&gt; in &lt;module&gt;()
+      1 # arguments passed incorrectly
+----&gt; 2 say_something(3, 'hello')
+
+
+&lt;ipython-input-18-aea698ed2a4b&gt; in say_something(message, number_of_times)
+      1 def say_something(message, number_of_times):
+----&gt; 2     for i in range(0, number_of_times):
+      3         print(message)
+      4 
+      5 # arguments passed in the proper order
+
+
+TypeError: 'str' object cannot be interpreted as an integer
+</code></pre></div></div>
+
+<h3 id="keyword-arguments">Keyword Arguments</h3>
+
+<p>You can use keyword arguments to make sure that you call all the parameters in the right order. You can do so by specifying their parameter name in the function call.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">say_something</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s">'hello'</span><span class="p">,</span> <span class="n">number_of_times</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">say_something</span><span class="p">(</span><span class="n">number_of_times</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s">'hello'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hello
+hello
+hello
+hello
+hello
+hello
+</code></pre></div></div>
+
+<h3 id="variable-number-of-arguments">Variable Number of Arguments</h3>
+
+<p>In cases where you don’t know the exact number of arguments that you want to pass to a function, you can use the following syntax with *args:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">total</span>
+
+<span class="n">total</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+
+<span class="n">total</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+
+<span class="n">total</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'tuple'&gt; (1,)
+1
+&lt;class 'tuple'&gt; (1, 1)
+2
+&lt;class 'tuple'&gt; (1, 2, 3, 4, 5)
+15
+</code></pre></div></div>
+
+<p>The asterisk <code class="highlighter-rouge">*</code> is placed before the variable name that holds the values of all nonkeyword variable arguments. Note here that you might as well have passed <code class="highlighter-rouge">*varint</code>, <code class="highlighter-rouge">*var_int_args</code> or any other name to the <code class="highlighter-rouge">plus()</code> function.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># You can spedify any combination of required, keyword, and variable arguments.</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">a</span>
+    <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">arg</span>
+    <span class="k">return</span> <span class="n">total</span>
+
+<span class="n">total</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+<span class="n">total</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+<span class="n">total</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1
+3
+13
+</code></pre></div></div>
+
+<h3 id="global-vs-local-variables">Global vs Local Variables</h3>
+
+<p>In general, variables that are defined inside a function body have a local scope, and those defined outside have a global scope. That means that local variables are defined within a function block and can only be accessed inside that function, while global variables can be obtained by all functions that might be in your script:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># global variable</span>
+<span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="err">():</span><span class="nf">player_hit</span>
+    <span class="k">global</span> <span class="n">score</span>
+    <span class="n">hit_points</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span> <span class="c"># local variable</span>
+    <span class="n">score</span> <span class="o">+=</span> <span class="n">hit_points</span>
+    
+<span class="k">def</span> <span class="nf">enemy_hit</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">score</span>
+    <span class="n">hit_points</span> <span class="o">=</span> <span class="mi">5</span> <span class="c"># local variable</span>
+    <span class="n">score</span> <span class="o">+=</span> <span class="n">hit_points</span> 
+
+<span class="n">enemy_hit</span><span class="p">()</span>
+<span class="n">enemy_hit</span><span class="p">()</span>
+<span class="n">enemy_hit</span><span class="p">()</span>
+<span class="n">enemy_hit</span><span class="p">()</span>
+<span class="n">player_hit</span><span class="p">()</span>
+<span class="n">enemy_hit</span><span class="p">()</span>
+<span class="n">player_hit</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5
+</code></pre></div></div>
+
+<h2 id="anonymous-functions-in-python">Anonymous Functions in Python</h2>
+
+<p>Anonymous functions are also called lambda functions in Python because instead of declaring them with the standard def keyword, you use the <code class="highlighter-rouge">lambda</code> keyword.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">double</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y</span> <span class="o">=</span> <span class="n">double</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sdlfjsdk</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="n">x</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="k">else</span> <span class="mi">0</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">sdlfjsdk</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5
+</code></pre></div></div>
+
+<p>You use anonymous functions when you require a nameless function for a short period of time, and that is created at runtime. Specific contexts in which this would be relevant is when you’re working with <code class="highlighter-rouge">filter()</code>, <code class="highlighter-rouge">map()</code> and <code class="highlighter-rouge">reduce()</code>:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">filter()</code> function filters the original input list on the basis of a criterion &gt; 10.</li>
+  <li><code class="highlighter-rouge">map()</code> applies a function to all items of the list</li>
+  <li><code class="highlighter-rouge">reduce()</code> is part of the functools library. You use this function cumulatively to the items of the my_list list, from left to right and reduce the sequence to a single value.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
+
+<span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+
+<span class="c"># Use lambda function with `filter()`</span>
+<span class="n">filtered_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">),</span> <span class="n">my_list</span><span class="p">))</span>
+
+<span class="c"># Use lambda function with `map()`</span>
+<span class="n">mapped_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">my_list</span><span class="p">))</span>
+
+<span class="c"># Use lambda function with `reduce()`</span>
+<span class="n">reduced_list</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">my_list</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">filtered_list</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mapped_list</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">reduced_list</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[6, 7, 8, 9, 10]
+[2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+55
+</code></pre></div></div>
+
+<h2 id="using-main-as-a-function">Using main() as a Function</h2>
+
+<p>You can easily define a main() function and call it just like you have done with all of the other functions above:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Define `main()` function</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+  <span class="k">print</span><span class="p">(</span><span class="s">"This is a main function"</span><span class="p">)</span>
+
+<span class="n">main</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>However, as it stands now, the code of your <code class="highlighter-rouge">main()</code> function will be called when you import it as a module. To make sure that this doesn’t happen, you call the <code class="highlighter-rouge">main()</code> function when <code class="highlighter-rouge">__name__ == '__main__'</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Define `main()` function</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+  <span class="k">print</span><span class="p">(</span><span class="s">"This is a main function"</span><span class="p">)</span>
+  
+<span class="c"># Execute `main()` function </span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></div>

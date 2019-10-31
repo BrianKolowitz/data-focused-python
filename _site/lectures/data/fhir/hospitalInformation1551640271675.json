@@ -1,0 +1,136 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:8074c9c5-982f-3d30-8a5f-95f6ba9fde06",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "8074c9c5-982f-3d30-8a5f-95f6ba9fde06",
+        "extension": [
+          {
+            "url": "http://synthetichealth.github.io/synthea/utilization-encounters-extension",
+            "valueInteger": 2501
+          },
+          {
+            "url": "http://synthetichealth.github.io/synthea/utilization-procedures-extension",
+            "valueInteger": 1334
+          },
+          {
+            "url": "http://synthetichealth.github.io/synthea/utilization-labs-extension",
+            "valueInteger": 184
+          },
+          {
+            "url": "http://synthetichealth.github.io/synthea/utilization-prescriptions-extension",
+            "valueInteger": 227
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://github.com/synthetichealth/synthea",
+            "value": "8074c9c5-982f-3d30-8a5f-95f6ba9fde06"
+          }
+        ],
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/organization-type",
+                "code": "prov",
+                "display": "Healthcare Provider"
+              }
+            ],
+            "text": "Healthcare Provider"
+          }
+        ],
+        "name": "UPMC MERCY",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "4122328111"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "1400 LOCUST STREET"
+            ],
+            "city": "PITTSBURGH",
+            "state": "PA",
+            "postalCode": "15219",
+            "country": "US"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Organization"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:797d87ed-77fa-3b01-b971-0399bb10dc09",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "797d87ed-77fa-3b01-b971-0399bb10dc09",
+        "extension": [
+          {
+            "url": "http://synthetichealth.github.io/synthea/utilization-encounters-extension",
+            "valueInteger": 8
+          },
+          {
+            "url": "http://synthetichealth.github.io/synthea/utilization-procedures-extension",
+            "valueInteger": 0
+          },
+          {
+            "url": "http://synthetichealth.github.io/synthea/utilization-labs-extension",
+            "valueInteger": 0
+          },
+          {
+            "url": "http://synthetichealth.github.io/synthea/utilization-prescriptions-extension",
+            "valueInteger": 0
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://github.com/synthetichealth/synthea",
+            "value": "797d87ed-77fa-3b01-b971-0399bb10dc09"
+          }
+        ],
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/organization-type",
+                "code": "prov",
+                "display": "Healthcare Provider"
+              }
+            ],
+            "text": "Healthcare Provider"
+          }
+        ],
+        "name": "SELECT SPECIALITY AT UPMC MONTEFIORE",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "412-647-2345"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "3459 5TH AVENUE"
+            ],
+            "city": "PITTSBURGH",
+            "state": "PA",
+            "postalCode": "15213",
+            "country": "US"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Organization"
+      }
+    }
+  ]
+}

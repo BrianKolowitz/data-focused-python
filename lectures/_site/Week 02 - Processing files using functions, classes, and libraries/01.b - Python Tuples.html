@@ -1,0 +1,326 @@
+<h1 id="python-tuple">Python Tuple</h1>
+<p><a href="https://www.programiz.com/python-programming/tuple">Python Tuple</a></p>
+
+<h2 id="what-is-tuple">What is tuple?</h2>
+
+<p>In Python programming, a tuple is similar to a list. The difference between the two is that we cannot change the elements of a tuple once it is assigned whereas in a list, elements can be changed.</p>
+
+<h3 id="advantages-of-tuple-over-list">Advantages of Tuple over List</h3>
+
+<p>Since, tuples are quite similiar to lists, both of them are used in similar situations as well.</p>
+
+<p>However, there are certain advantages of implementing a tuple over a list. Below listed are some of the main advantages:</p>
+
+<ul>
+  <li>We generally use tuple for heterogeneous (different) datatypes and list for homogeneous (similar) datatypes.</li>
+  <li>Since tuple are immutable, iterating through tuple is faster than with list. So there is a slight performance boost.</li>
+  <li>Tuples that contain immutable elements can be used as key for a dictionary. With list, this is not possible.</li>
+  <li>If you have data that doesn’t change, implementing it as tuple will guarantee that it remains write-protected.</li>
+</ul>
+
+<h3 id="creating-a-tuple">Creating a Tuple</h3>
+<p>A tuple is created by placing all the items (elements) inside a parentheses (), separated by comma. The parentheses are optional but is a good practice to write it.</p>
+
+<p>A tuple can have any number of items and they may be of different types (integer, float, list, string etc.).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># empty tuple</span>
+<span class="c"># Output: ()</span>
+<span class="n">my_tuple</span> <span class="o">=</span> <span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">my_tuple</span><span class="p">),</span> <span class="n">my_tuple</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'tuple'&gt; ()
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># tuple having integers</span>
+<span class="c"># Output: (1, 2, 3)</span>
+<span class="n">my_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_tuple</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(1, 2, 3)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># tuple with mixed datatypes</span>
+<span class="c"># Output: (1, "Hello", 3.4)</span>
+<span class="n">my_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">"Hello"</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_tuple</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(1, 'Hello', 3.4)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># nested tuple</span>
+<span class="c"># Output: ("mouse", [8, 4, 6], (1, 2, 3))</span>
+<span class="n">my_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s">"mouse"</span><span class="p">,</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_tuple</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('mouse', [8, 4, 6], (1, 2, 3))
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># tuple can be created without parentheses</span>
+<span class="c"># also called tuple packing</span>
+<span class="c"># Output: 3, 4.6, "dog"</span>
+
+<span class="n">my_tuple</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">4.6</span><span class="p">,</span> <span class="s">"dog"</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_tuple</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(3, 4.6, 'dog')
+</code></pre></div></div>
+
+<p><strong>Creating a tuple with one element is a bit tricky.</strong></p>
+
+<p>Having one element within parentheses is not enough. We will need a trailing comma to indicate that it is in fact a tuple.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># only parentheses is not enough</span>
+<span class="c"># Output: &lt;class 'str'&gt;</span>
+<span class="n">my_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s">"hello"</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">my_tuple</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'str'&gt;
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># need a comma at the end</span>
+<span class="c"># Output: &lt;class 'tuple'&gt;</span>
+<span class="n">my_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s">"hello"</span><span class="p">)</span> 
+
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">my_tuple</span><span class="p">),</span> <span class="n">my_tuple</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'str'&gt; hellobye
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># what if i forget a comma</span>
+<span class="c"># Output: &lt;class 'tuple'&gt;</span>
+<span class="n">my_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s">"hello"</span> <span class="s">"bye"</span><span class="p">)</span> 
+
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">my_tuple</span><span class="p">),</span> <span class="n">my_tuple</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'str'&gt; hellobye
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># parentheses is optional</span>
+<span class="c"># Output: &lt;class 'tuple'&gt;</span>
+<span class="n">my_tuple</span> <span class="o">=</span> <span class="s">"hello"</span><span class="p">,</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">my_tuple</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'tuple'&gt;
+</code></pre></div></div>
+
+<h2 id="accessing-elements-in-a-tuple">Accessing Elements in a Tuple</h2>
+
+<h3 id="indexing">Indexing</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s">"mouse"</span><span class="p">,</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">n_tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s">"mouse"</span><span class="p">,</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">n_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]),</span> <span class="n">n_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'str'&gt; u
+</code></pre></div></div>
+
+<h3 id="negative-indexing">Negative indexing</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s">"mouse"</span><span class="p">,</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">n_tuple</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="s">' is the same as '</span><span class="p">,</span> <span class="n">n_tuple</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1  is the same as  1
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s">"mouse"</span><span class="p">,</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">n_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="s">' is the same as '</span><span class="p">,</span> <span class="n">n_tuple</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">][</span><span class="o">-</span><span class="mi">5</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>m  is the same as  m
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s">"mouse"</span><span class="p">,</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">n_tuple</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
+</code></pre></div></div>
+
+<h3 id="slicing">Slicing</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">letter_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">,</span> <span class="s">'f'</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span> <span class="s">'h'</span><span class="p">,</span> <span class="s">'i'</span><span class="p">,</span> <span class="s">'j'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># prints items at position 0, 1, and 2 but not 3</span>
+<span class="k">print</span><span class="p">(</span><span class="n">letter_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('a', 'b', 'c')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># prints items at position 3, 4, and 5 but not 6</span>
+<span class="k">print</span><span class="p">(</span><span class="n">letter_tuple</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('d', 'e', 'f')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># start at the beginning</span>
+<span class="k">print</span><span class="p">(</span><span class="n">letter_tuple</span><span class="p">[:</span><span class="mi">6</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('a', 'b', 'c', 'd', 'e', 'f')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># go until the end</span>
+<span class="k">print</span><span class="p">(</span><span class="n">letter_tuple</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('d', 'e', 'f', 'g', 'h', 'i', 'j')
+</code></pre></div></div>
+
+<h3 id="stepping-over-a-tuple-or-list">stepping over a tuple (or list)</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># every element</span>
+<span class="k">print</span><span class="p">(</span><span class="n">letter_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># every 3rd element</span>
+<span class="k">print</span><span class="p">(</span><span class="n">letter_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('a', 'd', 'g', 'j')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># elements at even positions</span>
+<span class="k">print</span><span class="p">(</span><span class="n">letter_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('a', 'c', 'e', 'g', 'i')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># elements at odd positions</span>
+<span class="k">print</span><span class="p">(</span><span class="n">letter_tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('b', 'd', 'f', 'h', 'j')
+</code></pre></div></div>
+
+<h3 id="reversing-a-tuple-or-list">reversing a tuple (or list)</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">letter_tuple</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">letter_tuple</span><span class="p">)::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('j', 'i', 'h', 'g', 'f', 'e', 'd', 'c', 'b', 'a')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">letter_tuple</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">letter_tuple</span><span class="p">)::</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('j', 'h', 'f', 'd', 'b')
+</code></pre></div></div>
+
+<h2 id="changing-a-tuple">Changing a Tuple</h2>
+
+<p>Unlike lists, tuples are immutable.</p>
+
+<p>This means that elements of a tuple cannot be changed once it has been assigned.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+
+<span class="n">x_tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span> <span class="c"># throws an error</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-45-ca0ecf3b2f0d&gt; in &lt;module&gt;
+      1 x_tuple = (4, 2, 3, [6, 5])
+      2 
+----&gt; 3 x_tuple[1] = 8 # throws an error
+
+
+TypeError: 'tuple' object does not support item assignment
+</code></pre></div></div>
+
+<p>But, if the element is itself a mutable datatype like list, its nested items can be changed.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x_tuple</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">9</span> <span class="c"># but item of mutable element can be changed</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x_tuple</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(4, 2, 3, [9, 5])
+</code></pre></div></div>
+
+<h2 id="deleting-a-tuple">Deleting a Tuple</h2>
+
+<p>We cannot change the elements in a tuple. That also means we cannot delete or remove items from a tuple. But deleting a tuple entirely is possible using the keyword <code class="highlighter-rouge">del</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a_tuple</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(1, 2, 3)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">del</span> <span class="n">a_tuple</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a_tuple</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
+
+NameError                                 Traceback (most recent call last)
+
+&lt;ipython-input-53-301a8601cf95&gt; in &lt;module&gt;
+      1 del a_tuple
+----&gt; 2 print(a_tuple)
+
+
+NameError: name 'a_tuple' is not defined
+</code></pre></div></div>
+
+<h2 id="other-tuple-methods">Other Tuple Methods</h2>
+
+<ul>
+  <li><code class="highlighter-rouge">count(x)</code> - Return the number of items that is equal to x</li>
+  <li><code class="highlighter-rouge">index(x)</code> - Return index of first item that is equal to x</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s">'r'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="s">'a'</span><span class="p">,</span> <span class="s">'p'</span><span class="p">,</span> <span class="s">'p'</span><span class="p">,</span> <span class="s">'l'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">,)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">my_tuple</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">'p'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">my_tuple</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">'p'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
+
+ValueError                                Traceback (most recent call last)
+
+&lt;ipython-input-55-6a32d652cb38&gt; in &lt;module&gt;
+----&gt; 1 print(my_tuple.index('p'))
+
+
+ValueError: tuple.index(x): x not in tuple
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>

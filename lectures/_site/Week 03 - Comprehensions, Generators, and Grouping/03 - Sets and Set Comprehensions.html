@@ -1,0 +1,637 @@
+<h1 id="sets-and-set-comprehensions">Sets and Set Comprehensions</h1>
+
+<p><a href="https://realpython.com/python-sets/">Python Sets</a>
+<a href="https://python-reference.readthedocs.io/en/latest/docs/comprehensions/set_comprehension.html">Set Comprehensions</a></p>
+
+<p>Perhaps you recall learning about sets and set theory at some point in your mathematical education. Maybe you even remember Venn diagrams:</p>
+
+<p><img src="https://files.realpython.com/media/t.8b7abb515ae8.png" width="384px" /></p>
+
+<p>In mathematics, a rigorous definition of a set can be abstract and difficult to grasp. Practically though, a set can be thought of simply as a well-defined collection of distinct objects, typically called elements or members.</p>
+
+<p>Grouping objects into a set can be useful in programming as well, and Python provides a built-in set type to do so. Sets are distinguished from other object types by the unique operations that can be performed on them.</p>
+
+<p>Here’s what you’ll learn in this tutorial:</p>
+<ul>
+  <li>You’ll see how to define set objects in Python and discover the operations that they support.</li>
+  <li>You’ll also learn about frozen sets, which are similar to sets except for one important detail.</li>
+</ul>
+
+<h2 id="defining-a-set">Defining a Set</h2>
+
+<p>Python’s built-in set type has the following characteristics:</p>
+<ul>
+  <li>Sets are unordered.</li>
+  <li>Set elements are unique. Duplicate elements are not allowed.</li>
+  <li>A set itself may be modified, but the elements contained in the set must be of an immutable type.</li>
+</ul>
+
+<p>A set can be created in two ways. First, you can define a set with the built-in set() function:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="o">&lt;</span><span class="nb">iter</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'foo', 'baz', 'qux', 'bar'}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y</span> <span class="o">=</span> <span class="nb">set</span><span class="p">((</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'foo', 'baz', 'qux', 'bar'}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">z</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">z</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'set'&gt; set()
+</code></pre></div></div>
+
+<p>Strings are also iterable, so a string can be passed to set() as well. You have already seen that list(s) generates a list of the characters in the string s. Similarly, set(s) generates a set of the characters in s:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="s">'data focused python'</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data focused python
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['d', 'a', 't', 'a', ' ', 'f', 'o', 'c', 'u', 's', 'e', 'd', ' ', 'p', 'y', 't', 'h', 'o', 'n']
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'o', 'p', 'u', 'e', 'h', 'f', 'd', 'n', 'y', 'c', 't', 's', 'a', ' '}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="s">'data focused python is cool because we learn python and work with data'</span>
+<span class="n">words</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">words</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['data', 'focused', 'python', 'is', 'cool', 'because', 'we', 'learn', 'python', 'and', 'work', 'with', 'data']
+{'we', 'is', 'with', 'and', 'learn', 'cool', 'python', 'because', 'work', 'data', 'focused'}
+</code></pre></div></div>
+
+<p>You can see that the resulting sets are unordered: the original order, as specified in the definition, is not necessarily preserved. Additionally, duplicate values are only represented in the set once, as with the string ‘foo’ in the first two examples and the letter ‘u’ in the third.</p>
+
+<p>Alternately, a set can be defined with curly braces (<code class="highlighter-rouge">{}</code>):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="o">&lt;</span><span class="n">obj</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">obj</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">obj</span><span class="o">&gt;</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>When a set is defined this way, each <obj> becomes a distinct element of the set, even if it is an iterable. This behavior is similar to that of the ```.append()``` list method.</obj></p>
+
+<p>Thus, the sets shown above can also be defined like this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'set'&gt; {'foo', 'baz', 'qux', 'bar'}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y</span> <span class="o">=</span> <span class="p">{</span><span class="s">'q'</span><span class="p">,</span> <span class="s">'u'</span><span class="p">,</span> <span class="s">'u'</span><span class="p">,</span> <span class="s">'x'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'set'&gt; {'x', 'u', 'q'}
+</code></pre></div></div>
+
+<p>To recap:</p>
+<ul>
+  <li>The argument to set() is an iterable. It generates a list of elements to be placed into the set.</li>
+  <li>The objects in curly braces are placed into the set intact, even if they are iterable.</li>
+</ul>
+
+<p>Observe the difference between these two set definitions:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'set'&gt; {'foo'}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s">'foo'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'set'&gt; {'o', 'f'}
+</code></pre></div></div>
+
+<p>A set can be empty. However, recall that Python interprets empty curly braces (<code class="highlighter-rouge">{}</code>) as an empty dictionary, so the only way to define an empty set is with the <code class="highlighter-rouge">set()</code> function:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'dict'&gt;
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'set'&gt;
+</code></pre></div></div>
+
+<p>An empty set is falsy in Boolean context:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">bool</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="ow">or</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="ow">and</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set()
+</code></pre></div></div>
+
+<p>You might think the most intuitive sets would contain similar objects—for example, even numbers or surnames:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">}</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Smith'</span><span class="p">,</span> <span class="s">'McArthur'</span><span class="p">,</span> <span class="s">'Wilson'</span><span class="p">,</span> <span class="s">'Johansson'</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>Python does not require this, though. The elements in a set can be objects of different types:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="mi">42</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">,</span> <span class="mf">3.14159</span><span class="p">,</span> <span class="bp">None</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'foo', 42, 3.14159, None}
+</code></pre></div></div>
+
+<p>Don’t forget that set elements must be immutable. For example, a tuple may be included in a set:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="mi">42</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mf">3.14159</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'foo', 42, 3.14159, (1, 2, 3)}
+</code></pre></div></div>
+
+<p>But lists and dictionaries are mutable, so they can’t be set elements:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="n">a</span><span class="p">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-34-0c2e2fff221a&gt; in &lt;module&gt;
+      1 a = [1, 2, 3]
+----&gt; 2 x = {a}
+
+
+TypeError: unhashable type: 'list'
+</code></pre></div></div>
+
+<h2 id="set-size-and-membership">Set Size and Membership</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">'bar'</span> <span class="ow">in</span> <span class="n">x</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">'qux'</span> <span class="ow">in</span> <span class="n">x</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<h2 id="operating-on-a-set">Operating on a Set</h2>
+
+<p>Many of the operations that can be used for Python’s other composite data types don’t make sense for sets. For example, sets can’t be indexed or sliced. However, Python provides a whole host of operations on set objects that generally mimic the operations that are defined for mathematical sets.</p>
+
+<h3 id="operators-vs-methods">Operators vs. Methods</h3>
+<p>Most, though not quite all, set operations in Python can be performed in two different ways: by operator or by method. Let’s take a look at how these operators and methods work, using set union as an example.</p>
+
+<p>Given two sets, x1 and x2, the union of x1 and x2 is a set consisting of all elements in either set.</p>
+
+<p>Consider these two sets:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>The union of <code class="highlighter-rouge">x1</code> and <code class="highlighter-rouge">x2</code> is <code class="highlighter-rouge">{'foo', 'bar', 'baz', 'qux', 'quux'}</code>.</p>
+
+<p>In Python, set union can be performed with the <code class="highlighter-rouge">|</code> operator:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">union_x</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">|</span> <span class="n">x2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">union_x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'foo', 'bar', 'baz', 'qux', 'quux'}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># note : there aren't any duplicates</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">union_x</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5 3 3
+</code></pre></div></div>
+
+<p>Set union can also be obtained with the .union() method. The method is invoked on one of the sets, and the other is passed as an argument:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'bar', 'baz', 'foo', 'quux', 'qux'}
+</code></pre></div></div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>The way they are used in the examples above, the operator and method behave identically. But there is a subtle difference between them. When you use the</td>
+      <td>operator, both operands must be sets. The .union() method, on the other hand, will take any iterable as an argument, convert it to a set, and then perform the union.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Observe the difference between these two statements:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">|</span> <span class="p">(</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-44-d83d33f7fbad&gt; in &lt;module&gt;
+----&gt; 1 x1 | ('baz', 'qux', 'quux')
+
+
+TypeError: unsupported operand type(s) for |: 'set' and 'tuple'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span><span class="o">.</span><span class="n">union</span><span class="p">((</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'bar', 'baz', 'foo', 'quux', 'qux'}
+</code></pre></div></div>
+
+<h3 id="available-operators-and-methods">Available Operators and Methods</h3>
+
+<p>Below is a list of the set operations available in Python. Some are performed by operator, some by method, and some by both. The principle outlined above generally applies: where a set is expected, methods will typically accept any iterable as an argument, but operators require actual sets as operands.</p>
+
+<h4 id="union">Union</h4>
+<p><img src="https://files.realpython.com/media/t.ca57b915cec6.png" width="384px" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">|</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'foo', 'bar', 'baz', 'qux', 'quux'}
+{'foo', 'bar', 'baz', 'qux', 'quux'}
+</code></pre></div></div>
+
+<p>More than two sets may be specified with either the operator or the method:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span> <span class="o">|</span> <span class="n">c</span> <span class="o">|</span> <span class="n">d</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{1, 2, 3, 4, 5, 6, 7}
+{1, 2, 3, 4, 5, 6, 7}
+</code></pre></div></div>
+
+<h4 id="intersection">Intersection</h4>
+
+<p><img src="https://files.realpython.com/media/t.9c6d33717cdc.png" width="384px" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">&amp;</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'baz'}
+{'baz'}
+</code></pre></div></div>
+
+<p>You can specify multiple sets with the intersection method and operator, just like you can with set union:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span> <span class="o">&amp;</span> <span class="n">c</span> <span class="o">&amp;</span> <span class="n">d</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{4}
+{4}
+</code></pre></div></div>
+
+<h4 id="difference">Difference</h4>
+
+<p><img src="https://files.realpython.com/media/t.a90b4c323d99.png" width="384px" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'foo', 'bar'}
+{'foo', 'bar'}
+</code></pre></div></div>
+
+<p>Once again, you can specify more than two sets:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">300</span><span class="p">}</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">}</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">{</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{1, 2, 3}
+{1, 2, 3}
+</code></pre></div></div>
+
+<p>When multiple sets are specified, the operation is performed from left to right. In the example above, <code class="highlighter-rouge">a - b</code> is computed first, resulting in <code class="highlighter-rouge">{1, 2, 3, 300}</code>. Then <code class="highlighter-rouge">c</code> is subtracted from that set, leaving <code class="highlighter-rouge">{1, 2, 3}</code>:</p>
+
+<p><img src="https://files.realpython.com/media/t.b37d6f78f99a.png" width="768" /></p>
+
+<h4 id="symmetric-difference">Symmetric Difference</h4>
+
+<p><img src="https://files.realpython.com/media/t.604de51646cc.png" width="384px" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">^</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'foo', 'bar', 'qux', 'quux'}
+{'foo', 'bar', 'qux', 'quux'}
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">^</code> operator also allows more than two sets:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">50</span><span class="p">}</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">^</span> <span class="n">b</span> <span class="o">^</span> <span class="n">c</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{10, 100, 5}
+</code></pre></div></div>
+
+<h4 id="disjoint">Disjoint</h4>
+
+<p>Determines whether or not two sets have any elements in common.</p>
+
+<p><code class="highlighter-rouge">x1.isdisjoint(x2)</code> returns <code class="highlighter-rouge">True</code> if <code class="highlighter-rouge">x1</code> and <code class="highlighter-rouge">x2</code> have no elements in common:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x3</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">x3</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<p>If <code class="highlighter-rouge">x1.isdisjoint(x2)</code> is <code class="highlighter-rouge">True</code>, then <code class="highlighter-rouge">x1 &amp; x2</code> is the empty set:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">&amp;</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set()
+</code></pre></div></div>
+
+<h4 id="is-subset">Is Subset</h4>
+
+<p>Determine whether one set is a subset of the other.</p>
+
+<p>In set theory, a set <code class="highlighter-rouge">x1</code> is considered a subset of another set <code class="highlighter-rouge">x2</code> if every element of <code class="highlighter-rouge">x1</code> is in <code class="highlighter-rouge">x2</code>.</p>
+
+<p><code class="highlighter-rouge">x1.issubset(x2)</code> and <code class="highlighter-rouge">x1 &lt;= x2</code> return <code class="highlighter-rouge">True</code> if <code class="highlighter-rouge">x1</code> is a subset of <code class="highlighter-rouge">x2</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">issubset</span><span class="p">({</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">}))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">&lt;=</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<h4 id="is-proper-subset">Is Proper Subset</h4>
+
+<p>A proper subset is the same as a subset, except that the sets can’t be identical. A set <code class="highlighter-rouge">x1</code> is considered a proper subset of another set <code class="highlighter-rouge">x2</code> if every element of <code class="highlighter-rouge">x1</code> is in <code class="highlighter-rouge">x2</code>, and <code class="highlighter-rouge">x1</code> and <code class="highlighter-rouge">x2</code> are not equal.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">&lt;</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">&lt;</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<h4 id="is-superset">Is Superset</h4>
+
+<p>A superset is the reverse of a subset. A set <code class="highlighter-rouge">x1</code> is considered a superset of another set <code class="highlighter-rouge">x2</code> if <code class="highlighter-rouge">x1</code> contains every element of <code class="highlighter-rouge">x2</code>.</p>
+
+<p><code class="highlighter-rouge">x1.issuperset(x2)</code> and <code class="highlighter-rouge">x1 &gt;= x2</code> return True if <code class="highlighter-rouge">x1</code> is a superset of <code class="highlighter-rouge">x2</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">issuperset</span><span class="p">({</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">}))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">&gt;=</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<h4 id="is-proper-superset">Is Proper Superset</h4>
+
+<p>A proper superset is the same as a superset, except that the sets can’t be identical. A set <code class="highlighter-rouge">x1</code> is considered a proper superset of another set <code class="highlighter-rouge">x2</code> if <code class="highlighter-rouge">x1</code> contains every element of <code class="highlighter-rouge">x2</code>, and <code class="highlighter-rouge">x1</code> and <code class="highlighter-rouge">x2</code> are not equal.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">&gt;</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x1</span> <span class="o">&gt;</span> <span class="n">x2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<h2 id="frozen-sets">Frozen Sets</h2>
+
+<p>Python provides another built-in type called a frozenset, which is in all respects exactly like a set, except that a frozenset is immutable. You can perform non-modifying operations on a frozenset:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">([</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>frozenset({'foo', 'baz', 'bar'})
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="p">{</span><span class="s">'baz'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'quux'</span><span class="p">})</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>frozenset({'baz'})
+</code></pre></div></div>
+
+<p>But methods that attempt to modify a frozenset fail:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">'quux'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
+
+AttributeError                            Traceback (most recent call last)
+
+&lt;ipython-input-70-b02648b33e59&gt; in &lt;module&gt;
+----&gt; 1 x.add('quux')
+
+
+AttributeError: 'frozenset' object has no attribute 'add'
+</code></pre></div></div>
+
+<h2 id="set-comprehension">Set Comprehension</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seed</span> <span class="o">=</span> <span class="mi">1234</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[3, 0, 0, 0, 4, 0, 5, 5, 0, 0]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="n">randint</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{0, 3, 4, 5}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Even'</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="k">else</span> <span class="s">'Odd'</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['Odd', 'Even', 'Odd', 'Even', 'Odd', 'Even', 'Odd', 'Even', 'Odd', 'Even']
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Even'</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="k">else</span> <span class="s">'Odd'</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'Odd', 'Even'}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>

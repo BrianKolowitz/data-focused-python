@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  
+
+  <title>07 - Getting Data from Web APIs - Data Focused Python</title>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/just-the-docs.css">
+
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-139655036-1', 'http://localhost:4000');
+      ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+  
+
+  
+    <script type="text/javascript" src="http://localhost:4000/assets/js/vendor/lunr.min.js"></script>
+  
+  <script type="text/javascript" src="http://localhost:4000/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>07 - Getting Data from Web APIs | Data Focused Python</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="07 - Getting Data from Web APIs" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/07%20-%20Getting%20Data%20from%20Web%20APIs.html" />
+<meta property="og:url" content="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/07%20-%20Getting%20Data%20from%20Web%20APIs.html" />
+<meta property="og:site_name" content="Data Focused Python" />
+<script type="application/ld+json">
+{"@type":"WebPage","url":"http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/07%20-%20Getting%20Data%20from%20Web%20APIs.html","headline":"07 - Getting Data from Web APIs","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+
+  <div class="page-wrap">
+    <div class="side-bar">
+      <a href="http://localhost:4000" class="site-title fs-6 lh-tight">Data Focused Python</a>
+      <span class="fs-3"><button class="js-main-nav-trigger navigation-list-toggle btn btn-outline" type="button" data-text-toggle="Hide">Menu</button></span>
+      <div class="navigation main-nav js-main-nav">
+        <nav role="navigation" aria-label="Main navigation">
+  <ul class="navigation-list">
+    
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/about.html" class="navigation-list-link"></a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/" class="navigation-list-link">Data Focused Python</a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/assignments" class="navigation-list-link">Assignments</a>
+            
+          </li>
+        
+      
+    
+      
+        
+          <li class="navigation-list-item active">
+            
+            <a href="http://localhost:4000/lectures" class="navigation-list-link">Lectures</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data.html" class="navigation-list-link">Week 01 - Language basics, Generating Data, Storing Data</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/00%20-%20Getting%20Started.html" class="navigation-list-link">00 - Getting Started</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/01.a%20-%20Terminal%20Application.html" class="navigation-list-link">01.a - Terminal Application</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/01.b%20-%20Argparse.html" class="navigation-list-link">01.b - Argparse</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/02.a%20-%20Generating%20Synthetic%20Data.html" class="navigation-list-link">02.a - Generating Synthetic Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/02.b%20-%20Synthetic%20Data%20Generation.html" class="navigation-list-link">02.b - Synthetic Data Generation</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/02.c%20-%20Using%20Synthea.html" class="navigation-list-link">02.c - Using Synthea</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/03%20-%20Getting%20Data%20from%20a%20Database.html" class="navigation-list-link">03 - Getting Data from a Database</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/04%20-%20FHIR%20SQL.html" class="navigation-list-link">04 - FHIR SQL</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/04%20-%20Python%20Testing.html" class="navigation-list-link">04 - Python Testing</a>
+                              </li>
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/05%20-%20Start%20a%20process%20in%20Python.html" class="navigation-list-link">05 - Start a process in Python</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20unit%20testing,%20generating%20files.html" class="navigation-list-link">Week 01 - Language basics, unit testing, generating files</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item  active">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries.html" class="navigation-list-link">Week 02 - Processing files using functions, classes, and libraries</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/01.a%20-%20File%20Processing.html" class="navigation-list-link">01.a - File Processing</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/01.b%20-%20CSV%20Files.html" class="navigation-list-link">01.b - CSV Files</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/01.c%20-%20JSON%20Files.html" class="navigation-list-link">01.c - JSON Files</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/01.d%20-%20XML%20Files.html" class="navigation-list-link">01.d - XML Files</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/02.a%20-%20Python%20Classes.html" class="navigation-list-link">02.a - Python Classes</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/02.b%20-%20Python%20Modules%20and%20Packages.html" class="navigation-list-link">02.b - Python Modules and Packages</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/03%20-%20Using%20fhirclient%20to%20parse%20data.html" class="navigation-list-link">03 - Using fhirclient to parse data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/04%20-%20Reading%20synthea%20data.html" class="navigation-list-link">04 - Reading synthea data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/05%20-%20Python%20Functions.html" class="navigation-list-link">05 - Python Functions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/06%20-%20Python%20Tuples.html" class="navigation-list-link">06 - Python Tuples</a>
+                              </li>
+                            
+                          
+                            
+                              <li class="navigation-list-item  active">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries/07%20-%20Getting%20Data%20from%20Web%20APIs.html" class="navigation-list-link active">07 - Getting Data from Web APIs</a>
+                              </li>
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping.html" class="navigation-list-link">Week 03 - Comprehensions, Generators, and Grouping</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/01%20-%20Loops.html" class="navigation-list-link">01 - Loops</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/02%20-%20Lists%20and%20List%20Comprehensions.html" class="navigation-list-link">02 - Lists and List Comprehensions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/03%20-%20Sets%20and%20Set%20Comprehensions.html" class="navigation-list-link">03 - Sets and Set Comprehensions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/04.a%20-%20Dictionaries.html" class="navigation-list-link">04.a - Dictionaries</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/04.b%20-%20Dictionary%20Comprehensions.html" class="navigation-list-link">04.b - Dictionary Comprehensions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/05%20-%20Python%20Generators.html" class="navigation-list-link">05 - Python Generators</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/06%20-%20Cleaning%20and%20Transforming%20Data.html" class="navigation-list-link">06 - Cleaning and Transforming Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Comprehensions,%20Generators,%20and%20Grouping/07%20-%20Grouping%20Data.html" class="navigation-list-link">07 - Grouping Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization.html" class="navigation-list-link">Week 04 - Numpy, Pandas, Graphing & Visualization</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization/01%20-%20Descriptive%20Statistics.html" class="navigation-list-link">01 - Descriptive Statistics</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization/02%20-%20Basic%20Medical%20Data%20Visualization.html" class="navigation-list-link">02 - Basic Medical Data Visualization</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting.html" class="navigation-list-link">03 - Matplotlib Tutorial Python Plotting</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Numpy,%20Pandas,%20Graphing%20&%20Visualization/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial.html" class="navigation-list-link">04 - The Ultimate Python Seaborn Tutorial</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth.html" class="navigation-list-link">Week 05 - Numpy & Pandas In-Depth</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/00%20-%20Additional%20Links.html" class="navigation-list-link">00 - Additional Links</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/01%20-%20NumPy%20Introduction.html" class="navigation-list-link">01 - NumPy Introduction</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/02%20-%20NumPy%20Data%20analysis.html" class="navigation-list-link">02 - NumPy Data analysis</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/03%20-%20Pandas%20Introduction.html" class="navigation-list-link">03 - Pandas Introduction</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/04.a%20-%20Pandas%20Data%20analysis%20Part%201.html" class="navigation-list-link">04.a - Pandas Data analysis Part 1</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Numpy%20&%20Pandas%20In-Depth/04.b%20-%20Pandas%20Data%20analysis%20Part%202.html" class="navigation-list-link">04.b - Pandas Data analysis Part 2</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping,%20Databases,%20and%20Other%20Data%20Sources.html" class="navigation-list-link">Week 06 - Web Scraping, Databases, and Other Data Sources</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping,%20Databases,%20and%20Other%20Data%20Sources/01.a%20-%20Getting%20Data%20from%20Web%20Pages.html" class="navigation-list-link">01.a - Getting Data from Web Pages</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping,%20Databases,%20and%20Other%20Data%20Sources/01.b%20-%20Getting%20Data%20from%20Web%20Pages.html" class="navigation-list-link">01.b - Getting Data from Web Pages</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/resources" class="navigation-list-link">Resources</a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  </ul>
+</nav>
+
+      </div>
+      <footer role="contentinfo" class="site-footer">
+        <p class="text-small text-grey-dk-000 mb-0">This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.</p>
+      </footer>
+    </div>
+    <div class="main-content-wrap js-main-content" tabindex="0">
+      <div class="page-header">
+        <div class="main-content">
+          
+          <div class="search js-search">
+            <div class="search-input-wrap">
+              <input type="text" class="js-search-input search-input" tabindex="0" placeholder="Search Data Focused Python" aria-label="Search Data Focused Python" autocomplete="off">
+              <svg width="14" height="14" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" class="search-icon"><title>Search</title><g fill-rule="nonzero"><path d="M17.332 20.735c-5.537 0-10-4.6-10-10.247 0-5.646 4.463-10.247 10-10.247 5.536 0 10 4.601 10 10.247s-4.464 10.247-10 10.247zm0-4c3.3 0 6-2.783 6-6.247 0-3.463-2.7-6.247-6-6.247s-6 2.784-6 6.247c0 3.464 2.7 6.247 6 6.247z"/><path d="M11.672 13.791L.192 25.271 3.02 28.1 14.5 16.62z"/></g></svg>
+            </div>
+            <div class="js-search-results search-results-wrap"></div>
+          </div>
+          
+          
+            <ul class="list-style-none text-small mt-md-1 mb-md-1 pb-4 pb-md-0 js-aux-nav aux-nav">
+              
+                <li class="d-inline-block my-0 mr-2"><a href="//github.com/BrianKolowitz/data-focused-python">Code</a></li>
+              
+                <li class="d-inline-block my-0"><a href="/data-focused-python/about.html">About</a></li>
+              
+            </ul>
+          
+        </div>
+      </div>
+      <div class="main-content">
+        
+          
+            <nav class="breadcrumb-nav">
+              <ol class="breadcrumb-nav-list">
+                
+                  <li class="breadcrumb-nav-list-item"><a href="http://localhost:4000/lectures">Lectures</a></li>
+                  <li class="breadcrumb-nav-list-item"><a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files%20using%20functions,%20classes,%20and%20libraries.html">Week 02 - Processing files using functions, classes, and libraries</a></li>
+                
+                <li class="breadcrumb-nav-list-item"><span>07 - Getting Data from Web APIs</span></li>
+              </ol>
+            </nav>
+          
+        
+        <div id="main-content" class="page-content" role="main">
+          <h1 id="python-api-tutorial---an-introduction-to-using-apis">Python API tutorial - An Introduction to using APIs</h1>
+<p><a href="https://www.dataquest.io/blog/python-api-tutorial/">source</a></p>
+
+<p>Application Program Interfaces, or APIs, are commonly used to retrieve data from remote websites. Sites like Reddit, Twitter, and Facebook all offer certain data through their APIs. To use an API, you make a request to a remote web server, and retrieve the data you need.</p>
+
+<p>But why use an API instead of a static dataset you can download? APIs are useful in the following cases:</p>
+
+<ul>
+  <li>The data is changing quickly. An example of this is stock price data. It doesn’t really make sense to regenerate a dataset and download it every minute – this will take a lot of bandwidth, and be pretty slow.</li>
+  <li>You want a small piece of a much larger set of data. Reddit comments are one example. What if you want to just pull your own comments on Reddit? It doesn’t make much sense to download the entire Reddit database, then filter just your own comments.</li>
+  <li>There is repeated computation involved. Spotify has an API that can tell you the genre of a piece of music. You could theoretically create your own classifier, and use it to categorize music, but you’ll never have as much data as Spotify does.</li>
+</ul>
+
+<p>In cases like the ones above, an API is the right solution. In this blog post, we’ll be querying a simple API to retrieve data about the International Space Station (ISS). Using an API will save us time and effort over doing all the computation ourselves.</p>
+
+<p><img src="https://www.dataquest.io/wp-content/uploads/2015/09/iss056e201262.jpg" alt="ISS" /></p>
+
+<h2 id="api-requests">API Requests</h2>
+
+<p>APIs are hosted on web servers. When you type www.google.com in your browser’s address bar, your computer is actually asking the www.google.com server for a webpage, which it then returns to your browser.</p>
+
+<p>APIs work much the same way, except instead of your web browser asking for a webpage, your program asks for data. This data is usually returned in JSON format (for more on this, checkout our tutorial on working with JSON data).</p>
+
+<p>In order to get the data, we make a request to a webserver. The server then replies with our data. In Python, we’ll use the <a href="http://www.python-requests.org/en/latest/">requests</a> library to do this. In this Python API tutorial we’ll be using Python 3.4 for all of our examples.</p>
+
+<h2 id="type-of-requests">Type of requests</h2>
+
+<p>There are many different types of requests. The most commonly used one, a GET request, is used to retrieve data.</p>
+
+<p>We can use a simple GET request to retrieve information from the OpenNotify API.</p>
+
+<p>OpenNotify has several API endpoints. An endpoint is a server route that is used to retrieve different data from the API. For example, the <code class="highlighter-rouge">/comments</code> endpoint on the Reddit API might retrieve information about comments, whereas the <code class="highlighter-rouge">/users</code> endpoint might retrieve data about users. To access them, you would add the endpoint to the base url of the API.</p>
+
+<p>The first endpoint we’ll look at on OpenNotify is the <code class="highlighter-rouge">iss-now.json</code> endpoint. This endpoint gets the current latitude and longitude of the International Space Station. As you can see, retrieving this data isn’t a great fit for a dataset, because it involves some calculation on the server, and changes quickly.</p>
+
+<p>You can see a listing of all the endpoints on OpenNotify <a href="http://open-notify.org/Open-Notify-API/">here</a>.</p>
+
+<p>The <em>base url</em> for the OpenNotify API is <code class="highlighter-rouge">http://api.open-notify.org</code>, so we’ll add this to the beginning of all of our endpoints.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c"># Make a get request to get the latest position of the international space station from the opennotify api.</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"http://api.open-notify.org/iss-now.json"</span><span class="p">)</span>
+
+<span class="c"># Print the status code of the response.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>200
+b'{"timestamp": 1561675806, "iss_position": {"longitude": "-163.8987", "latitude": "34.8719"}, "message": "success"}'
+</code></pre></div></div>
+
+<h2 id="status-codes">Status codes</h2>
+
+<p>The request we just made had a status code of <code class="highlighter-rouge">200</code>. Status codes are returned with every request that is made to a web server. Status codes indicate information about what happened with a request. Here are some codes that are relevant to GET requests:</p>
+
+<ul>
+  <li><strong>200</strong> – everything went okay, and the result has been returned (if any)</li>
+  <li><strong>301</strong> – the server is redirecting you to a different endpoint. This can happen when a company switches domain names, or an endpoint name is changed.</li>
+  <li><strong>401</strong> – the server thinks you’re not authenticated. This happens when you don’t send the right credentials to access an API (we’ll talk about authentication in a later post).</li>
+  <li><strong>400</strong> – the server thinks you made a bad request. This can happen when you don’t send along the right data, among other things.</li>
+  <li><strong>403</strong> – the resource you’re trying to access is forbidden – you don’t have the right permissions to see it.</li>
+  <li><strong>404</strong> – the resource you tried to access wasn’t found on the server.</li>
+</ul>
+
+<p>We’ll now make a GET request to <code class="highlighter-rouge">http://api.open-notify.org/iss-pass</code>, an endpoint that doesn’t exist, per the <a href="http://open-notify.org/Open-Notify-API/">API documentation</a>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"http://api.open-notify.org/iss-pass"</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>404
+</code></pre></div></div>
+
+<h2 id="hitting-the-right-endpoint">Hitting the right endpoint</h2>
+
+<p><code class="highlighter-rouge">iss-pass</code> wasn’t a valid endpoint, so we got a <code class="highlighter-rouge">404</code> status code in response. We forgot to add <code class="highlighter-rouge">.json</code> at the end, as the <a href="http://open-notify.org/Open-Notify-API/">API documentation</a> states.</p>
+
+<p>We’ll now make a <code class="highlighter-rouge">GET</code> request to <code class="highlighter-rouge">http://api.open-notify.org/iss-pass.json</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"http://api.open-notify.org/iss-pass.json"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>400
+</code></pre></div></div>
+
+<h2 id="query-parameters">Query parameters</h2>
+<p>You’ll see that in the last example, we got a <code class="highlighter-rouge">400</code> status code, which indicates a bad request. If you look at the documentation for the OpenNotify API, we see that the <a href="http://open-notify.org/Open-Notify-API/ISS-Pass-Times/">ISS Pass endpoint</a> requires two parameters.</p>
+
+<p>The ISS Pass endpoint returns when the ISS will next pass over a given location on earth. In order to compute this, we need to pass the coordinates of the location to the API. We do this by passing two parameters – latitude and longitude.</p>
+
+<p>We can do this by adding an optional keyword argument, <code class="highlighter-rouge">params</code>, to our request. In this case, there are two parameters we need to pass:</p>
+
+<ul>
+  <li><strong>lat</strong> – The latitude of the location we want.</li>
+  <li><strong>lon</strong> – The longitude of the location we want.</li>
+</ul>
+
+<p>We can make a dictionary with these parameters, and then pass them into the <code class="highlighter-rouge">requests.get</code> function.</p>
+
+<p>We can also do the same thing directly by adding the query parameters to the url, like this: <code class="highlighter-rouge">http://api.open-notify.org/iss-pass.json?lat=40.71&amp;lon=-74</code>.</p>
+
+<p>It’s almost always preferable to setup the parameters as a dictionary, because <code class="highlighter-rouge">requests</code> takes care of some things that come up, like properly formatting the query parameters.</p>
+
+<p>We’ll make a request using the coordinates of New York City, and see what response we get.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Set up the parameters we want to pass to the API.</span>
+<span class="c"># This is the latitude and longitude of New York City.</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s">"lat"</span><span class="p">:</span> <span class="mf">40.71</span><span class="p">,</span> <span class="s">"lon"</span><span class="p">:</span> <span class="o">-</span><span class="mi">74</span><span class="p">}</span>
+
+<span class="c"># Make a get request with the parameters.</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"http://api.open-notify.org/iss-pass.json"</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">parameters</span><span class="p">)</span>
+<span class="c"># response = requests.get("http://api.open-notify.org/iss-pass.json?lat={0}&amp;lon={1}".format(parameters['lat'], parameters['lon']))</span>
+
+<span class="c"># Print the content of the response (the data the server returned)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+
+<span class="c"># This gets the same data as the command above</span>
+<span class="c"># response = requests.get("http://api.open-notify.org/iss-pass.json?lat=40.71&amp;lon=-74")</span>
+<span class="c"># print(response.content)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'message': 'success', 'request': {'altitude': 100, 'datetime': 1561675647, 'latitude': 40.71, 'longitude': -74.0, 'passes': 5}, 'response': [{'duration': 373, 'risetime': 1561707577}, {'duration': 637, 'risetime': 1561713201}, {'duration': 614, 'risetime': 1561719021}, {'duration': 550, 'risetime': 1561724905}, {'duration': 586, 'risetime': 1561730748}]}
+</code></pre></div></div>
+
+<h2 id="working-with-json-data">Working with JSON data</h2>
+
+<p>You may have noticed that the content of the response earlier was a <code class="highlighter-rouge">string</code>. Although it was shown as a <strong>bytes</strong> object, we can easily convert the content to a string using <code class="highlighter-rouge">response.content.decode("utf-8")</code>.</p>
+
+<p>Strings are the way that we pass information back and forth to APIs, but it’s hard to get the information we want out of them. How do we know how to decode the string that we get back and work with it in Python? How do we figure out the <code class="highlighter-rouge">altitude</code> of the ISS from the string response?</p>
+
+<p>Luckily, there’s a format called <a href="http://json.org">JavaScript Object Notation (JSON)</a>. JSON is a way to encode data structures like lists and dictionaries to strings that ensures that they are easily readable by machines. JSON is the primary format in which data is passed back and forth to APIs, and most API servers will send their responses in JSON format.</p>
+
+<p>Python has great JSON support, with the <code class="highlighter-rouge">json</code> package. The <code class="highlighter-rouge">json</code> package is part of the standard library, so we don’t have to install anything to use it. We can both convert lists and dictionaries to JSON, and convert strings to lists and dictionaries. In the case of our ISS Pass data, it is a dictionary encoded to a string in JSON format.</p>
+
+<p>The json library has two main methods:</p>
+
+<ul>
+  <li><strong>dumps</strong> – Takes in a Python object, and converts it to a string.</li>
+  <li><strong>loads</strong> – Takes a JSON string, and converts it to a Python object.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Make a list of fast food chains.</span>
+<span class="n">best_food_chains</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Taco Bell"</span><span class="p">,</span> <span class="s">"Shake Shack"</span><span class="p">,</span> <span class="s">"Chipotle"</span><span class="p">]</span>
+
+<span class="c"># This is a list.</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">best_food_chains</span><span class="p">))</span> 
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'list'&gt;
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Import the json library</span>
+<span class="kn">import</span> <span class="nn">json</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Use json.dumps to convert best_food_chains to a string.</span>
+<span class="n">best_food_chains_string</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">best_food_chains</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'***'</span><span class="p">,</span> <span class="n">best_food_chains_string</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*** ["Taco Bell", "Shake Shack", "Chipotle"]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># We've successfully converted our list to a string.</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">best_food_chains_string</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'str'&gt;
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Convert best_food_chains_string back into a list</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">best_food_chains_string</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'list'&gt;
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Make a dictionary</span>
+<span class="n">fast_food_franchise</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"Subway"</span><span class="p">:</span> <span class="mi">24722</span><span class="p">,</span>
+    <span class="s">"McDonalds"</span><span class="p">:</span> <span class="mi">14098</span><span class="p">,</span>
+    <span class="s">"Starbucks"</span><span class="p">:</span> <span class="mi">10821</span><span class="p">,</span>
+    <span class="s">"Pizza Hut"</span><span class="p">:</span> <span class="mi">7600</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># We can also dump a dictionary to a string and load it.</span>
+<span class="n">fast_food_franchise_string</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">fast_food_franchise</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">fast_food_franchise_string</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'str'&gt;
+</code></pre></div></div>
+
+<h2 id="getting-json-from-an-api-request">Getting JSON from an API request</h2>
+<p>You can get the content of a response as a python object by using the <code class="highlighter-rouge">.json()</code> method on the response.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Make the same request we did earlier, but with the coordinates of San Francisco instead.</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s">"lat"</span><span class="p">:</span> <span class="mf">37.78</span><span class="p">,</span> <span class="s">"lon"</span><span class="p">:</span> <span class="o">-</span><span class="mf">122.41</span><span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"http://api.open-notify.org/iss-pass.json"</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">parameters</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'bytes'&gt;
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Get the response data as a python object.  Verify that it's a dictionary.</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'message is '</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s">'message'</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'altitude is '</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s">'request'</span><span class="p">][</span><span class="s">'altitude'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'dict'&gt;
+{'message': 'success', 'request': {'altitude': 100, 'datetime': 1561673601, 'latitude': 37.78, 'longitude': -122.41, 'passes': 5}, 'response': [{'duration': 408, 'risetime': 1561718642}, {'duration': 642, 'risetime': 1561724287}, {'duration': 585, 'risetime': 1561730133}, {'duration': 480, 'risetime': 1561736052}, {'duration': 527, 'risetime': 1561741907}]}
+message is  success
+altitude is  100
+</code></pre></div></div>
+
+<h2 id="content-type">Content type</h2>
+
+<p>The server doesn’t just send a status code and the data when it generates a response. It also sends metadata containing information on how the data was generated and how to decode it. This is stored in the response headers. In Python, we can access this with the <code class="highlighter-rouge">headers</code> property of a response object.</p>
+
+<p>The headers will be shown as a dictionary. Within the headers, <code class="highlighter-rouge">content-type</code> is the most important key for now. It tells us the format of the response, and how to decode it. For the OpenNotify API, the format is JSON, which is why we could decode it with the <code class="highlighter-rouge">json</code> package earlier.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Headers is a dictionary</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="c"># Get the content-type from the dictionary.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">"content-type"</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'Server': 'nginx/1.10.3', 'Date': 'Sun, 28 Apr 2019 19:05:12 GMT', 'Content-Type': 'application/json', 'Content-Length': '521', 'Connection': 'keep-alive', 'Via': '1.1 vegur'}
+application/json
+</code></pre></div></div>
+
+<h2 id="finding-the-number-of-people-in-space">Finding the number of people in space</h2>
+<p>OpenNotify has one more API endpoint, <code class="highlighter-rouge">astros.json</code>. It tells you how many people are currently in space. The format of the responses can be found <a href="http://open-notify.org/Open-Notify-API/People-In-Space/">here</a>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Get the response from the API endpoint.</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"http://api.open-notify.org/astros.json"</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># people are currently in space.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">"number"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6
+{'message': 'success', 'number': 6, 'people': [{'craft': 'ISS', 'name': 'Oleg Kononenko'}, {'craft': 'ISS', 'name': 'David Saint-Jacques'}, {'craft': 'ISS', 'name': 'Anne McClain'}, {'craft': 'ISS', 'name': 'Alexey Ovchinin'}, {'craft': 'ISS', 'name': 'Nick Hague'}, {'craft': 'ISS', 'name': 'Christina Koch'}]}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

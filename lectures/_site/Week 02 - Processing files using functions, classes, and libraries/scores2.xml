@@ -1,0 +1,16 @@
+<scores xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="scores.xsd">
+    <score>
+        <date>2019-05-01</date>
+        <home-team>Pirates</home-team>
+        <home-score>0</home-score>
+        <away-team>Cubs</away-team>
+        <away-score>10</away-score>
+    </score>
+    <score>
+        <date>2019-05-05</date>
+        <home-team>Reds</home-team>
+        <home-score>7</home-score>
+        <away-team>Pirates</away-team>
+        <away-score>0</away-score>
+    </score>
+</scores>

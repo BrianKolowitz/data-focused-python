@@ -1,0 +1,266 @@
+<h1 id="reading-csv-files">Reading CSV files</h1>
+<h2 id="reading-with-open">Reading with open</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># open and print line by line</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'mock.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id,first_name,last_name,email,gender,ip_address
+
+1,Finn,Burchmore,fburchmore0@epa.gov,Male,74.20.172.212
+
+2,Coral,Grigorey,cgrigorey1@cdc.gov,Female,151.91.212.169
+
+3,Harold,McCormack,hmccormack2@marketwatch.com,Male,72.36.41.150
+
+4,Thacher,Woodvine,twoodvine3@marketwatch.com,Male,66.50.122.48
+
+5,Querida,Allmann,qallmann4@people.com.cn,Female,236.145.83.165
+
+6,Irving,Loughman,iloughman5@globo.com,Male,19.142.188.98
+
+7,Meghann,Vittet,mvittet6@cyberchimps.com,Female,235.59.102.124
+
+8,Wolfgang,Mishow,wmishow7@gnu.org,Male,189.36.37.25
+
+9,Babbie,Reide,breide8@jiathis.com,Female,129.226.63.38
+
+10,Carson,Vowdon,cvowdon9@slashdot.org,Male,51.228.124.19
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'mock.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c"># use enumerate to get the index as you iterate</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 id,first_name,last_name,email,gender,ip_address
+
+1 1,Finn,Burchmore,fburchmore0@epa.gov,Male,74.20.172.212
+
+2 2,Coral,Grigorey,cgrigorey1@cdc.gov,Female,151.91.212.169
+
+3 3,Harold,McCormack,hmccormack2@marketwatch.com,Male,72.36.41.150
+
+4 4,Thacher,Woodvine,twoodvine3@marketwatch.com,Male,66.50.122.48
+
+5 5,Querida,Allmann,qallmann4@people.com.cn,Female,236.145.83.165
+
+6 6,Irving,Loughman,iloughman5@globo.com,Male,19.142.188.98
+
+7 7,Meghann,Vittet,mvittet6@cyberchimps.com,Female,235.59.102.124
+
+8 8,Wolfgang,Mishow,wmishow7@gnu.org,Male,189.36.37.25
+
+9 9,Babbie,Reide,breide8@jiathis.com,Female,129.226.63.38
+
+10 10,Carson,Vowdon,cvowdon9@slashdot.org,Male,51.228.124.19
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">processed_header</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'mock.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c"># handle the header differently</span>
+        <span class="k">if</span> <span class="n">processed_header</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"header"</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+            <span class="n">processed_header</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"row"</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+        <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>header 0 id,first_name,last_name,email,gender,ip_address
+
+row 1 1,Finn,Burchmore,fburchmore0@epa.gov,Male,74.20.172.212
+
+row 2 2,Coral,Grigorey,cgrigorey1@cdc.gov,Female,151.91.212.169
+
+row 3 3,Harold,McCormack,hmccormack2@marketwatch.com,Male,72.36.41.150
+
+row 4 4,Thacher,Woodvine,twoodvine3@marketwatch.com,Male,66.50.122.48
+
+row 5 5,Querida,Allmann,qallmann4@people.com.cn,Female,236.145.83.165
+
+row 6 6,Irving,Loughman,iloughman5@globo.com,Male,19.142.188.98
+
+row 7 7,Meghann,Vittet,mvittet6@cyberchimps.com,Female,235.59.102.124
+
+row 8 8,Wolfgang,Mishow,wmishow7@gnu.org,Male,189.36.37.25
+
+row 9 9,Babbie,Reide,breide8@jiathis.com,Female,129.226.63.38
+
+row 10 10,Carson,Vowdon,cvowdon9@slashdot.org,Male,51.228.124.19
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'mock.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="c"># handle the header differently</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"header"</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"row"</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>header 0 id,first_name,last_name,email,gender,ip_address
+
+row 1 1,Finn,Burchmore,fburchmore0@epa.gov,Male,74.20.172.212
+
+row 2 2,Coral,Grigorey,cgrigorey1@cdc.gov,Female,151.91.212.169
+
+row 3 3,Harold,McCormack,hmccormack2@marketwatch.com,Male,72.36.41.150
+
+row 4 4,Thacher,Woodvine,twoodvine3@marketwatch.com,Male,66.50.122.48
+
+row 5 5,Querida,Allmann,qallmann4@people.com.cn,Female,236.145.83.165
+
+row 6 6,Irving,Loughman,iloughman5@globo.com,Male,19.142.188.98
+
+row 7 7,Meghann,Vittet,mvittet6@cyberchimps.com,Female,235.59.102.124
+
+row 8 8,Wolfgang,Mishow,wmishow7@gnu.org,Male,189.36.37.25
+
+row 9 9,Babbie,Reide,breide8@jiathis.com,Female,129.226.63.38
+
+row 10 10,Carson,Vowdon,cvowdon9@slashdot.org,Male,51.228.124.19
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">headers</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'mock.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c"># split the headers</span>
+            <span class="n">headers</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">','</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'header fields'</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>header fields ['id', 'first_name', 'last_name', 'email', 'gender', 'ip_address\n']
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">headers</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'mock.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">headers</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">','</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># append the rows</span>
+            <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">','</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'header fields'</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'rows fields'</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>header fields ['id', 'first_name', 'last_name', 'email', 'gender', 'ip_address\n']
+rows fields [['1', 'Finn', 'Burchmore', 'fburchmore0@epa.gov', 'Male', '74.20.172.212\n'], ['2', 'Coral', 'Grigorey', 'cgrigorey1@cdc.gov', 'Female', '151.91.212.169\n'], ['3', 'Harold', 'McCormack', 'hmccormack2@marketwatch.com', 'Male', '72.36.41.150\n'], ['4', 'Thacher', 'Woodvine', 'twoodvine3@marketwatch.com', 'Male', '66.50.122.48\n'], ['5', 'Querida', 'Allmann', 'qallmann4@people.com.cn', 'Female', '236.145.83.165\n'], ['6', 'Irving', 'Loughman', 'iloughman5@globo.com', 'Male', '19.142.188.98\n'], ['7', 'Meghann', 'Vittet', 'mvittet6@cyberchimps.com', 'Female', '235.59.102.124\n'], ['8', 'Wolfgang', 'Mishow', 'wmishow7@gnu.org', 'Male', '189.36.37.25\n'], ['9', 'Babbie', 'Reide', 'breide8@jiathis.com', 'Female', '129.226.63.38\n'], ['10', 'Carson', 'Vowdon', 'cvowdon9@slashdot.org', 'Male', '51.228.124.19\n']]
+</code></pre></div></div>
+
+<h2 id="reading-with-csv">Reading with csv</h2>
+<p><a href="https://realpython.com/python-csv/">Reading and Writing CSV Files in Python</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">csv</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'mock.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">','</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['id', 'first_name', 'last_name', 'email', 'gender', 'ip_address']
+['1', 'Finn', 'Burchmore', 'fburchmore0@epa.gov', 'Male', '74.20.172.212']
+['2', 'Coral', 'Grigorey', 'cgrigorey1@cdc.gov', 'Female', '151.91.212.169']
+['3', 'Harold', 'McCormack', 'hmccormack2@marketwatch.com', 'Male', '72.36.41.150']
+['4', 'Thacher', 'Woodvine', 'twoodvine3@marketwatch.com', 'Male', '66.50.122.48']
+['5', 'Querida', 'Allmann', 'qallmann4@people.com.cn', 'Female', '236.145.83.165']
+['6', 'Irving', 'Loughman', 'iloughman5@globo.com', 'Male', '19.142.188.98']
+['7', 'Meghann', 'Vittet', 'mvittet6@cyberchimps.com', 'Female', '235.59.102.124']
+['8', 'Wolfgang', 'Mishow', 'wmishow7@gnu.org', 'Male', '189.36.37.25']
+['9', 'Babbie', 'Reide', 'breide8@jiathis.com', 'Female', '129.226.63.38']
+['10', 'Carson', 'Vowdon', 'cvowdon9@slashdot.org', 'Male', '51.228.124.19']
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'mock.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">','</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reader</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'{", ".join(row)}'</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'id: {row[0]} first_name: {row[1]} last_name: {row[2]} email: {row[3]}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id, first_name, last_name, email, gender, ip_address
+id: 1 first_name: Finn last_name: Burchmore email: fburchmore0@epa.gov
+id: 2 first_name: Coral last_name: Grigorey email: cgrigorey1@cdc.gov
+id: 3 first_name: Harold last_name: McCormack email: hmccormack2@marketwatch.com
+id: 4 first_name: Thacher last_name: Woodvine email: twoodvine3@marketwatch.com
+id: 5 first_name: Querida last_name: Allmann email: qallmann4@people.com.cn
+id: 6 first_name: Irving last_name: Loughman email: iloughman5@globo.com
+id: 7 first_name: Meghann last_name: Vittet email: mvittet6@cyberchimps.com
+id: 8 first_name: Wolfgang last_name: Mishow email: wmishow7@gnu.org
+id: 9 first_name: Babbie last_name: Reide email: breide8@jiathis.com
+id: 10 first_name: Carson last_name: Vowdon email: cvowdon9@slashdot.org
+</code></pre></div></div>
+
+<h2 id="reading-csv-files-into-a-dictionary-with-csv">Reading CSV Files Into a Dictionary With csv</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'mock.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reader</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'{", ".join(row)}'</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'id: {row["id"]} first_name: {row["first_name"]} last_name: {row["last_name"]} email: {row["email"]}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id, first_name, last_name, email, gender, ip_address
+id: 2 first_name: Coral last_name: Grigorey email: cgrigorey1@cdc.gov
+id: 3 first_name: Harold last_name: McCormack email: hmccormack2@marketwatch.com
+id: 4 first_name: Thacher last_name: Woodvine email: twoodvine3@marketwatch.com
+id: 5 first_name: Querida last_name: Allmann email: qallmann4@people.com.cn
+id: 6 first_name: Irving last_name: Loughman email: iloughman5@globo.com
+id: 7 first_name: Meghann last_name: Vittet email: mvittet6@cyberchimps.com
+id: 8 first_name: Wolfgang last_name: Mishow email: wmishow7@gnu.org
+id: 9 first_name: Babbie last_name: Reide email: breide8@jiathis.com
+id: 10 first_name: Carson last_name: Vowdon email: cvowdon9@slashdot.org
+</code></pre></div></div>
+
+<h2 id="optional-python-csv-reader-parameters">Optional Python CSV reader Parameters</h2>
+
+<ul>
+  <li>delimiter specifies the character used to separate each field. The default is the comma (‘,’).</li>
+  <li>quotechar specifies the character used to surround fields that contain the delimiter character. The default is a double quote (‘ “ ‘).</li>
+  <li>escapechar specifies the character used to escape the delimiter character, in case quotes aren’t used. The default is no escape character.</li>
+</ul>
+
+<h2 id="writing-csv-files-with-csv">Writing CSV Files With csv</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'scores.csv'</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">employee_file</span><span class="p">:</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">employee_file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">','</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s">'"'</span><span class="p">,</span> <span class="n">quoting</span><span class="o">=</span><span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_MINIMAL</span><span class="p">)</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s">'2019-05-01'</span><span class="p">,</span> <span class="s">'Pirates'</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'Cubs'</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s">'2019-05-15'</span><span class="p">,</span> <span class="s">'Reds'</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s">'Pirates'</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<ul>
+  <li>If quoting is set to csv.QUOTE_MINIMAL, then .writerow() will quote fields only if they contain the delimiter or the quotechar. This is the default case.</li>
+  <li>If quoting is set to csv.QUOTE_ALL, then .writerow() will quote all fields.</li>
+  <li>If quoting is set to csv.QUOTE_NONNUMERIC, then .writerow() will quote all fields containing text data and convert all numeric fields to the float data type.</li>
+  <li>If quoting is set to csv.QUOTE_NONE, then .writerow() will escape delimiters instead of quoting them. In this case, you also must provide a value for the escapechar optional parameter.</li>
+</ul>
+
+<h2 id="writing-csv-file-from-a-dictionary-with-csv">Writing CSV File From a Dictionary With csv</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'scores.csv'</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">csv_file</span><span class="p">:</span>
+    <span class="n">fieldnames</span> <span class="o">=</span> <span class="p">[</span><span class="s">'date'</span><span class="p">,</span> <span class="s">'home_team'</span><span class="p">,</span> <span class="s">'home_score'</span><span class="p">,</span> <span class="s">'away_team'</span><span class="p">,</span> <span class="s">'away_score'</span><span class="p">]</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">csv_file</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="n">fieldnames</span><span class="p">)</span>
+
+    <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">({</span><span class="s">'date'</span><span class="p">:</span> <span class="s">'2019-05-01'</span><span class="p">,</span> <span class="s">'home_team'</span><span class="p">:</span> <span class="s">'Pirates'</span><span class="p">,</span> <span class="s">'home_score'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'away_team'</span><span class="p">:</span> <span class="s">'Cubs'</span><span class="p">,</span> <span class="s">'away_score'</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">({</span><span class="s">'date'</span><span class="p">:</span> <span class="s">'2019-05-15'</span><span class="p">,</span> <span class="s">'home_team'</span><span class="p">:</span> <span class="s">'Reds'</span><span class="p">,</span> <span class="s">'home_score'</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s">'away_team'</span><span class="p">:</span> <span class="s">'Pirates'</span><span class="p">,</span> <span class="s">'away_score'</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>

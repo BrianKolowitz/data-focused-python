@@ -1,0 +1,212 @@
+<h1 id="files">Files</h1>
+<p><a href="https://www.programiz.com/python-programming/file-operation">Python File I/O
+</a></p>
+
+<h2 id="open-files">Open Files</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'file.txt'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="python-file-modes">Python File Modes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Mode</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>‘r’</td>
+      <td>Open a file for reading. (default)</td>
+    </tr>
+    <tr>
+      <td>‘w’</td>
+      <td>Open a file for writing. Creates a new file if it does not exist or truncates the file if it exists.</td>
+    </tr>
+    <tr>
+      <td>‘x’</td>
+      <td>Open a file for exclusive creation. If the file already exists, the operation fails.</td>
+    </tr>
+    <tr>
+      <td>‘a’</td>
+      <td>Open for appending at the end of the file without truncating it. Creates a new file if it does not exist.</td>
+    </tr>
+    <tr>
+      <td>‘t’</td>
+      <td>Open in text mode. (default)</td>
+    </tr>
+    <tr>
+      <td>‘b’</td>
+      <td>Open in binary mode.</td>
+    </tr>
+    <tr>
+      <td>’+’</td>
+      <td>Open a file for updating (reading and writing)</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"test.txt"</span><span class="p">)</span>      <span class="c"># equivalent to 'r' or 'rt'</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"test.txt"</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span>  <span class="c"># write in text mode</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"python.png"</span><span class="p">,</span><span class="s">'r+b'</span><span class="p">)</span> <span class="c"># read and write in binary mode</span>
+</code></pre></div></div>
+
+<h3 id="file-encodings">File Encodings</h3>
+
+<p>Unlike other languages, the character ‘a’ does not imply the number 97 until it is encoded using ASCII (or other equivalent encodings). The default encoding is platform dependent.</p>
+
+<ul>
+  <li>In Windows it is ‘cp1252’</li>
+  <li>In Linux it is ‘utf-8’</li>
+</ul>
+
+<p>You cannot rely on the default encoding or else our code will behave differently in different platforms. It is highly recommended to specify the encoding type when working with text files.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"file.txt"</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="closing-files">Closing Files</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"file.txt"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">)</span>
+<span class="c"># perform file operations</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>In the last example exceptions could crash your program. Exception handlig is a topic in itself, but here we’ll simply wrap the code in a try…catch block. Now the file handle will be closed regardless of whether or not there was an exception. In the example above, an exeption might result in the file remaining open (and potentially locked) from other applications in the event of an exception.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span><span class="p">:</span>
+   <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"file.txt"</span><span class="p">,</span><span class="n">encoding</span> <span class="o">=</span> <span class="s">'utf-8'</span><span class="p">)</span>
+   <span class="c"># perform file operations</span>
+<span class="k">finally</span><span class="p">:</span>
+   <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="using-with">Using with</h2>
+
+<p>The best way to ensure that you close your files when the code block terminates is by using the with statement. When using the with statement you do not have to explicitly call the file’s close() method.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'file.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hello class
+python is fun
+
+let's get started
+</code></pre></div></div>
+
+<h2 id="writing-files">Writing Files</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"file.txt"</span><span class="p">,</span> <span class="s">'w'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">"hello class</span><span class="se">\n</span><span class="s">"</span> <span class="p">)</span>
+   <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">"python is fun</span><span class="se">\n\n</span><span class="s">"</span><span class="p">)</span>
+   <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">"let's get started</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>       
+</code></pre></div></div>
+
+<h2 id="reading-files">Reading Files</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"file.txt"</span><span class="p">,</span> <span class="s">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'1:'</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="c"># read the 1st 4 characters</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'2:'</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="c"># read the next 4 characters</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'3:'</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span> <span class="c"># read until the end</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'4:'</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span> <span class="c"># return's an empty string</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1: hel
+2: lo 
+3: class
+python is fun
+
+let's get started
+
+4: 
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span> <span class="c"># get the current file position</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>45
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c"># bring file cursor to initial position</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="c"># read the entire file</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"hello class\npython is fun\n\nlet's get started\n"
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c"># reset the cursor</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># read line by line</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c"># reset the cursor</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># read line by line</span>
+<span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'hello class\n'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'python is fun\n'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'\n'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"let's get started\n"
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>''
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c"># reset the cursor</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># read all lines at once</span>
+<span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['hello class\n', 'python is fun\n', '\n', "let's get started\n"]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>

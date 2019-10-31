@@ -1,0 +1,945 @@
+<h1 id="synthetic-data-generation">Synthetic Data Generation</h1>
+<p><a href="https://towardsdatascience.com/synthetic-data-generation-a-must-have-skill-for-new-data-scientists-915896c0c1ae">Source</a></p>
+
+<h2 id="what-kind-of-data-may-be-needed-for-a-rich-learning-experience">What kind of data may be needed for a rich learning experience?</h2>
+
+<p>Imagine you are tinkering with a cool machine learning algorithm like SVM or a deep neural net. What kind of dataset you should practice them on? If you are learning from scratch, the advice is to start with simple, small-scale datasets which you can plot in two dimensions to understand the patterns visually and see for yourself the working of the ML algorithm in an intuitive fashion. For example, here is an <a href="https://www.analyticsvidhya.com/blog/2018/05/24-ultimate-data-science-projects-to-boost-your-knowledge-and-skills/">excellent article on various datasets you can try at various level of learning</a>.</p>
+
+<h2 id="what-is-a-synthetic-dataset">What is a synthetic dataset?</h2>
+
+<p>As the name suggests, quite obviously, a synthetic dataset is a repository of data that is generated programmatically. So, it is not collected by any real-life survey or experiment. Its main purpose, therefore, is to be flexible and rich enough to help an ML practitioner conduct fascinating experiments with various classification, regression, and clustering algorithms. Desired properties are,</p>
+
+<ul>
+  <li>It can be numerical, binary, or categorical (ordinal or non-ordinal),</li>
+  <li>The number of features and length of the dataset should be arbitrary</li>
+  <li>It should preferably be random and the user should be able to choose a wide variety of statistical distribution to base this data upon i.e. the underlying random process can be precisely controlled and tuned,</li>
+  <li>If it is used for classification algorithms, then the degree of class separation should be controllable to make the learning problem easy or hard,</li>
+  <li>Random noise can be interjected in a controllable manner</li>
+  <li>For a regression problem, a complex, non-linear generative process can be used for sourcing the data</li>
+</ul>
+
+<h2 id="what-about-privacy-concerns">What about privacy concerns?</h2>
+
+<p>Although in this article, we keep our discussions limited to synthetic data for better ML algorithms, its purpose can be far reaching in cases where it helps get around security and privacy concerns with real datasets, that cannot be used or acquired for learning purpose. For example, think about medical or military data. <a href="https://www.ijstr.org/final-print/mar2017/A-Review-Of-Synthetic-Data-Generation-Methods-For-Privacy-Preserving-Data-Publishing.pdf">Here is an excellent summary article about such methods</a>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+</code></pre></div></div>
+
+<h2 id="regression-problem-generation">Regression problem generation</h2>
+
+<p>Regression problem generation: Scikit-learn’s <code class="highlighter-rouge">dataset.make_regression</code> function can create random regression problem with arbitrary number of input features, output targets, and controllable degree of informative coupling between them. It can also mix Gaussian noise.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_regression</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data1</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_targets</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                        <span class="n">bias</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">effective_rank</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">tail_strength</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> 
+                        <span class="n">noise</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">coef</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+<span class="n">df1</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df1</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x1</th>
+      <th>x2</th>
+      <th>x3</th>
+      <th>x4</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-0.726064</td>
+      <td>-0.330319</td>
+      <td>1.028857</td>
+      <td>1.060585</td>
+      <td>95.436070</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.552313</td>
+      <td>0.313671</td>
+      <td>-0.073183</td>
+      <td>0.285335</td>
+      <td>22.901152</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.822014</td>
+      <td>-0.241618</td>
+      <td>1.849015</td>
+      <td>-0.900789</td>
+      <td>-79.460904</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.834856</td>
+      <td>-0.268336</td>
+      <td>0.242290</td>
+      <td>0.272725</td>
+      <td>32.480840</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-0.019002</td>
+      <td>-1.650089</td>
+      <td>-0.206772</td>
+      <td>0.564262</td>
+      <td>53.629369</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="plot">Plot</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">df1</span><span class="p">[</span><span class="n">df1</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="n">df1</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">fit_fn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df1</span><span class="p">[</span><span class="n">df1</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="n">df1</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s">'orange'</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df1</span><span class="p">[</span><span class="n">df1</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="n">fit_fn</span><span class="p">(</span><span class="n">df1</span><span class="p">[</span><span class="n">df1</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]]),</span><span class="s">'b-'</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_7_0.png" alt="png" /></p>
+
+<h3 id="data-with-gaussian-noise">Data with Gaussian noise</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data2</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_targets</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                        <span class="n">bias</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">effective_rank</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">tail_strength</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> 
+                        <span class="n">noise</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">coef</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+<span class="n">df2</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="plot-1">Plot</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="n">df2</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="n">df2</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">fit_fn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="n">df2</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="n">df2</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s">'orange'</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="n">df2</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="n">fit_fn</span><span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="n">df2</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]]),</span><span class="s">'b-'</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_11_0.png" alt="png" /></p>
+
+<h3 id="plot-datasets-with-varying-degree-of-noise">Plot datasets with varying degree of noise</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">20</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">data2</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_targets</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                        <span class="n">bias</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">effective_rank</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">tail_strength</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> 
+                        <span class="n">noise</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mi">10</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">coef</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="n">df2</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span><span class="o">=</span><span class="n">data2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">df2</span><span class="p">[</span><span class="s">'y'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)],</span><span class="n">df2</span><span class="p">[</span><span class="s">'y'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)],</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">fit_fn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)],</span><span class="n">df2</span><span class="p">[</span><span class="s">'y'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)],</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s">'orange'</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)],</span><span class="n">fit_fn</span><span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]),</span><span class="s">'b-'</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_13_0.png" alt="png" /></p>
+
+<h2 id="classification-problem-generation">Classification problem generation</h2>
+
+<p>Classification problem generation: Similar to the regression function above, <code class="highlighter-rouge">dataset.make_classification</code> generates a random multi-class classification problem (dataset) with controllable class separation and added noise. You can also randomly flip any percentage of output signs to create a harder classification dataset if you want.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data3</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_repeated</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+                            <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">flip_y</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">class_sep</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> 
+                            <span class="n">hypercube</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">df3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data3</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+<span class="n">df3</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df3</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x1</th>
+      <th>x2</th>
+      <th>x3</th>
+      <th>x4</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.061883</td>
+      <td>0.055163</td>
+      <td>-1.267258</td>
+      <td>-2.902750</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-1.201849</td>
+      <td>0.003287</td>
+      <td>-1.653525</td>
+      <td>-2.585140</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-1.577193</td>
+      <td>-0.663333</td>
+      <td>-1.042551</td>
+      <td>-0.954686</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-1.389437</td>
+      <td>-2.269763</td>
+      <td>-0.686865</td>
+      <td>0.309748</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-1.665307</td>
+      <td>-1.256313</td>
+      <td>-0.603768</td>
+      <td>0.207372</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="plot-2">Plot</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">ceil</span>
+<span class="n">lst_var</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">df3</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">len_var</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst_var</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">len_var</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">ceil</span><span class="p">(</span><span class="n">len_var</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">var1</span> <span class="o">=</span> <span class="n">lst_var</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">var2</span> <span class="o">=</span> <span class="n">lst_var</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df3</span><span class="p">[</span><span class="n">var1</span><span class="p">],</span><span class="n">df3</span><span class="p">[</span><span class="n">var2</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">df3</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="n">edgecolor</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">var1</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">var2</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_19_0.png" alt="png" /></p>
+
+<h3 id="making-class-separation-easy-by-tweaking-class_sep">Making class separation easy by tweaking <code class="highlighter-rouge">class_sep</code></h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data3</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_repeated</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+                            <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">flip_y</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">class_sep</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> 
+                            <span class="n">hypercube</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">df3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data3</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+<span class="n">df3</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">ceil</span>
+<span class="n">lst_var</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">df3</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">len_var</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst_var</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">len_var</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">ceil</span><span class="p">(</span><span class="n">len_var</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">var1</span> <span class="o">=</span> <span class="n">lst_var</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">var2</span> <span class="o">=</span> <span class="n">lst_var</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df3</span><span class="p">[</span><span class="n">var1</span><span class="p">],</span><span class="n">df3</span><span class="p">[</span><span class="n">var2</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">df3</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="n">edgecolor</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">var1</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">var2</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_22_0.png" alt="png" /></p>
+
+<h3 id="making-class-separation-hard-by-tweaking-class_sep">Making class separation hard by tweaking <code class="highlighter-rouge">class_sep</code></h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data3</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_repeated</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+                            <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">flip_y</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">class_sep</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> 
+                            <span class="n">hypercube</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">df3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data3</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+<span class="n">df3</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">ceil</span>
+<span class="n">lst_var</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">df3</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">len_var</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst_var</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">len_var</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">ceil</span><span class="p">(</span><span class="n">len_var</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">var1</span> <span class="o">=</span> <span class="n">lst_var</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">var2</span> <span class="o">=</span> <span class="n">lst_var</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df3</span><span class="p">[</span><span class="n">var1</span><span class="p">],</span><span class="n">df3</span><span class="p">[</span><span class="n">var2</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">df3</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="n">edgecolor</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">var1</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">var2</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_25_0.png" alt="png" /></p>
+
+<h3 id="making-data-noisy-by-increasing-flip_y">Making data noisy by increasing <code class="highlighter-rouge">flip_y</code></h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">data3</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_repeated</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+                                <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">flip_y</span><span class="o">=</span><span class="mf">0.1</span><span class="o">*</span><span class="n">i</span><span class="p">,</span> <span class="n">class_sep</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> 
+                                <span class="n">hypercube</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">101</span><span class="p">)</span>
+    <span class="n">df3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data3</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+    <span class="n">df3</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">f</span><span class="s">"Plot for flip_y={round(0.1*i,2)}"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df3</span><span class="p">[</span><span class="s">'x1'</span><span class="p">],</span><span class="n">df3</span><span class="p">[</span><span class="s">'x2'</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">df3</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="n">edgecolor</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'x1'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'x2'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_27_0.png" alt="png" /></p>
+
+<h3 id="plot-datasets-with-varying-degree-of-class-separation">Plot datasets with varying degree of class separation</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">20</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">data2</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_repeated</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+                                <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">flip_y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">class_sep</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span> 
+                                <span class="n">hypercube</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">101</span><span class="p">)</span>
+    <span class="n">df2</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">'1'</span><span class="p">]</span><span class="o">=</span><span class="n">data2</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">df2</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">'2'</span><span class="p">]</span><span class="o">=</span><span class="n">data2</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">df2</span><span class="p">[</span><span class="s">'y'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">'1'</span><span class="p">],</span><span class="n">df2</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">'2'</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">df2</span><span class="p">[</span><span class="s">'y'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)],</span><span class="n">edgecolor</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_29_0.png" alt="png" /></p>
+
+<h2 id="clustering-problem-generation">Clustering problem generation</h2>
+
+<p>Clustering problem generation: There are quite a few functions for generating interesting clusters. The most straightforward one is <code class="highlighter-rouge">datasets.make_blobs</code>, which generates arbitrary number of clusters with controllable distance parameters.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data4</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">cluster_std</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> 
+                   <span class="n">center_box</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">),</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">df4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data4</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+<span class="n">df4</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data4</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">ceil</span>
+<span class="n">lst_var</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">df4</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">len_var</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst_var</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">len_var</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">ceil</span><span class="p">(</span><span class="n">len_var</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">var1</span> <span class="o">=</span> <span class="n">lst_var</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">var2</span> <span class="o">=</span> <span class="n">lst_var</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df4</span><span class="p">[</span><span class="n">var1</span><span class="p">],</span><span class="n">df4</span><span class="p">[</span><span class="n">var2</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">df4</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="n">edgecolor</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">var1</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">var2</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_33_0.png" alt="png" /></p>
+
+<h3 id="making-clusters-compact-and-easily-separable-by-tweaking-cluster_std">Making clusters compact and easily separable by tweaking <code class="highlighter-rouge">cluster_std</code></h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data4</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">cluster_std</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> 
+                   <span class="n">center_box</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">),</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">df4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data4</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+<span class="n">df4</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data4</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">ceil</span>
+<span class="n">lst_var</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">df4</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">len_var</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst_var</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">len_var</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">ceil</span><span class="p">(</span><span class="n">len_var</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">var1</span> <span class="o">=</span> <span class="n">lst_var</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">var2</span> <span class="o">=</span> <span class="n">lst_var</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df4</span><span class="p">[</span><span class="n">var1</span><span class="p">],</span><span class="n">df4</span><span class="p">[</span><span class="n">var2</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">df4</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="n">edgecolor</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">var1</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">var2</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_36_0.png" alt="png" /></p>
+
+<h3 id="making-clusters-spread-out-and-difficult-to-separate-by-tweaking-cluster_std">Making clusters spread out and difficult to separate by tweaking <code class="highlighter-rouge">cluster_std</code></h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data4</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">cluster_std</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> 
+                   <span class="n">center_box</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">),</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">df4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data4</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+<span class="n">df4</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data4</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">ceil</span>
+<span class="n">lst_var</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">df4</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">len_var</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst_var</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">len_var</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">ceil</span><span class="p">(</span><span class="n">len_var</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">var1</span> <span class="o">=</span> <span class="n">lst_var</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">var2</span> <span class="o">=</span> <span class="n">lst_var</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df4</span><span class="p">[</span><span class="n">var1</span><span class="p">],</span><span class="n">df4</span><span class="p">[</span><span class="n">var2</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">df4</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="n">edgecolor</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">var1</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">var2</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_39_0.png" alt="png" /></p>
+
+<h3 id="making-anisotropically-distributed-clustering-problem">Making anisotropically distributed clustering problem</h3>
+
+<p>Anisotropic cluster generation: With a simple transformation using matrix multiplication, you can generate clusters which is aligned along certain axis or anisotropically distributed.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data5</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">cluster_std</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transformation</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data5_0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">data5</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">transformation</span><span class="p">)</span>
+<span class="n">df5</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data5_0</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)])</span>
+<span class="n">df5</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data5</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df5</span><span class="p">[</span><span class="s">'x1'</span><span class="p">],</span><span class="n">df5</span><span class="p">[</span><span class="s">'x2'</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">df5</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">edgecolors</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'x1'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'x2'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_44_0.png" alt="png" /></p>
+
+<h3 id="making-concentric-circle-clusters">Making concentric circle clusters</h3>
+
+<p>Concentric ring cluster data generation: For testing affinity based clustering algorithm or Gaussian mixture models, it is useful to have clusters generated in a special shape. We can use <code class="highlighter-rouge">datasets.make_circles</code> function to accomplish that.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_circles</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data6</span> <span class="o">=</span> <span class="n">make_circles</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">df6</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data6</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)])</span>
+<span class="n">df6</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data6</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df6</span><span class="p">[</span><span class="s">'x1'</span><span class="p">],</span><span class="n">df6</span><span class="p">[</span><span class="s">'x2'</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">df6</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">edgecolors</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'x1'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'x2'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_48_0.png" alt="png" /></p>
+
+<h3 id="introdue-noise-in-the-circle-clusters">Introdue noise in the circle clusters</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data6</span> <span class="o">=</span> <span class="n">make_circles</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">df6</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data6</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)])</span>
+<span class="n">df6</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data6</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df6</span><span class="p">[</span><span class="s">'x1'</span><span class="p">],</span><span class="n">df6</span><span class="p">[</span><span class="s">'x2'</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">df6</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">edgecolors</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'x1'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'x2'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_51_0.png" alt="png" /></p>
+
+<h3 id="make-moon-shape-clusters">Make moon shape clusters</h3>
+
+<p>Moon-shaped cluster data generation: We can also generate moon-shaped cluster data for testing algorithms, with controllable noise using <code class="highlighter-rouge">datasets.make_moons</code> function.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_moons</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data7</span> <span class="o">=</span> <span class="n">make_moons</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">df7</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data7</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)])</span>
+<span class="n">df7</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data7</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df7</span><span class="p">[</span><span class="s">'x1'</span><span class="p">],</span><span class="n">df7</span><span class="p">[</span><span class="s">'x2'</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">df7</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">edgecolors</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'x1'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'x2'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_55_0.png" alt="png" /></p>
+
+<h3 id="introduce-noise-in-the-moon-shaped-clusters">Introduce noise in the moon-shaped clusters</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data7</span> <span class="o">=</span> <span class="n">make_moons</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">df7</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data7</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)])</span>
+<span class="n">df7</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data7</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df7</span><span class="p">[</span><span class="s">'x1'</span><span class="p">],</span><span class="n">df7</span><span class="p">[</span><span class="s">'x2'</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">df7</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">edgecolors</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'x1'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'x2'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_58_0.png" alt="png" /></p>
+
+<h2 id="random-regressionclassification-problem-generation-using-symbolic-function">Random regression/classification problem generation using symbolic function</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">Symbolic_regression_classification_generator</span> <span class="kn">import</span> <span class="n">gen_regression_symbolic</span><span class="p">,</span> <span class="n">gen_classification_symbolic</span>
+</code></pre></div></div>
+
+<h3 id="generate-regression-data-with-a-symbolic-expression-of">Generate regression data with a symbolic expression of:</h3>
+<p><script type="math/tex">\frac{x_1^2}{2}-3x_2+20.\text{sin}(x_3)</script></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data8</span> <span class="o">=</span> <span class="n">gen_regression_symbolic</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="s">'((x1^2)/2-3*x2)+20*sin(x3)'</span><span class="p">,</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">noise</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">df8</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data8</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)]</span><span class="o">+</span><span class="p">[</span><span class="s">'y'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df8</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x1</th>
+      <th>x2</th>
+      <th>x3</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2.81256</td>
+      <td>2.44171</td>
+      <td>0.164293</td>
+      <td>-0.0854328434586468</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.142291</td>
+      <td>1.23618</td>
+      <td>-6.7039</td>
+      <td>-11.8655190618648</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-3.12003</td>
+      <td>4.51081</td>
+      <td>-1.62335</td>
+      <td>-28.6475904071715</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3.17514</td>
+      <td>5.96053</td>
+      <td>1.35922</td>
+      <td>6.72283347069333</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-0.714066</td>
+      <td>3.2681</td>
+      <td>-1.56271</td>
+      <td>-29.5495765823713</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df8</span><span class="p">[</span><span class="n">df8</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="n">df8</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s">'orange'</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_64_0.png" alt="png" /></p>
+
+<h3 id="generate-regression-data-with-a-symbolic-expression-of-1">Generate regression data with a symbolic expression of:</h3>
+<p><script type="math/tex">x_1^2*sin(x_1)</script></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data8</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">gen_regression_symbolic</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="s">'x1^2*sin(x1)'</span><span class="p">,</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">noise</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">df8</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data8</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span><span class="o">+</span><span class="p">[</span><span class="s">'y'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df8</span><span class="p">[</span><span class="s">'x1'</span><span class="p">],</span><span class="n">df8</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s">'orange'</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_67_0.png" alt="png" /></p>
+
+<h3 id="generate-classification-data-with-a-symbolic-expression-of">Generate classification data with a symbolic expression of:</h3>
+<p><script type="math/tex">\frac{x_1^2}{3}-\frac{x_2^2}{15}</script></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data9</span> <span class="o">=</span> <span class="n">gen_classification_symbolic</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="s">'((x1^2)/3-(x2^2)/15)'</span><span class="p">,</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">flip_y</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">df9</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data9</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)]</span><span class="o">+</span><span class="p">[</span><span class="s">'y'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df9</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x1</th>
+      <th>x2</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-1.484834</td>
+      <td>-1.036240</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-3.448183</td>
+      <td>0.979776</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-7.778664</td>
+      <td>4.174078</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.976225</td>
+      <td>5.150482</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.653557</td>
+      <td>7.083188</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df9</span><span class="p">[</span><span class="s">'x1'</span><span class="p">],</span><span class="n">df9</span><span class="p">[</span><span class="s">'x2'</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">df9</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">edgecolors</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'x1'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'x2'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_71_0.png" alt="png" /></p>
+
+<h3 id="generate-classification-data-with-a-symbolic-expression-of-1">Generate classification data with a symbolic expression of:</h3>
+<p><script type="math/tex">x_1-3.\text{sin}\frac{x_2}{2}</script></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data9</span> <span class="o">=</span> <span class="n">gen_classification_symbolic</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="s">'x1-3*sin(x2/2)'</span><span class="p">,</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">flip_y</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">df9</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data9</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)]</span><span class="o">+</span><span class="p">[</span><span class="s">'y'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df9</span><span class="p">[</span><span class="s">'x1'</span><span class="p">],</span><span class="n">df9</span><span class="p">[</span><span class="s">'x2'</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">df9</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">edgecolors</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'x1'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'x2'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="02.b%20-%20Synthetic%20Data%20Generation_files/02.b%20-%20Synthetic%20Data%20Generation_74_0.png" alt="png" /></p>
+
+<h2 id="categorical-data-generation-using-pydbgen-library">Categorical data generation using “pydbgen” library</h2>
+
+<p>While many high-quality real-life datasets are available on the web for trying out cool machine learning techniques, from my personal experience, I found that the same is not true when it comes to learning SQL.</p>
+
+<p>For data science expertise, having a basic familiarity of SQL is almost as important as knowing how to write code in Python or R. But access to a large enough database with real categorical data (such as name, age, credit card, SSN, address, birthday, etc.) is not nearly as common as access to toy datasets on Kaggle, specifically designed or curated for machine learning task.</p>
+
+<p>Apart from the beginners in data science, <a href="https://www.riaktr.com/synthetic-data-become-major-competitive-advantage/">even seasoned software testers may find it useful to have a simple tool</a> where with a few lines of code they can generate arbitrarily large data sets with random (fake) yet meaningful entries.</p>
+
+<p>Enter pydbgen. <a href="http://pydbgen.readthedocs.io/en/latest/#">Read the docs here</a>.</p>
+
+<p>It is a <a href="https://github.com/tirthajyoti/pydbgen">lightweight, pure-python library</a> to generate random useful entries (e.g. name, address, credit card number, date, time, company name, job title, license plate number, etc.) and save them in either Pandas dataframe object, or as a SQLite table in a database file, or in a MS Excel file.</p>
+
+<h2 id="generate-name-address-phone-number-email-etc-using-pydbgen-package">Generate name, address, phone number, email etc. using <code class="highlighter-rouge">pydbgen</code> package</h2>
+
+<p>This is a package you need to install first with <strong><code class="highlighter-rouge">pip install pydbgen</code></strong>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pydbgen</span> <span class="kn">import</span> <span class="n">pydbgen</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">generator</span> <span class="o">=</span> <span class="n">pydbgen</span><span class="o">.</span><span class="n">pydb</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="generate-a-license-plate-us-style">Generate a license-plate (US style)</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">generator</span><span class="o">.</span><span class="n">license_plate</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'DEE-328'
+</code></pre></div></div>
+
+<h3 id="generate-few-random-names">Generate few random names</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">generator</span><span class="o">.</span><span class="n">gen_data_series</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">data_type</span><span class="o">=</span><span class="s">'name'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0       Kristin Cortez
+1          Kerry Singh
+2    Timothy Blanchard
+3        Jaclyn Powers
+4       Danielle Jones
+5          David Perez
+6        Jason Stewart
+7         Justin Kelly
+8         Joseph Moses
+9       Jeanette Lopez
+dtype: object
+</code></pre></div></div>
+
+<h3 id="generate-random-phone-numbers">Generate random phone numbers</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">generator</span><span class="o">.</span><span class="n">simple_ph_num</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'209-922-0398'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">generator</span><span class="o">.</span><span class="n">gen_data_series</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">data_type</span><span class="o">=</span><span class="s">'phone_number_full'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0    1-195-730-3152x151
+1     827.024.2732x1761
+2     977-282-0138x3868
+3      655-724-0652x010
+4     088-458-4360x7793
+5        1-526-302-3859
+6          315-650-7567
+7     493.804.2412x6951
+8    1-770-960-5933x867
+9          664.585.2472
+dtype: object
+</code></pre></div></div>
+
+<h3 id="generate-a-full-data-frame-with-random-name-street-address-ssn-email-date">Generate a full data frame with random name, street address, SSN, email, date</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df10</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">gen_dataframe</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">'name'</span><span class="p">,</span><span class="s">'street_address'</span><span class="p">,</span><span class="s">'ssn'</span><span class="p">,</span><span class="s">'email'</span><span class="p">,</span><span class="s">'date'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df10</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>street_address</th>
+      <th>ssn</th>
+      <th>email</th>
+      <th>date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>David Washington</td>
+      <td>893 Deborah Spur Apt. 341</td>
+      <td>863-23-8636</td>
+      <td>David.W34@gmail.com</td>
+      <td>2004-06-29</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Daniel Bush</td>
+      <td>942 Gabriel Brooks</td>
+      <td>406-17-7350</td>
+      <td>DBush@protonmail.com</td>
+      <td>1991-05-11</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Anna Roberson</td>
+      <td>3209 Todd Views Apt. 410</td>
+      <td>256-68-9954</td>
+      <td>ARoberson@protonmail.com</td>
+      <td>1982-07-23</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Jacob Parker</td>
+      <td>132 Bailey Overpass Suite 627</td>
+      <td>771-91-9716</td>
+      <td>Parker_Jacob@aol.com</td>
+      <td>1970-01-22</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Mr. Jeffrey Zimmerman</td>
+      <td>85005 Weeks Prairie</td>
+      <td>090-57-2158</td>
+      <td>Mr.Zimmerman@att.com</td>
+      <td>1975-12-27</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Lisa Reyes</td>
+      <td>6675 Jack Orchard</td>
+      <td>019-20-2315</td>
+      <td>Lisa_R@yandex.com</td>
+      <td>2016-09-09</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Anna Gonzales</td>
+      <td>4169 Edwards Island Suite 974</td>
+      <td>441-94-8985</td>
+      <td>Gonzales.Anna@yandex.com</td>
+      <td>1999-06-24</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Melanie Frazier</td>
+      <td>752 Dawn Neck</td>
+      <td>392-39-6581</td>
+      <td>Melanie.F@protonmail.com</td>
+      <td>2001-05-07</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Lindsey King</td>
+      <td>862 Donald Trace</td>
+      <td>457-83-0301</td>
+      <td>King.Lindsey@zoho.com</td>
+      <td>1985-01-03</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>David Hawkins</td>
+      <td>204 Weiss Mall Apt. 256</td>
+      <td>072-33-6619</td>
+      <td>DavidHawkins@att.com</td>
+      <td>1982-04-13</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
