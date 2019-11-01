@@ -1288,12 +1288,12 @@ pprint(bundle.as_json())
                                                'unit': 'mg/l',
                                                'value': 6}},
                 'search': {'mode': 'match'}}],
-     'id': 'a4804867-4ef3-448b-b4fc-3dc767b90d9e',
+     'id': '327cddc7-d99d-4219-b8f4-3dd782db66dd',
      'link': [{'relation': 'self',
                'url': 'http://hapi.fhir.org/baseR4/Observation?subject=Patient%2F38'},
               {'relation': 'next',
-               'url': 'http://hapi.fhir.org/baseR4?_getpages=a4804867-4ef3-448b-b4fc-3dc767b90d9e&_getpagesoffset=20&_count=20&_pretty=true&_bundletype=searchset'}],
-     'meta': {'lastUpdated': '2019-10-31T20:25:18.166+00:00'},
+               'url': 'http://hapi.fhir.org/baseR4?_getpages=327cddc7-d99d-4219-b8f4-3dd782db66dd&_getpagesoffset=20&_count=20&_pretty=true&_bundletype=searchset'}],
+     'meta': {'lastUpdated': '2019-11-01T00:01:34.662+00:00'},
      'resourceType': 'Bundle',
      'total': 204,
      'type': 'searchset'}
@@ -1345,7 +1345,7 @@ patient.as_json() # throws FHIRValidationError: because we incorrectly set the n
 
     FHIRValidationError                       Traceback (most recent call last)
 
-    <ipython-input-8-814c163e63cc> in <module>
+    <ipython-input-19-814c163e63cc> in <module>
           1 name.given = 'Peter'
     ----> 2 patient.as_json() # throws FHIRValidationError: because we incorrectly set the name to a string
     
@@ -1392,6 +1392,130 @@ with open('patient.json', 'r') as h:
     Luc
     male
     1980-01-01
+
+
+## Using Requests only
+
+
+```python
+import requests
+```
+
+
+```python
+response = requests.get("http://hapi.fhir.org/baseR4/Patient/38")
+```
+
+
+```python
+response.status_code
+```
+
+
+
+
+    200
+
+
+
+
+```python
+data = json.loads(response.content.decode('utf-8'))
+data['name']
+```
+
+
+
+
+    [{'family': 'Sky', 'given': ['Luc']}]
+
+
+
+
+```python
+data['name'][0]['family']
+```
+
+
+
+
+    'Sky'
+
+
+
+
+```python
+data['name'][0]['given']
+```
+
+
+
+
+    ['Luc']
+
+
+
+
+```python
+data['name'][0]['given'][0]
+```
+
+
+
+
+    'Luc'
+
+
+
+
+```python
+response.text
+```
+
+
+
+
+    '{\n  "resourceType": "Patient",\n  "id": "38",\n  "meta": {\n    "versionId": "32",\n    "lastUpdated": "2019-10-30T14:16:54.484+00:00",\n    "source": "#e0mm6ofqyX94cLL9"\n  },\n  "text": {\n    "status": "generated",\n    "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"> <div class=\\"hapiHeaderText\\">Hi <b>HELLO </b> </div> <table class=\\"hapiPropertyTable\\"> <tbody> <tr> <td>Identifier</td> <td>NCC-7676</td> </tr> <tr> <td>Address</td> <td> <span>Nowhere 42 </span> <br/> <span>Spöck </span> <span>Germany </span> </td> </tr> <tr> <td>Date of birth</td> <td> <span>24 October 1990</span> </td> </tr> </tbody> </table> </div>"\n  },\n  "identifier": [\n    {\n      "use": "usual",\n      "type": {\n        "coding": [\n          {\n            "system": "http://interopsante.org/fhir/valueset/fr-patient-identifier-type",\n            "version": "1.0",\n            "code": "INS-NIR",\n            "display": "NIR définitif"\n          }\n        ]\n      },\n      "system": "urn:oid:1.2.250.1.213.1.4.10",\n      "value": "1426354675483"\n    },\n    {\n      "system": "http://starfleet-hospital.ufp/NamingSystem/patient-identifier",\n      "value": "NCC-7676"\n    },\n    {\n      "system": "http://starfleet-hospital.ufp/fhir/",\n      "value": "6768"\n    }\n  ],\n  "name": [\n    {\n      "family": "Sky",\n      "given": [\n        "Luc"\n      ]\n    }\n  ],\n  "telecom": [\n    {\n      "system": "phone",\n      "value": "+49 (0)12345 - 123456"\n    }\n  ],\n  "gender": "male",\n  "birthDate": "1980-01-01",\n  "address": [\n    {\n      "line": [\n        "Nowhere 42"\n      ],\n      "city": "Spöck",\n      "postalCode": "76297",\n      "country": "Germany"\n    }\n  ],\n  "maritalStatus": {\n    "coding": [\n      {\n        "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",\n        "code": "U",\n        "display": "unmarried"\n      }\n    ]\n  }\n}'
+
+
+
+
+```python
+response.json()
+```
+
+
+
+
+    {'resourceType': 'Patient',
+     'id': '38',
+     'meta': {'versionId': '32',
+      'lastUpdated': '2019-10-30T14:16:54.484+00:00',
+      'source': '#e0mm6ofqyX94cLL9'},
+     'text': {'status': 'generated',
+      'div': '<div xmlns="http://www.w3.org/1999/xhtml"> <div class="hapiHeaderText">Hi <b>HELLO </b> </div> <table class="hapiPropertyTable"> <tbody> <tr> <td>Identifier</td> <td>NCC-7676</td> </tr> <tr> <td>Address</td> <td> <span>Nowhere 42 </span> <br/> <span>Spöck </span> <span>Germany </span> </td> </tr> <tr> <td>Date of birth</td> <td> <span>24 October 1990</span> </td> </tr> </tbody> </table> </div>'},
+     'identifier': [{'use': 'usual',
+       'type': {'coding': [{'system': 'http://interopsante.org/fhir/valueset/fr-patient-identifier-type',
+          'version': '1.0',
+          'code': 'INS-NIR',
+          'display': 'NIR définitif'}]},
+       'system': 'urn:oid:1.2.250.1.213.1.4.10',
+       'value': '1426354675483'},
+      {'system': 'http://starfleet-hospital.ufp/NamingSystem/patient-identifier',
+       'value': 'NCC-7676'},
+      {'system': 'http://starfleet-hospital.ufp/fhir/', 'value': '6768'}],
+     'name': [{'family': 'Sky', 'given': ['Luc']}],
+     'telecom': [{'system': 'phone', 'value': '+49 (0)12345 - 123456'}],
+     'gender': 'male',
+     'birthDate': '1980-01-01',
+     'address': [{'line': ['Nowhere 42'],
+       'city': 'Spöck',
+       'postalCode': '76297',
+       'country': 'Germany'}],
+     'maritalStatus': {'coding': [{'system': 'http://terminology.hl7.org/CodeSystem/v3-MaritalStatus',
+        'code': 'U',
+        'display': 'unmarried'}]}}
+
 
 
 
