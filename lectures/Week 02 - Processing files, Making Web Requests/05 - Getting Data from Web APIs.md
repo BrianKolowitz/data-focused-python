@@ -1,9 +1,9 @@
 ---
 layout: default
-title: 07 - Getting Data from Web APIs
-parent: Week 02 - Processing files using functions, classes, and libraries
+title: 05 - Getting Data from Web APIs
+parent: Week 02 - Processing files, Making Web Requests
 grand_parent: Lectures
-nav_order: 11
+nav_order: 9
 ---
 
 # Python API tutorial - An Introduction to using APIs

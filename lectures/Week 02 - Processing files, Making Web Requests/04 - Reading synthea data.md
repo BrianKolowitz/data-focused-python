@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 04 - Reading synthea data
-parent: Week 02 - Processing files using functions, classes, and libraries
+parent: Week 02 - Processing files, Making Web Requests
 grand_parent: Lectures
 nav_order: 8
 ---

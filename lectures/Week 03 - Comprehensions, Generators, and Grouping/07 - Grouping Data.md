@@ -3,7 +3,7 @@ layout: default
 title: 07 - Grouping Data
 parent: Week 03 - Comprehensions, Generators, and Grouping
 grand_parent: Lectures
-nav_order: 8
+nav_order: 10
 ---
 
 # Grouping data using python

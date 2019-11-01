@@ -3,7 +3,7 @@ layout: default
 title: 02 - Lists and List Comprehensions
 parent: Week 03 - Comprehensions, Generators, and Grouping
 grand_parent: Lectures
-nav_order: 2
+nav_order: 4
 ---
 
 # Python List Comprehensions

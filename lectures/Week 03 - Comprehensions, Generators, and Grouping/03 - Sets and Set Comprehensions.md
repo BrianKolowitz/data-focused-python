@@ -3,7 +3,7 @@ layout: default
 title: 03 - Sets and Set Comprehensions
 parent: Week 03 - Comprehensions, Generators, and Grouping
 grand_parent: Lectures
-nav_order: 3
+nav_order: 5
 ---
 
 # Sets and Set Comprehensions

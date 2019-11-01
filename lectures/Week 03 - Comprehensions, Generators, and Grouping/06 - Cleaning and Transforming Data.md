@@ -3,7 +3,7 @@ layout: default
 title: 06 - Cleaning and Transforming Data
 parent: Week 03 - Comprehensions, Generators, and Grouping
 grand_parent: Lectures
-nav_order: 7
+nav_order: 9
 ---
 
 
