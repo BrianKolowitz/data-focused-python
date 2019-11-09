@@ -575,8 +575,3 @@ emp.drop(engine)
 # drop all tables
 metadata.drop_all(engine)
 ```
-
-
-```python
-
-```

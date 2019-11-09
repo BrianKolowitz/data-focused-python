@@ -473,8 +473,3 @@ df.head()
 </div>
 
 
-
-
-```python
-
-```
