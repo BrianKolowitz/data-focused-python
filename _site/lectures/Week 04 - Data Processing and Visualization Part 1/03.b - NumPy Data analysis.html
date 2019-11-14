@@ -1,0 +1,2493 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  
+
+  <title>03.b - NumPy Data analysis - Data Focused Python</title>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/just-the-docs.css">
+
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-139655036-1', 'http://localhost:4000');
+      ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+  
+
+  
+    <script type="text/javascript" src="http://localhost:4000/assets/js/vendor/lunr.min.js"></script>
+  
+  <script type="text/javascript" src="http://localhost:4000/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>03.b - NumPy Data analysis | Data Focused Python</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="03.b - NumPy Data analysis" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/lectures/Week%2004%20-%20Data%20Processing%20and%20Visualization%20Part%201/03.b%20-%20NumPy%20Data%20analysis.html" />
+<meta property="og:url" content="http://localhost:4000/lectures/Week%2004%20-%20Data%20Processing%20and%20Visualization%20Part%201/03.b%20-%20NumPy%20Data%20analysis.html" />
+<meta property="og:site_name" content="Data Focused Python" />
+<script type="application/ld+json">
+{"@type":"WebPage","url":"http://localhost:4000/lectures/Week%2004%20-%20Data%20Processing%20and%20Visualization%20Part%201/03.b%20-%20NumPy%20Data%20analysis.html","headline":"03.b - NumPy Data analysis","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+
+  <div class="page-wrap">
+    <div class="side-bar">
+      <a href="http://localhost:4000" class="site-title fs-6 lh-tight">Data Focused Python</a>
+      <span class="fs-3"><button class="js-main-nav-trigger navigation-list-toggle btn btn-outline" type="button" data-text-toggle="Hide">Menu</button></span>
+      <div class="navigation main-nav js-main-nav">
+        <nav role="navigation" aria-label="Main navigation">
+  <ul class="navigation-list">
+    
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/about.html" class="navigation-list-link"></a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/" class="navigation-list-link">Data Focused Python</a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/assignments" class="navigation-list-link">Assignments</a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item active">
+            
+            <a href="http://localhost:4000/lectures" class="navigation-list-link">Lectures</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data.html" class="navigation-list-link">Week 01 - Language basics, Generating Data, Storing Data</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/00%20-%20Getting%20Started.html" class="navigation-list-link">00 - Getting Started</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/01.a%20-%20Terminal%20Application.html" class="navigation-list-link">01.a - Terminal Application</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/01.b%20-%20Argparse.html" class="navigation-list-link">01.b - Argparse</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/02.a%20-%20Generating%20Synthetic%20Healthcare%20Data.html" class="navigation-list-link">02.a - Generating Synthetic Healthcare Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/02.b%20-%20Generating%20Other%20Synthetic%20Data.html" class="navigation-list-link">02.b - Generating Other Synthetic Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/02.c%20-%20Using%20Synthea.html" class="navigation-list-link">02.c - Using Synthea</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/03%20-%20Getting%20Data%20from%20a%20Database.html" class="navigation-list-link">03 - Getting Data from a Database</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/04%20-%20FHIR%20SQL.html" class="navigation-list-link">04 - FHIR SQL</a>
+                              </li>
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/04%20-%20Python%20Testing.html" class="navigation-list-link">04 - Python Testing</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/05%20-%20Start%20a%20process%20in%20Python.html" class="navigation-list-link">05 - Start a process in Python</a>
+                              </li>
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests.html" class="navigation-list-link">Week 02 - Processing files, Making Web Requests</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests/01.a%20-%20File%20Processing.html" class="navigation-list-link">01.a - File Processing</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests/01.b%20-%20CSV%20Files.html" class="navigation-list-link">01.b - CSV Files</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests/01.c%20-%20JSON%20Files.html" class="navigation-list-link">01.c - JSON Files</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests/01.d%20-%20XML%20Files.html" class="navigation-list-link">01.d - XML Files</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests/02.a%20-%20Python%20Classes.html" class="navigation-list-link">02.a - Python Classes</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests/02.b%20-%20Python%20Modules%20and%20Packages.html" class="navigation-list-link">02.b - Python Modules and Packages</a>
+                              </li>
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests/03%20-%20Using%20fhirclient%20to%20parse%20Healthcare%20Data.html" class="navigation-list-link">03 - Using fhirclient to parse Healthcare Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests/04%20-%20Reading%20Synthea%20data.html" class="navigation-list-link">04 - Reading Synthea data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests/05%20-%20Getting%20Data%20from%20Web%20APIs.html" class="navigation-list-link">05 - Getting Data from Web APIs</a>
+                              </li>
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2003%20-%20Functions,%20Loops,%20Comprehensions%20and%20Generators.html" class="navigation-list-link">Week 03 - Functions, Loops, Comprehensions and Generators</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Functions,%20Loops,%20Comprehensions%20and%20Generators/01.a%20-%20Python%20Functions.html" class="navigation-list-link">01.a - Python Functions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Functions,%20Loops,%20Comprehensions%20and%20Generators/01.b%20-%20Python%20Tuples.html" class="navigation-list-link">01.b - Python Tuples</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Functions,%20Loops,%20Comprehensions%20and%20Generators/01.c%20-%20Loops.html" class="navigation-list-link">01.c - Loops</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Functions,%20Loops,%20Comprehensions%20and%20Generators/02%20-%20Lists%20and%20List%20Comprehensions.html" class="navigation-list-link">02 - Lists and List Comprehensions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Functions,%20Loops,%20Comprehensions%20and%20Generators/03%20-%20Sets%20and%20Set%20Comprehensions.html" class="navigation-list-link">03 - Sets and Set Comprehensions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Functions,%20Loops,%20Comprehensions%20and%20Generators/04.a%20-%20Dictionaries.html" class="navigation-list-link">04.a - Dictionaries</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Functions,%20Loops,%20Comprehensions%20and%20Generators/04.b%20-%20Dictionary%20Comprehensions.html" class="navigation-list-link">04.b - Dictionary Comprehensions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Functions,%20Loops,%20Comprehensions%20and%20Generators/05%20-%20Python%20Generators.html" class="navigation-list-link">05 - Python Generators</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item  active">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2004%20-%20Data%20Processing%20and%20Visualization%20Part%201.html" class="navigation-list-link">Week 04 - Data Processing and Visualization Part 1</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Data%20Processing%20and%20Visualization%20Part%201/01.a%20-%20Cleaning%20and%20Transforming%20Data.html" class="navigation-list-link">01.a - Cleaning and Transforming Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Data%20Processing%20and%20Visualization%20Part%201/01.b%20-%20Grouping%20Data.html" class="navigation-list-link">01.b - Grouping Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Data%20Processing%20and%20Visualization%20Part%201/01.c%20-%20Descriptive%20Statistics.html" class="navigation-list-link">01.c - Descriptive Statistics</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Data%20Processing%20and%20Visualization%20Part%201/02%20-%20Basic%20Medical%20Data%20Visualization.html" class="navigation-list-link">02 - Basic Medical Data Visualization</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Data%20Processing%20and%20Visualization%20Part%201/03.a%20-%20NumPy%20Introduction.html" class="navigation-list-link">03.a - NumPy Introduction</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item  active">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Data%20Processing%20and%20Visualization%20Part%201/03.b%20-%20NumPy%20Data%20analysis.html" class="navigation-list-link active">03.b - NumPy Data analysis</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2005%20-%20Data%20Processing%20and%20Visualization%20Part%202.html" class="navigation-list-link">Week 05 - Data Processing and Visualization Part 2</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Data%20Processing%20and%20Visualization%20Part%202/00%20-%20Additional%20Links.html" class="navigation-list-link">00 - Additional Links</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Data%20Processing%20and%20Visualization%20Part%202/01%20-%20Pandas%20Introduction.html" class="navigation-list-link">01 - Pandas Introduction</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Data%20Processing%20and%20Visualization%20Part%202/02.a%20-%20Pandas%20Data%20analysis%20Part%201.html" class="navigation-list-link">02.a - Pandas Data analysis Part 1</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Data%20Processing%20and%20Visualization%20Part%202/02.b%20-%20Pandas%20Data%20analysis%20Part%202.html" class="navigation-list-link">02.b - Pandas Data analysis Part 2</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Data%20Processing%20and%20Visualization%20Part%202/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting.html" class="navigation-list-link">03 - Matplotlib Tutorial Python Plotting</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Data%20Processing%20and%20Visualization%20Part%202/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial.html" class="navigation-list-link">04 - The Ultimate Python Seaborn Tutorial</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping.html" class="navigation-list-link">Week 06 - Web Scraping</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping/01.a%20-%20Getting%20Data%20from%20Web%20Pages.html" class="navigation-list-link">01.a - Getting Data from Web Pages</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping/01.b%20-%20Getting%20Data%20from%20Web%20Pages.html" class="navigation-list-link">01.b - Getting Data from Web Pages</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/resources" class="navigation-list-link">Resources</a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  </ul>
+</nav>
+
+      </div>
+      <footer role="contentinfo" class="site-footer">
+        <p class="text-small text-grey-dk-000 mb-0">This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.</p>
+      </footer>
+    </div>
+    <div class="main-content-wrap js-main-content" tabindex="0">
+      <div class="page-header">
+        <div class="main-content">
+          
+          <div class="search js-search">
+            <div class="search-input-wrap">
+              <input type="text" class="js-search-input search-input" tabindex="0" placeholder="Search Data Focused Python" aria-label="Search Data Focused Python" autocomplete="off">
+              <svg width="14" height="14" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" class="search-icon"><title>Search</title><g fill-rule="nonzero"><path d="M17.332 20.735c-5.537 0-10-4.6-10-10.247 0-5.646 4.463-10.247 10-10.247 5.536 0 10 4.601 10 10.247s-4.464 10.247-10 10.247zm0-4c3.3 0 6-2.783 6-6.247 0-3.463-2.7-6.247-6-6.247s-6 2.784-6 6.247c0 3.464 2.7 6.247 6 6.247z"/><path d="M11.672 13.791L.192 25.271 3.02 28.1 14.5 16.62z"/></g></svg>
+            </div>
+            <div class="js-search-results search-results-wrap"></div>
+          </div>
+          
+          
+            <ul class="list-style-none text-small mt-md-1 mb-md-1 pb-4 pb-md-0 js-aux-nav aux-nav">
+              
+                <li class="d-inline-block my-0 mr-2"><a href="//github.com/BrianKolowitz/data-focused-python">Code</a></li>
+              
+                <li class="d-inline-block my-0"><a href="/data-focused-python/about.html">About</a></li>
+              
+            </ul>
+          
+        </div>
+      </div>
+      <div class="main-content">
+        
+          
+            <nav class="breadcrumb-nav">
+              <ol class="breadcrumb-nav-list">
+                
+                  <li class="breadcrumb-nav-list-item"><a href="http://localhost:4000/lectures">Lectures</a></li>
+                  <li class="breadcrumb-nav-list-item"><a href="http://localhost:4000/lectures/Week%2004%20-%20Data%20Processing%20and%20Visualization%20Part%201.html">Week 04 - Data Processing and Visualization Part 1</a></li>
+                
+                <li class="breadcrumb-nav-list-item"><span>03.b - NumPy Data analysis</span></li>
+              </ol>
+            </nav>
+          
+        
+        <div id="main-content" class="page-content" role="main">
+          <h1 id="numpy-tutorial-data-analysis-with-python">NumPy Tutorial: Data analysis with Python</h1>
+<p><a href="https://www.dataquest.io/blog/numpy-tutorial-python/">Source</a></p>
+
+<p>NumPy is a commonly used Python data analysis package. By using NumPy, you can speed up your workflow, and interface with other packages in the Python ecosystem, like scikit-learn, that use NumPy under the hood. NumPy was originally developed in the mid 2000s, and arose from an even older package called Numeric. This longevity means that almost every data analysis or machine learning package for Python leverages NumPy in some way.</p>
+
+<p>In this tutorial, we’ll walk through using NumPy to analyze data on wine quality. The data contains information on various attributes of wines, such as pH and fixed acidity, along with a quality score between 0 and 10 for each wine. The quality score is the average of at least 3 human taste testers. As we learn how to work with NumPy, we’ll try to figure out more about the perceived quality of wine.</p>
+
+<p>The wines we’ll be analyzing are from the Minho region of Portugal.</p>
+
+<p>The data was downloaded from the UCI Machine Learning Repository, and is available <a href="https://archive.ics.uci.edu/ml/datasets/Wine+Quality">here</a>. Here are the first few rows of the winequality-red.csv file, which we’ll be using throughout this tutorial:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"fixed acidity";"volatile acidity";"citric acid";"residual sugar";"chlorides";"free sulfur dioxide";"total sulfur dioxide";"density";"pH";"sulphates";"alcohol";"quality"
+7.4;0.7;0;1.9;0.076;11;34;0.9978;3.51;0.56;9.4;5
+7.8;0.88;0;2.6;0.098;25;67;0.9968;3.2;0.68;9.8;5
+</code></pre></div></div>
+
+<p>The data is in what I’m going to call ssv (semicolon separated values) format – each record is separated by a semicolon (;), and rows are separated by a new line. There are 1600 rows in the file, including a header row, and 12 columns.</p>
+
+<p>Before we get started, a quick version note – we’ll be using Python 3.5. Our code examples will be done using Jupyter notebook.</p>
+
+<p>If you want to jump right into a specific area, here are the topics:</p>
+<ul>
+  <li>Creating an Array</li>
+  <li>Reading Text Files</li>
+  <li>Array Indexing</li>
+  <li>N-Dimensional Arrays</li>
+  <li>Data Types</li>
+  <li>Array Math</li>
+  <li>Array Methods</li>
+  <li>Array Comparison and Filtering</li>
+  <li>Reshaping and Combining Arrays</li>
+</ul>
+
+<p>Lists Of Lists for CSV Data
+Before using NumPy, we’ll first try to work with the data using Python and the csv package. We can read in the file using the csv.reader object, which will allow us to read in and split up all the content from the ssv file.</p>
+
+<p>In the below code, we:</p>
+
+<ul>
+  <li>Import the csv library.</li>
+  <li>Open the winequality-red.csv file.
+    <ul>
+      <li>With the file open, create a new csv.reader object.
+        <ul>
+          <li>Pass in the keyword argument delimiter=”;” to make sure that the records are split up on the semicolon character instead of the default comma character.</li>
+        </ul>
+      </li>
+      <li>Call the list type to get all the rows from the file.</li>
+      <li>Assign the result to wines.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"winequality-red.csv"</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">wines</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">";"</span><span class="p">))</span>
+<span class="c">#     print(wines[:3])</span>
+    
+<span class="n">headers</span> <span class="o">=</span> <span class="n">wines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">wines_only</span> <span class="o">=</span> <span class="n">wines</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># print the headers</span>
+<span class="k">print</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar', 'chlorides', 'free sulfur dioxide', 'total sulfur dioxide', 'density', 'pH', 'sulphates', 'alcohol', 'quality']
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># print the 1st row of data</span>
+<span class="k">print</span><span class="p">(</span><span class="n">wines_only</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['7.4', '0.7', '0', '1.9', '0.076', '11', '34', '0.9978', '3.51', '0.56', '9.4', '5']
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># print the 1st three rows of data</span>
+<span class="k">print</span><span class="p">(</span><span class="n">wines_only</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[['7.4', '0.7', '0', '1.9', '0.076', '11', '34', '0.9978', '3.51', '0.56', '9.4', '5'], ['7.8', '0.88', '0', '2.6', '0.098', '25', '67', '0.9968', '3.2', '0.68', '9.8', '5'], ['11.2', '0.28', '0.56', '1.9', '0.075', '17', '60', '0.998', '3.16', '0.58', '9.8', '6']]
+</code></pre></div></div>
+
+<p>The data has been read into a list of lists. Each inner list is a row from the ssv file. As you may have noticed, each item in the entire list of lists is represented as a string, which will make it harder to do computations.</p>
+
+<p>As you can see from the table above, we’ve read in three rows, the first of which contains column headers. Each row after the header row represents a wine. The first element of each row is the fixed acidity, the second is the volatile acidity, and so on.</p>
+
+<h2 id="calculate-average-wine-quality">Calculate Average Wine Quality</h2>
+
+<p>We can find the average quality of the wines. The below code will:</p>
+
+<ul>
+  <li>Extract the last element from each row after the header row.</li>
+  <li>Convert each extracted element to a float.</li>
+  <li>Assign all the extracted elements to the list qualities.</li>
+  <li>Divide the sum of all the elements in qualities by the total number of elements in qualities to the get the mean.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># calculate average wine quality with a loop</span>
+<span class="n">qualities</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">wines</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+    <span class="n">qualities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+
+<span class="nb">sum</span><span class="p">(</span><span class="n">qualities</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">wines</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5.636420525657071
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># calculate average wine quality with a list comprehension</span>
+<span class="n">qualities</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">wines</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
+
+<span class="nb">sum</span><span class="p">(</span><span class="n">qualities</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">wines</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5.636420525657071
+</code></pre></div></div>
+
+<p>Although we were able to do the calculation we wanted, the code is fairly complex, and it won’t be fun to have to do something similar every time we want to compute a quantity. Luckily, we can use NumPy to make it easier to work with our data.</p>
+
+<h1 id="numpy-2-dimensional-arrays">Numpy 2-Dimensional Arrays</h1>
+
+<p>With NumPy, we work with multidimensional arrays. We’ll dive into all of the possible types of multidimensional arrays later on, but for now, we’ll focus on 2-dimensional arrays. A 2-dimensional array is also known as a matrix, and is something you should be familiar with. In fact, it’s just a different way of thinking about a list of lists. A matrix has rows and columns. By specifying a row number and a column number, we’re able to extract an element from a matrix.</p>
+
+<p>If we picked the element at the first row and the second column, we’d get volatile acidity. If we picked the element in the third row and the second column, we’d get 0.88.</p>
+
+<p>In a NumPy array, the number of dimensions is called the <strong>rank</strong>, and each dimension is called an <strong>axis</strong>. So</p>
+<ul>
+  <li>the rows are the first axis</li>
+  <li>the columns are the second axis</li>
+</ul>
+
+<p>Now that you understand the basics of matrices, let’s see how we can get from our list of lists to a NumPy array.</p>
+
+<h2 id="creating-a-numpy-array">Creating A NumPy Array</h2>
+
+<p>We can create a NumPy array using the numpy.array function. If we pass in a list of lists, it will automatically create a NumPy array with the same number of rows and columns. Because we want all of the elements in the array to be float elements for easy computation, we’ll leave off the header row, which contains strings. One of the limitations of NumPy is that all the elements in an array have to be of the same type, so if we include the header row, all the elements in the array will be read in as strings. Because we want to be able to do computations like find the average quality of the wines, we need the elements to all be floats.</p>
+
+<p>In the below code, we:</p>
+
+<ul>
+  <li>Import the <code class="highlighter-rouge">numpy</code> package.</li>
+  <li>Pass the <code class="highlighter-rouge">list</code> of lists wines into the array function, which converts it into a NumPy array.
+    <ul>
+      <li>Exclude the header row with list slicing.</li>
+      <li>Specify the keyword argument <code class="highlighter-rouge">dtype</code> to make sure each element is converted to a <code class="highlighter-rouge">float</code>. We’ll dive more into what the <code class="highlighter-rouge">dtype</code> is later on.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c"># set the output print precision for readability</span>
+
+<span class="c"># create the numpy array skipping the headers</span>
+<span class="n">wines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">wines</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="nb">float</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># If we display wines, we'll now get a NumPy array:</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">wines</span><span class="p">),</span> <span class="n">wines</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'numpy.ndarray'&gt; [[ 7.4   0.7   0.   ...  0.56  9.4   5.  ]
+ [ 7.8   0.88  0.   ...  0.68  9.8   5.  ]
+ [11.2   0.28  0.56 ...  0.58  9.8   6.  ]
+ ...
+ [ 6.3   0.51  0.13 ...  0.75 11.    6.  ]
+ [ 5.9   0.65  0.12 ...  0.71 10.2   5.  ]
+ [ 6.    0.31  0.47 ...  0.66 11.    6.  ]]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># We can check the number of rows and columns in our data using the shape property of NumPy arrays:</span>
+<span class="n">wines</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(1598, 12)
+</code></pre></div></div>
+
+<h2 id="alternative-numpy-array-creation-methods">Alternative NumPy Array Creation Methods</h2>
+
+<p>There are a variety of methods that you can use to create NumPy arrays. It’s useful to create an array with all zero elements in cases when you need an array of fixed size, but don’t have any values for it yet. To start with, you can create an array where every element is zero. The below code will create an array with 3 rows and 4 columns, where every element is 0, using <code class="highlighter-rouge">numpy.zeros</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">empty_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">empty_array</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[0., 0., 0., 0.],
+       [0., 0., 0., 0.],
+       [0., 0., 0., 0.]])
+</code></pre></div></div>
+
+<p>Creating arrays full of random numbers can be useful when you want to quickly test your code with sample arrays. You can also create an array where each element is a random number using <code class="highlighter-rouge">numpy.random.rand</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[0.45, 0.91, 0.91],
+       [0.47, 0.32, 0.32]])
+</code></pre></div></div>
+
+<h3 id="using-numpy-to-read-in-files">Using NumPy To Read In Files</h3>
+<p>It’s possible to use NumPy to directly read <code class="highlighter-rouge">csv</code> or other files into arrays. We can do this using the <code class="highlighter-rouge">numpy.genfromtxt</code> function. We can use it to read in our initial data on red wines.</p>
+
+<p>In the below code, we:</p>
+
+<ul>
+  <li>Use the <code class="highlighter-rouge">genfromtxt</code> function to read in the <code class="highlighter-rouge">winequality-red.csv</code> file.</li>
+  <li>Specify the keyword argument <code class="highlighter-rouge">delimiter=";"</code> so that the fields are parsed properly.</li>
+  <li>Specify the keyword argument <code class="highlighter-rouge">skip_header=1</code> so that the header row is skipped.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s">"winequality-red.csv"</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">";"</span><span class="p">,</span> <span class="n">skip_header</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">wines</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[ 7.4 ,  0.7 ,  0.  , ...,  0.56,  9.4 ,  5.  ],
+       [ 7.8 ,  0.88,  0.  , ...,  0.68,  9.8 ,  5.  ],
+       [11.2 ,  0.28,  0.56, ...,  0.58,  9.8 ,  6.  ],
+       ...,
+       [ 6.3 ,  0.51,  0.13, ...,  0.75, 11.  ,  6.  ],
+       [ 5.9 ,  0.65,  0.12, ...,  0.71, 10.2 ,  5.  ],
+       [ 6.  ,  0.31,  0.47, ...,  0.66, 11.  ,  6.  ]])
+</code></pre></div></div>
+
+<p>Wines will end up looking the same as if we read it into a list then converted it to an array of <code class="highlighter-rouge">floats</code>. NumPy will automatically pick a data type for the elements in an array based on their format.</p>
+
+<h2 id="indexing-numpy-arrays">Indexing NumPy Arrays</h2>
+
+<p>We now know how to create arrays, but unless we can retrieve results from them, there isn’t a lot we can do with NumPy. We can use array indexing to select individual elements, groups of elements, or entire rows and columns.</p>
+
+<p>One important thing to keep in mind is that just like Python lists, NumPy is <strong>zero-indexed</strong>, meaning that:</p>
+
+<ul>
+  <li>The index of the first row is 0</li>
+  <li>The index of the first column is 0</li>
+  <li>If we want to work with the fourth row, we’d use index 3</li>
+  <li>If we want to work with the second row, we’d use index 1, and so on.</li>
+</ul>
+
+<p>We’ll again work with the wines array:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">7.4</td>
+      <td style="text-align: right">0.70</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">1.9</td>
+      <td style="text-align: right">0.076</td>
+      <td style="text-align: right">11</td>
+      <td style="text-align: right">34</td>
+      <td style="text-align: right">0.9978</td>
+      <td style="text-align: right">3.51</td>
+      <td style="text-align: right">0.56</td>
+      <td style="text-align: right">9.4</td>
+      <td style="text-align: right">5</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">7.8</td>
+      <td style="text-align: right">0.88</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">2.6</td>
+      <td style="text-align: right">0.098</td>
+      <td style="text-align: right">25</td>
+      <td style="text-align: right">67</td>
+      <td style="text-align: right">0.9968</td>
+      <td style="text-align: right">3.20</td>
+      <td style="text-align: right">0.68</td>
+      <td style="text-align: right">9.8</td>
+      <td style="text-align: right">5</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">7.8</td>
+      <td style="text-align: right">0.76</td>
+      <td style="text-align: right">0.04</td>
+      <td style="text-align: right">2.3</td>
+      <td style="text-align: right">0.092</td>
+      <td style="text-align: right">15</td>
+      <td style="text-align: right">54</td>
+      <td style="text-align: right">0.9970</td>
+      <td style="text-align: right">3.26</td>
+      <td style="text-align: right">0.65</td>
+      <td style="text-align: right">9.8</td>
+      <td style="text-align: right">5</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">11.2</td>
+      <td style="text-align: right">0.28</td>
+      <td style="text-align: right">0.56</td>
+      <td style="text-align: right">1.9</td>
+      <td style="text-align: right">0.075</td>
+      <td style="text-align: right">17</td>
+      <td style="text-align: right">60</td>
+      <td style="text-align: right">0.9980</td>
+      <td style="text-align: right">3.16</td>
+      <td style="text-align: right">0.58</td>
+      <td style="text-align: right">9.8</td>
+      <td style="text-align: right">6</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">7.4</td>
+      <td style="text-align: right">0.70</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">1.9</td>
+      <td style="text-align: right">0.076</td>
+      <td style="text-align: right">11</td>
+      <td style="text-align: right">34</td>
+      <td style="text-align: right">0.9978</td>
+      <td style="text-align: right">3.51</td>
+      <td style="text-align: right">0.56</td>
+      <td style="text-align: right">9.4</td>
+      <td style="text-align: right">5</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Let’s select the element at <strong>row 3</strong> and <strong>column 4</strong>.</p>
+
+<p>We pass:</p>
+<ul>
+  <li>2 as the row index</li>
+  <li>3 as the column index.</li>
+</ul>
+
+<p>This retrieves the value from the <strong>third row</strong> and <strong>fourth column</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wines</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.9
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wines</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.9
+</code></pre></div></div>
+
+<p>Since we’re working with a 2-dimensional array in NumPy we specify 2 indexes to retrieve an element.</p>
+
+<ul>
+  <li>The first index is the row, or <strong>axis 1</strong>, index</li>
+  <li>The second index is the column, or <strong>axis 2</strong>, index</li>
+</ul>
+
+<p>Any element in wines can be retrieved using 2 indexes.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># rows 1, 2, 3 and column 4</span>
+<span class="n">wines</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([1.9, 2.6, 1.9])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># all rows and column 3</span>
+<span class="n">wines</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([0.  , 0.  , 0.56, ..., 0.13, 0.12, 0.47])
+</code></pre></div></div>
+
+<p>Just like with <code class="highlighter-rouge">list</code> slicing, it’s possible to omit the 0 to just retrieve all the elements from the beginning up to element 3:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># rows 1, 2, 3 and column 4</span>
+<span class="n">wines</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([1.9, 2.6, 1.9])
+</code></pre></div></div>
+
+<p>We can select an entire column by specifying that we want all the elements, from the first to the last. We specify this by just using the colon <code class="highlighter-rouge">:</code>, with no starting or ending indices. The below code will select the entire fourth column:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># all rows and column 4</span>
+<span class="n">wines</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([1.9, 2.6, 1.9, ..., 2.3, 2. , 3.6])
+</code></pre></div></div>
+
+<p>We selected an entire column above, but we can also extract an entire row:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># row 4 and all columns</span>
+<span class="n">wines</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="p">:]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([ 7.4 ,  0.7 ,  0.  ,  1.9 ,  0.08, 11.  , 34.  ,  1.  ,  3.51,
+        0.56,  9.4 ,  5.  ])
+</code></pre></div></div>
+
+<p>If we take our indexing to the extreme, we can select the entire array using two colons to select all the rows and columns in wines. This is a great party trick, but doesn’t have a lot of good applications:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wines</span><span class="p">[:,</span> <span class="p">:]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[ 7.4 ,  0.7 ,  0.  , ...,  0.56,  9.4 ,  5.  ],
+       [ 7.8 ,  0.88,  0.  , ...,  0.68,  9.8 ,  5.  ],
+       [11.2 ,  0.28,  0.56, ...,  0.58,  9.8 ,  6.  ],
+       ...,
+       [ 6.3 ,  0.51,  0.13, ...,  0.75, 11.  ,  6.  ],
+       [ 5.9 ,  0.65,  0.12, ...,  0.71, 10.2 ,  5.  ],
+       [ 6.  ,  0.31,  0.47, ...,  0.66, 11.  ,  6.  ]])
+</code></pre></div></div>
+
+<h2 id="assigning-values-to-numpy-arrays">Assigning Values To NumPy Arrays</h2>
+<p>We can also use indexing to assign values to certain elements in arrays. We can do this by assigning directly to the indexed value:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># assign the value of 10 to the 2nd row and 6th column</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Before'</span><span class="p">,</span> <span class="n">wines</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="mi">7</span><span class="p">])</span>
+<span class="n">wines</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'After'</span><span class="p">,</span> <span class="n">wines</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="mi">7</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Before [ 0.1 25.  67. ]
+After [ 0.1 10.  67. ]
+</code></pre></div></div>
+
+<p>We can do the same for slices. To overwrite an entire column, we can do this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Overwrites all the values in the eleventh column with 50.</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Before'</span><span class="p">,</span> <span class="n">wines</span><span class="p">[:,</span> <span class="mi">9</span><span class="p">:</span><span class="mi">12</span><span class="p">])</span>
+<span class="n">wines</span><span class="p">[:,</span> <span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'After'</span><span class="p">,</span> <span class="n">wines</span><span class="p">[:,</span> <span class="mi">9</span><span class="p">:</span><span class="mi">12</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Before [[ 0.56  9.4   5.  ]
+ [ 0.68  9.8   5.  ]
+ [ 0.58  9.8   6.  ]
+ ...
+ [ 0.75 11.    6.  ]
+ [ 0.71 10.2   5.  ]
+ [ 0.66 11.    6.  ]]
+After [[ 0.56 50.    5.  ]
+ [ 0.68 50.    5.  ]
+ [ 0.58 50.    6.  ]
+ ...
+ [ 0.75 50.    6.  ]
+ [ 0.71 50.    5.  ]
+ [ 0.66 50.    6.  ]]
+</code></pre></div></div>
+
+<h2 id="1-dimensional-numpy-arrays">1-Dimensional NumPy Arrays</h2>
+
+<p>So far, we’ve worked with 2-dimensional arrays, such as wines. However, NumPy is a package for working with multidimensional arrays.</p>
+
+<p>One of the most common types of multidimensional arrays is the <strong>1-dimensional array</strong>, or <strong>vector</strong>. As you may have noticed above, when we sliced wines, we retrieved a 1-dimensional array.</p>
+
+<ul>
+  <li>A 1-dimensional array only needs a single index to retrieve an element.</li>
+  <li>Each row and column in a 2-dimensional array is a 1-dimensional array.</li>
+</ul>
+
+<p>Just like a list of lists is analogous to a 2-dimensional array, a single list is analogous to a 1-dimensional array.</p>
+
+<p>If we slice wines and only retrieve the third row, we get a 1-dimensional array:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">third_wine</span> <span class="o">=</span> <span class="n">wines</span><span class="p">[</span><span class="mi">3</span><span class="p">,:]</span>
+<span class="n">third_wine</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([ 7.4 ,  0.7 ,  0.  ,  1.9 ,  0.08, 11.  , 34.  ,  1.  ,  3.51,
+        0.56, 50.  ,  5.  ])
+</code></pre></div></div>
+
+<p>We can retrieve individual elements from <code class="highlighter-rouge">third_wine</code> using a single index.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># display the second item in third_wine</span>
+<span class="n">third_wine</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.7
+</code></pre></div></div>
+
+<p>Most NumPy functions that we’ve worked with, such as <code class="highlighter-rouge">numpy.random.rand</code>, can be used with multidimensional arrays. Here’s how we’d use <code class="highlighter-rouge">numpy.random.rand</code> to generate a random vector:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([0.97, 0.95, 0.04])
+</code></pre></div></div>
+
+<p>Previously, when we called <code class="highlighter-rouge">np.random.rand</code>, we passed in a shape for a 2-dimensional array, so the result was a 2-dimensional array. This time, we passed in a shape for a single dimensional array. The shape specifies the number of dimensions, and the size of the array in each dimension.</p>
+
+<p>A shape of <code class="highlighter-rouge">(10,10)</code> will be a 2-dimensional array with <strong>10 rows</strong> and <strong>10 columns</strong>. A shape of <code class="highlighter-rouge">(10,)</code> will be a <strong>1-dimensional</strong> array with <strong>10 elements</strong>.</p>
+
+<p>Where NumPy gets more complex is when we start to deal with arrays that have more than 2 dimensions.</p>
+
+<h2 id="n-dimensional-numpy-arrays">N-Dimensional NumPy Arrays</h2>
+
+<p>This doesn’t happen extremely often, but there are cases when you’ll want to deal with arrays that have greater than 3 dimensions. One way to think of this is as a list of lists of lists. Let’s say we want to store the monthly earnings of a store, but we want to be able to quickly lookup the results for a quarter, and for a year. The earnings for one year might look like this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="mi">500</span><span class="p">,</span> <span class="mi">505</span><span class="p">,</span> <span class="mi">490</span><span class="p">,</span> <span class="mi">810</span><span class="p">,</span> <span class="mi">450</span><span class="p">,</span> <span class="mi">678</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">897</span><span class="p">,</span> <span class="mi">430</span><span class="p">,</span> <span class="mi">560</span><span class="p">,</span> <span class="mi">1023</span><span class="p">,</span> <span class="mi">640</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>The store earned $500 in January, $505 in February, and so on. We can split up these earnings by quarter into a list of lists:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">year_one</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">500</span><span class="p">,</span><span class="mi">505</span><span class="p">,</span><span class="mi">490</span><span class="p">],</span> <span class="c"># 1st quarter</span>
+    <span class="p">[</span><span class="mi">810</span><span class="p">,</span><span class="mi">450</span><span class="p">,</span><span class="mi">678</span><span class="p">],</span> <span class="c"># 2nd quarter</span>
+    <span class="p">[</span><span class="mi">234</span><span class="p">,</span><span class="mi">897</span><span class="p">,</span><span class="mi">430</span><span class="p">],</span> <span class="c"># 3rd quarter</span>
+    <span class="p">[</span><span class="mi">560</span><span class="p">,</span><span class="mi">1023</span><span class="p">,</span><span class="mi">640</span><span class="p">]</span> <span class="c"># 4th quarter</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<p>We can retrieve the earnings from January by calling <code class="highlighter-rouge">year_one[0][0]</code>. If we want the results for a whole quarter, we can call <code class="highlighter-rouge">year_one[0]</code> or <code class="highlighter-rouge">year_one[1]</code>.</p>
+
+<p>We now have a 2-dimensional array, or matrix. But what if we now want to add the results from another year? We have to add a third dimension:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">earnings</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span> <span class="c"># year 1</span>
+                <span class="p">[</span><span class="mi">500</span><span class="p">,</span><span class="mi">505</span><span class="p">,</span><span class="mi">490</span><span class="p">],</span> <span class="c"># year 1, 1st quarter</span>
+                <span class="p">[</span><span class="mi">810</span><span class="p">,</span><span class="mi">450</span><span class="p">,</span><span class="mi">678</span><span class="p">],</span> <span class="c"># year 1, 2nd quarter</span>
+                <span class="p">[</span><span class="mi">234</span><span class="p">,</span><span class="mi">897</span><span class="p">,</span><span class="mi">430</span><span class="p">],</span> <span class="c"># year 1, 3rd quarter</span>
+                <span class="p">[</span><span class="mi">560</span><span class="p">,</span><span class="mi">1023</span><span class="p">,</span><span class="mi">640</span><span class="p">]</span> <span class="c"># year 1, 4th quarter</span>
+            <span class="p">],</span>
+            <span class="p">[</span> <span class="c"># year =2</span>
+                <span class="p">[</span><span class="mi">600</span><span class="p">,</span><span class="mi">605</span><span class="p">,</span><span class="mi">490</span><span class="p">],</span> <span class="c"># year 2, 1st quarter</span>
+                <span class="p">[</span><span class="mi">345</span><span class="p">,</span><span class="mi">900</span><span class="p">,</span><span class="mi">1000</span><span class="p">],</span><span class="c"># year 2, 2nd quarter</span>
+                <span class="p">[</span><span class="mi">780</span><span class="p">,</span><span class="mi">730</span><span class="p">,</span><span class="mi">710</span><span class="p">],</span> <span class="c"># year 2, 3rd quarter</span>
+                <span class="p">[</span><span class="mi">670</span><span class="p">,</span><span class="mi">540</span><span class="p">,</span><span class="mi">324</span><span class="p">]</span>  <span class="c"># year 2, 4th quarter</span>
+            <span class="p">]</span>
+          <span class="p">]</span>
+</code></pre></div></div>
+
+<p>We can retrieve the earnings from January of the first year by calling <code class="highlighter-rouge">earnings[0][0][0]</code>.</p>
+
+<p>We now need three indexes to retrieve a single element. A three-dimensional array in NumPy is much the same. In fact, we can convert earnings to an array and then get the earnings for January of the first year:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">earnings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">earnings</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># year 1, 1st quarter, 1st month (January)</span>
+<span class="n">earnings</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> 
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>500
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># year 2, 3rd quarter, 1st month (July)</span>
+<span class="n">earnings</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> 
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>780
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># we can also find the shape of the array</span>
+<span class="n">earnings</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(2, 4, 3)
+</code></pre></div></div>
+
+<p>Indexing and slicing work the exact same way with a 3-dimensional array, but now we have an extra axis to pass in. If we wanted to get the earnings for <strong>January of all years</strong>, we could do this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># all years, 1st quarter, 1st month (January)</span>
+<span class="n">earnings</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([500, 600])
+</code></pre></div></div>
+
+<p>If we wanted to get first quarter earnings from both years, we could do this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># all years, 1st quarter, all months (January, February, March)</span>
+<span class="n">earnings</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,:]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[500, 505, 490],
+       [600, 605, 490]])
+</code></pre></div></div>
+
+<p>Adding more dimensions can make it much easier to query your data if it’s organized in a certain way. As we go from 3-dimensional arrays to 4-dimensional and larger arrays, the same properties apply, and they can be indexed and sliced in the same ways.</p>
+
+<h2 id="numpy-data-types">NumPy Data Types</h2>
+
+<p>As we mentioned earlier, each NumPy array can store elements of a single data type. For example, wines contains only float values.</p>
+
+<p>NumPy stores values using its own data types, <strong>which are distinct from Python types</strong> like <code class="highlighter-rouge">float</code> and <code class="highlighter-rouge">str</code>.</p>
+
+<p>This is because the core of NumPy is written in a programming language called <code class="highlighter-rouge">C</code>, <strong>which stores data differently than the Python data types</strong>. NumPy data types map between Python and C, allowing us to use NumPy arrays without any conversion hitches.</p>
+
+<p>You can find the data type of a NumPy array by accessing the dtype property:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wines</span><span class="o">.</span><span class="n">dtype</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dtype('float64')
+</code></pre></div></div>
+
+<p>NumPy has several different data types, which mostly map to Python data types, like <code class="highlighter-rouge">float</code>, and <code class="highlighter-rouge">str</code>. You can find a full listing of NumPy data types <a href="https://www.dataquest.io/blog/numpy-tutorial-python/">here</a>, but here are a few important ones:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">float</code> – numeric floating point data.</li>
+  <li><code class="highlighter-rouge">int</code> – integer data.</li>
+  <li><code class="highlighter-rouge">string</code> – character data.</li>
+  <li><code class="highlighter-rouge">object</code> – Python objects.</li>
+</ul>
+
+<p>Data types additionally end with a suffix that indicates how many bits of memory they take up. So <code class="highlighter-rouge">int32</code> is a <strong>32 bit integer data type</strong>, and <code class="highlighter-rouge">float64</code> is a <strong>64 bit float data type</strong>.</p>
+
+<h3 id="converting-data-types">Converting Data Types</h3>
+
+<p>You can use the numpy.ndarray.astype method to convert an array to a different type. The method will actually <strong>copy the array</strong>, and <strong>return a new array with the specified data type</strong>.</p>
+
+<p>For instance, we can convert wines to the <code class="highlighter-rouge">int</code> data type:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># convert wines to the int data type</span>
+<span class="n">wines</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[ 7,  0,  0, ...,  0, 50,  5],
+       [ 7,  0,  0, ...,  0, 50,  5],
+       [11,  0,  0, ...,  0, 50,  6],
+       ...,
+       [ 6,  0,  0, ...,  0, 50,  6],
+       [ 5,  0,  0, ...,  0, 50,  5],
+       [ 6,  0,  0, ...,  0, 50,  6]])
+</code></pre></div></div>
+
+<p>As you can see above, all of the items in the resulting array are integers. Note that we used the Python <code class="highlighter-rouge">int</code> type instead of a NumPy data type when converting wines. This is because several Python data types, including <code class="highlighter-rouge">float</code>, <code class="highlighter-rouge">int</code>, and <code class="highlighter-rouge">string</code>, can be used with NumPy, and are automatically converted to NumPy data types.</p>
+
+<p>We can check the name property of the <code class="highlighter-rouge">dtype</code> of the resulting array to see what data type NumPy mapped the resulting array to:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># convert to int</span>
+<span class="n">int_wines</span> <span class="o">=</span> <span class="n">wines</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c"># check the data type</span>
+<span class="n">int_wines</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'int64'
+</code></pre></div></div>
+
+<p>The array has been converted to a <strong>64-bit integer</strong> data type. This allows for very long integer values, <strong>but takes up more space in memory</strong> than storing the values as 32-bit integers.</p>
+
+<p>If you want more control over how the array is stored in memory, you can directly create NumPy dtype objects like <code class="highlighter-rouge">numpy.int32</code></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">int32</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>numpy.int32
+</code></pre></div></div>
+
+<p>You can use these directly to convert between types:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># convert to a 64-bit integer</span>
+<span class="n">wines</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[ 7,  0,  0, ...,  0, 50,  5],
+       [ 7,  0,  0, ...,  0, 50,  5],
+       [11,  0,  0, ...,  0, 50,  6],
+       ...,
+       [ 6,  0,  0, ...,  0, 50,  6],
+       [ 5,  0,  0, ...,  0, 50,  5],
+       [ 6,  0,  0, ...,  0, 50,  6]])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># convert to a 32-bit integer</span>
+<span class="n">wines</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[ 7,  0,  0, ...,  0, 50,  5],
+       [ 7,  0,  0, ...,  0, 50,  5],
+       [11,  0,  0, ...,  0, 50,  6],
+       ...,
+       [ 6,  0,  0, ...,  0, 50,  6],
+       [ 5,  0,  0, ...,  0, 50,  5],
+       [ 6,  0,  0, ...,  0, 50,  6]], dtype=int32)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># convert to a 16-bit integer</span>
+<span class="n">wines</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[ 7,  0,  0, ...,  0, 50,  5],
+       [ 7,  0,  0, ...,  0, 50,  5],
+       [11,  0,  0, ...,  0, 50,  6],
+       ...,
+       [ 6,  0,  0, ...,  0, 50,  6],
+       [ 5,  0,  0, ...,  0, 50,  5],
+       [ 6,  0,  0, ...,  0, 50,  6]], dtype=int16)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># convert to a 8-bit integer</span>
+<span class="n">wines</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[ 7,  0,  0, ...,  0, 50,  5],
+       [ 7,  0,  0, ...,  0, 50,  5],
+       [11,  0,  0, ...,  0, 50,  6],
+       ...,
+       [ 6,  0,  0, ...,  0, 50,  6],
+       [ 5,  0,  0, ...,  0, 50,  5],
+       [ 6,  0,  0, ...,  0, 50,  6]], dtype=int8)
+</code></pre></div></div>
+
+<h2 id="numpy-array-operations">NumPy Array Operations</h2>
+
+<p>NumPy makes it simple to perform mathematical operations on arrays. This is one of the primary advantages of NumPy, and makes it quite easy to do computations.</p>
+
+<h3 id="single-array-math">Single Array Math</h3>
+<p>If you do any of the basic mathematical operations <code class="highlighter-rouge">/</code>, <code class="highlighter-rouge">*</code>, <code class="highlighter-rouge">-</code>, <code class="highlighter-rouge">+</code>, <code class="highlighter-rouge">^</code> with an array and a value, it will apply the operation to each of the elements in the array.</p>
+
+<p>Let’s say we want to add 10 points to each quality score because we’re feeling generous. Here’s how we’d do that:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># add 10 points to the quality score</span>
+<span class="n">wines</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">10</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([15., 15., 16., ..., 16., 15., 16.])
+</code></pre></div></div>
+
+<p><em>Note: that the above operation won’t change the wines array – it will return a new 1-dimensional array where 10 has been added to each element in the quality column of wines.</em></p>
+
+<p>If we instead did <code class="highlighter-rouge">+=</code>, we’d modify the array in place:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'Before'</span><span class="p">,</span> <span class="n">wines</span><span class="p">[:,</span><span class="mi">11</span><span class="p">])</span>
+
+<span class="c"># modify the data in place</span>
+<span class="n">wines</span><span class="p">[:,</span><span class="mi">11</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">10</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'After'</span><span class="p">,</span> <span class="n">wines</span><span class="p">[:,</span><span class="mi">11</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Before [5. 5. 6. ... 6. 5. 6.]
+After [15. 15. 16. ... 16. 15. 16.]
+</code></pre></div></div>
+
+<p>All the other operations work the same way. For example, if we want to multiply each of the quality score by 2, we could do it like this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># multiply the quality score by 2</span>
+<span class="n">wines</span><span class="p">[:,</span><span class="mi">11</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([30., 30., 32., ..., 32., 30., 32.])
+</code></pre></div></div>
+
+<h3 id="multiple-array-math">Multiple Array Math</h3>
+
+<p>It’s also possible to do mathematical operations between arrays. This will apply the operation to pairs of elements. For example, if we add the quality column to itself, here’s what we get:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># add the quality column to itself</span>
+<span class="n">wines</span><span class="p">[:,</span><span class="mi">11</span><span class="p">]</span> <span class="o">+</span> <span class="n">wines</span><span class="p">[:,</span><span class="mi">11</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([30., 30., 32., ..., 32., 30., 32.])
+</code></pre></div></div>
+
+<p>Note that this is equivalent to <code class="highlighter-rouge">wines[:,11] * 2</code> – this is because NumPy adds each pair of elements. The first element in the first array is added to the first element in the second array, the second to the second, and so on.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># add the quality column to itself</span>
+<span class="n">wines</span><span class="p">[:,</span><span class="mi">11</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([30., 30., 32., ..., 32., 30., 32.])
+</code></pre></div></div>
+
+<p>We can also use this to multiply arrays. Let’s say we want to pick a wine that maximizes alcohol content and quality. We’d multiply alcohol by quality, and select the wine with the highest score:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># multiply alcohol content by quality</span>
+<span class="n">alcohol_by_quality</span> <span class="o">=</span> <span class="n">wines</span><span class="p">[:,</span><span class="mi">10</span><span class="p">]</span> <span class="o">*</span> <span class="n">wines</span><span class="p">[:,</span><span class="mi">11</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">alcohol_by_quality</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[750. 750. 800. ... 800. 750. 800.]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">alcohol_by_quality</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">alcohol_by_quality</span><span class="p">,</span> <span class="n">alcohol_by_quality</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[650. 650. 650. ... 900. 900. 900.] 900.0
+</code></pre></div></div>
+
+<p>All of the common operations <code class="highlighter-rouge">/</code>, <code class="highlighter-rouge">*</code>, <code class="highlighter-rouge">-</code>, <code class="highlighter-rouge">+</code>, <code class="highlighter-rouge">^</code> will work between arrays.</p>
+
+<h2 id="numpy-array-methods">NumPy Array Methods</h2>
+
+<p>In addition to the common mathematical operations, NumPy also has several methods that you can use for more complex calculations on arrays. An example of this is the <code class="highlighter-rouge">numpy.ndarray.sum</code> method. This finds the sum of all the elements in an array by default:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># find the sum of all rows and the quality column</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">wines</span><span class="p">:</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">row</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>24987.0
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># find the sum of all rows and the quality column</span>
+<span class="n">wines</span><span class="p">[:,</span><span class="mi">11</span><span class="p">]</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>24987.0
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># find the sum of the rows 1, 2, and 3 across all columns</span>
+<span class="n">totals</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">wines</span><span class="p">[</span><span class="n">i</span><span class="p">,:]:</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">col</span>
+    <span class="n">totals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">totals</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[125.1438, 158.2548, 161.753]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># find the sum of the rows 1, 2, and 3 across all columns</span>
+<span class="n">wines</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,:]</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([125.14, 158.25, 161.75])
+</code></pre></div></div>
+
+<p>We can pass the <code class="highlighter-rouge">axis</code> keyword argument into the sum method to find sums over an axis.</p>
+
+<p>If we call sum across the wines matrix, and pass in <code class="highlighter-rouge">axis=0</code>, we’ll find the sums over the first axis of the array. This will give us the <strong>sum of all the values in every column</strong>.</p>
+
+<p>This may seem backwards that the sums over the first axis would give us the sum of each column, but one way to think about this is that <strong>the specified axis is the one “going away”</strong>.</p>
+
+<p>So if we specify <code class="highlighter-rouge">axis=0</code>, we want the <strong>rows to go away</strong>, and we want to find <strong>the sums for each of the remaining axes across each row</strong>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># sum each column for all rows</span>
+<span class="n">totals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">wines</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">total</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">totals</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">row_val</span> <span class="ow">in</span> <span class="n">wines</span><span class="p">[:,</span><span class="n">i</span><span class="p">]:</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">row_val</span>
+    <span class="n">totals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">total</span>
+<span class="k">print</span><span class="p">(</span><span class="n">totals</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[13295.300000000045, 843.2250000000005, 433.2499999999982, 4057.2500000000027, 139.76699999999963, 25354.0, 74248.0, 1592.8009399999985, 5291.210000000001, 1051.7300000000007, 79900.0, 24987.0]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># sum each column for all rows</span>
+<span class="n">wines</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([13295.3 ,   843.23,   433.25,  4057.25,   139.77, 25354.  ,
+       74248.  ,  1592.8 ,  5291.21,  1051.73, 79900.  , 24987.  ])
+</code></pre></div></div>
+
+<p>We can verify that we did the sum correctly by checking the shape. The shape should be 12, corresponding to the number of columns:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wines</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(12,)
+</code></pre></div></div>
+
+<p>If we pass in axis=1, we’ll find the sums over the second axis of the array. This will give us the sum of each row:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># sum each row for all columns</span>
+<span class="n">totals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">wines</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">total</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">totals</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">col_val</span> <span class="ow">in</span> <span class="n">wines</span><span class="p">[</span><span class="n">i</span><span class="p">,:]:</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">col_val</span>
+    <span class="n">totals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">total</span>
+<span class="k">print</span><span class="p">(</span><span class="n">totals</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="s">'...'</span><span class="p">,</span> <span class="n">totals</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[125.1438, 158.2548, 161.753] ... [149.48174, 155.01547, 141.49249]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># sum each row for all columns</span>
+<span class="n">wines</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([125.14, 158.25, 161.75, ..., 149.48, 155.02, 141.49])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wines</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(1598,)
+</code></pre></div></div>
+
+<p>There are several other methods that behave like the sum method, including:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">numpy.ndarray.mean</code> — finds the mean of an array.</li>
+  <li><code class="highlighter-rouge">numpy.ndarray.std</code> — finds the standard deviation of an array.</li>
+  <li><code class="highlighter-rouge">numpy.ndarray.min</code> — finds the minimum value in an array.</li>
+  <li><code class="highlighter-rouge">numpy.ndarray.max</code> — finds the maximum value in an array.</li>
+</ul>
+
+<p>You can find a full list of array methods <a href="http://docs.scipy.org/doc/numpy/reference/arrays.ndarray.html">here</a>.</p>
+
+<h2 id="numpy-array-comparisons">NumPy Array Comparisons</h2>
+
+<p>NumPy makes it possible to test to see if rows match certain values using mathematical comparison operations like <code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">&gt;=</code>, <code class="highlighter-rouge">&lt;=</code>, and <code class="highlighter-rouge">==</code>. For example, if we want to see which wines have a quality rating higher than 5, we can do this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># return True for all rows in the Quality column that are greater than 5</span>
+<span class="n">wines</span><span class="p">[:,</span><span class="mi">11</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">5</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([ True,  True,  True, ...,  True,  True,  True])
+</code></pre></div></div>
+
+<p>We get a Boolean array that tells us which of the wines have a quality rating greater than 5. We can do something similar with the other operators. For instance, we can see if any wines have a quality rating equal to 10:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># return True for all rows that have a Quality rating of 10</span>
+<span class="n">wines</span><span class="p">[:,</span><span class="mi">11</span><span class="p">]</span> <span class="o">==</span> <span class="mi">10</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([False, False, False, ..., False, False, False])
+</code></pre></div></div>
+
+<h3 id="subsetting">Subsetting</h3>
+
+<p>One of the powerful things we can do with a Boolean array and a NumPy array is select only certain rows or columns in the NumPy array. For example, the below code will only select rows in wines where the quality is over 7:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># create a boolean array for wines with quality greater than 15</span>
+<span class="n">high_quality</span> <span class="o">=</span> <span class="n">wines</span><span class="p">[:,</span><span class="mi">11</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">15</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">high_quality</span><span class="p">),</span> <span class="n">high_quality</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1598 [False False  True ...  True False  True]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># use boolean indexing to find high quality wines</span>
+<span class="n">high_quality_wines</span> <span class="o">=</span> <span class="n">wines</span><span class="p">[</span><span class="n">high_quality</span><span class="p">,:]</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">high_quality_wines</span><span class="p">),</span> <span class="n">high_quality_wines</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>855 [[1.12e+01 2.80e-01 5.60e-01 ... 5.80e-01 5.00e+01 1.60e+01]
+ [7.30e+00 6.50e-01 0.00e+00 ... 4.70e-01 5.00e+01 1.70e+01]
+ [7.80e+00 5.80e-01 2.00e-02 ... 5.70e-01 5.00e+01 1.70e+01]
+ ...
+ [5.90e+00 5.50e-01 1.00e-01 ... 7.60e-01 5.00e+01 1.60e+01]
+ [6.30e+00 5.10e-01 1.30e-01 ... 7.50e-01 5.00e+01 1.60e+01]
+ [6.00e+00 3.10e-01 4.70e-01 ... 6.60e-01 5.00e+01 1.60e+01]]
+</code></pre></div></div>
+
+<p>We select only the rows where <code class="highlighter-rouge">high_quality</code> contains a <code class="highlighter-rouge">True</code> value, and all of the columns. This subsetting makes it simple to filter arrays for certain criteria.</p>
+
+<p>For example, we can look for wines with a lot of alcohol and high quality. In order to specify multiple conditions, we have to place each condition in <strong>parentheses</strong> <code class="highlighter-rouge">(...)</code>, and separate conditions with an <strong>ampersand</strong> <code class="highlighter-rouge">&amp;</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># create a boolean array for high alcohol content and high quality</span>
+<span class="n">high_alcohol_and_quality</span> <span class="o">=</span> <span class="p">(</span><span class="n">wines</span><span class="p">[:,</span><span class="mi">11</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">7</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">wines</span><span class="p">[:,</span><span class="mi">10</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">high_alcohol_and_quality</span><span class="p">)</span>
+
+<span class="c"># use boolean indexing to select out the wines</span>
+<span class="n">wines</span><span class="p">[</span><span class="n">high_alcohol_and_quality</span><span class="p">,:]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ True  True  True ...  True  True  True]
+
+
+
+
+
+array([[ 7.4 ,  0.7 ,  0.  , ...,  0.56, 50.  , 15.  ],
+       [ 7.8 ,  0.88,  0.  , ...,  0.68, 50.  , 15.  ],
+       [11.2 ,  0.28,  0.56, ...,  0.58, 50.  , 16.  ],
+       ...,
+       [ 6.3 ,  0.51,  0.13, ...,  0.75, 50.  , 16.  ],
+       [ 5.9 ,  0.65,  0.12, ...,  0.71, 50.  , 15.  ],
+       [ 6.  ,  0.31,  0.47, ...,  0.66, 50.  , 16.  ]])
+</code></pre></div></div>
+
+<p>We can combine subsetting and assignment to overwrite certain values in an array:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">high_alcohol_and_quality</span> <span class="o">=</span> <span class="p">(</span><span class="n">wines</span><span class="p">[:,</span><span class="mi">10</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">wines</span><span class="p">[:,</span><span class="mi">11</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">wines</span><span class="p">[</span><span class="n">high_alcohol_and_quality</span><span class="p">,</span><span class="mi">10</span><span class="p">:]</span> <span class="o">=</span> <span class="mi">20</span>
+</code></pre></div></div>
+
+<h2 id="reshaping-numpy-arrays">Reshaping NumPy Arrays</h2>
+
+<p>We can change the shape of arrays while still preserving all of their elements. This often can make it easier to access array elements. The simplest reshaping is to flip the axes, so rows become columns, and vice versa. We can accomplish this with the <code class="highlighter-rouge">numpy.transpose</code> function:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">wines</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(12, 1598)
+</code></pre></div></div>
+
+<p>We can use the <code class="highlighter-rouge">numpy.ravel</code> function to turn an array into a one-dimensional representation. It will essentially flatten an array into a long sequence of values:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wines</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([ 7.4 ,  0.7 ,  0.  , ...,  0.66, 20.  , 20.  ])
+</code></pre></div></div>
+
+<p>Here’s an example where we can see the ordering of <code class="highlighter-rouge">numpy.ravel</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">array_one</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> 
+        <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">array_one</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([1, 2, 3, 4, 5, 6, 7, 8])
+</code></pre></div></div>
+
+<p>Finally, we can use the numpy.reshape function to reshape an array to a certain shape we specify. The below code will turn the second row of wines into a 2-dimensional array with 2 rows and 6 columns:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># print the current shape of the 2nd row and all columns</span>
+<span class="n">wines</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(12,)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># reshape the 2nd row to a 2 by 6 matrix</span>
+<span class="n">wines</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[ 7.8 ,  0.88,  0.  ,  2.6 ,  0.1 , 10.  ],
+       [67.  ,  1.  ,  3.2 ,  0.68, 20.  , 20.  ]])
+</code></pre></div></div>
+
+<h2 id="combining-numpy-arrays">Combining NumPy Arrays</h2>
+
+<p>With NumPy, it’s very common to combine multiple arrays into a single unified array. We can use <code class="highlighter-rouge">numpy.vstack</code> to vertically stack multiple arrays.</p>
+
+<p>Think of it like the second arrays’s items being added as new rows to the first array. We can read in the <code class="highlighter-rouge">winequality-white.csv</code> dataset that contains information on the quality of white wines, then combine it with our existing dataset, wines, which contains information on red wines.</p>
+
+<p>In the below code, we:</p>
+
+<ul>
+  <li>Read in <code class="highlighter-rouge">winequality-white.csv</code>.</li>
+  <li>Display the shape of white_wines.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">white_wines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s">"winequality-white.csv"</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">";"</span><span class="p">,</span> <span class="n">skip_header</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">white_wines</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(4898, 12)
+</code></pre></div></div>
+
+<p>As you can see, we have attributes for 4898 wines. Now that we have the white wines data, we can combine all the wine data.</p>
+
+<p>In the below code, we:</p>
+
+<ul>
+  <li>Use the <code class="highlighter-rouge">vstack</code> function to combine wines and white_wines.</li>
+  <li>Display the shape of the result.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">all_wines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">wines</span><span class="p">,</span> <span class="n">white_wines</span><span class="p">))</span>
+<span class="n">all_wines</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(6496, 12)
+</code></pre></div></div>
+
+<p>As you can see, the result has 6497 rows, which is the sum of the number of rows in wines and the number of rows in red_wines.</p>
+
+<p>If we want to combine arrays horizontally, where the number of rows stay constant, but the columns are joined, then we can use the <code class="highlighter-rouge">numpy.hstack</code> function. The arrays we combine need to have the same number of rows for this to work.</p>
+
+<p>Finally, we can use <code class="highlighter-rouge">numpy.concatenate</code> as a general purpose version of <code class="highlighter-rouge">hstack</code> and <code class="highlighter-rouge">vstack</code>. If we want to concatenate two arrays, we pass them into concatenate, then specify the axis keyword argument that we want to concatenate along.</p>
+
+<ul>
+  <li>Concatenating along the first axis is similar to <code class="highlighter-rouge">vstack</code></li>
+  <li>Concatenating along the second axis is similar to <code class="highlighter-rouge">hstack</code>:</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">wines</span><span class="p">,</span> <span class="n">white_wines</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(6496, 12) [[ 7.4   0.7   0.   ...  0.56 20.   20.  ]
+ [ 7.8   0.88  0.   ...  0.68 20.   20.  ]
+ [11.2   0.28  0.56 ...  0.58 20.   20.  ]
+ ...
+ [ 6.5   0.24  0.19 ...  0.46  9.4   6.  ]
+ [ 5.5   0.29  0.3  ...  0.38 12.8   7.  ]
+ [ 6.    0.21  0.38 ...  0.32 11.8   6.  ]]
+</code></pre></div></div>
+
+<h2 id="broadcasting">Broadcasting</h2>
+
+<p>Unless the arrays that you’re operating on are the exact same size, it’s not possible to do elementwise operations. In cases like this, NumPy performs broadcasting to try to match up elements. Essentially, broadcasting involves a few steps:</p>
+
+<ul>
+  <li>The last dimension of each array is compared.
+    <ul>
+      <li>If the dimension lengths are equal, or one of the dimensions is of length 1, then we keep going.</li>
+      <li>If the dimension lengths aren’t equal, and none of the dimensions have length 1, then there’s an error.</li>
+    </ul>
+  </li>
+  <li>Continue checking dimensions until the shortest array is out of dimensions.</li>
+</ul>
+
+<p>For example, the following two shapes are compatible:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">A</span><span class="p">:</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">B</span>  <span class="p">(</span><span class="mi">3</span><span class="p">,)</span>
+</code></pre></div></div>
+
+<p>This is because the length of the trailing dimension of array A is 3, and the length of the trailing dimension of array B is 3. They’re equal, so that dimension is okay. Array B is then out of elements, so we’re okay, and the arrays are compatible for mathematical operations.</p>
+
+<p>The following two shapes are also compatible:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">A</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">B</span>  <span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The last dimension matches, and A is of length 1 in the first dimension.</p>
+
+<p>These two arrays don’t match:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">A</span><span class="p">:</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">B</span><span class="p">:</span> <span class="p">(</span><span class="mi">49</span><span class="p">,</span><span class="mi">49</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The lengths of the dimensions aren’t equal, and neither array has either dimension length equal to 1.</p>
+
+<p>There’s a detailed explanation of broadcasting <a href="http://docs.scipy.org/doc/numpy/user/basics.broadcasting.html">here</a>, but we’ll go through a few examples to illustrate the principle:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wines</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
+
+ValueError                                Traceback (most recent call last)
+
+&lt;ipython-input-82-1671c26db06c&gt; in &lt;module&gt;
+----&gt; 1 wines * np.array([1,2])
+
+
+ValueError: operands could not be broadcast together with shapes (1598,12) (2,) 
+</code></pre></div></div>
+
+<p>The above example didn’t work because the two arrays don’t have a matching trailing dimension. Here’s an example where the last dimension does match:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">array_one</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="n">array_two</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+
+<span class="n">array_one</span> <span class="o">+</span> <span class="n">array_two</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[5, 7],
+       [7, 9]])
+</code></pre></div></div>
+
+<p>As you can see, array_two has been broadcasted across each row of array_one. Here’s an example with our wines data:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rand_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">wines</span> <span class="o">+</span> <span class="n">rand_array</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[ 7.78,  1.25,  0.07, ...,  1.32, 20.46, 20.77],
+       [ 8.18,  1.43,  0.07, ...,  1.44, 20.46, 20.77],
+       [11.58,  0.83,  0.63, ...,  1.34, 20.46, 20.77],
+       ...,
+       [ 6.68,  1.06,  0.2 , ...,  1.51, 20.46, 20.77],
+       [ 6.28,  1.19,  0.19, ...,  1.47, 20.46, 20.77],
+       [ 6.38,  0.86,  0.54, ...,  1.42, 20.46, 20.77]])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
