@@ -172,7 +172,7 @@ df['ca'].unique()
 
 
 
-From the codbook above we see these are coded values that we can remap.
+From the codebook above we see these are coded values that we can remap.
 
 
 ```python
