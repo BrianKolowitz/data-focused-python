@@ -660,8 +660,3 @@ matplotlib.matplotlib_fname()
 Congratulations! You have gone through today’s Matplotlib tutorial successfully! There is still much to learn, but you’re definitely ready to go out on your own and create your own amazing plots. Don’t miss out on DataCamp’s [Matplotlib cheat sheet](https://www.datacamp.com/community/blog/python-matplotlib-cheat-sheet) that can help you to make plots in no time, step by step.
 
 If you’re eager to discover more from Matplotlib, consider checking out DataCamp’s [Viewing 3D Volumetric Data With Matplotlib](https://www.datacamp.com/community/tutorials/matplotlib-3d-volumetric-data) tutorial to learn how to work with matplotlib’s event handler API or this tutorial, in which you’ll learn all about [animating your plots](https://jakevdp.github.io/blog/2012/08/18/matplotlib-animation-tutorial/).
-
-
-```python
-
-```

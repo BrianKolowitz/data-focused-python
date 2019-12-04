@@ -1007,8 +1007,3 @@ Run the following command from the terminal.
 ```bash
 python Manifold_Approximation_and_Projection.py
 ```
-
-
-```python
-
-```

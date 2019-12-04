@@ -63,5 +63,10 @@ permalink: /lectures
 
 ## Week 06 - Web Scraping
 
-* [01.A - Getting Data From Web Pages](Week 06 - Web Scraping/01.a - Getting Data from Web Pages.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Week%2006%20-%20Web%20Scraping/01.a%20-%20Getting%20Data%20from%20Web%20Pages.ipynb)\)
-* [01.B - Getting Data From Web Pages](Week 06 - Web Scraping/01.b - Getting Data from Web Pages.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Week%2006%20-%20Web%20Scraping/01.b%20-%20Getting%20Data%20from%20Web%20Pages.ipynb)\)
+* [01. Introduction To Web Scraping](Week 06 - Web Scraping/01. Introduction to Web Scraping.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Week%2006%20-%20Web%20Scraping/01.%20Introduction%20to%20Web%20Scraping.ipynb)\)
+* [02. Css Selectors](Week 06 - Web Scraping/02. CSS Selectors.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Week%2006%20-%20Web%20Scraping/02.%20CSS%20Selectors.ipynb)\)
+* [03.A Web Scraping With Beautiful Soup](Week 06 - Web Scraping/03.a Web Scraping with Beautiful Soup.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Week%2006%20-%20Web%20Scraping/03.a%20Web%20Scraping%20with%20Beautiful%20Soup.ipynb)\)
+* [03.B Web Scraping Using Selenium](Week 06 - Web Scraping/03.b Web Scraping Using Selenium.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Week%2006%20-%20Web%20Scraping/03.b%20Web%20Scraping%20Using%20Selenium.ipynb)\)
+* [03.C Web Scraping With Scrapy](Week 06 - Web Scraping/03.c Web scraping with Scrapy.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Week%2006%20-%20Web%20Scraping/03.c%20Web%20scraping%20with%20Scrapy.ipynb)\)
+* [04.A - More Web Scraping With Beautifulsoup](Week 06 - Web Scraping/04.a - More Web Scraping with BeautifulSoup.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Week%2006%20-%20Web%20Scraping/04.a%20-%20More%20Web%20Scraping%20with%20BeautifulSoup.ipynb)\)
+* [04.B - Even More Web Scraping With Beautifulsoup](Week 06 - Web Scraping/04.b - Even More Web Scraping with BeautifulSoup.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Week%2006%20-%20Web%20Scraping/04.b%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup.ipynb)\)

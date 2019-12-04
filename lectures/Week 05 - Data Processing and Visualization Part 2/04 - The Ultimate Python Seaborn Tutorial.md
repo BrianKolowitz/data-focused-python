@@ -1108,8 +1108,3 @@ sns.jointplot(x='Attack', y='Defense', data=df)
 Congratulations... you've made it to the end of this Python Seaborn tutorial!
 
 We've just concluded a tour of key Seaborn paradigms and showed you many examples along the way. Feel free to use this page along with the [official Seaborn gallery](http://seaborn.pydata.org/examples/) as references for your projects going forward.
-
-
-```python
-
-```

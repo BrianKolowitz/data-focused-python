@@ -228,8 +228,3 @@ def test_create_file(tmp_path):
     assert p.read_text() == CONTENT
     assert len(list(tmp_path.iterdir())) == 1
 ```
-
-
-```python
-
-```

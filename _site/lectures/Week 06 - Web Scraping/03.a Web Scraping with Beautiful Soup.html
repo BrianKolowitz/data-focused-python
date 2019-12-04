@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  
+
+  <title>03.a Web Scraping with Beautiful Soup - Data Focused Python</title>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/just-the-docs.css">
+
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-139655036-1', 'http://localhost:4000');
+      ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+  
+
+  
+    <script type="text/javascript" src="http://localhost:4000/assets/js/vendor/lunr.min.js"></script>
+  
+  <script type="text/javascript" src="http://localhost:4000/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>03.a Web Scraping with Beautiful Soup | Data Focused Python</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="03.a Web Scraping with Beautiful Soup" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping/03.a%20Web%20Scraping%20with%20Beautiful%20Soup.html" />
+<meta property="og:url" content="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping/03.a%20Web%20Scraping%20with%20Beautiful%20Soup.html" />
+<meta property="og:site_name" content="Data Focused Python" />
+<script type="application/ld+json">
+{"@type":"WebPage","url":"http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping/03.a%20Web%20Scraping%20with%20Beautiful%20Soup.html","headline":"03.a Web Scraping with Beautiful Soup","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+
+  <div class="page-wrap">
+    <div class="side-bar">
+      <a href="http://localhost:4000" class="site-title fs-6 lh-tight">Data Focused Python</a>
+      <span class="fs-3"><button class="js-main-nav-trigger navigation-list-toggle btn btn-outline" type="button" data-text-toggle="Hide">Menu</button></span>
+      <div class="navigation main-nav js-main-nav">
+        <nav role="navigation" aria-label="Main navigation">
+  <ul class="navigation-list">
+    
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/about.html" class="navigation-list-link"></a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/" class="navigation-list-link">Data Focused Python</a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/assignments" class="navigation-list-link">Assignments</a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item active">
+            
+            <a href="http://localhost:4000/lectures" class="navigation-list-link">Lectures</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data.html" class="navigation-list-link">Week 01 - Language basics, Generating Data, Storing Data</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/00%20-%20Getting%20Started.html" class="navigation-list-link">00 - Getting Started</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/01.a%20-%20Terminal%20Application.html" class="navigation-list-link">01.a - Terminal Application</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/01.b%20-%20Argparse.html" class="navigation-list-link">01.b - Argparse</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/02.a%20-%20Generating%20Synthetic%20Healthcare%20Data.html" class="navigation-list-link">02.a - Generating Synthetic Healthcare Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/02.b%20-%20Generating%20Other%20Synthetic%20Data.html" class="navigation-list-link">02.b - Generating Other Synthetic Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/02.c%20-%20Using%20Synthea.html" class="navigation-list-link">02.c - Using Synthea</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/03%20-%20Getting%20Data%20from%20a%20Database.html" class="navigation-list-link">03 - Getting Data from a Database</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/04%20-%20FHIR%20SQL.html" class="navigation-list-link">04 - FHIR SQL</a>
+                              </li>
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/04%20-%20Python%20Testing.html" class="navigation-list-link">04 - Python Testing</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2001%20-%20Language%20basics,%20Generating%20Data,%20Storing%20Data/05%20-%20Start%20a%20process%20in%20Python.html" class="navigation-list-link">05 - Start a process in Python</a>
+                              </li>
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests.html" class="navigation-list-link">Week 02 - Processing files, Making Web Requests</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests/01.a%20-%20File%20Processing.html" class="navigation-list-link">01.a - File Processing</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests/01.b%20-%20CSV%20Files.html" class="navigation-list-link">01.b - CSV Files</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests/01.c%20-%20JSON%20Files.html" class="navigation-list-link">01.c - JSON Files</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests/01.d%20-%20XML%20Files.html" class="navigation-list-link">01.d - XML Files</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests/02.a%20-%20Python%20Classes.html" class="navigation-list-link">02.a - Python Classes</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests/02.b%20-%20Python%20Modules%20and%20Packages.html" class="navigation-list-link">02.b - Python Modules and Packages</a>
+                              </li>
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests/03%20-%20Using%20fhirclient%20to%20parse%20Healthcare%20Data.html" class="navigation-list-link">03 - Using fhirclient to parse Healthcare Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests/04%20-%20Reading%20Synthea%20data.html" class="navigation-list-link">04 - Reading Synthea data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2002%20-%20Processing%20files,%20Making%20Web%20Requests/05%20-%20Getting%20Data%20from%20Web%20APIs.html" class="navigation-list-link">05 - Getting Data from Web APIs</a>
+                              </li>
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2003%20-%20Functions,%20Loops,%20Comprehensions%20and%20Generators.html" class="navigation-list-link">Week 03 - Functions, Loops, Comprehensions and Generators</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Functions,%20Loops,%20Comprehensions%20and%20Generators/01.a%20-%20Python%20Functions.html" class="navigation-list-link">01.a - Python Functions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Functions,%20Loops,%20Comprehensions%20and%20Generators/01.b%20-%20Python%20Tuples.html" class="navigation-list-link">01.b - Python Tuples</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Functions,%20Loops,%20Comprehensions%20and%20Generators/01.c%20-%20Loops.html" class="navigation-list-link">01.c - Loops</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Functions,%20Loops,%20Comprehensions%20and%20Generators/02%20-%20Lists%20and%20List%20Comprehensions.html" class="navigation-list-link">02 - Lists and List Comprehensions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Functions,%20Loops,%20Comprehensions%20and%20Generators/03%20-%20Sets%20and%20Set%20Comprehensions.html" class="navigation-list-link">03 - Sets and Set Comprehensions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Functions,%20Loops,%20Comprehensions%20and%20Generators/04.a%20-%20Dictionaries.html" class="navigation-list-link">04.a - Dictionaries</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Functions,%20Loops,%20Comprehensions%20and%20Generators/04.b%20-%20Dictionary%20Comprehensions.html" class="navigation-list-link">04.b - Dictionary Comprehensions</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2003%20-%20Functions,%20Loops,%20Comprehensions%20and%20Generators/05%20-%20Python%20Generators.html" class="navigation-list-link">05 - Python Generators</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2004%20-%20Data%20Processing%20and%20Visualization%20Part%201.html" class="navigation-list-link">Week 04 - Data Processing and Visualization Part 1</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Data%20Processing%20and%20Visualization%20Part%201/01.a%20-%20Cleaning%20and%20Transforming%20Data.html" class="navigation-list-link">01.a - Cleaning and Transforming Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Data%20Processing%20and%20Visualization%20Part%201/01.b%20-%20Grouping%20Data.html" class="navigation-list-link">01.b - Grouping Data</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Data%20Processing%20and%20Visualization%20Part%201/01.c%20-%20Descriptive%20Statistics.html" class="navigation-list-link">01.c - Descriptive Statistics</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Data%20Processing%20and%20Visualization%20Part%201/02%20-%20Basic%20Medical%20Data%20Visualization.html" class="navigation-list-link">02 - Basic Medical Data Visualization</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Data%20Processing%20and%20Visualization%20Part%201/03.a%20-%20NumPy%20Introduction.html" class="navigation-list-link">03.a - NumPy Introduction</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2004%20-%20Data%20Processing%20and%20Visualization%20Part%201/03.b%20-%20NumPy%20Data%20analysis.html" class="navigation-list-link">03.b - NumPy Data analysis</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2005%20-%20Data%20Processing%20and%20Visualization%20Part%202.html" class="navigation-list-link">Week 05 - Data Processing and Visualization Part 2</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Data%20Processing%20and%20Visualization%20Part%202/00%20-%20Additional%20Links.html" class="navigation-list-link">00 - Additional Links</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Data%20Processing%20and%20Visualization%20Part%202/01%20-%20Pandas%20Introduction.html" class="navigation-list-link">01 - Pandas Introduction</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Data%20Processing%20and%20Visualization%20Part%202/02.a%20-%20Pandas%20Data%20analysis%20Part%201.html" class="navigation-list-link">02.a - Pandas Data analysis Part 1</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Data%20Processing%20and%20Visualization%20Part%202/02.b%20-%20Pandas%20Data%20analysis%20Part%202.html" class="navigation-list-link">02.b - Pandas Data analysis Part 2</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Data%20Processing%20and%20Visualization%20Part%202/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting.html" class="navigation-list-link">03 - Matplotlib Tutorial Python Plotting</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2005%20-%20Data%20Processing%20and%20Visualization%20Part%202/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial.html" class="navigation-list-link">04 - The Ultimate Python Seaborn Tutorial</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item  active">
+                      
+                      <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping.html" class="navigation-list-link">Week 06 - Web Scraping</a>
+                      
+                        
+                        <ul class="navigation-list-child-list">
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping/01.%20Introduction%20to%20Web%20Scraping.html" class="navigation-list-link">01. Introduction to Web Scraping</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping/02.%20CSS%20Selectors.html" class="navigation-list-link">02. CSS Selectors</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item  active">
+                                <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping/03.a%20Web%20Scraping%20with%20Beautiful%20Soup.html" class="navigation-list-link active">03.a Web Scraping with Beautiful Soup</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping/03.b%20Web%20Scraping%20Using%20Selenium.html" class="navigation-list-link">03.b Web Scraping Using Selenium</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping/03.c%20Web%20scraping%20with%20Scrapy.html" class="navigation-list-link">03.c Web scraping with Scrapy</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping/04.a%20-%20More%20Web%20Scraping%20with%20BeautifulSoup.html" class="navigation-list-link">04.a - More Web Scraping with BeautifulSoup</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <li class="navigation-list-item ">
+                                <a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping/04.b%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup.html" class="navigation-list-link">04.b - Even More Web Scraping with BeautifulSoup</a>
+                              </li>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        </ul>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="http://localhost:4000/resources" class="navigation-list-link">Resources</a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  </ul>
+</nav>
+
+      </div>
+      <footer role="contentinfo" class="site-footer">
+        <p class="text-small text-grey-dk-000 mb-0">This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.</p>
+      </footer>
+    </div>
+    <div class="main-content-wrap js-main-content" tabindex="0">
+      <div class="page-header">
+        <div class="main-content">
+          
+          <div class="search js-search">
+            <div class="search-input-wrap">
+              <input type="text" class="js-search-input search-input" tabindex="0" placeholder="Search Data Focused Python" aria-label="Search Data Focused Python" autocomplete="off">
+              <svg width="14" height="14" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" class="search-icon"><title>Search</title><g fill-rule="nonzero"><path d="M17.332 20.735c-5.537 0-10-4.6-10-10.247 0-5.646 4.463-10.247 10-10.247 5.536 0 10 4.601 10 10.247s-4.464 10.247-10 10.247zm0-4c3.3 0 6-2.783 6-6.247 0-3.463-2.7-6.247-6-6.247s-6 2.784-6 6.247c0 3.464 2.7 6.247 6 6.247z"/><path d="M11.672 13.791L.192 25.271 3.02 28.1 14.5 16.62z"/></g></svg>
+            </div>
+            <div class="js-search-results search-results-wrap"></div>
+          </div>
+          
+          
+            <ul class="list-style-none text-small mt-md-1 mb-md-1 pb-4 pb-md-0 js-aux-nav aux-nav">
+              
+                <li class="d-inline-block my-0 mr-2"><a href="//github.com/BrianKolowitz/data-focused-python">Code</a></li>
+              
+                <li class="d-inline-block my-0"><a href="/data-focused-python/about.html">About</a></li>
+              
+            </ul>
+          
+        </div>
+      </div>
+      <div class="main-content">
+        
+          
+            <nav class="breadcrumb-nav">
+              <ol class="breadcrumb-nav-list">
+                
+                  <li class="breadcrumb-nav-list-item"><a href="http://localhost:4000/lectures">Lectures</a></li>
+                  <li class="breadcrumb-nav-list-item"><a href="http://localhost:4000/lectures/Week%2006%20-%20Web%20Scraping.html">Week 06 - Web Scraping</a></li>
+                
+                <li class="breadcrumb-nav-list-item"><span>03.a Web Scraping with Beautiful Soup</span></li>
+              </ol>
+            </nav>
+          
+        
+        <div id="main-content" class="page-content" role="main">
+          <h1 id="web-scraping-with-beautiful-soup">Web Scraping with Beautiful Soup</h1>
+
+<p><a href="https://www.digitalocean.com/community/tutorials/how-to-scrape-web-pages-with-beautiful-soup-and-python-3">source</a></p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Many data analysis, big data, and machine learning projects require scraping websites to gather the data that you’ll be working with. The Python programming language is widely used in the data science community, and therefore has an ecosystem of modules and tools that you can use in your own projects. In this tutorial we will be focusing on the Beautiful Soup module.</p>
+
+<p><a href="https://www.crummy.com/software/BeautifulSoup/">Beautiful Soup</a> is a Python library that allows for quick turnaround on web scraping projects. Currently available as Beautiful Soup 4 and compatible with both Python 2.7 and Python 3, Beautiful Soup creates a parse tree from parsed HTML and XML documents (including documents with non-closed tags or <a href="https://en.wikipedia.org/wiki/Tag_soup">tag soup</a> and other malformed markup).</p>
+
+<p>In this tutorial, we will collect and parse a web page in order to grab textual data and write the information we have gathered to a CSV file.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>Before working on this tutorial, you should have a local or server-based Python programming environment set up on your machine.</p>
+
+<p>You should have the Requests and Beautiful Soup modules installed, which you can achieve by following the tutorial “<a href="https://www.digitalocean.com/community/tutorials/how-to-work-with-web-data-using-requests-and-beautiful-soup-with-python-3">How To Work with Web Data Using Requests and Beautiful Soup with Python 3</a>”. It would also be useful to have a working familiarity with these modules.</p>
+
+<p>Additionally, since we will be working with data scraped from the web, you should be comfortable with HTML structure and tagging.</p>
+
+<h2 id="understanding-the-data">Understanding the Data</h2>
+
+<p>In this tutorial, we’ll be working with data from the official website of the <a href="https://www.nga.gov/">National Gallery of Art</a> in the United States. The National Gallery is an art museum located on the National Mall in Washington, D.C. It holds over 120,000 pieces dated from the Renaissance to the present day done by more than 13,000 artists.</p>
+
+<p>We would like to search the Index of Artists, which, at the time of updating this tutorial, is available via the <a href="https://archive.org/">Internet Archive’s</a> <a href="https://web.archive.org/">Wayback Machine</a> at the following URL:</p>
+
+<p>https://web.archive.org/web/20170131230332/https://www.nga.gov/collection/an.shtm</p>
+
+<p>Beneath the Internet Archive’s header, you’ll see a page that looks like this:</p>
+
+<p><img src="https://assets.digitalocean.com/articles/eng_python/beautiful-soup/index-of-artists-landing-page.png" alt="img1" /></p>
+
+<p>Since we’ll be doing this project in order to learn about web scraping with Beautiful Soup, we don’t need to pull too much data from the site, so let’s limit the scope of the artist data we are looking to scrape. Let’s therefore choose one letter — in our example we’ll choose the letter <strong>Z</strong> — and we’ll see a page that looks like this:</p>
+
+<p><img src="https://assets.digitalocean.com/articles/eng_python/beautiful-soup/artist-names-beginning-with-z-2018.png" alt="img2" /></p>
+
+<p>In the page above, we see that the first artist listed at the time of writing is <strong>Zabaglia, Niccola</strong>, which is a good thing to note for when we start pulling data. We’ll start by working with this first page, with the following URL for the letter <strong>Z</strong>:</p>
+
+<p>https://web.archive.org/web/20121007172955/http://www.nga.gov/collection/anZ1.htm</p>
+
+<p>It is important to note for later how many pages total there are for the letter you are choosing to list, which you can discover by clicking through to the last page of artists. In this case, there are 4 pages total, and the last artist listed at the time of writing is <strong>Zykmund, Václav</strong>. The last page of <strong>Z</strong> artists has the following URL:</p>
+
+<p>https://web.archive.org/web/20121010201041/http://www.nga.gov/collection/anZ4.htm</p>
+
+<p><strong>However</strong>, you can also access the above page by using the same Internet Archive numeric string of the first page:</p>
+
+<p>https://web.archive.org/web/20121007172955/http://www.nga.gov/collection/anZ4.htm</p>
+
+<p>This is important to note because we’ll be iterating through these pages later in this tutorial.</p>
+
+<p>To begin to familiarize yourself with how this web page is set up, you can take a look at its <a href="https://www.digitalocean.com/community/tutorials/introduction-to-the-dom">DOM</a>, which will help you understand how the HTML is structured. In order to inspect the DOM, you can open your browser’s Developer Tools.</p>
+
+<h2 id="importing-the-libraries">Importing the Libraries</h2>
+
+<p>We’ll create a new file called nga_z_artists.py in this tutorial.</p>
+
+<p>Within this file, we can begin to import the libraries we’ll be using — <a href="http://docs.python-requests.org/en/master/">Requests</a> and Beautiful Soup.</p>
+
+<p>The Requests library allows you to make use of HTTP within your Python programs in a human readable way, and the Beautiful Soup module is designed to get web scraping done quickly.</p>
+
+<p>We will import both Requests and Beautiful Soup with the <code class="highlighter-rouge">import</code> statement. For Beautiful Soup, we’ll be importing it from <code class="highlighter-rouge">bs4</code>, the package in which Beautiful Soup 4 is found.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Import libraries</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+</code></pre></div></div>
+
+<h2 id="collecting-and-parsing-a-web-page">Collecting and Parsing a Web Page</h2>
+
+<p>The next step we will need to do is collect the URL of the first web page with Requests. We’ll assign the URL for the first page to the variable <code class="highlighter-rouge">page</code> by using the method <code class="highlighter-rouge">requests.get()</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Collect first page of artists’ list</span>
+<span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://web.archive.org/web/20121007172955/https://www.nga.gov/collection/anZ1.htm'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We’ll now create a BeautifulSoup object, or a parse tree. This object takes as its arguments the <code class="highlighter-rouge">page.text</code> document from Requests (the content of the server’s response) and then parses it from Python’s built-in <code class="highlighter-rouge">html.parser</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create a BeautifulSoup object</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="pulling-text-from-a-web-page">Pulling Text From a Web Page</h2>
+
+<p>For this project, we’ll collect artists’ names and the relevant links available on the website. You may want to collect different data, such as the artists’ nationality and dates. Whatever data you would like to collect, you need to find out how it is described by the DOM of the web page.</p>
+
+<p>To do this, in your web browser, right-click — or <code class="highlighter-rouge">CTRL</code> + click on macOS — on the first artist’s name, <strong>Zabaglia, Niccola</strong>. Within the context menu that pops up, you should see a menu item similar to <strong>Inspect Element</strong> (Firefox) or <strong>Inspect</strong> (Chrome).</p>
+
+<p><img src="https://assets.digitalocean.com/articles/eng_python/beautiful-soup/inspect-element.png" alt="img3" /></p>
+
+<p>Once you click on the relevant <strong>Inspect</strong> menu item, the tools for web developers should appear within your browser. We want to look for the class and tags associated with the artists’ names in this list.</p>
+
+<p><img src="https://assets.digitalocean.com/articles/eng_python/beautiful-soup/web-page-inspector.png" alt="img4" /></p>
+
+<p>We’ll see first that the table of names is within <code class="highlighter-rouge">&lt;div&gt;</code> tags where <code class="highlighter-rouge">class="BodyText"</code>. This is important to note so that we only search for text within this section of the web page. We also notice that the name <strong>Zabaglia, Niccola</strong> is in a link tag, since the name references a web page that describes the artist. So we will want to reference the <code class="highlighter-rouge">&lt;a&gt;</code> tag for links. Each artist’s name is a reference to a link.</p>
+
+<p>To do this, we’ll use Beautiful Soup’s <code class="highlighter-rouge">find()</code> and <code class="highlighter-rouge">find_all()</code> methods in order to pull the text of the artists’ names from the <code class="highlighter-rouge">BodyText</code> <code class="highlighter-rouge">&lt;div&gt;</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Pull all text from the BodyText div</span>
+<span class="n">artist_name_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s">'BodyText'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Pull text from all instances of &lt;a&gt; tag within BodyText div</span>
+<span class="n">artist_name_list_items</span> <span class="o">=</span> <span class="n">artist_name_list</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'a'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Next, at the bottom of our program file, we will want to create a for loop in order to iterate over all the artist names that we just put into the <code class="highlighter-rouge">artist_name_list_items variable</code>.</p>
+
+<p>We’ll print these names out with the <code class="highlighter-rouge">prettify()</code> method in order to turn the Beautiful Soup parse tree into a nicely formatted Unicode string.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create for loop to print out the artists' names</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">artist_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">artist_name_list_items</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">artist_name</span><span class="o">.</span><span class="n">prettify</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">break</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;a href="/web/20121007172955/https://www.nga.gov/cgi-bin/tsearch?artistid=11630"&gt;
+ Zabaglia, Niccola
+&lt;/a&gt;
+&lt;a href="/web/20121007172955/https://www.nga.gov/cgi-bin/tsearch?artistid=34202"&gt;
+ Zaccone, Fabian
+&lt;/a&gt;
+&lt;a href="/web/20121007172955/https://www.nga.gov/cgi-bin/tsearch?artistid=3475"&gt;
+ Zadkine, Ossip
+&lt;/a&gt;
+&lt;a href="/web/20121007172955/https://www.nga.gov/cgi-bin/tsearch?artistid=25135"&gt;
+ Zaech, Bernhard
+&lt;/a&gt;
+&lt;a href="/web/20121007172955/https://www.nga.gov/cgi-bin/tsearch?artistid=2298"&gt;
+ Zagar, Jacob
+&lt;/a&gt;
+&lt;a href="/web/20121007172955/https://www.nga.gov/cgi-bin/tsearch?artistid=23988"&gt;
+ Zagroba, Idalia
+&lt;/a&gt;
+</code></pre></div></div>
+
+<p>What we see in the output at this point is the full text and tags related to all of the artists’ names within the <code class="highlighter-rouge">&lt;a&gt;</code> tags found in the <code class="highlighter-rouge">&lt;div class="BodyText"&gt;</code> tag on the first page, as well as some additional link text at the bottom. Since we don’t want this extra information, let’s work on removing this in the next section.</p>
+
+<h2 id="removing-superfluous-data">Removing Superfluous Data</h2>
+
+<p>So far, we have been able to collect all the link text data within one <code class="highlighter-rouge">&lt;div&gt;</code> section of our web page. However, we don’t want to have the bottom links that don’t reference artists’ names, so let’s work to remove that part.</p>
+
+<p>In order to remove the bottom links of the page, let’s again right-click and <strong>Inspect</strong> the DOM. We’ll see that the links on the bottom of the <code class="highlighter-rouge">&lt;div class="BodyText"&gt;</code> section are contained in an HTML table: <code class="highlighter-rouge">&lt;table class="AlphaNav"&gt;</code>:</p>
+
+<p><img src="https://assets.digitalocean.com/articles/eng_python/beautiful-soup/html-table.png" alt="img5" /></p>
+
+<p>We can therefore use Beautiful Soup to find the <code class="highlighter-rouge">AlphaNav</code> class and use the <code class="highlighter-rouge">decompose()</code> method to remove a tag from the parse tree and then destroy it along with its contents.</p>
+
+<p>We’ll use the variable <code class="highlighter-rouge">last_links</code> to reference these bottom links and add them to the program file:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://web.archive.org/web/20121007172955/https://www.nga.gov/collection/anZ1.htm'</span><span class="p">)</span>
+
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
+
+<span class="c"># Remove bottom links</span>
+<span class="n">last_links</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s">'AlphaNav'</span><span class="p">)</span>
+<span class="n">last_links</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+<span class="n">artist_name_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s">'BodyText'</span><span class="p">)</span>
+<span class="n">artist_name_list_items</span> <span class="o">=</span> <span class="n">artist_name_list</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'a'</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">artist_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">artist_name_list_items</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">artist_name</span><span class="o">.</span><span class="n">prettify</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">break</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;a href="/web/20121007172955/https://www.nga.gov/cgi-bin/tsearch?artistid=11630"&gt;
+ Zabaglia, Niccola
+&lt;/a&gt;
+&lt;a href="/web/20121007172955/https://www.nga.gov/cgi-bin/tsearch?artistid=34202"&gt;
+ Zaccone, Fabian
+&lt;/a&gt;
+&lt;a href="/web/20121007172955/https://www.nga.gov/cgi-bin/tsearch?artistid=3475"&gt;
+ Zadkine, Ossip
+&lt;/a&gt;
+&lt;a href="/web/20121007172955/https://www.nga.gov/cgi-bin/tsearch?artistid=25135"&gt;
+ Zaech, Bernhard
+&lt;/a&gt;
+&lt;a href="/web/20121007172955/https://www.nga.gov/cgi-bin/tsearch?artistid=2298"&gt;
+ Zagar, Jacob
+&lt;/a&gt;
+&lt;a href="/web/20121007172955/https://www.nga.gov/cgi-bin/tsearch?artistid=23988"&gt;
+ Zagroba, Idalia
+&lt;/a&gt;
+</code></pre></div></div>
+
+<p>At this point, we see that the output no longer includes the links at the bottom of the web page, and now only displays the links associated with artists’ names.</p>
+
+<p>Until now, we have targeted the links with the artists’ names specifically, but we have the extra tag data that we don’t really want. Let’s remove that in the next section.</p>
+
+<h2 id="pulling-the-contents-from-a-tag">Pulling the Contents from a Tag</h2>
+
+<p>In order to access only the actual artists’ names, we’ll want to target the contents of the <code class="highlighter-rouge">&lt;a&gt;</code> tags rather than print out the entire link tag.</p>
+
+<p>We can do this with Beautiful Soup’s <code class="highlighter-rouge">.contents</code>, which will return the tag’s children as a Python list data type.</p>
+
+<p>Let’s revise the <code class="highlighter-rouge">for</code> loop so that instead of printing the entire link and its tag, we’ll print the list of children (i.e. the artists’ full names):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Use .contents to pull out the &lt;a&gt; tag’s children</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">artist_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">artist_name_list_items</span><span class="p">):</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="n">artist_name</span><span class="o">.</span><span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">break</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Zabaglia, Niccola
+Zaccone, Fabian
+Zadkine, Ossip
+Zaech, Bernhard
+Zagar, Jacob
+Zagroba, Idalia
+</code></pre></div></div>
+
+<p>Note that we are iterating over the list above by calling on the index number of each item.</p>
+
+<p>We have received back a list of all the artists’ names available on the first page of the letter Z.</p>
+
+<p>However, what if we want to also capture the URLs associated with those artists? We can extract URLs found within a page’s <code class="highlighter-rouge">&lt;a&gt;</code> tags by using Beautiful Soup’s <code class="highlighter-rouge">get('href')</code> method.</p>
+
+<p>From the output of the links above, we know that the entire URL is not being captured, so we will concatenate the link string with the front of the URL string (in this case https://web.archive.org/).</p>
+
+<p>These lines we’ll also add to the <code class="highlighter-rouge">for</code> loop:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">artist_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">artist_name_list_items</span><span class="p">):</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="n">artist_name</span><span class="o">.</span><span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">links</span> <span class="o">=</span> <span class="s">'https://web.archive.org'</span> <span class="o">+</span> <span class="n">artist_name</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'href'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">links</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">break</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Zabaglia, Niccola
+https://web.archive.org/web/20121007172955/https://www.nga.gov/cgi-bin/tsearch?artistid=11630
+Zaccone, Fabian
+https://web.archive.org/web/20121007172955/https://www.nga.gov/cgi-bin/tsearch?artistid=34202
+Zadkine, Ossip
+https://web.archive.org/web/20121007172955/https://www.nga.gov/cgi-bin/tsearch?artistid=3475
+Zaech, Bernhard
+https://web.archive.org/web/20121007172955/https://www.nga.gov/cgi-bin/tsearch?artistid=25135
+Zagar, Jacob
+https://web.archive.org/web/20121007172955/https://www.nga.gov/cgi-bin/tsearch?artistid=2298
+Zagroba, Idalia
+https://web.archive.org/web/20121007172955/https://www.nga.gov/cgi-bin/tsearch?artistid=23988
+</code></pre></div></div>
+
+<p>Although we are now getting information from the website, it is currently just printing to our terminal window. Let’s instead capture this data so that we can use it elsewhere by writing it to a file.</p>
+
+<h2 id="writing-the-data-to-a-csv-file">Writing the Data to a CSV File</h2>
+
+<p>Collecting data that only lives in a terminal window is not very useful. Comma-separated values (CSV) files allow us to store tabular data in plain text, and is a common format for spreadsheets and databases. Before beginning with this section, you should familiarize yourself with <a href="https://www.digitalocean.com/community/tutorials/how-to-handle-plain-text-files-in-python-3">how to handle plain text files in Python</a>.</p>
+
+<p>First, we need to import Python’s built-in <code class="highlighter-rouge">csv</code> module along with the other modules at the top of the Python programming file:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">csv</span>
+</code></pre></div></div>
+
+<p>Next, we’ll create and open a file called <code class="highlighter-rouge">z-artist-names.csv</code> for us to write to (we’ll use the variable <code class="highlighter-rouge">f</code> for file here) by using the <code class="highlighter-rouge">'w'</code> mode. We’ll also write the top row headings: <code class="highlighter-rouge">Name</code> and <code class="highlighter-rouge">Link</code> which we’ll pass to the <code class="highlighter-rouge">writerow()</code> method as a list:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">'z-artist-names.csv'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">))</span>
+<span class="n">f</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s">'Name'</span><span class="p">,</span> <span class="s">'Link'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>11
+</code></pre></div></div>
+
+<p>Finally, within our for loop, we’ll write each row with the artists’ <code class="highlighter-rouge">names</code> and their associated <code class="highlighter-rouge">links</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://web.archive.org/web/20121007172955/http://www.nga.gov/collection/anZ1.htm'</span><span class="p">)</span>
+
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
+
+<span class="n">last_links</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s">'AlphaNav'</span><span class="p">)</span>
+<span class="n">last_links</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+<span class="c"># Create a file to write to, add headers row</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">'z-artist-names.csv'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">))</span>
+<span class="n">f</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s">'Name'</span><span class="p">,</span> <span class="s">'Link'</span><span class="p">])</span>
+
+<span class="n">artist_name_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s">'BodyText'</span><span class="p">)</span>
+<span class="n">artist_name_list_items</span> <span class="o">=</span> <span class="n">artist_name_list</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'a'</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">artist_name</span> <span class="ow">in</span> <span class="n">artist_name_list_items</span><span class="p">:</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="n">artist_name</span><span class="o">.</span><span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">links</span> <span class="o">=</span> <span class="s">'https://web.archive.org'</span> <span class="o">+</span> <span class="n">artist_name</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'href'</span><span class="p">)</span>
+
+
+    <span class="c"># Add each artist’s name and associated link to a row</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="n">names</span><span class="p">,</span> <span class="n">links</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h2 id="retrieving-related-pages">Retrieving Related Pages</h2>
+
+<p>We have created a program that will pull data from the first page of the list of artists whose last names start with the letter <strong>Z</strong>. However, there are 4 pages in total of these artists available on the website.</p>
+
+<p>In order to collect all of these pages, we can perform more iterations with for loops. This will revise most of the code we have written so far, but will employ similar concepts.</p>
+
+<p>To start, we’ll want to initialize a list to hold the pages:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pages</span> <span class="o">=</span> <span class="p">[]</span>
+</code></pre></div></div>
+
+<p>We will populate this initialized list with the following <code class="highlighter-rouge">for</code> loop:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s">'https://web.archive.org/web/20121007172955/https://www.nga.gov/collection/anZ'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">'.htm'</span>
+    <span class="n">pages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Earlier in this tutorial, we noted that we should pay attention to the total number of pages there are that contain artists’ names starting with the letter <strong>Z</strong> (or whatever letter we’re using). Since there are 4 pages for the letter <strong>Z</strong>, we constructed the <code class="highlighter-rouge">for</code> loop above with a range of <code class="highlighter-rouge">1</code> to <code class="highlighter-rouge">5</code> so that it will iterate through each of the 4 pages.</p>
+
+<p>For this specific web site, the URLs begin with the string https://web.archive.org/web/20121007172955/https://www.nga.gov/collection/anZ and then are followed with a number for the page (which will be the integer <code class="highlighter-rouge">i</code> from the <code class="highlighter-rouge">for</code> loop that we convert to a string) and end with <code class="highlighter-rouge">.htm</code>. We will concatenate these strings together and then append the result to the <code class="highlighter-rouge">pages</code> list.</p>
+
+<p>In addition to this loop, we’ll have a second loop that will go through each of the pages above. The code in this <code class="highlighter-rouge">for</code> loop will look similar to the code we have created so far, as it is doing the task we completed for the first page of the letter <strong>Z</strong> artists for each of the 4 pages total. Note that because we have put the original program into the second <code class="highlighter-rouge">for</code> loop, we now have the original loop as a nested <code class="highlighter-rouge">for</code> loop contained in it.</p>
+
+<p>The two <code class="highlighter-rouge">for</code> loops will look like this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pages</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s">'https://web.archive.org/web/20121007172955/https://www.nga.gov/collection/anZ'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">'.htm'</span>
+    <span class="n">pages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">pages</span><span class="p">:</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
+
+    <span class="n">last_links</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s">'AlphaNav'</span><span class="p">)</span>
+    <span class="n">last_links</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+    <span class="n">artist_name_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s">'BodyText'</span><span class="p">)</span>
+    <span class="n">artist_name_list_items</span> <span class="o">=</span> <span class="n">artist_name_list</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'a'</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">artist_name</span> <span class="ow">in</span> <span class="n">artist_name_list_items</span><span class="p">:</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="n">artist_name</span><span class="o">.</span><span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">links</span> <span class="o">=</span> <span class="s">'https://web.archive.org'</span> <span class="o">+</span> <span class="n">artist_name</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'href'</span><span class="p">)</span>
+
+        <span class="n">f</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="n">names</span><span class="p">,</span> <span class="n">links</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>In the code above, you should see that the first <code class="highlighter-rouge">for</code> loop is iterating over the pages and the second <code class="highlighter-rouge">for</code> loop is scraping data from each of those pages and then is adding the artists’ names and links line by line through each row of each page.</p>
+
+<p>These two <code class="highlighter-rouge">for</code> loops come below the <code class="highlighter-rouge">import</code> statements, the CSV file creation and writer (with the line for writing the headers of the file), and the initialization of the <code class="highlighter-rouge">pages</code> variable (assigned to a list).</p>
+
+<p>Within the greater context of the programming file, the complete code looks like this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">'z-artist-names.csv'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">))</span>
+<span class="n">f</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s">'Name'</span><span class="p">,</span> <span class="s">'Link'</span><span class="p">])</span>
+
+<span class="n">pages</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s">'https://web.archive.org/web/20121007172955/https://www.nga.gov/collection/anZ'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">'.htm'</span>
+    <span class="n">pages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">pages</span><span class="p">:</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
+
+    <span class="n">last_links</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s">'AlphaNav'</span><span class="p">)</span>
+    <span class="n">last_links</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+    <span class="n">artist_name_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s">'BodyText'</span><span class="p">)</span>
+    <span class="n">artist_name_list_items</span> <span class="o">=</span> <span class="n">artist_name_list</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'a'</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">artist_name</span> <span class="ow">in</span> <span class="n">artist_name_list_items</span><span class="p">:</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="n">artist_name</span><span class="o">.</span><span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">links</span> <span class="o">=</span> <span class="s">'https://web.archive.org'</span> <span class="o">+</span> <span class="n">artist_name</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'href'</span><span class="p">)</span>
+
+        <span class="n">f</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="n">names</span><span class="p">,</span> <span class="n">links</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Since this program is doing a bit of work, it will take a little while to create the CSV file. Once it is done, the output will be complete, showing the artists’ names and their associated links from <strong>Zabaglia, Niccola</strong> to <strong>Zykmund, Václav</strong>.</p>
+
+<h2 id="being-considerate">Being Considerate</h2>
+
+<p>When scraping web pages, it is important to remain considerate of the servers you are grabbing information from.</p>
+
+<p>Check to see if a site has terms of service or terms of use that pertains to web scraping. Also, check to see if a site has an API that allows you to grab data before scraping it yourself.</p>
+
+<p>Be sure to not continuously hit servers to gather data. Once you have collected what you need from a site, run scripts that will go over the data locally rather than burden someone else’s servers.</p>
+
+<p>Additionally, it is a good idea to scrape with a header that has your name and email so that a website can identify you and follow up if they have any questions. An example of a header you can use with the Python Requests library is as follows:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'User-Agent'</span><span class="p">:</span> <span class="s">'Your Name, example.com'</span><span class="p">,</span>
+    <span class="s">'From'</span><span class="p">:</span> <span class="s">'email@example.com'</span>
+<span class="p">}</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://example.com'</span>
+
+<span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Using headers with identifiable information ensures that the people who go over a server’s logs can reach out to you.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This tutorial went through using Python and Beautiful Soup to scrape data from a website. We stored the text that we gathered within a CSV file.</p>
+
+<p>You can continue working on this project by collecting more data and making your CSV file more robust. For example, you may want to include the nationalities and years of each artist. You can also use what you have learned to scrape data from other websites.</p>
+
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

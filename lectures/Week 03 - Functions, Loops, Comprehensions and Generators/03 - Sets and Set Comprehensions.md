@@ -811,8 +811,3 @@ print(b)
 
     {'Odd', 'Even'}
 
-
-
-```python
-
-```
