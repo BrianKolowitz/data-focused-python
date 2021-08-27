@@ -5,7 +5,6 @@ parent: Week 01 - Language basics, Generating Data, Storing Data
 grand_parent: Lectures
 nav_order: 1
 ---
-
 # Getting Started
 
 Welcome to Data Focused Python. In this guide we'll walk through all the steps you need to get started with the course. Python has a robust community which is great, but it also means there's going to be many options from python distribution to IDEs to libraries. There's no right or wrong selection, only the one that works best for you.

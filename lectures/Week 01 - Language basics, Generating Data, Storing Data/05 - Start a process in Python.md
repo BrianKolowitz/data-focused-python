@@ -5,7 +5,6 @@ parent: Week 01 - Language basics, Generating Data, Storing Data
 grand_parent: Lectures
 nav_order: 10
 ---
-
 # Start a process in Python
 [Start a process in Python](https://www.bogotobogo.com/python/python_subprocess_module.php)
 

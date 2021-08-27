@@ -5,7 +5,6 @@ parent: Week 05 - Data Processing and Visualization Part 2
 grand_parent: Lectures
 nav_order: 5
 ---
-
 # Matplotlib Tutorial Python Plotting
 [Source](https://www.datacamp.com/community/tutorials/matplotlib-tutorial-python)
 
@@ -87,7 +86,9 @@ plt.show()
 ```
 
 
+    
 ![png](03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_files/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_6_0.png)
+    
 
 
 With the piece of code below:
@@ -102,7 +103,9 @@ plt.show()
 ```
 
 
+    
 ![png](03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_files/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_8_0.png)
+    
 
 
 The second code chunk is definitely cleaner, isn’it it?
@@ -166,7 +169,9 @@ plt.show()
 ```
 
 
+    
 ![png](03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_files/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_13_0.png)
+    
 
 
 ### What Is A Subplot?
@@ -197,7 +202,9 @@ plt.show()
 ```
 
 
+    
 ![png](03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_files/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_15_0.png)
+    
 
 
 You see that the ```add_subplot()``` function in itsef also poses you with a challenge, because you see ```add_subplots(111)``` in the above code chunk.
@@ -256,7 +263,9 @@ plt.show()
 ```
 
 
+    
 ![png](03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_files/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_19_0.png)
+    
 
 
 
@@ -276,7 +285,9 @@ plt.show()
 ```
 
 
+    
 ![png](03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_files/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_20_0.png)
+    
 
 
 ## Working With Pyplot: Plotting Routines
@@ -328,7 +339,9 @@ plt.show()
 ```
 
 
+    
 ![png](03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_files/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_22_0.png)
+    
 
 
 
@@ -355,7 +368,9 @@ plt.show()
 ```
 
 
+    
 ![png](03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_files/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_23_0.png)
+    
 
 
 Most functions speak for themselves because the names are quite clear. But that doesn’t mean that you need to limit yourself: for example, the ```fill_between()``` function is perfect for those who want to create area plots, but they can also be used to create a stacked line graph; Just use the plotting function a couple of times to make sure that the areas overlap and give the illusion of being stacked.
@@ -430,7 +445,9 @@ plt.show()
 ```
 
 
+    
 ![png](03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_files/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_29_0.png)
+    
 
 
 ### How To Put The Legend Out of the Plot
@@ -479,7 +496,9 @@ plt.show()
 ```
 
 
+    
 ![png](03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_files/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_34_0.png)
+    
 
 
 The line ```plt.show()``` says indeed that you want to see the plot. If you execute this line, you’ll see a window popping up. And you’ll see if it looks like what you had in your mind!
@@ -506,7 +525,9 @@ plt.savefig("foo.png")
 ```
 
 
+    
 ![png](03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_files/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_37_0.png)
+    
 
 
 
@@ -525,7 +546,9 @@ plt.savefig("foo_transparent.png", transparent=True)
 ```
 
 
+    
 ![png](03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_files/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_38_0.png)
+    
 
 
 ### How To Save A Plot To A Pdf File
@@ -557,7 +580,9 @@ pp.close()
 ```
 
 
+    
 ![png](03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_files/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_40_0.png)
+    
 
 
 ### When To Use cla(), clf() or close()?
@@ -610,7 +635,9 @@ plt.show()
 ```
 
 
+    
 ![png](03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_files/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_46_0.png)
+    
 
 
 
@@ -634,7 +661,9 @@ plt.show()
 ```
 
 
+    
 ![png](03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_files/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting_47_0.png)
+    
 
 
 You just adjusted the line width in the example above, but you can also change figure size and dpi, line width, color and style, axes, axis and grid properties, text and font properties, …
@@ -660,3 +689,8 @@ matplotlib.matplotlib_fname()
 Congratulations! You have gone through today’s Matplotlib tutorial successfully! There is still much to learn, but you’re definitely ready to go out on your own and create your own amazing plots. Don’t miss out on DataCamp’s [Matplotlib cheat sheet](https://www.datacamp.com/community/blog/python-matplotlib-cheat-sheet) that can help you to make plots in no time, step by step.
 
 If you’re eager to discover more from Matplotlib, consider checking out DataCamp’s [Viewing 3D Volumetric Data With Matplotlib](https://www.datacamp.com/community/tutorials/matplotlib-3d-volumetric-data) tutorial to learn how to work with matplotlib’s event handler API or this tutorial, in which you’ll learn all about [animating your plots](https://jakevdp.github.io/blog/2012/08/18/matplotlib-animation-tutorial/).
+
+
+```python
+
+```

@@ -5,7 +5,6 @@ parent: Week 02 - Processing files, Making Web Requests
 grand_parent: Lectures
 nav_order: 7
 ---
-
 # fhirclient 
 
 **Note: this example uses FHIR DSTU3 whereas synthea now supports FHIR R4 so you'll need a different version of the fhirclient library to deal with each dataset**
@@ -1517,3 +1516,8 @@ response.json()
         'display': 'unmarried'}]}}
 
 
+
+
+```python
+
+```

@@ -5,7 +5,6 @@ parent: Week 05 - Data Processing and Visualization Part 2
 grand_parent: Lectures
 nav_order: 2
 ---
-
 # Pandas Tutorial: DataFrames in Python
 [Source](https://www.datacamp.com/community/tutorials/pandas-tutorial-dataframe-python)
 
@@ -1322,3 +1321,8 @@ print(x)
     2  7  8  9
     3  1  2  3
 
+
+
+```python
+
+```

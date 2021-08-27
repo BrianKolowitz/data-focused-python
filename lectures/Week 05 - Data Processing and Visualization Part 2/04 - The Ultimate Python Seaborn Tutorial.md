@@ -5,7 +5,6 @@ parent: Week 05 - Data Processing and Visualization Part 2
 grand_parent: Lectures
 nav_order: 6
 ---
-
 # The Ultimate Python Seaborn Tutorial: Gotta Catch ‘Em All
 [Source](https://elitedatascience.com/python-seaborn-tutorial)
 
@@ -309,7 +308,9 @@ sns.lmplot(x='Attack', y='Defense', data=df)
 
 
 
+    
 ![png](04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_17_1.png)
+    
 
 
 By the way, Seaborn doesn't have a dedicated scatter plot function, which is why you see a diagonal line. We actually used Seaborn's function for fitting and plotting a **regression line**.
@@ -335,7 +336,9 @@ sns.lmplot(x='Attack', y='Defense', data=df,
 
 
 
+    
 ![png](04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_19_1.png)
+    
 
 
 
@@ -354,7 +357,9 @@ sns.lmplot(x='Attack', y='Defense', data=df,
 
 
 
+    
 ![png](04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_20_1.png)
+    
 
 
 Looking better, but we can improve this scatter plot further. For example, all of our Pokémon have positive Attack and Defense values, yet our **axes limits** fall below zero. 
@@ -392,7 +397,9 @@ plt.xlim(0, None)
 
 
 
+    
 ![png](04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_23_1.png)
+    
 
 
 # Step 5: The role of Pandas.
@@ -417,7 +424,9 @@ sns.boxplot(data=df)
 
 
 
+    
 ![png](04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_25_1.png)
+    
 
 
 Well, that's a reasonable start, but there are some columns we'd probably like to remove:
@@ -448,7 +457,9 @@ sns.boxplot(data=stats_df)
 
 
 
+    
 ![png](04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_27_1.png)
+    
 
 
 # Step 6: Seaborn themes.
@@ -481,7 +492,9 @@ sns.violinplot(x='Type 1', y='Attack', data=df)
 
 
 
+    
 ![png](04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_29_1.png)
+    
 
 
 As you can see, Dragon types tend to have higher Attack stats than Ghost types, but they also have greater variance.
@@ -532,7 +545,9 @@ sns.violinplot(x='Type 1', y='Attack', data=df,
 
 
 
+    
 ![png](04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_34_1.png)
+    
 
 
 Much better!
@@ -558,7 +573,9 @@ sns.swarmplot(x='Type 1', y='Attack', data=df,
 
 
 
+    
 ![png](04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_36_1.png)
+    
 
 
 That's handy, but can't we combine our swarm plot and the violin plot? After all, they display similar information, right?
@@ -604,7 +621,9 @@ plt.title('Attack by Type')
 
 
 
+    
 ![png](04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_39_1.png)
+    
 
 
 Awesome, now we have a pretty chart that tells us how Attack values are distributed across different Pokémon types. But what it we want to see all of the other stats as well?
@@ -903,7 +922,9 @@ sns.swarmplot(x='Stat', y='value', data=melted_df,
 
 
 
+    
 ![png](04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_49_1.png)
+    
 
 
 Finally, let's make a few final tweaks for a more readable chart:
@@ -941,7 +962,9 @@ plt.legend(bbox_to_anchor=(1, 1), loc=2)
 
 
 
+    
 ![png](04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_51_1.png)
+    
 
 
 # Step 10: Pokédex (mini-gallery).
@@ -971,7 +994,9 @@ sns.heatmap(corr)
 
 
 
+    
 ![png](04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_53_1.png)
+    
 
 
 ## 10.2 - Histogram
@@ -994,7 +1019,9 @@ sns.distplot(df.Attack)
 
 
 
+    
 ![png](04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_55_1.png)
+    
 
 
 ## 10.3 - Bar Plot
@@ -1021,7 +1048,9 @@ plt.xticks(rotation=-45)
 
 
 
+    
 ![png](04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_57_1.png)
+    
 
 
 ## 10.4 - Factor Plot
@@ -1053,7 +1082,9 @@ g.set_xticklabels(rotation=-45)
 
 
 
+    
 ![png](04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_59_1.png)
+    
 
 
 ## 10.5 - Density Plot
@@ -1075,7 +1106,9 @@ sns.kdeplot(df.Attack, df.Defense)
 
 
 
+    
 ![png](04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_61_1.png)
+    
 
 
 ## 10.6 - Joint Distribution Plot
@@ -1102,9 +1135,16 @@ sns.jointplot(x='Attack', y='Defense', data=df)
 
 
 
+    
 ![png](04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_files/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial_63_2.png)
+    
 
 
 Congratulations... you've made it to the end of this Python Seaborn tutorial!
 
 We've just concluded a tour of key Seaborn paradigms and showed you many examples along the way. Feel free to use this page along with the [official Seaborn gallery](http://seaborn.pydata.org/examples/) as references for your projects going forward.
+
+
+```python
+
+```

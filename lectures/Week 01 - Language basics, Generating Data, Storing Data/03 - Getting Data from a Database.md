@@ -5,7 +5,6 @@ parent: Week 01 - Language basics, Generating Data, Storing Data
 grand_parent: Lectures
 nav_order: 7
 ---
-
 # SQLAlchemy — Python Tutorial
 [Source](https://towardsdatascience.com/sqlalchemy-python-tutorial-79a577141a91)
 
@@ -574,4 +573,9 @@ emp.drop(engine)
 ```python
 # drop all tables
 metadata.drop_all(engine)
+```
+
+
+```python
+
 ```

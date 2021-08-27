@@ -5,7 +5,6 @@ parent: Week 03 - Functions, Loops, Comprehensions and Generators
 grand_parent: Lectures
 nav_order: 5
 ---
-
 # Sets and Set Comprehensions
 
 [Python Sets](https://realpython.com/python-sets/)
@@ -811,3 +810,8 @@ print(b)
 
     {'Odd', 'Even'}
 
+
+
+```python
+
+```

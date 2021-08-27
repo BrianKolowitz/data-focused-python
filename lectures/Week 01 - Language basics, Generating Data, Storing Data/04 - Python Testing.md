@@ -5,7 +5,6 @@ parent: Week 01 - Language basics, Generating Data, Storing Data
 grand_parent: Lectures
 nav_order: 9
 ---
-
 # 8 Benefis of Unit Testing
 [8 benefits of unit testing](https://dzone.com/articles/top-8-benefits-of-unit-testing)
 
@@ -227,4 +226,9 @@ def test_create_file(tmp_path):
     p.write_text(CONTENT)
     assert p.read_text() == CONTENT
     assert len(list(tmp_path.iterdir())) == 1
+```
+
+
+```python
+
 ```

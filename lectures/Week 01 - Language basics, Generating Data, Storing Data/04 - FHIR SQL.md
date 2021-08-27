@@ -5,8 +5,6 @@ parent: Week 01 - Language basics, Generating Data, Storing Data
 grand_parent: Lectures
 nav_order: 8
 ---
-
-
 ```python
 import json
 from dateutil.parser import parse
@@ -473,3 +471,8 @@ df.head()
 </div>
 
 
+
+
+```python
+
+```

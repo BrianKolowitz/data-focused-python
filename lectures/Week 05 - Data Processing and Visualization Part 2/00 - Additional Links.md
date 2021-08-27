@@ -5,7 +5,6 @@ parent: Week 05 - Data Processing and Visualization Part 2
 grand_parent: Lectures
 nav_order: 1
 ---
-
 # Links
 
 ## Python for Data Analysis, 2nd Edition
@@ -24,3 +23,8 @@ nav_order: 1
 * [Chapter 13: Introduction to Modeling Libraries in Python](http://nbviewer.ipython.org/github/pydata/pydata-book/blob/2nd-edition/ch13.ipynb)
 * [Chapter 14: Data Analysis Examples](http://nbviewer.ipython.org/github/pydata/pydata-book/blob/2nd-edition/ch14.ipynb)
 * [Appendix A: Advanced NumPy](http://nbviewer.ipython.org/github/pydata/pydata-book/blob/2nd-edition/appa.ipynb)
+
+
+```python
+
+```

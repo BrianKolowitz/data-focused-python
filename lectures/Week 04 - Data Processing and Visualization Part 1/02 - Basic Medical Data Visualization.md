@@ -5,7 +5,6 @@ parent: Week 04 - Data Processing and Visualization Part 1
 grand_parent: Lectures
 nav_order: 4
 ---
-
 # Basic Medical Data Exploration Visualization  Heart Diseases
 
 [Source](https://towardsdatascience.com/basic-medical-data-exploration-visualization-heart-diseases-6ab12bc0a8b7)
@@ -742,7 +741,9 @@ plt.show()
 ```
 
 
+    
 ![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_26_0.png)
+    
 
 
 
@@ -756,7 +757,9 @@ plt.show()
 ```
 
 
+    
 ![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_27_0.png)
+    
 
 
 With simple histogram of our data, we can easily observe the distribution of different attributes. One thing to note here is the fact that it is extremely easy for us to see which attributes are categorical values and which are not.
@@ -776,7 +779,9 @@ plt.close('all')
 ```
 
 
+    
 ![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_29_0.png)
+    
 
 
 
@@ -788,7 +793,9 @@ plt.show()
 ```
 
 
+    
 ![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_30_0.png)
+    
 
 
 ## Variance-Covariance Matrix
@@ -810,7 +817,9 @@ plt.show()
 ```
 
 
+    
 ![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_32_0.png)
+    
 
 
 
@@ -822,7 +831,9 @@ plt.show()
 ```
 
 
+    
 ![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_33_0.png)
+    
 
 
 ## Correlation matrix
@@ -845,7 +856,9 @@ plt.show()
 ```
 
 
+    
 ![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_35_0.png)
+    
 
 
 
@@ -859,7 +872,9 @@ plt.show()
 ```
 
 
+    
 ![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_36_0.png)
+    
 
 
 ## Interactive Histogram
@@ -877,7 +892,9 @@ plt.show()
 ```
 
 
+    
 ![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_38_0.png)
+    
 
 
 
@@ -964,7 +981,9 @@ plt.show()
 ```
 
 
+    
 ![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_41_0.png)
+    
 
 
 Again, when we create a box plot related to the average of people who have / doesn’t have heart disease we can observe the younger people are less likely to have heart disease.
@@ -978,7 +997,9 @@ plt.show()
 ```
 
 
+    
 ![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_43_0.png)
+    
 
 
 And finally, I wanted to show the pair plot against few of the attributes such as age, thal, ca 
@@ -997,7 +1018,9 @@ plt.show()
 
 
 
+    
 ![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_45_1.png)
+    
 
 
 ## Uniform Manifold Approximation and Projection embedding (UMAP) t-distributed Stochastic Neighbor Embedding (t-SNE)
@@ -1006,4 +1029,9 @@ Run the following command from the terminal.
 
 ```bash
 python Manifold_Approximation_and_Projection.py
+```
+
+
+```python
+
 ```

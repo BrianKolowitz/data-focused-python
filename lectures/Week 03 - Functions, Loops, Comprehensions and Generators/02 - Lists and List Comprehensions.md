@@ -5,7 +5,6 @@ parent: Week 03 - Functions, Loops, Comprehensions and Generators
 grand_parent: Lectures
 nav_order: 4
 ---
-
 # Python List Comprehensions
 [Python List Comprehension Tutorial](https://www.datacamp.com/community/tutorials/python-list-comprehension)
 
@@ -509,3 +508,8 @@ matrix
     [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
 
 
+
+
+```python
+
+```

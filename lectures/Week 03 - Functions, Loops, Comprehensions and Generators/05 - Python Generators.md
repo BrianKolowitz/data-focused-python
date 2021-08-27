@@ -5,7 +5,6 @@ parent: Week 03 - Functions, Loops, Comprehensions and Generators
 grand_parent: Lectures
 nav_order: 8
 ---
-
 # Python Generators
 [Source](https://realpython.com/introduction-to-python-generators/)
 

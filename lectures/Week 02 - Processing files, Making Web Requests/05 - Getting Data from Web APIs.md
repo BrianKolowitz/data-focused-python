@@ -5,7 +5,6 @@ parent: Week 02 - Processing files, Making Web Requests
 grand_parent: Lectures
 nav_order: 9
 ---
-
 # Python API tutorial - An Introduction to using APIs
 [source](https://www.dataquest.io/blog/python-api-tutorial/)
 
@@ -287,3 +286,8 @@ print(data)
     6
     {'people': [{'name': 'Christina Koch', 'craft': 'ISS'}, {'name': 'Alexander Skvortsov', 'craft': 'ISS'}, {'name': 'Luca Parmitano', 'craft': 'ISS'}, {'name': 'Andrew Morgan', 'craft': 'ISS'}, {'name': 'Oleg Skripochka', 'craft': 'ISS'}, {'name': 'Jessica Meir', 'craft': 'ISS'}], 'number': 6, 'message': 'success'}
 
+
+
+```python
+
+```

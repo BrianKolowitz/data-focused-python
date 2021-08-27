@@ -1,11 +1,10 @@
 ---
 layout: default
-title: 04 - Reading Synthea data
+title: 04 - Reading synthea data
 parent: Week 02 - Processing files, Making Web Requests
 grand_parent: Lectures
 nav_order: 8
 ---
-
 ## Reading Synthea Data
 
 Here we'll walk through the different data files from the [synthea](https://github.com/synthetichealth/synthea) data generator. Synthea can generate data in a number of formats including:
@@ -119,3 +118,8 @@ with open('../data/fhir/Abe604_Veum823_e841a5e8-9ace-437b-be32-b37d006aef87.json
     5:       "fullUrl": "urn:uuid:df5f01e0-810b-4379-be90-bf53a6b3563d",
     
 
+
+
+```python
+
+```
