@@ -81,7 +81,7 @@ assert sum([1, 1, 1]) == 6, "Should be 6"
 
     AssertionError                            Traceback (most recent call last)
 
-    <ipython-input-19-bebf0a559570> in <module>()
+    /var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/ipykernel_36949/1130538575.py in <module>
           1 # If the result from sum() is incorrect, this will fail with an AssertionError and the message "Should be 6".
     ----> 2 assert sum([1, 1, 1]) == 6, "Should be 6"
     
@@ -102,6 +102,9 @@ test_sum()
 print("Everything passed")
 ```
 
+    Everything passed
+
+
 
 ```python
 def test_sum_tuple():
@@ -110,10 +113,27 @@ def test_sum_tuple():
 
 
 ```python
-test_sum()
 test_sum_tuple()
 print("Everything passed")
 ```
+
+
+    ---------------------------------------------------------------------------
+
+    AssertionError                            Traceback (most recent call last)
+
+    /var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/ipykernel_36949/2203313225.py in <module>
+    ----> 1 test_sum_tuple()
+          2 print("Everything passed")
+
+
+    /var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/ipykernel_36949/2526289347.py in test_sum_tuple()
+          1 def test_sum_tuple():
+    ----> 2     assert sum((1, 2, 2)) == 6, "Should be 6"
+    
+
+    AssertionError: Should be 6
+
 
 # Choosing a Test Runner
 * [Pytest](https://docs.pytest.org/en/latest/)
@@ -142,6 +162,28 @@ def test_answer():
 !pytest test_sample.py
 ```
 
+    [1m============================= test session starts ==============================[0m
+    platform darwin -- Python 3.9.7, pytest-6.2.5, py-1.10.0, pluggy-1.0.0
+    rootdir: /Users/bk/Source/data-focused-python/lectures/Week 01 - Language basics, Generating Data, Storing Data
+    plugins: Faker-9.3.1, anyio-3.3.3
+    collected 1 item                                                               [0m
+    
+    test_sample.py [31mF[0m[31m                                                         [100%][0m
+    
+    =================================== FAILURES ===================================
+    [31m[1m_________________________________ test_answer __________________________________[0m
+    
+        [94mdef[39;49;00m [92mtest_answer[39;49;00m():
+    >       [94massert[39;49;00m inc([94m3[39;49;00m) == [94m5[39;49;00m
+    [1m[31mE       assert 4 == 5[0m
+    [1m[31mE        +  where 4 = inc(3)[0m
+    
+    [1m[31mtest_sample.py[0m:7: AssertionError
+    =========================== short test summary info ============================
+    FAILED test_sample.py::test_answer - assert 4 == 5
+    [31m============================== [31m[1m1 failed[0m[31m in 0.10s[0m[31m ===============================[0m
+
+
 contents of [test_sysexit.py](test_sysexit.py)
 
 
@@ -161,6 +203,10 @@ def test_mytest():
 # Execute the test function with “quiet” reporting mode:
 !pytest -q test_sysexit.py
 ```
+
+    [32m.[0m[32m                                                                        [100%][0m
+    [32m[32m[1m1 passed[0m[32m in 0.02s[0m[0m
+
 
 ## Group multiple tests in a class
 
@@ -188,6 +234,24 @@ class TestClass(object):
 !pytest -q test_class.py
 ```
 
+    [32m.[0m[31mF[0m[31m                                                                       [100%][0m
+    =================================== FAILURES ===================================
+    [31m[1m______________________________ TestClass.test_two ______________________________[0m
+    
+    self = <test_class.TestClass object at 0x7ff03131ddf0>
+    
+        [94mdef[39;49;00m [92mtest_two[39;49;00m([96mself[39;49;00m):
+            x = [33m"[39;49;00m[33mhello[39;49;00m[33m"[39;49;00m
+    >       [94massert[39;49;00m [96mhasattr[39;49;00m(x, [33m'[39;49;00m[33mcheck[39;49;00m[33m'[39;49;00m)
+    [1m[31mE       AssertionError: assert False[0m
+    [1m[31mE        +  where False = hasattr('hello', 'check')[0m
+    
+    [1m[31mtest_class.py[0m:9: AssertionError
+    =========================== short test summary info ============================
+    FAILED test_class.py::TestClass::test_two - AssertionError: assert False
+    [31m[31m[1m1 failed[0m, [32m1 passed[0m[31m in 0.09s[0m[0m
+
+
 ## Request a unique temporary directory for functional tests¶
 
 pytest provides Builtin fixtures/function arguments to request arbitrary resources, like a unique temporary directory:
@@ -199,13 +263,25 @@ contents of [test_tmpdir.py](test_tmpdir.py)
 # content of test_tmpdir.py
 def test_needsfiles(tmpdir):
     print(tmpdir)
-    assert 0
+    assert True
 ```
 
 
 ```python
-!pytest -q test_tmpdir.py
+!pytest -s test_tmpdir.py
 ```
+
+    [1m============================= test session starts ==============================[0m
+    platform darwin -- Python 3.9.7, pytest-6.2.5, py-1.10.0, pluggy-1.0.0
+    rootdir: /Users/bk/Source/data-focused-python/lectures/Week 01 - Language basics, Generating Data, Storing Data
+    plugins: Faker-9.3.1, anyio-3.3.3
+    collected 1 item                                                               [0m
+    
+    test_tmpdir.py /private/var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/pytest-of-bk/pytest-17/test_needsfiles0
+    [32m.[0m
+    
+    [32m============================== [32m[1m1 passed[0m[32m in 0.03s[0m[32m ===============================[0m
+
 
 You can use the tmp_path fixture which will provide a temporary directory unique to the test invocation, created in the base temporary directory.
 
@@ -213,11 +289,10 @@ contents of [test_tmppath.py](test_tmppath.py)
 
 
 ```python
-# content of test_tmp_path.py
+# content of test_tmppath.py
 import os
 
 CONTENT = u"content"
-
 
 def test_create_file(tmp_path):
     d = tmp_path / "sub"
@@ -227,6 +302,23 @@ def test_create_file(tmp_path):
     assert p.read_text() == CONTENT
     assert len(list(tmp_path.iterdir())) == 1
 ```
+
+
+```python
+!pytest -s test_tmppath.py
+```
+
+    [1m============================= test session starts ==============================[0m
+    platform darwin -- Python 3.9.7, pytest-6.2.5, py-1.10.0, pluggy-1.0.0
+    rootdir: /Users/bk/Source/data-focused-python/lectures/Week 01 - Language basics, Generating Data, Storing Data
+    plugins: Faker-9.3.1, anyio-3.3.3
+    collected 1 item                                                               [0m
+    
+    test_tmppath.py /private/var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/pytest-of-bk/pytest-16/test_create_file0/sub
+    [32m.[0m
+    
+    [32m============================== [32m[1m1 passed[0m[32m in 0.03s[0m[32m ===============================[0m
+
 
 
 ```python

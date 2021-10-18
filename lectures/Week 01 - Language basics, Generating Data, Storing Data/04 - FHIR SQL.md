@@ -79,7 +79,7 @@ import sqlalchemy as db
 
 
 ```python
-engine = db.create_engine('sqlite:///fhir.sqlite')
+engine = db.create_engine('sqlite:///fhir.db')
 connection = engine.connect()
 metadata = db.MetaData()
 ```
@@ -463,8 +463,8 @@ df.head()
   <tbody>
     <tr>
       <th>0</th>
-      <td>1476254.5</td>
-      <td>3627.160934</td>
+      <td>1538768.09</td>
+      <td>3153.213299</td>
     </tr>
   </tbody>
 </table>

@@ -11,22 +11,27 @@ Welcome to Data Focused Python. In this guide we'll walk through all the steps y
 
 ## Requirements
 
-* Python 3.7
+* Python 3.9
 
-## Instructor Recommendations
+## Development Environment
 
-You can use any combination of technology that you're most familiar with, but here's a short list or recommended options.
+You can use any combination of technology that you're most familiar with. However, I do recommend one of two setups:
 
-* Python Distribution - [Anaconda Python](https://www.anaconda.com/distribution/)
-* Python IDE - [PyCharm](https://www.jetbrains.com/pycharm/)
+### Recommended Configuration
 
-## Setup
+* Python - [Anaconda Python](https://www.anaconda.com/distribution/)
+* IDE - [PyCharm](https://www.jetbrains.com/pycharm/)
 
-Depending on your configuration (Windows, MacOS, Linux, etc.) your setup will vary. There's no shortage of guides on the internet that you can follow. Here's [one](https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html) direct from Jetbrains the creators of PyCharm.
+[Creating Conda Virtual Environments in Pycharm](https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html)
+
+### My Configuration
+
+* Python - [pyenv](https://github.com/pyenv/pyenv) 
+* Visual Studio Code - [vscode](https://code.visualstudio.com)
 
 ## Your First Python Program
 
-Now that you have everything setup, you'll want to dive in and create your first program. Jetbrains has a great tutorial that describes how to [Create and Running Your First Python Project](https://www.jetbrains.com/help/pycharm/creating-and-running-your-first-python-project.html#Creating_and_Running_Your_First_language_Project.xml). Once you're comfortable creating programs you might want to learn how to [Debug Your First Python Application](https://www.jetbrains.com/help/pycharm/debugging-your-first-python-application.html#Debugging_Your_First_Python_Application.xml), [Test Your First Python Application](https://www.jetbrains.com/help/pycharm/testing-your-first-python-application.html#Testing_Your_First__language__Application.xml), or even [Creat and Running Your First Django Project](https://www.jetbrains.com/help/pycharm/creating-and-running-your-first-django-project.html).
+Now that you have everything setup, you'll want to dive in and create your first program. Jetbrains has a great tutorial that describes how to [Create and Running Your First Python Project](https://www.jetbrains.com/help/pycharm/creating-and-running-your-first-python-project.html#Creating_and_Running_Your_First_language_Project.xml). Once you're comfortable creating programs you might want to learn how to [Debug Your First Python Application](https://www.jetbrains.com/help/pycharm/debugging-your-first-python-application.html#Debugging_Your_First_Python_Application.xml), [Test Your First Python Application](https://www.jetbrains.com/help/pycharm/testing-your-first-python-application.html#Testing_Your_First__language__Application.xml), or even [Creating and Running Your First Django Project](https://www.jetbrains.com/help/pycharm/creating-and-running-your-first-django-project.html).
 
 [Django](https://www.djangoproject.com) is a great way to build web applications in python, but debugging, testing, and creating web applications are not required components of this course. However, these are useful skills to pick up as you become more familiar with building solutions in python.
 
@@ -63,17 +68,17 @@ First, change the directory to the data-focused-python directory of your clonned
 cd data-focused-python
 ```
 
-Then start Jupyter
+Then start Jupyter from your terminal
 
 ```bash
-jupyter notebook
+jupyter-lab
 ```
 
 The [Jupyter Notebook](https://jupyter.org/) is an open-source web application that allows you to create and share documents that contain live code, equations, visualizations and narrative text. If you've installed [Anaconda](https://www.anaconda.com/distribution/), [Jupyter](https://jupyter.org/index.html) is packaged as part of the distribution.
 
 ## Running the Python Interpreter
 
-Python itself is an [interpreted programming language](https://en.wikipedia.org/wiki/Interpreted_language) which means the source code you type gets executed by the interpreter at runtime. You can start the python interpreter from any command line by executing:
+Python itself is an [interpreted programming language](https://en.wikipedia.org/wiki/Interpreted_language) which means the source code you type gets executed by the interpreter at runtime. You can start the python interpreter from any command line by executing the following in your terminal:
 
 ```bash
 python
@@ -84,6 +89,12 @@ I encourage you to try it out. You can follow along the official python docs [he
 ## Running the IPython Interpreter
 
 [IPython](https://ipython.org/) builds on the Python interpreter adding advanced read-eval-print-loop (REPL) functionality [among other features](https://plot.ly/python/ipython-vs-python/#targetText=IPython%20is%20an%20interactive%20command%2Dline%20terminal%20for%20Python.&targetText=IPython%20offers%20an%20enhanced%20read,certainly%20not%20the%20only%20one).
+
+You can start the ipython interpreter by executing the following command in your terminal:
+
+```bash
+ipython
+```
 
 ## Executing Python Files
 

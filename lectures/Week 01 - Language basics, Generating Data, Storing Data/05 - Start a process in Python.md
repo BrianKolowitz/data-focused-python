@@ -22,9 +22,6 @@ stdout, stderr = process.communicate()
 print(stdout.decode('utf-8'))
 ```
 
-    date,home_team,home_score,away_team,away_score
-    2019-05-01,Pirates,0,Cubs,10
-    2019-05-15,Reds,7,Pirates,0
     
 
 
@@ -40,9 +37,6 @@ status = process.wait()
 print(stdout.decode('utf-8'))
 ```
 
-    date,home_team,home_score,away_team,away_score
-    2019-05-01,Pirates,0,Cubs,10
-    2019-05-15,Reds,7,Pirates,0
     
 
 
@@ -56,11 +50,61 @@ import subprocess
 subprocess.call(['ls','-l'])
 ```
 
+    total 5392
+    -rw-r--r--   1 bk  staff     7863 Oct 16 10:47 00 - Getting Started.ipynb
+    -rw-r--r--   1 bk  staff     6101 Oct 16 10:41 00 - Getting Started.md
+    -rw-r--r--   1 bk  staff     7400 Oct 16 10:48 01.a - Terminal Application.ipynb
+    -rw-r--r--   1 bk  staff     4798 Oct 16 10:41 01.a - Terminal Application.md
+    -rw-r--r--   1 bk  staff    10581 Oct 16 10:49 01.b - Argparse.ipynb
+    -rw-r--r--   1 bk  staff     5714 Oct 16 10:41 01.b - Argparse.md
+    -rw-r--r--   1 bk  staff    16013 Oct 17 11:10 02.a - Generating Synthetic Healthcare Data.ipynb
+    -rw-r--r--   1 bk  staff    13100 Oct 16 10:41 02.a - Generating Synthetic Healthcare Data.md
+    -rw-r--r--   1 bk  staff  1755081 Oct 17 11:51 02.b - Generating Other Synthetic Data.ipynb
+    -rw-r--r--   1 bk  staff    30228 Oct 16 10:41 02.b - Generating Other Synthetic Data.md
+    drwxr-xr-x  22 bk  staff      704 Aug 26 15:35 02.b - Generating Other Synthetic Data_files
+    -rw-r--r--   1 bk  staff     4197 Oct 17 11:53 02.c - Using Synthea.ipynb
+    -rw-r--r--  
+
 
 
 
     0
 
+
+
+     1 bk  staff     2640 Oct 16 10:41 02.c - Using Synthea.md
+    -rw-r--r--   1 bk  staff    59673 Oct 17 20:03 03 - Getting Data from a Database.ipynb
+    -rw-r--r--   1 bk  staff    12361 Oct 17 12:29 03 - Getting Data from a Database.md
+    -rw-r--r--   1 bk  staff    21541 Oct 17 20:04 04 - FHIR SQL.ipynb
+    -rw-r--r--   1 bk  staff    10939 Oct 17 12:29 04 - FHIR SQL.md
+    -rw-r--r--   1 bk  staff    21305 Oct 17 20:21 04 - Python Testing.ipynb
+    -rw-r--r--   1 bk  staff     9428 Oct 16 10:41 04 - Python Testing.md
+    -rw-r--r--   1 bk  staff    10016 Aug 26 15:35 05 - Start a process in Python.ipynb
+    -rw-r--r--   1 bk  staff     6217 Oct 16 10:41 05 - Start a process in Python.md
+    -rw-r--r--   1 bk  staff      139 Aug 26 15:35 Domains.txt
+    -rw-r--r--   1 bk  staff     6584 Aug 26 15:35 Symbolic_regression_classification_generator.py
+    -rw-r--r--   1 bk  staff   207041 Aug 26 15:35 US_Cities.txt
+    drwxr-xr-x   8 bk  staff      256 Oct 17 20:21 __pycache__
+    -rw-r--r--   1 bk  staff      149 Aug 26 15:35 argparse_1.py
+    -rw-r--r--   1 bk  staff      202 Aug 26 15:35 argparse_2.py
+    -rw-r--r--   1 bk  staff      299 Aug 26 15:35 argparse_3.py
+    -rw-r--r--   1 bk  staff      309 Aug 26 15:35 argparse_4.py
+    -rw-r--r--   1 bk  staff      219 Aug 26 15:35 argparse_5.py
+    -rw-r--r--   1 bk  staff      580 Aug 26 15:35 argparse_6.py
+    -rw-r--r--   1 bk  staff   253952 Oct 17 12:55 census.db
+    -rw-r--r--   1 bk  staff    12288 Oct 17 18:21 employees.db
+    -rw-r--r--   1 bk  staff    90112 Oct 17 20:03 fhir.db
+    drwxr-xr-x   7 bk  staff      224 Aug 26 15:35 images
+    -rw-r--r--   1 bk  staff      952 Aug 26 15:35 inclass-2019-05-23.py
+    -rw-r--r--   1 bk  staff      299 Aug 26 15:35 inclass-test.py
+    -rw-r--r--   1 bk  staff      372 Aug 26 15:35 terminal_1.py
+    -rw-r--r--   1 bk  staff      370 Aug 26 15:35 terminal_2.py
+    -rw-r--r--   1 bk  staff     8192 Oct 17 20:02 test.db
+    -rw-r--r--   1 bk  staff      198 Aug 26 15:35 test_class.py
+    -rw-r--r--   1 bk  staff      100 Aug 26 15:35 test_sample.py
+    -rw-r--r--   1 bk  staff      143 Aug 26 15:35 test_sysexit.py
+    -rw-r--r--   1 bk  staff       90 Oct 17 20:17 test_tmpdir.py
+    -rw-r--r--   1 bk  staff      294 Oct 17 20:21 test_tmppath.py
 
 
 ```bash
@@ -86,17 +130,17 @@ subprocess.check_call(['false'])
 
     CalledProcessError                        Traceback (most recent call last)
 
-    <ipython-input-5-436d6a2ac26e> in <module>()
+    /var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/ipykernel_38017/359612823.py in <module>
           1 import subprocess
     ----> 2 subprocess.check_call(['false'])
     
 
-    ~/anaconda/lib/python3.6/subprocess.py in check_call(*popenargs, **kwargs)
-        289         if cmd is None:
-        290             cmd = popenargs[0]
-    --> 291         raise CalledProcessError(retcode, cmd)
-        292     return 0
-        293 
+    ~/opt/miniconda3/envs/cmu39/lib/python3.9/subprocess.py in check_call(*popenargs, **kwargs)
+        371         if cmd is None:
+        372             cmd = popenargs[0]
+    --> 373         raise CalledProcessError(retcode, cmd)
+        374     return 0
+        375 
 
 
     CalledProcessError: Command '['false']' returned non-zero exit status 1.
@@ -113,42 +157,56 @@ output = subprocess.check_output(['ls','-l'])
 print(output.decode('utf-8'))
 ```
 
-    total 488
-    -rw-r--r--  1 kolobj  staff   2821 Mar 19 13:04 00 - Anaconda & PyCharm Setup.ipynb
-    -rw-r--r--  1 kolobj  staff   1724 Mar 23 09:17 00 - Anaconda & PyCharm Setup.md
-    -rw-r--r--  1 kolobj  staff   8084 Mar 20 19:08 01.a - Terminal Application.ipynb
-    -rw-r--r--  1 kolobj  staff   4651 Mar 23 09:17 01.a - Terminal Application.md
-    -rw-r--r--  1 kolobj  staff  10913 Mar 20 19:47 01.b - Argparse.ipynb
-    -rw-r--r--  1 kolobj  staff   5670 Mar 23 09:17 01.b - Argparse.md
-    -rw-r--r--  1 kolobj  staff  16220 Mar 20 20:04 02 - Generating Synthetic Data.ipynb
-    -rw-r--r--  1 kolobj  staff  12974 Mar 23 09:17 02 - Generating Synthetic Data.md
-    -rw-r--r--  1 kolobj  staff   5772 Mar 23 09:29 03 - Start a process in Python.ipynb
-    -rw-r--r--  1 kolobj  staff   3324 Mar 23 09:17 03 - Start a process in Python.md
-    -rw-r--r--  1 kolobj  staff  14276 Mar 21 09:27 04 - Python Testing.ipynb
-    -rw-r--r--  1 kolobj  staff   9337 Mar 23 09:17 04 - Python Testing.md
-    drwxr-xr-x  7 kolobj  staff    224 Mar 20 20:23 __pycache__
-    -rw-r--r--  1 kolobj  staff    149 Mar 19 13:04 argparse_1.py
-    -rw-r--r--  1 kolobj  staff    202 Mar 19 13:04 argparse_2.py
-    -rw-r--r--  1 kolobj  staff    299 Mar 19 13:04 argparse_3.py
-    -rw-r--r--  1 kolobj  staff    309 Mar 19 13:04 argparse_4.py
-    -rw-r--r--  1 kolobj  staff    219 Mar 19 13:04 argparse_5.py
-    -rw-r--r--  1 kolobj  staff    580 Mar 19 13:04 argparse_6.py
-    -rw-r--r--  1 kolobj  staff     45 Mar 19 13:04 file.txt
-    drwxr-xr-x  7 kolobj  staff    224 Mar 19 13:04 images
-    -rw-r--r--  1 kolobj  staff    644 Mar 19 13:04 mock.csv
-    -rw-r--r--  1 kolobj  staff  45673 Mar 19 13:04 python.png
-    -rw-r--r--  1 kolobj  staff    107 Mar 19 13:04 scores.csv
-    -rw-r--r--  1 kolobj  staff    219 Mar 19 13:04 scores.json
-    -rw-r--r--  1 kolobj  staff    547 Mar 19 13:04 scores.xml
-    -rw-r--r--  1 kolobj  staff    762 Mar 19 13:04 scores.xsd
-    -rw-r--r--  1 kolobj  staff    520 Mar 19 13:04 scores2.xml
-    -rw-r--r--  1 kolobj  staff    406 Mar 20 19:01 terminal_1.py
-    -rw-r--r--  1 kolobj  staff    404 Mar 19 13:04 terminal_2.py
-    -rw-r--r--  1 kolobj  staff      0 Mar 19 13:04 test.txt
-    -rw-r--r--  1 kolobj  staff    198 Mar 19 13:04 test_class.py
-    -rw-r--r--  1 kolobj  staff    100 Mar 20 20:22 test_sample.py
-    -rw-r--r--  1 kolobj  staff    143 Mar 19 13:04 test_sysexit.py
-    -rw-r--r--  1 kolobj  staff     87 Mar 19 13:04 test_tmpdir.py
-    -rw-r--r--  1 kolobj  staff    281 Mar 19 13:04 test_tmppath.py
+    total 5392
+    -rw-r--r--   1 bk  staff     7863 Oct 16 10:47 00 - Getting Started.ipynb
+    -rw-r--r--   1 bk  staff     6101 Oct 16 10:41 00 - Getting Started.md
+    -rw-r--r--   1 bk  staff     7400 Oct 16 10:48 01.a - Terminal Application.ipynb
+    -rw-r--r--   1 bk  staff     4798 Oct 16 10:41 01.a - Terminal Application.md
+    -rw-r--r--   1 bk  staff    10581 Oct 16 10:49 01.b - Argparse.ipynb
+    -rw-r--r--   1 bk  staff     5714 Oct 16 10:41 01.b - Argparse.md
+    -rw-r--r--   1 bk  staff    16013 Oct 17 11:10 02.a - Generating Synthetic Healthcare Data.ipynb
+    -rw-r--r--   1 bk  staff    13100 Oct 16 10:41 02.a - Generating Synthetic Healthcare Data.md
+    -rw-r--r--   1 bk  staff  1755081 Oct 17 11:51 02.b - Generating Other Synthetic Data.ipynb
+    -rw-r--r--   1 bk  staff    30228 Oct 16 10:41 02.b - Generating Other Synthetic Data.md
+    drwxr-xr-x  22 bk  staff      704 Aug 26 15:35 02.b - Generating Other Synthetic Data_files
+    -rw-r--r--   1 bk  staff     4197 Oct 17 11:53 02.c - Using Synthea.ipynb
+    -rw-r--r--   1 bk  staff     2640 Oct 16 10:41 02.c - Using Synthea.md
+    -rw-r--r--   1 bk  staff    59673 Oct 17 20:03 03 - Getting Data from a Database.ipynb
+    -rw-r--r--   1 bk  staff    12361 Oct 17 12:29 03 - Getting Data from a Database.md
+    -rw-r--r--   1 bk  staff    21541 Oct 17 20:04 04 - FHIR SQL.ipynb
+    -rw-r--r--   1 bk  staff    10939 Oct 17 12:29 04 - FHIR SQL.md
+    -rw-r--r--   1 bk  staff    21305 Oct 17 20:21 04 - Python Testing.ipynb
+    -rw-r--r--   1 bk  staff     9428 Oct 16 10:41 04 - Python Testing.md
+    -rw-r--r--   1 bk  staff    10016 Aug 26 15:35 05 - Start a process in Python.ipynb
+    -rw-r--r--   1 bk  staff     6217 Oct 16 10:41 05 - Start a process in Python.md
+    -rw-r--r--   1 bk  staff      139 Aug 26 15:35 Domains.txt
+    -rw-r--r--   1 bk  staff     6584 Aug 26 15:35 Symbolic_regression_classification_generator.py
+    -rw-r--r--   1 bk  staff   207041 Aug 26 15:35 US_Cities.txt
+    drwxr-xr-x   8 bk  staff      256 Oct 17 20:21 __pycache__
+    -rw-r--r--   1 bk  staff      149 Aug 26 15:35 argparse_1.py
+    -rw-r--r--   1 bk  staff      202 Aug 26 15:35 argparse_2.py
+    -rw-r--r--   1 bk  staff      299 Aug 26 15:35 argparse_3.py
+    -rw-r--r--   1 bk  staff      309 Aug 26 15:35 argparse_4.py
+    -rw-r--r--   1 bk  staff      219 Aug 26 15:35 argparse_5.py
+    -rw-r--r--   1 bk  staff      580 Aug 26 15:35 argparse_6.py
+    -rw-r--r--   1 bk  staff   253952 Oct 17 12:55 census.db
+    -rw-r--r--   1 bk  staff    12288 Oct 17 18:21 employees.db
+    -rw-r--r--   1 bk  staff    90112 Oct 17 20:03 fhir.db
+    drwxr-xr-x   7 bk  staff      224 Aug 26 15:35 images
+    -rw-r--r--   1 bk  staff      952 Aug 26 15:35 inclass-2019-05-23.py
+    -rw-r--r--   1 bk  staff      299 Aug 26 15:35 inclass-test.py
+    -rw-r--r--   1 bk  staff      372 Aug 26 15:35 terminal_1.py
+    -rw-r--r--   1 bk  staff      370 Aug 26 15:35 terminal_2.py
+    -rw-r--r--   1 bk  staff     8192 Oct 17 20:02 test.db
+    -rw-r--r--   1 bk  staff      198 Aug 26 15:35 test_class.py
+    -rw-r--r--   1 bk  staff      100 Aug 26 15:35 test_sample.py
+    -rw-r--r--   1 bk  staff      143 Aug 26 15:35 test_sysexit.py
+    -rw-r--r--   1 bk  staff       90 Oct 17 20:17 test_tmpdir.py
+    -rw-r--r--   1 bk  staff      294 Oct 17 20:21 test_tmppath.py
     
 
+
+
+```python
+
+```

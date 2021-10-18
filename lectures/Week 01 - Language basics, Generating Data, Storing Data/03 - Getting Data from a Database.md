@@ -110,7 +110,7 @@ import sqlalchemy as db
 
 
 ```python
-engine = db.create_engine('sqlite:///census.sqlite')
+engine = db.create_engine('sqlite:///census.db')
 connection = engine.connect()
 metadata = db.MetaData()
 census = db.Table('census', metadata, autoload=True, autoload_with=engine)
@@ -122,11 +122,17 @@ census = db.Table('census', metadata, autoload=True, autoload_with=engine)
 print(census.columns.keys())
 ```
 
+    ['state', 'sex', 'age', 'pop2000', 'pop2008']
+
+
 
 ```python
 # Print full table metadata
 print(repr(metadata.tables['census']))
 ```
+
+    Table('census', MetaData(), Column('state', VARCHAR(length=30), table=<census>), Column('sex', VARCHAR(length=1), table=<census>), Column('age', INTEGER(), table=<census>), Column('pop2000', INTEGER(), table=<census>), Column('pop2008', INTEGER(), table=<census>), schema=None)
+
 
 ## Querying
 
@@ -139,7 +145,7 @@ import sqlalchemy as db
 
 
 ```python
-engine = db.create_engine('sqlite:///census.sqlite')
+engine = db.create_engine('sqlite:///census.db')
 connection = engine.connect()
 metadata = db.MetaData()
 census = db.Table('census', metadata, autoload=True, autoload_with=engine)
@@ -170,6 +176,15 @@ ResultSet = ResultProxy.fetchall()
 ResultSet[:3]
 ```
 
+
+
+
+    [('Illinois', 'M', 0, 89600, 95012),
+     ('Illinois', 'M', 1, 88445, 91829),
+     ('Illinois', 'M', 2, 88729, 89547)]
+
+
+
 ### Dealing with Large ResultSet
 
 We use ```.fetchmany()``` to load optimal no of rows and overcome memory issues in case of large datasets.
@@ -178,22 +193,17 @@ We use ```.fetchmany()``` to load optimal no of rows and overcome memory issues 
 ```python
 ResultProxy = connection.execute(query)
 # ResultSet = ResultProxy.fetchall()
-```
-
-
-```python
-flag = True
-while flag:
-    print('*** new fetch')
-    partial_results = ResultProxy.fetchmany(5)
-    if(partial_results == []): 
-        flag = False
-    for result in partial_results:
-        print('\t', result)
-
-#     print(partial_results)
+num_to_fetch = 3
+partial_results = ResultProxy.fetchmany(num_to_fetch)
+for i in range(num_to_fetch):
+    print(partial_results[i])
 ResultProxy.close()
 ```
+
+    ('Illinois', 'M', 0, 89600, 95012)
+    ('Illinois', 'M', 1, 88445, 91829)
+    ('Illinois', 'M', 2, 88729, 89547)
+
 
 ### Convert to DataFrame
 
@@ -213,6 +223,81 @@ df.columns = ResultSet[0].keys()
 df.head()
 ```
 
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state</th>
+      <th>sex</th>
+      <th>age</th>
+      <th>pop2000</th>
+      <th>pop2008</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>0</td>
+      <td>89600</td>
+      <td>95012</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>1</td>
+      <td>88445</td>
+      <td>91829</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>2</td>
+      <td>88729</td>
+      <td>89547</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>3</td>
+      <td>88868</td>
+      <td>90037</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>4</td>
+      <td>91947</td>
+      <td>91111</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
 ## Filtering data
 
 Lets see some examples of raw SQLite Queries and queries using SQLAlchemy.
@@ -228,8 +313,14 @@ WHERE sex = F
 
 ```python
 # SQLAlchemy
-db.select([census]).where(census.columns.sex == 'F')
+sql = db.select([census]).where(census.columns.sex == 'F')
+print(sql)
 ```
+
+    SELECT census.state, census.sex, census.age, census.pop2000, census.pop2008 
+    FROM census 
+    WHERE census.sex = :sex_1
+
 
 ### in
 
@@ -243,9 +334,15 @@ WHERE state IN (Texas, New York)
 
 ```python
 # SQLAlchemy
-db.select([census.columns.state, census.columns.sex]) \
+sql = db.select([census.columns.state, census.columns.sex]) \
     .where(census.columns.state.in_(['Texas', 'New York']))
+print(sql)
 ```
+
+    SELECT census.state, census.sex 
+    FROM census 
+    WHERE census.state IN ([POSTCOMPILE_state_1])
+
 
 ### and, or, not
 
@@ -258,10 +355,16 @@ WHERE state = 'California' AND NOT sex = 'M'
 
 ```python
 # SQLAlchemy
-db.select([census]) \
+sql = db.select([census]) \
     .where(db.and_(census.columns.state == 'California', 
                    census.columns.sex != 'M'))
+print(sql)
 ```
+
+    SELECT census.state, census.sex, census.age, census.pop2000, census.pop2008 
+    FROM census 
+    WHERE census.state = :state_1 AND census.sex != :sex_1
+
 
 ### order by
 
@@ -274,10 +377,15 @@ ORDER BY State DESC, pop2000
 
 ```python
 # SQLAlchemy
-db.select([census]).order_by(
+sql = db.select([census]).order_by(
         db.desc(census.columns.state), 
         census.columns.pop2000)
+print(sql)
 ```
+
+    SELECT census.state, census.sex, census.age, census.pop2000, census.pop2008 
+    FROM census ORDER BY census.state DESC, census.pop2000
+
 
 ### functions
 
@@ -297,6 +405,41 @@ ResultSet = connection.execute(query).fetchall()
 pd.DataFrame(ResultSet)
 ```
 
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>302876613</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
 ### group by
 
 **SQL**
@@ -315,6 +458,48 @@ ResultSet = connection.execute(query).fetchall()
 pd.DataFrame(ResultSet)
 ```
 
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>153959198</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>148917415</td>
+      <td>M</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
 ### distinct
 
 **SQL**
@@ -331,6 +516,241 @@ ResultSet = connection.execute(query).fetchall()
 pd.DataFrame(ResultSet)
 ```
 
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Illinois</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>New Jersey</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>District of Columbia</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>North Dakota</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Florida</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Maryland</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Idaho</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Massachusetts</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Oregon</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Nevada</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Michigan</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Wisconsin</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Missouri</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Washington</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>North Carolina</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Arizona</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Arkansas</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Colorado</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Indiana</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Pennsylvania</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Hawaii</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Kansas</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Louisiana</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Alabama</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Minnesota</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>South Dakota</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>New York</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>California</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Connecticut</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>Ohio</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Rhode Island</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Georgia</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>South Carolina</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>Alaska</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>Delaware</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>Tennessee</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>Vermont</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>Montana</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>Kentucky</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>Utah</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>Nebraska</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>West Virginia</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>Iowa</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>Wyoming</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>Maine</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>New Hampshire</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>Mississippi</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>Oklahoma</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>New Mexico</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>Virginia</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>Texas</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
 ### case & cast
 
 The ```case()``` expression accepts a list of conditions to match and the column to return if the condition matches, followed by an ```else_``` if none of the conditions match.
@@ -339,7 +759,7 @@ The ```case()``` expression accepts a list of conditions to match and the column
 
 
 ```python
-engine = db.create_engine('sqlite:///census.sqlite')
+engine = db.create_engine('sqlite:///census.db')
 connection = engine.connect()
 metadata = db.MetaData()
 census = db.Table('census', metadata, autoload=True, autoload_with=engine)
@@ -355,6 +775,41 @@ pd.DataFrame(ResultSet)
 ```
 
 
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>143534804</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
 ```python
 total_pop = db.cast(db.func.sum(census.columns.pop2000), db.Float)
 ```
@@ -367,10 +822,48 @@ pd.DataFrame(ResultSet)
 ```
 
 
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>51.094674</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
 ```python
 result = connection.execute(query).scalar()
 print(result)
 ```
+
+    51.09467432293413
+
 
 We use ```.scalar``` to the result when the result contains only single value
 
@@ -384,7 +877,7 @@ select([census.columns.pop2008, state_fact.columns.abbreviation])
 
 
 ```python
-engine = db.create_engine('sqlite:///census.sqlite')
+engine = db.create_engine('sqlite:///census.db')
 connection = engine.connect()
 metadata = db.MetaData()
 
@@ -403,6 +896,135 @@ df.head(5)
 ```
 
 
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pop2008</th>
+      <th>abbreviation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>95012</td>
+      <td>IL</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>95012</td>
+      <td>NJ</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>95012</td>
+      <td>ND</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>95012</td>
+      <td>OR</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>95012</td>
+      <td>DC</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+# Manual Join
+query = db.select([census.columns.pop2008, state_fact.columns.abbreviation]).join(state_fact, census.columns.state == state_fact.columns.name)
+print(query)
+results = connection.execute(query).fetchall()
+df = pd.DataFrame(results)
+df.columns = results[0].keys()
+df.head(5)
+```
+
+    SELECT census.pop2008, state_fact.abbreviation 
+    FROM census JOIN state_fact ON census.state = state_fact.name
+
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pop2008</th>
+      <th>abbreviation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>95012</td>
+      <td>IL</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>91829</td>
+      <td>IL</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>89547</td>
+      <td>IL</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>90037</td>
+      <td>IL</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>91111</td>
+      <td>IL</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
 ```python
 # Manual Join
 query = db.select([census, state_fact])
@@ -412,6 +1034,178 @@ df = pd.DataFrame(results)
 df.columns = results[0].keys()
 df.head(5)
 ```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state</th>
+      <th>sex</th>
+      <th>age</th>
+      <th>pop2000</th>
+      <th>pop2008</th>
+      <th>id</th>
+      <th>name</th>
+      <th>abbreviation</th>
+      <th>country</th>
+      <th>type</th>
+      <th>...</th>
+      <th>occupied</th>
+      <th>notes</th>
+      <th>fips_state</th>
+      <th>assoc_press</th>
+      <th>standard_federal_region</th>
+      <th>census_region</th>
+      <th>census_region_name</th>
+      <th>census_division</th>
+      <th>census_division_name</th>
+      <th>circuit_court</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>0</td>
+      <td>89600</td>
+      <td>95012</td>
+      <td>13</td>
+      <td>Illinois</td>
+      <td>IL</td>
+      <td>USA</td>
+      <td>state</td>
+      <td>...</td>
+      <td>occupied</td>
+      <td></td>
+      <td>17</td>
+      <td>Ill.</td>
+      <td>V</td>
+      <td>2</td>
+      <td>Midwest</td>
+      <td>3</td>
+      <td>East North Central</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>1</td>
+      <td>88445</td>
+      <td>91829</td>
+      <td>13</td>
+      <td>Illinois</td>
+      <td>IL</td>
+      <td>USA</td>
+      <td>state</td>
+      <td>...</td>
+      <td>occupied</td>
+      <td></td>
+      <td>17</td>
+      <td>Ill.</td>
+      <td>V</td>
+      <td>2</td>
+      <td>Midwest</td>
+      <td>3</td>
+      <td>East North Central</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>2</td>
+      <td>88729</td>
+      <td>89547</td>
+      <td>13</td>
+      <td>Illinois</td>
+      <td>IL</td>
+      <td>USA</td>
+      <td>state</td>
+      <td>...</td>
+      <td>occupied</td>
+      <td></td>
+      <td>17</td>
+      <td>Ill.</td>
+      <td>V</td>
+      <td>2</td>
+      <td>Midwest</td>
+      <td>3</td>
+      <td>East North Central</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>3</td>
+      <td>88868</td>
+      <td>90037</td>
+      <td>13</td>
+      <td>Illinois</td>
+      <td>IL</td>
+      <td>USA</td>
+      <td>state</td>
+      <td>...</td>
+      <td>occupied</td>
+      <td></td>
+      <td>17</td>
+      <td>Ill.</td>
+      <td>V</td>
+      <td>2</td>
+      <td>Midwest</td>
+      <td>3</td>
+      <td>East North Central</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>4</td>
+      <td>91947</td>
+      <td>91111</td>
+      <td>13</td>
+      <td>Illinois</td>
+      <td>IL</td>
+      <td>USA</td>
+      <td>state</td>
+      <td>...</td>
+      <td>occupied</td>
+      <td></td>
+      <td>17</td>
+      <td>Ill.</td>
+      <td>V</td>
+      <td>2</td>
+      <td>Midwest</td>
+      <td>3</td>
+      <td>East North Central</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 22 columns</p>
+</div>
+
+
 
 ## Creating and Inserting Data into Tables
 
@@ -423,7 +1217,7 @@ By passing the database which is not present, to the engine then sqlalchemy auto
 ```python
 # delete the test database
 import os
-test_db_name = 'test.sqlite'
+test_db_name = 'test.db'
 
 if os.path.exists(test_db_name): 
     os.remove(test_db_name)
@@ -431,7 +1225,7 @@ if os.path.exists(test_db_name):
 
 
 ```python
-engine = db.create_engine(f'sqlite:///{test_db_name}') #Create test.sqlite automatically
+engine = db.create_engine(f'sqlite:///{test_db_name}') #Create test.db automatically
 connection = engine.connect()
 metadata = db.MetaData()
 
@@ -471,6 +1265,61 @@ df.columns = results[0].keys()
 df.head(4)
 ```
 
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Id</th>
+      <th>name</th>
+      <th>salary</th>
+      <th>active</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>naveen</td>
+      <td>60000.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>ram</td>
+      <td>80000.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>ramesh</td>
+      <td>70000.0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
 ### Updating data in Databases
 
 ```python
@@ -494,6 +1343,61 @@ df.head(4)
 ```
 
 
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Id</th>
+      <th>name</th>
+      <th>salary</th>
+      <th>active</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>naveen</td>
+      <td>60000.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>ram</td>
+      <td>80000.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>ramesh</td>
+      <td>70000.0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
 ```python
 # Build a statement to update the salary to 100000
 query = db.update(emp).values(salary = 100000)
@@ -508,6 +1412,61 @@ df = pd.DataFrame(results)
 df.columns = results[0].keys()
 df.head(4)
 ```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Id</th>
+      <th>name</th>
+      <th>salary</th>
+      <th>active</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>naveen</td>
+      <td>100000.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>ram</td>
+      <td>80000.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>ramesh</td>
+      <td>70000.0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 
 ### Delete Table
 
@@ -532,6 +1491,61 @@ df.head(4)
 ```
 
 
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Id</th>
+      <th>name</th>
+      <th>salary</th>
+      <th>active</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>naveen</td>
+      <td>100000.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>ram</td>
+      <td>80000.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>ramesh</td>
+      <td>70000.0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
 ```python
 # Build a statement to delete where salary < 100000
 query = db.delete(emp)
@@ -546,6 +1560,47 @@ df = pd.DataFrame(results)
 df.columns = results[0].keys()
 df.head(4)
 ```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Id</th>
+      <th>name</th>
+      <th>salary</th>
+      <th>active</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>naveen</td>
+      <td>100000.0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 
 ### Dropping a Table
 

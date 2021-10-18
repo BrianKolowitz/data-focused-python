@@ -1,0 +1,1444 @@
+<h1 id="sqlalchemypython-tutorial">SQLAlchemy — Python Tutorial</h1>
+<p><a href="https://towardsdatascience.com/sqlalchemy-python-tutorial-79a577141a91">Source</a></p>
+
+<p>Other References</p>
+<ul>
+  <li><a href="https://www.fullstackpython.com/object-relational-mappers-orms.html">What are Object Relational Mappers (ORMs)</a></li>
+  <li><a href="https://leportella.com/english/2019/01/10/sqlalchemy-basics-tutorial.html">SQLAlchemy Basics</a></li>
+</ul>
+
+<p>We often encounter data as Relational Databases. To work with them we generally would need to write raw SQL queries, pass them to the database engine and parse the returned results as a normal array of records.</p>
+
+<p>SQLAlchemy provides a nice “Pythonic” way of interacting with databases. So rather than dealing with the differences between specific dialects of traditional SQL such as MySQL or PostgreSQL or Oracle, you can leverage the Pythonic framework of SQLAlchemy to streamline your workflow and more efficiently query your data.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Installing The Package
+</span><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">sqlalchemy</span>
+</code></pre></div></div>
+
+<h2 id="connecting-to-a-database">Connecting to a database</h2>
+
+<p>To start interacting with the database we first we need to establish a connection.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="n">db</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s">'dialect+driver://user:pass@host:port/db'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="database-connection-examples">Database connection examples</h3>
+
+<p><a href="https://docs.sqlalchemy.org/en/13/core/engines.html#postgresql">Source</a></p>
+
+<h4 id="postgresql">PostgreSQL</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># default
+</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'postgresql://scott:tiger@localhost/mydatabase'</span><span class="p">)</span>
+
+<span class="c1"># psycopg2
+</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'postgresql+psycopg2://scott:tiger@localhost/mydatabase'</span><span class="p">)</span>
+
+<span class="c1"># pg8000
+</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'postgresql+pg8000://scott:tiger@localhost/mydatabase'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="mysql">MySQL</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># default
+</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'mysql://scott:tiger@localhost/foo'</span><span class="p">)</span>
+
+<span class="c1"># mysqlclient (a maintained fork of MySQL-Python)
+</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'mysql+mysqldb://scott:tiger@localhost/foo'</span><span class="p">)</span>
+
+<span class="c1"># PyMySQL
+</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'mysql+pymysql://scott:tiger@localhost/foo'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="oracle">Oracle</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'oracle://scott:tiger@127.0.0.1:1521/sidname'</span><span class="p">)</span>
+
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'oracle+cx_oracle://scott:tiger@tnsname'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="microsoft-sql-server">Microsoft SQL Server</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># pyodbc
+</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'mssql+pyodbc://scott:tiger@mydsn'</span><span class="p">)</span>
+
+<span class="c1"># pymssql
+</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'mssql+pymssql://scott:tiger@hostname:port/dbname'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="sqlite">SQLite</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># sqlite://&lt;nohostname&gt;/&lt;path&gt;
+# where &lt;path&gt; is relative:
+</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'sqlite:///foo.db'</span><span class="p">)</span>
+
+<span class="c1"># Unix/Mac - 4 initial slashes in total
+</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'sqlite:////absolute/path/to/foo.db'</span><span class="p">)</span>
+
+<span class="c1"># Windows
+</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'sqlite:///C:</span><span class="se">\\</span><span class="s">path</span><span class="se">\\</span><span class="s">to</span><span class="se">\\</span><span class="s">foo.db'</span><span class="p">)</span>
+
+<span class="c1"># Windows alternative using raw string
+</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="sa">r</span><span class="s">'sqlite:///C:\path\to\foo.db'</span><span class="p">)</span>
+
+<span class="c1"># To use a SQLite :memory: database, specify an empty URL:
+</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'sqlite://'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="viewing-table-details">Viewing Table Details</h2>
+
+<p>SQLAlchemy can be used to automatically load tables from a database using something called reflection. Reflection is the process of reading the database and building the metadata based on that information.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="n">db</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">engine</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s">'sqlite:///census.db'</span><span class="p">)</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">MetaData</span><span class="p">()</span>
+<span class="n">census</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Table</span><span class="p">(</span><span class="s">'census'</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">autoload_with</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Print the column names
+</span><span class="k">print</span><span class="p">(</span><span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">keys</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['state', 'sex', 'age', 'pop2000', 'pop2008']
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Print full table metadata
+</span><span class="k">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">metadata</span><span class="p">.</span><span class="n">tables</span><span class="p">[</span><span class="s">'census'</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Table('census', MetaData(), Column('state', VARCHAR(length=30), table=&lt;census&gt;), Column('sex', VARCHAR(length=1), table=&lt;census&gt;), Column('age', INTEGER(), table=&lt;census&gt;), Column('pop2000', INTEGER(), table=&lt;census&gt;), Column('pop2008', INTEGER(), table=&lt;census&gt;), schema=None)
+</code></pre></div></div>
+
+<h2 id="querying">Querying</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Table</code> and <code class="language-plaintext highlighter-rouge">MetaData</code> have already been imported. The metadata is available as <code class="language-plaintext highlighter-rouge">metadata</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="n">db</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">engine</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s">'sqlite:///census.db'</span><span class="p">)</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">MetaData</span><span class="p">()</span>
+<span class="n">census</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Table</span><span class="p">(</span><span class="s">'census'</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">autoload_with</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Equivalent to 'SELECT * FROM census'
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">select</span><span class="p">([</span><span class="n">census</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p><strong>ResultProxy</strong>: The object returned by the <code class="language-plaintext highlighter-rouge">.execute()</code> method. It can be used in a variety of ways to get the data returned by the query.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ResultProxy</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>ResultSet</strong>: The actual data asked for in the query when using a fetch method such as <code class="language-plaintext highlighter-rouge">.fetchall()</code> on a ResultProxy.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ResultSet</span> <span class="o">=</span> <span class="n">ResultProxy</span><span class="p">.</span><span class="n">fetchall</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ResultSet</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[('Illinois', 'M', 0, 89600, 95012),
+ ('Illinois', 'M', 1, 88445, 91829),
+ ('Illinois', 'M', 2, 88729, 89547)]
+</code></pre></div></div>
+
+<h3 id="dealing-with-large-resultset">Dealing with Large ResultSet</h3>
+
+<p>We use <code class="language-plaintext highlighter-rouge">.fetchmany()</code> to load optimal no of rows and overcome memory issues in case of large datasets.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ResultProxy</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="c1"># ResultSet = ResultProxy.fetchall()
+</span><span class="n">num_to_fetch</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">partial_results</span> <span class="o">=</span> <span class="n">ResultProxy</span><span class="p">.</span><span class="n">fetchmany</span><span class="p">(</span><span class="n">num_to_fetch</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_to_fetch</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">partial_results</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="n">ResultProxy</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('Illinois', 'M', 0, 89600, 95012)
+('Illinois', 'M', 1, 88445, 91829)
+('Illinois', 'M', 2, 88729, 89547)
+</code></pre></div></div>
+
+<h3 id="convert-to-dataframe">Convert to DataFrame</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ResultSet</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">ResultSet</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">keys</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state</th>
+      <th>sex</th>
+      <th>age</th>
+      <th>pop2000</th>
+      <th>pop2008</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>0</td>
+      <td>89600</td>
+      <td>95012</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>1</td>
+      <td>88445</td>
+      <td>91829</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>2</td>
+      <td>88729</td>
+      <td>89547</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>3</td>
+      <td>88868</td>
+      <td>90037</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>4</td>
+      <td>91947</td>
+      <td>91111</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="filtering-data">Filtering data</h2>
+
+<p>Lets see some examples of raw SQLite Queries and queries using SQLAlchemy.</p>
+
+<h3 id="where">where</h3>
+
+<p><strong>SQL</strong></p>
+<pre><code class="language-SQL">SELECT * FROM census 
+WHERE sex = F
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># SQLAlchemy
+</span><span class="n">sql</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">select</span><span class="p">([</span><span class="n">census</span><span class="p">]).</span><span class="n">where</span><span class="p">(</span><span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">sex</span> <span class="o">==</span> <span class="s">'F'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT census.state, census.sex, census.age, census.pop2000, census.pop2008 
+FROM census 
+WHERE census.sex = :sex_1
+</code></pre></div></div>
+
+<h3 id="in">in</h3>
+
+<p><strong>SQL</strong></p>
+<pre><code class="language-SQL">SELECT state, sex
+FROM census
+WHERE state IN (Texas, New York)
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># SQLAlchemy
+</span><span class="n">sql</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">select</span><span class="p">([</span><span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">state</span><span class="p">,</span> <span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">sex</span><span class="p">])</span> \
+    <span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">state</span><span class="p">.</span><span class="n">in_</span><span class="p">([</span><span class="s">'Texas'</span><span class="p">,</span> <span class="s">'New York'</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT census.state, census.sex 
+FROM census 
+WHERE census.state IN ([POSTCOMPILE_state_1])
+</code></pre></div></div>
+
+<h3 id="and-or-not">and, or, not</h3>
+
+<p><strong>SQL</strong></p>
+<pre><code class="language-SQL">SELECT * FROM census
+WHERE state = 'California' AND NOT sex = 'M'
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># SQLAlchemy
+</span><span class="n">sql</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">select</span><span class="p">([</span><span class="n">census</span><span class="p">])</span> \
+    <span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">and_</span><span class="p">(</span><span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">state</span> <span class="o">==</span> <span class="s">'California'</span><span class="p">,</span> 
+                   <span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">sex</span> <span class="o">!=</span> <span class="s">'M'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT census.state, census.sex, census.age, census.pop2000, census.pop2008 
+FROM census 
+WHERE census.state = :state_1 AND census.sex != :sex_1
+</code></pre></div></div>
+
+<h3 id="order-by">order by</h3>
+
+<p><strong>SQL</strong></p>
+<pre><code class="language-SQL">SELECT * FROM census
+ORDER BY State DESC, pop2000
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># SQLAlchemy
+</span><span class="n">sql</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">select</span><span class="p">([</span><span class="n">census</span><span class="p">]).</span><span class="n">order_by</span><span class="p">(</span>
+        <span class="n">db</span><span class="p">.</span><span class="n">desc</span><span class="p">(</span><span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">state</span><span class="p">),</span> 
+        <span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">pop2000</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT census.state, census.sex, census.age, census.pop2000, census.pop2008 
+FROM census ORDER BY census.state DESC, census.pop2000
+</code></pre></div></div>
+
+<h3 id="functions">functions</h3>
+
+<p>other functions include <code class="language-plaintext highlighter-rouge">avg</code>, <code class="language-plaintext highlighter-rouge">count</code>, <code class="language-plaintext highlighter-rouge">min</code>, <code class="language-plaintext highlighter-rouge">max</code></p>
+
+<p><strong>SQL</strong></p>
+<pre><code class="language-SQL">SELECT SUM(pop2008)
+FROM census
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># SQLAlchemy
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">select</span><span class="p">([</span><span class="n">db</span><span class="p">.</span><span class="n">func</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">pop2008</span><span class="p">)])</span>
+<span class="n">ResultSet</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">).</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ResultSet</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>302876613</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="group-by">group by</h3>
+
+<p><strong>SQL</strong></p>
+<pre><code class="language-SQL">SELECT SUM(pop2008) as pop2008, sex
+FROM census
+GROUP BY sex
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># SQLAlchemy
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">select</span><span class="p">([</span><span class="n">db</span><span class="p">.</span><span class="n">func</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">pop2008</span><span class="p">).</span><span class="n">label</span><span class="p">(</span><span class="s">'pop2008'</span><span class="p">),</span> 
+           <span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">sex</span><span class="p">]).</span><span class="n">group_by</span><span class="p">(</span><span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">sex</span><span class="p">)</span>
+<span class="n">ResultSet</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">).</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ResultSet</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>153959198</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>148917415</td>
+      <td>M</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="distinct">distinct</h3>
+
+<p><strong>SQL</strong></p>
+<pre><code class="language-SQL">SELECT DISTINCT state
+FROM census
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># SQLAlchemy
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">select</span><span class="p">([</span><span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">state</span><span class="p">.</span><span class="n">distinct</span><span class="p">()])</span>
+<span class="n">ResultSet</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">).</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ResultSet</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Illinois</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>New Jersey</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>District of Columbia</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>North Dakota</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Florida</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Maryland</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Idaho</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Massachusetts</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Oregon</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Nevada</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Michigan</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Wisconsin</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Missouri</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Washington</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>North Carolina</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Arizona</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Arkansas</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Colorado</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Indiana</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Pennsylvania</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Hawaii</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Kansas</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Louisiana</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Alabama</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Minnesota</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>South Dakota</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>New York</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>California</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Connecticut</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>Ohio</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Rhode Island</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Georgia</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>South Carolina</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>Alaska</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>Delaware</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>Tennessee</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>Vermont</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>Montana</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>Kentucky</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>Utah</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>Nebraska</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>West Virginia</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>Iowa</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>Wyoming</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>Maine</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>New Hampshire</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>Mississippi</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>Oklahoma</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>New Mexico</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>Virginia</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>Texas</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="case--cast">case &amp; cast</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">case()</code> expression accepts a list of conditions to match and the column to return if the condition matches, followed by an <code class="language-plaintext highlighter-rouge">else_</code> if none of the conditions match.</p>
+
+<p><code class="language-plaintext highlighter-rouge">cast()</code> function to convert an expression to a particular type</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">engine</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s">'sqlite:///census.db'</span><span class="p">)</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">MetaData</span><span class="p">()</span>
+<span class="n">census</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Table</span><span class="p">(</span><span class="s">'census'</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">autoload_with</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">female_pop</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">func</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span>
+    <span class="n">db</span><span class="p">.</span><span class="n">case</span><span class="p">([(</span><span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">sex</span> <span class="o">==</span> <span class="s">'F'</span><span class="p">,</span> <span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">pop2000</span><span class="p">)],</span>
+            <span class="n">else_</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">ResultSet</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">female_pop</span><span class="p">).</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ResultSet</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>143534804</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">total_pop</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">cast</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">func</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">pop2000</span><span class="p">),</span> <span class="n">db</span><span class="p">.</span><span class="n">Float</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">select</span><span class="p">([</span><span class="n">female_pop</span><span class="o">/</span><span class="n">total_pop</span> <span class="o">*</span> <span class="mi">100</span><span class="p">])</span>
+<span class="n">ResultSet</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">).</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ResultSet</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>51.094674</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">).</span><span class="n">scalar</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>51.09467432293413
+</code></pre></div></div>
+
+<p>We use <code class="language-plaintext highlighter-rouge">.scalar</code> to the result when the result contains only single value</p>
+
+<h3 id="joins">joins</h3>
+
+<p>If you have two tables that already have an established relationship, you can automatically use that relationship by just adding the columns we want from each table to the select statement.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">select</span><span class="p">([</span><span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">pop2008</span><span class="p">,</span> <span class="n">state_fact</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">abbreviation</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">engine</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s">'sqlite:///census.db'</span><span class="p">)</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">MetaData</span><span class="p">()</span>
+
+<span class="n">census</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Table</span><span class="p">(</span><span class="s">'census'</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">autoload_with</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+<span class="n">state_fact</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Table</span><span class="p">(</span><span class="s">'state_fact'</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">autoload_with</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Automatic Join
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">select</span><span class="p">([</span><span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">pop2008</span><span class="p">,</span> <span class="n">state_fact</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">abbreviation</span><span class="p">])</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">).</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pop2008</th>
+      <th>abbreviation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>95012</td>
+      <td>IL</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>95012</td>
+      <td>NJ</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>95012</td>
+      <td>ND</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>95012</td>
+      <td>OR</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>95012</td>
+      <td>DC</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Manual Join
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">select</span><span class="p">([</span><span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">pop2008</span><span class="p">,</span> <span class="n">state_fact</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">abbreviation</span><span class="p">]).</span><span class="n">join</span><span class="p">(</span><span class="n">state_fact</span><span class="p">,</span> <span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">state_fact</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">).</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT census.pop2008, state_fact.abbreviation 
+FROM census JOIN state_fact ON census.state = state_fact.name
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pop2008</th>
+      <th>abbreviation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>95012</td>
+      <td>IL</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>91829</td>
+      <td>IL</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>89547</td>
+      <td>IL</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>90037</td>
+      <td>IL</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>91111</td>
+      <td>IL</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Manual Join
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">select</span><span class="p">([</span><span class="n">census</span><span class="p">,</span> <span class="n">state_fact</span><span class="p">])</span>
+<span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="p">.</span><span class="n">select_from</span><span class="p">(</span><span class="n">census</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">state_fact</span><span class="p">,</span> <span class="n">census</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">state_fact</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">name</span><span class="p">))</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">).</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state</th>
+      <th>sex</th>
+      <th>age</th>
+      <th>pop2000</th>
+      <th>pop2008</th>
+      <th>id</th>
+      <th>name</th>
+      <th>abbreviation</th>
+      <th>country</th>
+      <th>type</th>
+      <th>...</th>
+      <th>occupied</th>
+      <th>notes</th>
+      <th>fips_state</th>
+      <th>assoc_press</th>
+      <th>standard_federal_region</th>
+      <th>census_region</th>
+      <th>census_region_name</th>
+      <th>census_division</th>
+      <th>census_division_name</th>
+      <th>circuit_court</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>0</td>
+      <td>89600</td>
+      <td>95012</td>
+      <td>13</td>
+      <td>Illinois</td>
+      <td>IL</td>
+      <td>USA</td>
+      <td>state</td>
+      <td>...</td>
+      <td>occupied</td>
+      <td></td>
+      <td>17</td>
+      <td>Ill.</td>
+      <td>V</td>
+      <td>2</td>
+      <td>Midwest</td>
+      <td>3</td>
+      <td>East North Central</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>1</td>
+      <td>88445</td>
+      <td>91829</td>
+      <td>13</td>
+      <td>Illinois</td>
+      <td>IL</td>
+      <td>USA</td>
+      <td>state</td>
+      <td>...</td>
+      <td>occupied</td>
+      <td></td>
+      <td>17</td>
+      <td>Ill.</td>
+      <td>V</td>
+      <td>2</td>
+      <td>Midwest</td>
+      <td>3</td>
+      <td>East North Central</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>2</td>
+      <td>88729</td>
+      <td>89547</td>
+      <td>13</td>
+      <td>Illinois</td>
+      <td>IL</td>
+      <td>USA</td>
+      <td>state</td>
+      <td>...</td>
+      <td>occupied</td>
+      <td></td>
+      <td>17</td>
+      <td>Ill.</td>
+      <td>V</td>
+      <td>2</td>
+      <td>Midwest</td>
+      <td>3</td>
+      <td>East North Central</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>3</td>
+      <td>88868</td>
+      <td>90037</td>
+      <td>13</td>
+      <td>Illinois</td>
+      <td>IL</td>
+      <td>USA</td>
+      <td>state</td>
+      <td>...</td>
+      <td>occupied</td>
+      <td></td>
+      <td>17</td>
+      <td>Ill.</td>
+      <td>V</td>
+      <td>2</td>
+      <td>Midwest</td>
+      <td>3</td>
+      <td>East North Central</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Illinois</td>
+      <td>M</td>
+      <td>4</td>
+      <td>91947</td>
+      <td>91111</td>
+      <td>13</td>
+      <td>Illinois</td>
+      <td>IL</td>
+      <td>USA</td>
+      <td>state</td>
+      <td>...</td>
+      <td>occupied</td>
+      <td></td>
+      <td>17</td>
+      <td>Ill.</td>
+      <td>V</td>
+      <td>2</td>
+      <td>Midwest</td>
+      <td>3</td>
+      <td>East North Central</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 22 columns</p>
+</div>
+
+<h2 id="creating-and-inserting-data-into-tables">Creating and Inserting Data into Tables</h2>
+
+<p>By passing the database which is not present, to the engine then sqlalchemy automatically creates a new database.</p>
+
+<h3 id="creating-database-and-table">Creating Database and Table</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># delete the test database
+</span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">test_db_name</span> <span class="o">=</span> <span class="s">'test.db'</span>
+
+<span class="k">if</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">exists</span><span class="p">(</span><span class="n">test_db_name</span><span class="p">):</span> 
+    <span class="n">os</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">test_db_name</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">engine</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">create_engine</span><span class="p">(</span><span class="sa">f</span><span class="s">'sqlite:///</span><span class="si">{</span><span class="n">test_db_name</span><span class="si">}</span><span class="s">'</span><span class="p">)</span> <span class="c1">#Create test.db automatically
+</span><span class="n">connection</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">MetaData</span><span class="p">()</span>
+
+<span class="n">emp</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Table</span><span class="p">(</span><span class="s">'emp'</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span>
+              <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="s">'Id'</span><span class="p">,</span> <span class="n">db</span><span class="p">.</span><span class="n">Integer</span><span class="p">()),</span>
+              <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="s">'name'</span><span class="p">,</span> <span class="n">db</span><span class="p">.</span><span class="n">String</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="bp">False</span><span class="p">),</span>
+              <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="s">'salary'</span><span class="p">,</span> <span class="n">db</span><span class="p">.</span><span class="n">Float</span><span class="p">(),</span> <span class="n">default</span><span class="o">=</span><span class="mf">100.0</span><span class="p">),</span>
+              <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="s">'active'</span><span class="p">,</span> <span class="n">db</span><span class="p">.</span><span class="n">Boolean</span><span class="p">(),</span> <span class="n">default</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+              <span class="p">)</span>
+
+<span class="n">metadata</span><span class="p">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span> <span class="c1">#Creates the table
+</span></code></pre></div></div>
+
+<h3 id="inserting-data">Inserting Data</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Inserting record one by one
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">emp</span><span class="p">).</span><span class="n">values</span><span class="p">(</span><span class="n">Id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'naveen'</span><span class="p">,</span> <span class="n">salary</span><span class="o">=</span><span class="mf">60000.00</span><span class="p">,</span> <span class="n">active</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> 
+<span class="n">ResultProxy</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Inserting many records at ones
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">emp</span><span class="p">)</span> 
+<span class="n">values_list</span> <span class="o">=</span> <span class="p">[{</span><span class="s">'Id'</span><span class="p">:</span><span class="s">'2'</span><span class="p">,</span> <span class="s">'name'</span><span class="p">:</span><span class="s">'ram'</span><span class="p">,</span> <span class="s">'salary'</span><span class="p">:</span><span class="mi">80000</span><span class="p">,</span> <span class="s">'active'</span><span class="p">:</span><span class="bp">False</span><span class="p">},</span>
+               <span class="p">{</span><span class="s">'Id'</span><span class="p">:</span><span class="s">'3'</span><span class="p">,</span> <span class="s">'name'</span><span class="p">:</span><span class="s">'ramesh'</span><span class="p">,</span> <span class="s">'salary'</span><span class="p">:</span><span class="mi">70000</span><span class="p">,</span> <span class="s">'active'</span><span class="p">:</span><span class="bp">True</span><span class="p">}]</span>
+<span class="n">ResultProxy</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">values_list</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">results</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">select</span><span class="p">([</span><span class="n">emp</span><span class="p">])).</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Id</th>
+      <th>name</th>
+      <th>salary</th>
+      <th>active</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>naveen</td>
+      <td>60000.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>ram</td>
+      <td>80000.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>ramesh</td>
+      <td>70000.0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="updating-data-in-databases">Updating data in Databases</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">db</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">table_name</span><span class="p">).</span><span class="n">values</span><span class="p">(</span><span class="n">attribute</span> <span class="o">=</span> <span class="n">new_value</span><span class="p">).</span><span class="n">where</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">engine</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">create_engine</span><span class="p">(</span><span class="sa">f</span><span class="s">'sqlite:///</span><span class="si">{</span><span class="n">test_db_name</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">MetaData</span><span class="p">()</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">emp</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Table</span><span class="p">(</span><span class="s">'emp'</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">autoload_with</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">results</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">select</span><span class="p">([</span><span class="n">emp</span><span class="p">])).</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Id</th>
+      <th>name</th>
+      <th>salary</th>
+      <th>active</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>naveen</td>
+      <td>60000.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>ram</td>
+      <td>80000.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>ramesh</td>
+      <td>70000.0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Build a statement to update the salary to 100000
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">emp</span><span class="p">).</span><span class="n">values</span><span class="p">(</span><span class="n">salary</span> <span class="o">=</span> <span class="mi">100000</span><span class="p">)</span>
+<span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">emp</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">Id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">results</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">select</span><span class="p">([</span><span class="n">emp</span><span class="p">])).</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Id</th>
+      <th>name</th>
+      <th>salary</th>
+      <th>active</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>naveen</td>
+      <td>100000.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>ram</td>
+      <td>80000.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>ramesh</td>
+      <td>70000.0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="delete-table">Delete Table</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">db</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="n">table_name</span><span class="p">).</span><span class="n">where</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">engine</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">create_engine</span><span class="p">(</span><span class="sa">f</span><span class="s">'sqlite:///</span><span class="si">{</span><span class="n">test_db_name</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">MetaData</span><span class="p">()</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">emp</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Table</span><span class="p">(</span><span class="s">'emp'</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">autoload_with</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">results</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">select</span><span class="p">([</span><span class="n">emp</span><span class="p">])).</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Id</th>
+      <th>name</th>
+      <th>salary</th>
+      <th>active</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>naveen</td>
+      <td>100000.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>ram</td>
+      <td>80000.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>ramesh</td>
+      <td>70000.0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Build a statement to delete where salary &lt; 100000
+</span><span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="n">emp</span><span class="p">)</span>
+<span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">emp</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">salary</span> <span class="o">&lt;</span> <span class="mi">100000</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">results</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">select</span><span class="p">([</span><span class="n">emp</span><span class="p">])).</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Id</th>
+      <th>name</th>
+      <th>salary</th>
+      <th>active</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>naveen</td>
+      <td>100000.0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="dropping-a-table">Dropping a Table</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">table_name</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span> <span class="c1">#drops a single table
+</span>
+<span class="n">metadata</span><span class="p">.</span><span class="n">drop_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span> <span class="c1">#drops all the tables in the database
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">engine</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">create_engine</span><span class="p">(</span><span class="sa">f</span><span class="s">'sqlite:///</span><span class="si">{</span><span class="n">test_db_name</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">MetaData</span><span class="p">()</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">connect</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># drop a table
+</span><span class="n">emp</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Table</span><span class="p">(</span><span class="s">'emp'</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">autoload_with</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+<span class="n">emp</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># drop all tables
+</span><span class="n">metadata</span><span class="p">.</span><span class="n">drop_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
