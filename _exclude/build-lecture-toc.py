@@ -8,8 +8,8 @@ if __name__ == "__main__":
 
     lecture_toc_md = []
     lecture_root = "../lectures"
-    weeks = [week for week in os.listdir(lecture_root) if week.lower().startswith('week') and not week.lower().endswith('.md')]
-    weeks.sort()
+    topics = [topic for topic in os.listdir(lecture_root) if topic.lower().startswith('topic') and not topic.lower().endswith('.md')]
+    topics.sort()
     lecture_toc_title = "Lectures"
     lecture_toc_md.append("---")
     lecture_toc_md.append("layout: default")
@@ -21,40 +21,40 @@ if __name__ == "__main__":
     lecture_toc_md.append("---")
     # lecture_toc_md.append("")
     
-    week_nav_order = 1
+    topic_nav_order = 1
     # todo : delete all md files
-    for week_title in weeks:
-        week_path = os.path.join(lecture_root, week_title)
+    for topic_title in topics:
+        topic_path = os.path.join(lecture_root, topic_title)
         lecture_toc_md.append("")
-        lecture_toc_md.append(f"## {week_title}")
+        lecture_toc_md.append(f"## {topic_title}")
         lecture_toc_md.append("")
-        with open(week_path + '.md', 'w') as week_file:
-            week_md = [
+        with open(topic_path + '.md', 'w') as topic_file:
+            topic_md = [
                 f"---",
                 f"layout: default",
-                f"title: {week_title}",
+                f"title: {topic_title}",
                 f"parent: {lecture_toc_title}",
                 f"has_children: true",
-                f"nav_order: {week_nav_order}",
+                f"nav_order: {topic_nav_order}",
                 f"---",
                 f"",
             ]
-            week_file.write('\n'.join(week_md))
-            week_nav_order += 1
+            topic_file.write('\n'.join(topic_md))
+            topic_nav_order += 1
         
-        files = os.listdir(week_path)
+        files = os.listdir(topic_path)
         files = [file for file in files if file.endswith('.md')]
         files.sort()
         file_nav_order = 1
         for file in files:
-            lecture_md_path = os.path.join(week_title, file)
+            lecture_md_path = os.path.join(topic_title, file)
             
             # todo : figure out why this broke
             ipynb_root = "https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures"
-            ipynb_route = os.path.join(week_title, file[:-3] + ".ipynb")
+            ipynb_route = os.path.join(topic_title, file[:-3] + ".ipynb")
             ipynb_route = urllib.parse.quote(ipynb_route)
             lecture_ipynb_path = os.path.join(ipynb_root, ipynb_route)
-            # lecture_ipynb_path = os.path.join(week_path, file[:-3] + ".ipynb")
+            # lecture_ipynb_path = os.path.join(topic_path, file[:-3] + ".ipynb")
             # lecture_md_path = urllib.parse.quote(md_path)
             # lecture_ipynb_path = urllib.parse.quote(lecture_ipynb_path)
             lecture_toc_md.append(f"* [{Path(file).resolve().stem.title()}]({lecture_md_path}) \([ipynb]({lecture_ipynb_path})\)")
@@ -65,7 +65,7 @@ if __name__ == "__main__":
                     f"---", 
                     f"layout: default",
                     f"title: {file[:-3]}",
-                    f"parent: {week_title}",
+                    f"parent: {topic_title}",
                     f"grand_parent: {lecture_toc_title}",
                     f"nav_order: {file_nav_order}",
                     f"---",

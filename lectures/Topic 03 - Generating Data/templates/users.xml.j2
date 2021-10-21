@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users>
+    {% for user in users %}
+    <user id="{{ loop.index }}">
+        <firstname>{{ user.first_name }}</firstname>
+        <lastname>{{ user.last_name }}</lastname>
+        <occupation>{{ user.occupation }}</occupation>
+    </user>
+    {% endfor %}
+</users>
