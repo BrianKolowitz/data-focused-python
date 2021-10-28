@@ -1,11 +1,11 @@
 remote_theme: "pmarsceill/just-the-docs"
-search_enabled: true
+search_enabled: false
 locale: "en-US"
 title: "Data Focused Python"
 repository: "BrianKolowitz/data-focused-python"
 ga_tracking: UA-139655036-1
-aux_links:
-    "Code":
-      - "//github.com/BrianKolowitz/data-focused-python"
-    "About":
-      - "/data-focused-python/about.html"
+# aux_links:
+#     "Code":
+#       - "//github.com/BrianKolowitz/data-focused-python"
+#     "About":
+#       - "/data-focused-python/about.html"

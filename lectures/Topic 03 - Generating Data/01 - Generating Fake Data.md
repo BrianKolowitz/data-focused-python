@@ -48,7 +48,7 @@ person['age'] = random.randrange(100)
 print(person)
 ```
 
-    {'age': 41, 'employeed': 'Full Time'}
+    {'age': 2}
 
 
 
@@ -57,7 +57,7 @@ person['age'] = random.randrange(100)
 print(person)
 ```
 
-    {'age': 80}
+    {'age': 42}
 
 
 
@@ -67,7 +67,7 @@ person['age'] = random.randint(18, 65)
 print(person)
 ```
 
-    {'age': 55, 'employeed': 'Full Time'}
+    {'age': 32}
 
 
 
@@ -76,7 +76,7 @@ person['employment'] = 'Full Time'
 print(person)
 ```
 
-    {'age': 55, 'employeed': 'Part Time', 'employment': 'Full Time'}
+    {'age': 32, 'employment': 'Full Time'}
 
 
 
@@ -87,7 +87,7 @@ person['employment'] = random.choice(employment_status)
 print(person)
 ```
 
-    {'age': 55, 'employeed': 'Part Time', 'employment': 'Contract'}
+    {'age': 32, 'employment': 'Unemployed'}
 
 
 
@@ -96,7 +96,7 @@ person['employment'] = random.choice(employment_status)
 print(person)
 ```
 
-    {'age': 55, 'employeed': 'Part Time', 'employment': 'Contract'}
+    {'age': 32, 'employment': 'Retired'}
 
 
 
@@ -105,7 +105,7 @@ person['employment'] = random.choices(employment_status, [.5, .2, .1, .1, .05, .
 print(person)
 ```
 
-    {'age': 55, 'employeed': 'Part Time', 'employment': 'Retired'}
+    {'age': 32, 'employment': 'Part Time'}
 
 
 
@@ -114,7 +114,7 @@ person['employment'] = random.choices(employment_status, [.5, .2, .1, .1, .05, .
 print(person)
 ```
 
-    {'age': 55, 'employeed': 'Part Time', 'employment': 'Full Time'}
+    {'age': 32, 'employment': 'Part Time'}
 
 
 
@@ -149,8 +149,7 @@ address = generate_address()
 print(address)
 ```
 
-    Pittsburgh
-    14 Federal
+    24 Federal
     Pittsburgh, 15106 PA
 
 
@@ -168,7 +167,7 @@ name = generate_name()
 print(name)
 ```
 
-    Jen Doe
+    John Doe
 
 
 
@@ -187,7 +186,7 @@ person = generate_person()
 print(person)
 ```
 
-    {'name': 'Ben Smith', 'address': '91 Bluff\nPittsburgh, 15106 PA', 'employment': 'Full Time'}
+    {'name': 'Ben Jones', 'address': '12 Bluff\nCleveland, 44101 OH', 'employment': 'Seasonal'}
 
 
 
@@ -196,7 +195,7 @@ person = generate_person()
 print(person)
 ```
 
-    {'name': 'John Jones', 'address': '35 Federal\nCleveland, 44101 OH', 'employment': 'Retired'}
+    {'name': 'John Jones', 'address': '64 Federal\nCleveland, 44101 OH', 'employment': 'Full Time'}
 
 
 
@@ -205,7 +204,7 @@ person = generate_person()
 print(person)
 ```
 
-    {'name': 'John Doe', 'address': '86 Main\nCleveland, 44101 OH', 'employment': 'Contract'}
+    {'name': 'Ben Jones', 'address': '47 Federal\nPittsburgh, 15106 PA', 'employment': 'Part Time'}
 
 
 

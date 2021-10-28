@@ -31,7 +31,7 @@ faker.name()
 
 
 
-    'Mary Peterson'
+    'Vincent Allen'
 
 
 
@@ -44,7 +44,7 @@ faker.name()
 
 
 
-    'Samuel Nguyen'
+    'Dawn Harvey'
 
 
 
@@ -57,7 +57,7 @@ faker.address()
 
 
 
-    '66360 Aguilar Skyway Apt. 156\nDawsonview, NE 36387'
+    '11351 Elizabeth Canyon\nLake Sarah, NE 29707'
 
 
 
@@ -70,7 +70,7 @@ faker.address()
 
 
 
-    '577 Michael Springs\nNorth Thomasland, NC 57297'
+    '1006 Jessica Mills\nBrewerview, MO 39072'
 
 
 
@@ -83,7 +83,7 @@ faker.text()
 
 
 
-    'Story effort work staff major. There girl foreign. Economic practice either common person generation. Population list most people decision himself call.'
+    'Help politics watch space study beautiful. If focus firm again.\nPay up subject. Will particularly have be article clear season. Participant huge name notice.'
 
 
 
@@ -97,7 +97,7 @@ faker.name()
 
 
 
-    'Kimberly Miller DVM'
+    'Amy Roberson'
 
 
 
@@ -109,7 +109,7 @@ faker.first_name()
 
 
 
-    'William'
+    'Antonio'
 
 
 
@@ -121,7 +121,7 @@ faker.last_name()
 
 
 
-    'Potts'
+    'Odom'
 
 
 
@@ -135,7 +135,7 @@ faker.job()
 
 
 
-    'Tourist information centre manager'
+    'Microbiologist'
 
 
 
@@ -147,7 +147,7 @@ faker.job()
 
 
 
-    'Radio broadcast assistant'
+    'Health promotion specialist'
 
 
 
@@ -157,11 +157,11 @@ for _ in range(5):
     print(faker.job())
 ```
 
-    Logistics and distribution manager
-    Patent attorney
-    Designer, multimedia
-    Holiday representative
-    Psychologist, forensic
+    Surveyor, insurance
+    Engineer, chemical
+    Cytogeneticist
+    Drilling engineer
+    Production assistant, radio
 
 
 ## Faking Locale Data
@@ -178,12 +178,12 @@ for i in range(3):
     print(f'{name}, {address}, {phone}')
 ```
 
-    Radka Krejčová, Pikovická 5
-    135 29 Česká Skalice, 790 939 153
-    Iva Malá, Vašátkova 973
-    355 57 Český Dub, 732 872 338
-    Žaneta Moravcová, Na Cikánce 5
-    411 12 Zruč nad Sázavou, 722 413 421
+    Miroslava Kratochvílová, Komenského Nám. 91
+    595 83 Kojetín, 601 108 913
+    Kryštof Bartoš, Lednická 347
+    649 34 Horní Jelení, 723 227 473
+    Bohuslav Urban, Na Staré Vinici 50
+    609 26 Hostomice, 603 178 388
 
 
 ## Faking Currencies
@@ -201,7 +201,7 @@ faker.currency()
 
 
 
-    ('VUV', 'Vanuatu vatu')
+    ('GNF', 'Guinean franc')
 
 
 
@@ -213,7 +213,7 @@ faker.currency_name()
 
 
 
-    'Burmese kyat'
+    'Jersey pound'
 
 
 
@@ -225,7 +225,7 @@ faker.currency_code()
 
 
 
-    'SYP'
+    'AWG'
 
 
 
@@ -239,7 +239,7 @@ faker.word()
 
 
 
-    'school'
+    'care'
 
 
 
@@ -251,16 +251,16 @@ faker.words(10)
 
 
 
-    ['agency',
-     'production',
-     'wide',
-     'tell',
-     'themselves',
-     'close',
-     'hear',
-     'these',
-     'cold',
-     'ahead']
+    ['its',
+     'pattern',
+     'concern',
+     'road',
+     'couple',
+     'common',
+     'value',
+     'our',
+     'either',
+     'world']
 
 
 
@@ -273,7 +273,7 @@ faker.words(3, my_words, True)
 
 
 
-    ['forrest', 'blue', 'falcon']
+    ['blue', 'cloud', 'wood']
 
 
 
@@ -285,7 +285,7 @@ profile1 = faker.simple_profile()
 print(profile1)
 ```
 
-    {'username': 'rhuynh', 'name': 'Rebecca Bryant', 'sex': 'F', 'address': '49969 Hill Light Apt. 617\nMichaelton, MT 10598', 'mail': 'patrickmartin@hotmail.com', 'birthdate': datetime.date(1918, 1, 12)}
+    {'username': 'churchjames', 'name': 'Victoria Ryan MD', 'sex': 'F', 'address': '90570 Hannah Stream\nSouth Shelly, TN 77015', 'mail': 'kelli28@yahoo.com', 'birthdate': datetime.date(1949, 7, 30)}
 
 
 
@@ -294,13 +294,13 @@ import dumper
 dumper.dump(profile1)
 ```
 
-    <dict at 0x7fb0998fb580>:
-      username: 'rhuynh'
-      name: 'Rebecca Bryant'
+    <dict at 0x7ffcc004d380>:
+      username: 'churchjames'
+      name: 'Victoria Ryan MD'
       sex: 'F'
-      address: '49969 Hill Light Apt. 617\nMichaelton, MT 10598'
-      mail: 'patrickmartin@hotmail.com'
-      birthdate: <str at 0x7fb09b4ab760>: 'datetime.date(1918, 1, 12)'
+      address: '90570 Hannah Stream\nSouth Shelly, TN 77015'
+      mail: 'kelli28@yahoo.com'
+      birthdate: <str at 0x7ffcc00503a0>: 'datetime.date(1949, 7, 30)'
 
 
 
@@ -309,13 +309,13 @@ profile2 = faker.simple_profile('F')
 dumper.dump(profile2)
 ```
 
-    <dict at 0x7fb09b4f7880>:
-      username: 'christopherrodgers'
-      name: 'Donna Berry'
+    <dict at 0x7ffcc0047200>:
+      username: 'qjohnston'
+      name: 'Jessica Gillespie'
       sex: 'F'
-      address: '42662 Orr Ridges Suite 300\nNorth Alexisview, MA 98751'
-      mail: 'hcrawford@hotmail.com'
-      birthdate: <str at 0x7fb09b4abda0>: 'datetime.date(1990, 3, 4)'
+      address: '69654 Megan Rest\nPatriciafurt, MD 35261'
+      mail: 'jessicasmith@hotmail.com'
+      birthdate: <str at 0x7ffcc00509e0>: 'datetime.date(1949, 4, 3)'
 
 
 ## Faking Numbers
@@ -328,7 +328,7 @@ faker.random_int()
 
 
 
-    6029
+    1717
 
 
 
@@ -340,7 +340,7 @@ faker.random_int(18, 64)
 
 
 
-    48
+    31
 
 
 
@@ -352,7 +352,7 @@ faker.random_digit()
 
 
 
-    5
+    1
 
 
 
@@ -366,7 +366,7 @@ faker.md5()
 
 
 
-    'd03a2a604b262b4d157d944ecb8303c0'
+    '1e7bfd5eb691a36a94af457b383f375e'
 
 
 
@@ -378,7 +378,7 @@ faker.sha1()
 
 
 
-    '3197bcdec7121a375b88a6af9ba57838c5176552'
+    '0c83ab884516f9ef6f877a4d077a16630354b001'
 
 
 
@@ -390,7 +390,7 @@ faker.sha256()
 
 
 
-    '9a748899c8d85a270e193fa712dc57f5d1807058b379c0db9cc7118c7f12a12d'
+    'b239734a398a4c8005beefefd98a772c896dc5966f6233d74a398988d98714d3'
 
 
 
@@ -402,7 +402,7 @@ faker.uuid4()
 
 
 
-    '959bdf47-6819-425d-b512-d5a49597d989'
+    'b914121e-63e4-4610-a1df-2555719ba7b8'
 
 
 
@@ -416,7 +416,7 @@ faker.email()
 
 
 
-    'hopkinsvanessa@example.org'
+    'kellylester@example.org'
 
 
 
@@ -428,7 +428,7 @@ faker.safe_email()
 
 
 
-    'davischarles@example.net'
+    'powellbenjamin@example.com'
 
 
 
@@ -440,7 +440,7 @@ faker.free_email()
 
 
 
-    'sanchezleah@yahoo.com'
+    'mphillips@gmail.com'
 
 
 
@@ -452,7 +452,7 @@ faker.company_email()
 
 
 
-    'ashleewilliams@brown-wolfe.net'
+    'seancarroll@murray.info'
 
 
 
@@ -464,7 +464,7 @@ faker.hostname()
 
 
 
-    'desktop-76.harris-ortiz.com'
+    'srv-25.williamson-johnson.com'
 
 
 
@@ -476,7 +476,7 @@ faker.domain_name()
 
 
 
-    'smith.biz'
+    'wilson.org'
 
 
 
@@ -488,7 +488,7 @@ faker.domain_word()
 
 
 
-    'morrison-horton'
+    'clark'
 
 
 
@@ -500,7 +500,7 @@ faker.tld()
 
 
 
-    'com'
+    'org'
 
 
 
@@ -512,7 +512,7 @@ faker.ipv4()
 
 
 
-    '188.141.18.11'
+    '31.17.120.149'
 
 
 
@@ -524,7 +524,7 @@ faker.ipv6()
 
 
 
-    '9b68:7c19:307:3214:87d1:b29:26c8:b835'
+    'e4d1:cfad:4a05:b049:cb63:5889:8094:c571'
 
 
 
@@ -536,7 +536,7 @@ faker.slug()
 
 
 
-    'decision-air-adult'
+    'occur-bed-work-yet'
 
 
 
@@ -548,7 +548,7 @@ faker.image_url()
 
 
 
-    'https://www.lorempixel.com/640/339'
+    'https://placekitten.com/727/516'
 
 
 
@@ -564,7 +564,7 @@ faker.century()
 
 
 
-    'III'
+    'XV'
 
 
 
@@ -576,7 +576,7 @@ faker.year()
 
 
 
-    '1983'
+    '1991'
 
 
 
@@ -588,7 +588,7 @@ faker.month()
 
 
 
-    '08'
+    '09'
 
 
 
@@ -600,7 +600,7 @@ faker.month_name()
 
 
 
-    'December'
+    'November'
 
 
 
@@ -612,7 +612,7 @@ faker.day_of_week()
 
 
 
-    'Friday'
+    'Sunday'
 
 
 
@@ -624,7 +624,7 @@ faker.day_of_month()
 
 
 
-    '12'
+    '01'
 
 
 
@@ -636,7 +636,7 @@ faker.timezone()
 
 
 
-    'America/Panama'
+    'America/Paramaribo'
 
 
 
@@ -662,7 +662,7 @@ faker.date_time_this_century()
 
 
 
-    datetime.datetime(2018, 2, 2, 7, 29, 55)
+    datetime.datetime(2018, 2, 9, 20, 51, 37)
 
 
 
@@ -674,7 +674,7 @@ faker.date_time_this_decade()
 
 
 
-    datetime.datetime(2020, 1, 20, 12, 29, 55)
+    datetime.datetime(2020, 1, 12, 23, 48, 1)
 
 
 
@@ -686,7 +686,7 @@ faker.date_time_this_year()
 
 
 
-    datetime.datetime(2021, 6, 14, 22, 1, 24)
+    datetime.datetime(2021, 6, 11, 20, 16, 29)
 
 
 
@@ -698,7 +698,7 @@ faker.date_time_this_month()
 
 
 
-    datetime.datetime(2021, 10, 20, 11, 47, 42)
+    datetime.datetime(2021, 10, 6, 18, 59, 38)
 
 
 
@@ -710,7 +710,7 @@ faker.date_this_century()
 
 
 
-    datetime.date(2016, 3, 10)
+    datetime.date(2013, 10, 11)
 
 
 
@@ -722,7 +722,7 @@ faker.date_this_decade()
 
 
 
-    datetime.date(2020, 10, 6)
+    datetime.date(2021, 4, 1)
 
 
 
@@ -734,7 +734,7 @@ faker.date_this_year()
 
 
 
-    datetime.date(2021, 9, 7)
+    datetime.date(2021, 8, 28)
 
 
 
@@ -746,7 +746,7 @@ faker.date_this_month()
 
 
 
-    datetime.date(2021, 10, 19)
+    datetime.date(2021, 10, 20)
 
 
 
@@ -760,12 +760,12 @@ for val in series:
     print(val[0])
 ```
 
-    2021-10-09 15:09:25
-    2021-10-11 15:09:25
-    2021-10-13 15:09:25
-    2021-10-15 15:09:25
-    2021-10-17 15:09:25
-    2021-10-19 15:09:25
+    2021-10-16 15:13:18
+    2021-10-18 15:13:18
+    2021-10-20 15:13:18
+    2021-10-22 15:13:18
+    2021-10-24 15:13:18
+    2021-10-26 15:13:18
 
 
 ## More Date Time
@@ -778,7 +778,7 @@ faker.unix_time()
 
 
 
-    498578330
+    1251085387
 
 
 
@@ -790,7 +790,7 @@ faker.date_time()
 
 
 
-    datetime.datetime(1986, 11, 5, 4, 17, 14)
+    datetime.datetime(1976, 7, 17, 20, 43, 28)
 
 
 
@@ -802,7 +802,7 @@ faker.iso8601()
 
 
 
-    '1986-05-21T22:10:26'
+    '1982-11-03T07:46:42'
 
 
 
@@ -814,7 +814,7 @@ faker.date()
 
 
 
-    '2016-04-14'
+    '1990-08-27'
 
 
 
@@ -826,7 +826,7 @@ faker.time()
 
 
 
-    '07:36:49'
+    '12:55:01'
 
 
 
@@ -836,8 +836,8 @@ print(f"Datetime between: {faker.date_time_between(start_date='-15y', end_date='
 print(f"Date between: {faker.date_between()}")
 ```
 
-    Datetime between: 2007-07-08 04:32:13
-    Date between: 1999-11-03
+    Datetime between: 2007-07-11 14:37:20
+    Date between: 1993-01-12
 
 
 
@@ -848,7 +848,7 @@ faker.future_datetime()
 
 
 
-    datetime.datetime(2021, 11, 14, 0, 37, 51)
+    datetime.datetime(2021, 11, 9, 6, 55, 23)
 
 
 
@@ -860,7 +860,7 @@ faker.future_date()
 
 
 
-    datetime.date(2021, 11, 5)
+    datetime.date(2021, 11, 18)
 
 
 
@@ -872,7 +872,7 @@ faker.past_datetime()
 
 
 
-    datetime.datetime(2021, 10, 9, 21, 7, 21)
+    datetime.datetime(2021, 9, 29, 8, 18, 48)
 
 
 
@@ -884,7 +884,7 @@ faker.past_date()
 
 
 
-    datetime.date(2021, 10, 3)
+    datetime.date(2021, 10, 23)
 
 
 
@@ -945,63 +945,63 @@ print(output)
     <users>
         
         <user id="1">
-            <firstname>Christopher</firstname>
-            <lastname>Gay</lastname>
-            <occupation>Scientist, research (maths)</occupation>
+            <firstname>Cheryl</firstname>
+            <lastname>Howard</lastname>
+            <occupation>Community arts worker</occupation>
         </user>
         
         <user id="2">
-            <firstname>George</firstname>
-            <lastname>Macias</lastname>
-            <occupation>Television/film/video producer</occupation>
+            <firstname>Jessica</firstname>
+            <lastname>Miller</lastname>
+            <occupation>Magazine features editor</occupation>
         </user>
         
         <user id="3">
-            <firstname>Shelby</firstname>
-            <lastname>Phelps</lastname>
-            <occupation>Make</occupation>
+            <firstname>Alexandra</firstname>
+            <lastname>Hill</lastname>
+            <occupation>Ceramics designer</occupation>
         </user>
         
         <user id="4">
-            <firstname>Jacqueline</firstname>
-            <lastname>Mcdonald</lastname>
-            <occupation>Freight forwarder</occupation>
+            <firstname>Lindsay</firstname>
+            <lastname>Holland</lastname>
+            <occupation>Economist</occupation>
         </user>
         
         <user id="5">
-            <firstname>Melissa</firstname>
-            <lastname>Banks</lastname>
-            <occupation>Recycling officer</occupation>
+            <firstname>Kevin</firstname>
+            <lastname>Michael</lastname>
+            <occupation>Nurse, children's</occupation>
         </user>
         
         <user id="6">
-            <firstname>Elizabeth</firstname>
-            <lastname>Snyder</lastname>
-            <occupation>Forensic scientist</occupation>
+            <firstname>Amanda</firstname>
+            <lastname>Bush</lastname>
+            <occupation>IT trainer</occupation>
         </user>
         
         <user id="7">
-            <firstname>Juan</firstname>
-            <lastname>Barnes</lastname>
-            <occupation>Lobbyist</occupation>
+            <firstname>Candice</firstname>
+            <lastname>Oliver</lastname>
+            <occupation>Quantity surveyor</occupation>
         </user>
         
         <user id="8">
-            <firstname>Rodney</firstname>
-            <lastname>Macdonald</lastname>
-            <occupation>Theatre director</occupation>
+            <firstname>Brian</firstname>
+            <lastname>Powell</lastname>
+            <occupation>Advice worker</occupation>
         </user>
         
         <user id="9">
-            <firstname>Michael</firstname>
-            <lastname>Mendez</lastname>
-            <occupation>Careers information officer</occupation>
+            <firstname>Sarah</firstname>
+            <lastname>Graham</lastname>
+            <occupation>Heritage manager</occupation>
         </user>
         
         <user id="10">
-            <firstname>Laura</firstname>
-            <lastname>Melton</lastname>
-            <occupation>Operations geologist</occupation>
+            <firstname>Frank</firstname>
+            <lastname>Acevedo</lastname>
+            <occupation>Archivist</occupation>
         </user>
         
     </users>

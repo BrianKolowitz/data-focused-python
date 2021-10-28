@@ -34,7 +34,16 @@ permalink: /lectures
 
 ## Topic 04 - Writing Testable Code
 
-* [01 - Python Testing](Topic 04 - Writing Testable Code/01 - Python Testing.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2004%20-%20Writing%20Testable%20Code/01%20-%20Python%20Testing.ipynb)\)
+* [01 - Python Code Quality Tools And Best Practices](Topic 04 - Writing Testable Code/01 - Python Code Quality Tools and Best Practices.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2004%20-%20Writing%20Testable%20Code/01%20-%20Python%20Code%20Quality%20Tools%20and%20Best%20Practices.ipynb)\)
+* [02 - Python Testing](Topic 04 - Writing Testable Code/02 - Python Testing.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2004%20-%20Writing%20Testable%20Code/02%20-%20Python%20Testing.ipynb)\)
+* [03 - Getting Started With Testing In Python](Topic 04 - Writing Testable Code/03 - Getting Started With Testing in Python.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2004%20-%20Writing%20Testable%20Code/03%20-%20Getting%20Started%20With%20Testing%20in%20Python.ipynb)\)
+* [04- Choosing A Test Runner](Topic 04 - Writing Testable Code/04- Choosing a Test Runner.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2004%20-%20Writing%20Testable%20Code/04-%20Choosing%20a%20Test%20Runner.ipynb)\)
+* [05 - Writing Your First Test](Topic 04 - Writing Testable Code/05 - Writing Your First Test.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2004%20-%20Writing%20Testable%20Code/05%20-%20Writing%20Your%20First%20Test.ipynb)\)
+* [06 - Writing Integration Tests](Topic 04 - Writing Testable Code/06 - Writing Integration Tests.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2004%20-%20Writing%20Testable%20Code/06%20-%20Writing%20Integration%20Tests.ipynb)\)
+* [07 - Testing In Multiple Environments](Topic 04 - Writing Testable Code/07 - Testing in Multiple Environments.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2004%20-%20Writing%20Testable%20Code/07%20-%20Testing%20in%20Multiple%20Environments.ipynb)\)
+* [08 - Introducing Linters Into Your Application](Topic 04 - Writing Testable Code/08 - Introducing Linters Into Your Application.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2004%20-%20Writing%20Testable%20Code/08%20-%20Introducing%20Linters%20Into%20Your%20Application.ipynb)\)
+* [09 - Testing For Performance Degradation Between Changes](Topic 04 - Writing Testable Code/09 - Testing for Performance Degradation Between Changes.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2004%20-%20Writing%20Testable%20Code/09%20-%20Testing%20for%20Performance%20Degradation%20Between%20Changes.ipynb)\)
+* [10 - Testing For Security Flaws In Your Application](Topic 04 - Writing Testable Code/10 - Testing for Security Flaws in Your Application.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2004%20-%20Writing%20Testable%20Code/10%20-%20Testing%20for%20Security%20Flaws%20in%20Your%20Application.ipynb)\)
 
 ## Topic 05 - Processing files
 
