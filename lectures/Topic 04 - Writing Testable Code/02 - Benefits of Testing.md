@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 02 - Python Testing
+title: 02 - Benefits of Testing
 parent: Topic 04 - Writing Testable Code
 grand_parent: Lectures
 nav_order: 2

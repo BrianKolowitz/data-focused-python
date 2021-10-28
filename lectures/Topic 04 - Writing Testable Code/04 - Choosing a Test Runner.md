@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 04- Choosing a Test Runner
+title: 04 - Choosing a Test Runner
 parent: Topic 04 - Writing Testable Code
 grand_parent: Lectures
 nav_order: 4
