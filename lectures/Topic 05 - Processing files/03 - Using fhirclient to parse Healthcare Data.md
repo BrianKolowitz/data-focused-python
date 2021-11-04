@@ -483,12 +483,12 @@ pprint(bundle.as_json())
                                              'class="hapiPropertyTable"><tbody><tr><td>Identifier</td><td>02d67065-0107-4f99-b967-ee4396a037ba</td></tr></tbody></table></div>',
                                       'status': 'generated'}},
                 'search': {'mode': 'match'}}],
-     'id': '80e8c67f-800d-4fce-8299-5b674b257a5b',
+     'id': '7f333553-29ce-439a-9c9b-c72fd7bc0f9c',
      'link': [{'relation': 'self',
                'url': 'http://hapi.fhir.org/baseR4/Patient?family=Cushing'},
               {'relation': 'next',
-               'url': 'http://hapi.fhir.org/baseR4?_getpages=80e8c67f-800d-4fce-8299-5b674b257a5b&_getpagesoffset=20&_count=20&_pretty=true&_bundletype=searchset'}],
-     'meta': {'lastUpdated': '2021-10-21T14:34:50.512+00:00'},
+               'url': 'http://hapi.fhir.org/baseR4?_getpages=7f333553-29ce-439a-9c9b-c72fd7bc0f9c&_getpagesoffset=20&_count=20&_pretty=true&_bundletype=searchset'}],
+     'meta': {'lastUpdated': '2021-11-04T13:35:17.915+00:00'},
      'resourceType': 'Bundle',
      'type': 'searchset'}
 
@@ -539,7 +539,7 @@ patient.as_json() # throws FHIRValidationError: because we incorrectly set the n
 
     FHIRValidationError                       Traceback (most recent call last)
 
-    /var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/ipykernel_93131/1295677727.py in <module>
+    /var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/ipykernel_75139/1295677727.py in <module>
           1 name.given = 'Peter'
     ----> 2 patient.as_json() # throws FHIRValidationError: because we incorrectly set the name to a string
     

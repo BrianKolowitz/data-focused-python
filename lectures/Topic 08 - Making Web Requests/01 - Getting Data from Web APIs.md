@@ -1,9 +1,9 @@
 ---
 layout: default
-title: 05 - Getting Data from Web APIs
+title: 01 - Getting Data from Web APIs
 parent: Topic 08 - Making Web Requests
 grand_parent: Lectures
-nav_order: 2
+nav_order: 1
 ---
 # Python API tutorial - An Introduction to using APIs
 [source](https://www.dataquest.io/blog/python-api-tutorial/)

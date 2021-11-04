@@ -53,6 +53,11 @@ permalink: /lectures
 * [01.D - Xml Files](Topic 05 - Processing files/01.d - XML Files.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2005%20-%20Processing%20files/01.d%20-%20XML%20Files.ipynb)\)
 * [03 - Using Fhirclient To Parse Healthcare Data](Topic 05 - Processing files/03 - Using fhirclient to parse Healthcare Data.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2005%20-%20Processing%20files/03%20-%20Using%20fhirclient%20to%20parse%20Healthcare%20Data.ipynb)\)
 * [04 - Reading Synthea Data](Topic 05 - Processing files/04 - Reading synthea data.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2005%20-%20Processing%20files/04%20-%20Reading%20synthea%20data.ipynb)\)
+* [05 - Working With Csv Files And Json Data](Topic 05 - Processing files/05 - Working with CSV files and JSON data.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2005%20-%20Processing%20files/05%20-%20Working%20with%20CSV%20files%20and%20JSON%20data.ipynb)\)
+* [06 - A Guide To Excel Spreadsheets In Python With Openpyxl](Topic 05 - Processing files/06 - A Guide to Excel Spreadsheets in Python With openpyxl.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2005%20-%20Processing%20files/06%20-%20A%20Guide%20to%20Excel%20Spreadsheets%20in%20Python%20With%20openpyxl.ipynb)\)
+* [07 - Working With Pdf Documents](Topic 05 - Processing files/07 - Working with PDF Documents.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2005%20-%20Processing%20files/07%20-%20Working%20with%20PDF%20Documents.ipynb)\)
+* [08 - Working With Word Documents](Topic 05 - Processing files/08 - Working with Word Documents.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2005%20-%20Processing%20files/08%20-%20Working%20with%20Word%20Documents.ipynb)\)
+* [10 - Additional Reading](Topic 05 - Processing files/10 - Additional Reading.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2005%20-%20Processing%20files/10%20-%20Additional%20Reading.ipynb)\)
 
 ## Topic 06 - Comprehensions and Generators
 
@@ -68,8 +73,9 @@ permalink: /lectures
 
 ## Topic 08 - Making Web Requests
 
-* [03 - Using Requests To Fetch Healthcare Data](Topic 08 - Making Web Requests/03 - Using requests to fetch Healthcare Data.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2008%20-%20Making%20Web%20Requests/03%20-%20Using%20requests%20to%20fetch%20Healthcare%20Data.ipynb)\)
-* [05 - Getting Data From Web Apis](Topic 08 - Making Web Requests/05 - Getting Data from Web APIs.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2008%20-%20Making%20Web%20Requests/05%20-%20Getting%20Data%20from%20Web%20APIs.ipynb)\)
+* [01 - Getting Data From Web Apis](Topic 08 - Making Web Requests/01 - Getting Data from Web APIs.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2008%20-%20Making%20Web%20Requests/01%20-%20Getting%20Data%20from%20Web%20APIs.ipynb)\)
+* [02 - Using Requests To Fetch Healthcare Data](Topic 08 - Making Web Requests/02 - Using requests to fetch Healthcare Data.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2008%20-%20Making%20Web%20Requests/02%20-%20Using%20requests%20to%20fetch%20Healthcare%20Data.ipynb)\)
+* [03 - Additional Reading](Topic 08 - Making Web Requests/03 - Additional Reading.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2008%20-%20Making%20Web%20Requests/03%20-%20Additional%20Reading.ipynb)\)
 
 ## Topic 09 - Interfacing with Databases
 

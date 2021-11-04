@@ -43,6 +43,13 @@ To write a unit test for the built-in function sum(), you would check the output
 assert sum([1, 2, 3]) == 6, "Should be 6"
 ```
 
+
+```python
+expected = 6
+actual = sum([1, 2, 3])
+assert actual == expected, "Should be 6"
+```
+
 If the result from sum() is incorrect, this will fail with an AssertionError and the message "Should be 6".
 
 
@@ -55,7 +62,7 @@ assert sum([1, 1, 1]) == 6, "Should be 6"
 
     AssertionError                            Traceback (most recent call last)
 
-    /var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/ipykernel_3247/17110154.py in <module>
+    /var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/ipykernel_29862/17110154.py in <module>
     ----> 1 assert sum([1, 1, 1]) == 6, "Should be 6"
     
 
@@ -106,23 +113,7 @@ test_sum_tuple()
 print("Everything passed")
 ```
 
-
-    ---------------------------------------------------------------------------
-
-    AssertionError                            Traceback (most recent call last)
-
-    /var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/ipykernel_3247/2054533739.py in <module>
-          1 test_sum()
-    ----> 2 test_sum_tuple()
-          3 print("Everything passed")
-
-
-    /var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/ipykernel_3247/2526289347.py in test_sum_tuple()
-          1 def test_sum_tuple():
-    ----> 2     assert sum((1, 2, 2)) == 6, "Should be 6"
-    
-
-    AssertionError: Should be 6
+    Everything passed
 
 
 We've updated `test_sum_2.py` with the new code which can be executed as follows:

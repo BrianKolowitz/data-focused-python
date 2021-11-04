@@ -21,6 +21,18 @@ person = {}
 
 
 ```python
+type(person)
+```
+
+
+
+
+    dict
+
+
+
+
+```python
 print(person)
 ```
 
@@ -31,6 +43,18 @@ print(person)
 ```python
 person['age'] = 28
 ```
+
+
+```python
+type(person['age'])
+```
+
+
+
+
+    int
+
+
 
 
 ```python
@@ -48,7 +72,24 @@ person['age'] = random.randrange(100)
 print(person)
 ```
 
-    {'age': 2}
+    {'age': 24}
+
+
+
+```python
+random.randrange?
+```
+
+
+    [0;31mSignature:[0m [0mrandom[0m[0;34m.[0m[0mrandrange[0m[0;34m([0m[0mstart[0m[0;34m,[0m [0mstop[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m [0mstep[0m[0;34m=[0m[0;36m1[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+    [0;31mDocstring:[0m
+    Choose a random item from range(start, stop[, step]).
+    
+    This fixes the problem with randint() which includes the
+    endpoint; in Python this is usually not what you want.
+    [0;31mFile:[0m      ~/opt/miniconda3/envs/cmu39/lib/python3.9/random.py
+    [0;31mType:[0m      method
+
 
 
 
@@ -57,7 +98,7 @@ person['age'] = random.randrange(100)
 print(person)
 ```
 
-    {'age': 42}
+    {'age': 5, 'employment': 40}
 
 
 
@@ -67,16 +108,18 @@ person['age'] = random.randint(18, 65)
 print(person)
 ```
 
-    {'age': 32}
+    {'age': 31}
 
 
 
 ```python
 person['employment'] = 'Full Time'
+print(type(person['employment']))
 print(person)
 ```
 
-    {'age': 32, 'employment': 'Full Time'}
+    <class 'str'>
+    {'age': 5, 'employment': 'Full Time'}
 
 
 
@@ -87,7 +130,7 @@ person['employment'] = random.choice(employment_status)
 print(person)
 ```
 
-    {'age': 32, 'employment': 'Unemployed'}
+    {'age': 5, 'employment': 'Seasonal'}
 
 
 
@@ -96,25 +139,31 @@ person['employment'] = random.choice(employment_status)
 print(person)
 ```
 
-    {'age': 32, 'employment': 'Retired'}
+    {'age': 5, 'employment': 'Full Time'}
 
 
 
 ```python
-person['employment'] = random.choices(employment_status, [.5, .2, .1, .1, .05, .05])[0]
+choice = random.choices(employment_status, [.5, .2, .1, .1, .05, .05])
+print(f"Choice has type {type(choice)} and len {len(choice)}")
+print(choice)
+
+person['employment'] = choice[0]
 print(person)
 ```
 
-    {'age': 32, 'employment': 'Part Time'}
+    Choice has type <class 'list'> and len 1
+    ['Full Time']
+    {'age': 5, 'employment': 'Full Time'}
 
 
 
 ```python
-person['employment'] = random.choices(employment_status, [.5, .2, .1, .1, .05, .05])[0]
+person['employment'] = random.choices(employment_status, [.5, .2, .1, .1, .05, .05],k=1)[0]
 print(person)
 ```
 
-    {'age': 32, 'employment': 'Part Time'}
+    {'age': 5, 'employment': 'Part Time'}
 
 
 
@@ -123,21 +172,39 @@ def generate_employment():
     employment_status = ['Full Time', 'Part Time', 'Contract', 'Seasonal', 'Unemployed', 'Retired']
     employment = random.choices(employment_status, [.5, .2, .1, .1, .05, .05])[0]
     return employment
-    
 ```
+
+
+```python
+print(generate_employment())
+print(generate_employment())
+print(generate_employment())
+```
+
+    Contract
+    Seasonal
+    Seasonal
+
 
 
 ```python
 # let's construct some fake addresses
 def generate_address():
-    street_number = random.randint(1, 100)
-    street_name= random.choice(['Main', 'Bluff', 'Federal'])
-    city = random.choice(['Pittsburgh', 'Cleveland' ])
+    street_number = random.randint(1, 1000)
+    street_name = random.choice(['Main', 'Bluff', 'Federal'])
+#     city = random.choice(['Pittsburgh', 'Cleveland' ])
+#     city_details = { 'Pittsburgh' : { 'zip': 15106, 'state': 'PA' },
+#                     'Cleveland' : { 'zip': 44101, 'state': 'OH' } }
+#     state = city_details[city]['state']
+#     zip_code = city_details[city]['zip']
 
-    city_details = { 'Pittsburgh' : { 'zip': 15106, 'state': 'PA' },
-                    'Cleveland' : { 'zip': 44101, 'state': 'OH' } }
-    state = city_details[city]['zip']
-    zip_code = city_details[city]['state']
+    city_details = random.choice([
+        { 'city': 'Pittsburgh', 'zip': 15106, 'state': 'PA' }, 
+        { 'city': 'Cleveland', 'zip': 44101, 'state': 'OH' } ])
+    
+    city = city_details['city']
+    state = city_details['state']
+    zip_code = city_details['zip']
     
     address = f"{street_number} {street_name}\n{city}, {state} {zip_code}"
     return address
@@ -149,8 +216,8 @@ address = generate_address()
 print(address)
 ```
 
-    24 Federal
-    Pittsburgh, 15106 PA
+    257 Federal
+    Pittsburgh, PA 15106
 
 
 
@@ -167,7 +234,7 @@ name = generate_name()
 print(name)
 ```
 
-    John Doe
+    Jen Doe
 
 
 
@@ -183,10 +250,12 @@ def generate_person():
 
 ```python
 person = generate_person()
+print(type(person))
 print(person)
 ```
 
-    {'name': 'Ben Jones', 'address': '12 Bluff\nCleveland, 44101 OH', 'employment': 'Seasonal'}
+    <class 'dict'>
+    {'name': 'Ben Doe', 'address': '905 Main\nCleveland, OH 44101', 'employment': 'Contract'}
 
 
 
@@ -195,7 +264,7 @@ person = generate_person()
 print(person)
 ```
 
-    {'name': 'John Jones', 'address': '64 Federal\nCleveland, 44101 OH', 'employment': 'Full Time'}
+    {'name': 'Joan Smith', 'address': '617 Bluff\nPittsburgh, PA 15106', 'employment': 'Seasonal'}
 
 
 
@@ -204,7 +273,7 @@ person = generate_person()
 print(person)
 ```
 
-    {'name': 'Ben Jones', 'address': '47 Federal\nPittsburgh, 15106 PA', 'employment': 'Part Time'}
+    {'name': 'Jen Doe', 'address': '83 Main\nCleveland, OH 44101', 'employment': 'Retired'}
 
 
 
