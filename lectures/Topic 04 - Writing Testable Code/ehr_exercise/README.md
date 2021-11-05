@@ -1,4 +1,4 @@
-# EHR Exercise
+# Electronic Health Record (EHR) Exercise
 
 ## Requirements
 
