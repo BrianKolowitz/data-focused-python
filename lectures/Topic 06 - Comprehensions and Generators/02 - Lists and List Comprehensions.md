@@ -176,7 +176,7 @@ import timeit
 print(timeit.timeit('[n**2 for n in range(10) if n%2==0]', number=10000))
 ```
 
-    0.04181958400000063
+    0.040025875001447275
 
 
 
@@ -194,7 +194,7 @@ def power_two(numbers):
 print(timeit.timeit('power_two(numbers)', globals=globals(), number=10000))
 ```
 
-    0.044310624999999604
+    0.0407682080003724
 
 
 ### Lambda Functions with map(), filter() and reduce()
@@ -239,13 +239,13 @@ print(feet)
 
 ```python
 # Convert `kilometer` to `feet` 
-feet = [3280.8399*x for x in kilometer]
+feet = [int(3280.8399*x) for x in kilometer]
 
 # Print `feet`
 print(feet)
 ```
 
-    [128608.92408000001, 119750.65635, 122375.32826999998, 124015.74822]
+    [128608, 119750, 122375, 124015]
 
 
 ### Replace filter() and Lambda Functions with List Comprehensions
@@ -254,7 +254,7 @@ print(feet)
 
 
 ```python
-# Filter `feet` to only include uneven distances 
+# Filter `feet` to only include odd distances 
 uneven = filter(lambda x: x % 2, feet)
 
 # Check the type of `uneven`
@@ -264,7 +264,7 @@ type(uneven)
 print(list(uneven))
 ```
 
-    [128608.92408000001, 119750.65635, 122375.32826999998, 124015.74822]
+    [122375, 124015]
 
 
 #### List Comprehension Alternative to Filter
@@ -277,7 +277,7 @@ feet = [int(x) for x in feet]
 # Print `feet`
 print(feet)
 
-# Get all uneven distances
+# Get all odd distances
 uneven = [True if x%2 else False for x in feet]
 
 # Print `uneven`

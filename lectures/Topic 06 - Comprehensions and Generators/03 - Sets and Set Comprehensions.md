@@ -41,7 +41,7 @@ x = set(['foo', 'bar', 'baz', 'foo', 'qux'])
 print(x)
 ```
 
-    {'bar', 'qux', 'baz', 'foo'}
+    {'foo', 'baz', 'bar', 'qux'}
 
 
 
@@ -50,7 +50,7 @@ y = set(('foo', 'bar', 'baz', 'foo', 'qux'))
 print(y)
 ```
 
-    {'bar', 'qux', 'baz', 'foo'}
+    {'foo', 'baz', 'bar', 'qux'}
 
 
 
@@ -113,7 +113,7 @@ print(list(s))
 print(set(s))
 ```
 
-    {'h', 'y', ' ', 'u', 'c', 'e', 'p', 'd', 'o', 't', 'a', 'n', 's', 'f'}
+    {'e', 'f', 'o', 'u', 'd', 'a', 's', 'n', 't', 'c', 'p', 'y', 'h', ' '}
 
 
 
@@ -125,7 +125,7 @@ print(set(words))
 ```
 
     ['data', 'focused', 'python', 'is', 'cool', 'because', 'we', 'learn', 'python', 'and', 'work', 'with', 'data']
-    {'because', 'python', 'we', 'work', 'is', 'with', 'data', 'focused', 'learn', 'cool', 'and'}
+    {'because', 'python', 'with', 'work', 'is', 'and', 'learn', 'we', 'focused', 'data', 'cool'}
 
 
 You can see that the resulting sets are unordered: the original order, as specified in the definition, is not necessarily preserved. Additionally, duplicate values are only represented in the set once, as with the string 'foo' in the first two examples and the letter 'u' in the third.
@@ -146,7 +146,7 @@ x = { 'foo', 'bar', 'baz', 'foo', 'qux' }
 print(type(x), x)
 ```
 
-    <class 'set'> {'bar', 'qux', 'baz', 'foo'}
+    <class 'set'> {'foo', 'baz', 'bar', 'qux'}
 
 
 
@@ -155,7 +155,7 @@ y = {'q', 'u', 'u', 'x'}
 print(type(y), y)
 ```
 
-    <class 'set'> {'x', 'u', 'q'}
+    <class 'set'> {'x', 'q', 'u'}
 
 
 To recap:
@@ -261,7 +261,7 @@ x = {42, 'foo', 3.14159, None}
 print(x)
 ```
 
-    {42, 3.14159, 'foo', None}
+    {'foo', 42, 3.14159, None}
 
 
 Don’t forget that set elements must be immutable. For example, a tuple may be included in a set:
@@ -272,7 +272,7 @@ x = {42, 'foo', (1, 2, 3), 3.14159}
 print(x)
 ```
 
-    {42, 3.14159, 'foo', (1, 2, 3)}
+    {'foo', 42, (1, 2, 3), 3.14159}
 
 
 But lists and dictionaries are mutable, so they can’t be set elements:
@@ -288,7 +288,7 @@ x = {a}
 
     TypeError                                 Traceback (most recent call last)
 
-    /var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/ipykernel_93351/1659420868.py in <module>
+    /var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/ipykernel_22205/1659420868.py in <module>
           1 a = [1, 2, 3]
     ----> 2 x = {a}
     
@@ -366,7 +366,7 @@ union_x = x1 | x2
 print(union_x)
 ```
 
-    {'baz', 'foo', 'bar', 'qux', 'quux'}
+    {'foo', 'quux', 'baz', 'bar', 'qux'}
 
 
 
@@ -406,7 +406,7 @@ x1 | ('baz', 'qux', 'quux')
 
     TypeError                                 Traceback (most recent call last)
 
-    /var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/ipykernel_93351/1141666621.py in <module>
+    /var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/ipykernel_22205/1141666621.py in <module>
     ----> 1 x1 | ('baz', 'qux', 'quux')
     
 
@@ -441,8 +441,8 @@ print(x1.union(x2))
 print(x1 | x2)
 ```
 
-    {'baz', 'foo', 'bar', 'qux', 'quux'}
-    {'baz', 'foo', 'bar', 'qux', 'quux'}
+    {'foo', 'quux', 'baz', 'bar', 'qux'}
+    {'foo', 'quux', 'baz', 'bar', 'qux'}
 
 
 More than two sets may be specified with either the operator or the method:
@@ -509,8 +509,8 @@ print(x1.difference(x2))
 print(x1 - x2)
 ```
 
-    {'bar', 'foo'}
-    {'bar', 'foo'}
+    {'foo', 'bar'}
+    {'foo', 'bar'}
 
 
 Once again, you can specify more than two sets:
@@ -546,8 +546,8 @@ print(x1.symmetric_difference(x2))
 print(x1 ^ x2)
 ```
 
-    {'foo', 'bar', 'qux', 'quux'}
-    {'foo', 'bar', 'qux', 'quux'}
+    {'bar', 'qux', 'foo', 'quux'}
+    {'bar', 'qux', 'foo', 'quux'}
 
 
 The ```^``` operator also allows more than two sets:
@@ -720,7 +720,7 @@ x = frozenset(['foo', 'bar', 'baz'])
 print(x)
 ```
 
-    frozenset({'bar', 'baz', 'foo'})
+    frozenset({'foo', 'baz', 'bar'})
 
 
 
