@@ -61,11 +61,11 @@ permalink: /lectures
 
 ## Topic 06 - Comprehensions and Generators
 
+* [01 - Comprehensions And Generator Expression In Python](Topic 06 - Comprehensions and Generators/01 - Comprehensions and Generator Expression in Python.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2006%20-%20Comprehensions%20and%20Generators/01%20-%20Comprehensions%20and%20Generator%20Expression%20in%20Python.ipynb)\)
 * [02 - Lists And List Comprehensions](Topic 06 - Comprehensions and Generators/02 - Lists and List Comprehensions.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2006%20-%20Comprehensions%20and%20Generators/02%20-%20Lists%20and%20List%20Comprehensions.ipynb)\)
 * [03 - Sets And Set Comprehensions](Topic 06 - Comprehensions and Generators/03 - Sets and Set Comprehensions.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2006%20-%20Comprehensions%20and%20Generators/03%20-%20Sets%20and%20Set%20Comprehensions.ipynb)\)
-* [04.A - Dictionaries](Topic 06 - Comprehensions and Generators/04.a - Dictionaries.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2006%20-%20Comprehensions%20and%20Generators/04.a%20-%20Dictionaries.ipynb)\)
-* [04.B - Dictionary Comprehensions](Topic 06 - Comprehensions and Generators/04.b - Dictionary Comprehensions.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2006%20-%20Comprehensions%20and%20Generators/04.b%20-%20Dictionary%20Comprehensions.ipynb)\)
-* [05 - Python Generators](Topic 06 - Comprehensions and Generators/05 - Python Generators.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2006%20-%20Comprehensions%20and%20Generators/05%20-%20Python%20Generators.ipynb)\)
+* [04 - Dictionary Comprehensions](Topic 06 - Comprehensions and Generators/04 - Dictionary Comprehensions.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2006%20-%20Comprehensions%20and%20Generators/04%20-%20Dictionary%20Comprehensions.ipynb)\)
+* [05 - Generators And Yield](Topic 06 - Comprehensions and Generators/05 - Generators and yield.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2006%20-%20Comprehensions%20and%20Generators/05%20-%20Generators%20and%20yield.ipynb)\)
 
 ## Topic 07 - Classes
 

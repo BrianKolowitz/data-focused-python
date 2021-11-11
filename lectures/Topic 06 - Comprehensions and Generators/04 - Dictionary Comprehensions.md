@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 04.b - Dictionary Comprehensions
+title: 04 - Dictionary Comprehensions
 parent: Topic 06 - Comprehensions and Generators
 grand_parent: Lectures
 nav_order: 4

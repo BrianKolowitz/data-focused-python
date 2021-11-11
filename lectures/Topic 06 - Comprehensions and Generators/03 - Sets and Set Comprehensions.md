@@ -3,7 +3,7 @@ layout: default
 title: 03 - Sets and Set Comprehensions
 parent: Topic 06 - Comprehensions and Generators
 grand_parent: Lectures
-nav_order: 2
+nav_order: 3
 ---
 # Sets and Set Comprehensions
 

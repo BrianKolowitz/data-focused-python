@@ -3,7 +3,7 @@ layout: default
 title: 02 - Lists and List Comprehensions
 parent: Topic 06 - Comprehensions and Generators
 grand_parent: Lectures
-nav_order: 1
+nav_order: 2
 ---
 # Python List Comprehensions
 [Python List Comprehension Tutorial](https://www.datacamp.com/community/tutorials/python-list-comprehension)

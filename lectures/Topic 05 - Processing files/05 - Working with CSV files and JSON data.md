@@ -52,14 +52,27 @@ exampleData
 
 
 ```python
-exampleData[0][0]
+exampleData[2][1]
 ```
 
 
 
 
-    '4/5/2014 13:34'
+    'Pears'
 
+
+
+
+```python
+with open('../automate_online-materials/example.csv', 'r') as f:
+    lines = []
+    for row in f:
+        cols = row.split(',')
+        lines.append(cols)
+print(lines)
+```
+
+    [['4/5/2014 13:34', 'Apples', '73\n'], ['4/5/2014 3:41', 'Cherries', '85\n'], ['4/6/2014 12:46', 'Pears', '14\n'], ['4/8/2014 8:59', 'Oranges', '52\n'], ['4/10/2014 2:07', 'Apples', '152\n'], ['4/10/2014 18:10', 'Bananas', '23\n'], ['4/10/2014 2:40', 'Strawberries', '98\n']]
 
 
 
@@ -87,15 +100,6 @@ for row in exampleReader:
     print(f"Row #{exampleReader.line_num} {row}")
 ```
 
-    Row #1 ['4/5/2014 13:34', 'Apples', '73']
-    Row #2 ['4/5/2014 3:41', 'Cherries', '85']
-    Row #3 ['4/6/2014 12:46', 'Pears', '14']
-    Row #4 ['4/8/2014 8:59', 'Oranges', '52']
-    Row #5 ['4/10/2014 2:07', 'Apples', '152']
-    Row #6 ['4/10/2014 18:10', 'Bananas', '23']
-    Row #7 ['4/10/2014 2:40', 'Strawberries', '98']
-
-
 ## writer Objects
 
 
@@ -107,6 +111,33 @@ outputFile = open('output.csv', 'w', newline='')
 ```python
 outputWriter = csv.writer(outputFile)
 ```
+
+
+```python
+outputFile.write?
+```
+
+
+    [0;31mSignature:[0m [0moutputFile[0m[0;34m.[0m[0mwrite[0m[0;34m([0m[0mtext[0m[0;34m,[0m [0;34m/[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+    [0;31mDocstring:[0m
+    Write string to stream.
+    Returns the number of characters written (which is always equal to
+    the length of the string).
+    [0;31mType:[0m      builtin_function_or_method
+
+
+
+
+```python
+outputWriter.writerow('spam')
+```
+
+
+
+
+    9
+
+
 
 
 ```python
@@ -142,6 +173,8 @@ outputFile.close()
 !cat output.csv
 ```
 
+    s,p,a,m
+    s,p,a,m
     spam,eggs,bacon,ham
     "Hello, world!",eggs,bacon,ham
 
@@ -233,17 +266,17 @@ If you tried to use DictReader objects with example.csv, which doesn’t have co
 exampleFile = open('../automate_online-materials/example.csv')
 exampleDictReader = csv.DictReader(exampleFile, ['time', 'name', 'amount'])
 for row in exampleDictReader:
-    print(row['time'], row['name'], row['amount'])
-
+    # print(row['time'], row['name'], row['amount'])
+    print(row['name'])
 ```
 
-    4/5/2014 13:34 Apples 73
-    4/5/2014 3:41 Cherries 85
-    4/6/2014 12:46 Pears 14
-    4/8/2014 8:59 Oranges 52
-    4/10/2014 2:07 Apples 152
-    4/10/2014 18:10 Bananas 23
-    4/10/2014 2:40 Strawberries 98
+    Apples
+    Cherries
+    Pears
+    Oranges
+    Apples
+    Bananas
+    Strawberries
 
 
 DictWriter objects use dictionaries to create CSV files.
@@ -321,7 +354,7 @@ jsonDataAsPythonValue
 
 
 
-    {'name': 'Zophie', 'isCat': True, 'miceCaught': 0, 'felineIQ': None}
+    {'isCat': True, 'miceCaught': 0, 'name': 'Zophie', 'felineIQ': None}
 
 
 
