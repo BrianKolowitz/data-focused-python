@@ -66,6 +66,7 @@ permalink: /lectures
 * [03 - Sets And Set Comprehensions](Topic 06 - Comprehensions and Generators/03 - Sets and Set Comprehensions.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2006%20-%20Comprehensions%20and%20Generators/03%20-%20Sets%20and%20Set%20Comprehensions.ipynb)\)
 * [04 - Dictionary Comprehensions](Topic 06 - Comprehensions and Generators/04 - Dictionary Comprehensions.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2006%20-%20Comprehensions%20and%20Generators/04%20-%20Dictionary%20Comprehensions.ipynb)\)
 * [05 - Generators And Yield](Topic 06 - Comprehensions and Generators/05 - Generators and yield.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2006%20-%20Comprehensions%20and%20Generators/05%20-%20Generators%20and%20yield.ipynb)\)
+* [Untitled](Topic 06 - Comprehensions and Generators/Untitled.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2006%20-%20Comprehensions%20and%20Generators/Untitled.ipynb)\)
 
 ## Topic 07 - Classes
 
@@ -82,12 +83,11 @@ permalink: /lectures
 
 ## Topic 10 - Data Processing and Visualization Part 1
 
-* [01.A - Cleaning And Transforming Data](Topic 10 - Data Processing and Visualization Part 1/01.a - Cleaning and Transforming Data.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/01.a%20-%20Cleaning%20and%20Transforming%20Data.ipynb)\)
-* [01.B - Grouping Data](Topic 10 - Data Processing and Visualization Part 1/01.b - Grouping Data.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/01.b%20-%20Grouping%20Data.ipynb)\)
-* [01.C - Descriptive Statistics](Topic 10 - Data Processing and Visualization Part 1/01.c - Descriptive Statistics.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/01.c%20-%20Descriptive%20Statistics.ipynb)\)
-* [02 - Basic Medical Data Visualization](Topic 10 - Data Processing and Visualization Part 1/02 - Basic Medical Data Visualization.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/02%20-%20Basic%20Medical%20Data%20Visualization.ipynb)\)
-* [03.A - Numpy Introduction](Topic 10 - Data Processing and Visualization Part 1/03.a - NumPy Introduction.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/03.a%20-%20NumPy%20Introduction.ipynb)\)
-* [03.B - Numpy Data Analysis](Topic 10 - Data Processing and Visualization Part 1/03.b - NumPy Data analysis.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/03.b%20-%20NumPy%20Data%20analysis.ipynb)\)
+* [01 - Numpy Your First Steps Into Data Science In Python](Topic 10 - Data Processing and Visualization Part 1/01 - NumPy Your First Steps Into Data Science in Python.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/01%20-%20NumPy%20Your%20First%20Steps%20Into%20Data%20Science%20in%20Python.ipynb)\)
+* [02 - Numpy Data Analysis](Topic 10 - Data Processing and Visualization Part 1/02 - NumPy Data analysis.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/02%20-%20NumPy%20Data%20analysis.ipynb)\)
+* [03 - Python Numpy Array Tutorial](Topic 10 - Data Processing and Visualization Part 1/03 - Python Numpy Array Tutorial.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/03%20-%20Python%20Numpy%20Array%20Tutorial.ipynb)\)
+* [04 - Pythonic Data Cleaning With Pandas And Numpy](Topic 10 - Data Processing and Visualization Part 1/04 - Pythonic Data Cleaning With Pandas and NumPy.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/04%20-%20Pythonic%20Data%20Cleaning%20With%20Pandas%20and%20NumPy.ipynb)\)
+* [05 - 10 Minutes To Pandas](Topic 10 - Data Processing and Visualization Part 1/05 - 10 minutes to pandas.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/05%20-%2010%20minutes%20to%20pandas.ipynb)\)
 
 ## Topic 11 - Data Processing and Visualization Part 2
 
@@ -97,6 +97,7 @@ permalink: /lectures
 * [02.B - Pandas Data Analysis Part 2](Topic 11 - Data Processing and Visualization Part 2/02.b - Pandas Data analysis Part 2.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2011%20-%20Data%20Processing%20and%20Visualization%20Part%202/02.b%20-%20Pandas%20Data%20analysis%20Part%202.ipynb)\)
 * [03 - Matplotlib Tutorial Python Plotting](Topic 11 - Data Processing and Visualization Part 2/03 - Matplotlib Tutorial Python Plotting.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2011%20-%20Data%20Processing%20and%20Visualization%20Part%202/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting.ipynb)\)
 * [04 - The Ultimate Python Seaborn Tutorial](Topic 11 - Data Processing and Visualization Part 2/04 - The Ultimate Python Seaborn Tutorial.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2011%20-%20Data%20Processing%20and%20Visualization%20Part%202/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial.ipynb)\)
+* [09 - Basic Medical Data Visualization](Topic 11 - Data Processing and Visualization Part 2/09 - Basic Medical Data Visualization.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2011%20-%20Data%20Processing%20and%20Visualization%20Part%202/09%20-%20Basic%20Medical%20Data%20Visualization.ipynb)\)
 
 ## Topic 12 - Web Scraping
 

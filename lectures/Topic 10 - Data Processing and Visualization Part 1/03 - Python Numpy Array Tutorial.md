@@ -1,11 +1,11 @@
 ---
 layout: default
-title: 03.a - NumPy Introduction
+title: 03 - Python Numpy Array Tutorial
 parent: Topic 10 - Data Processing and Visualization Part 1
 grand_parent: Lectures
-nav_order: 5
+nav_order: 3
 ---
-# Python Numpy Tutorial
+# Python Numpy Array Tutorial
 [Source](https://www.datacamp.com/community/tutorials/python-numpy-tutorial)
 
 A NumPy tutorial for beginners in which you'll learn how to create a NumPy array, use broadcasting, access values, manipulate arrays, and much more.
@@ -1429,7 +1429,7 @@ plt.show()
 
 
     
-![png](03.a%20-%20NumPy%20Introduction_files/03.a%20-%20NumPy%20Introduction_114_0.png)
+![png](03%20-%20Python%20Numpy%20Array%20Tutorial_files/03%20-%20Python%20Numpy%20Array%20Tutorial_114_0.png)
     
 
 
@@ -1464,7 +1464,7 @@ plt.show()
 
 
     
-![png](03.a%20-%20NumPy%20Introduction_files/03.a%20-%20NumPy%20Introduction_116_0.png)
+![png](03%20-%20Python%20Numpy%20Array%20Tutorial_files/03%20-%20Python%20Numpy%20Array%20Tutorial_116_0.png)
     
 
 

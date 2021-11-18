@@ -40,6 +40,7 @@ A common use case of generators is to [work with data streams or large files](ht
 def csv_reader(file_name):
     file = open(file_name)
     result = file.read().split("\n")
+    file.close()
     return result
 ```
 
@@ -147,6 +148,43 @@ Instead of using a for loop, you can also call `next()` on the generator object 
 
 
 ```python
+# 1, 1, 2, 3, 5, 8
+def fib():
+    p = 1
+    c = 1
+    yield p
+    yield c
+    while True:
+        nc = c + p
+        yield c + p
+        p = c
+        c = nc
+```
+
+
+```python
+for i in fib():
+    print(i)
+    if i > 100:
+        break
+```
+
+    1
+    1
+    2
+    3
+    5
+    8
+    13
+    21
+    34
+    55
+    89
+    144
+
+
+
+```python
 gen = infinite_sequence()
 ```
 
@@ -182,7 +220,7 @@ next(gen)
 
 
 
-    2
+    3
 
 
 
@@ -299,7 +337,7 @@ nums_squared_gc
 
 
 
-    <generator object <genexpr> at 0x7fcee989a0b0>
+    <generator object <genexpr> at 0x7fce98021200>
 
 
 
@@ -354,14 +392,14 @@ import cProfile
 cProfile.run('sum([i * 2 for i in range(10000)])')
 ```
 
-             5 function calls in 0.004 seconds
+             5 function calls in 0.003 seconds
     
        Ordered by: standard name
     
        ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-            1    0.004    0.004    0.004    0.004 <string>:1(<listcomp>)
-            1    0.000    0.000    0.004    0.004 <string>:1(<module>)
-            1    0.000    0.000    0.004    0.004 {built-in method builtins.exec}
+            1    0.002    0.002    0.002    0.002 <string>:1(<listcomp>)
+            1    0.000    0.000    0.002    0.002 <string>:1(<module>)
+            1    0.000    0.000    0.003    0.003 {built-in method builtins.exec}
             1    0.000    0.000    0.000    0.000 {built-in method builtins.sum}
             1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
     
@@ -373,15 +411,15 @@ cProfile.run('sum([i * 2 for i in range(10000)])')
 cProfile.run('sum((i * 2 for i in range(10000)))')
 ```
 
-             10005 function calls in 0.007 seconds
+             10005 function calls in 0.005 seconds
     
        Ordered by: standard name
     
        ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        10001    0.005    0.000    0.005    0.000 <string>:1(<genexpr>)
-            1    0.000    0.000    0.007    0.007 <string>:1(<module>)
-            1    0.000    0.000    0.007    0.007 {built-in method builtins.exec}
-            1    0.003    0.003    0.007    0.007 {built-in method builtins.sum}
+        10001    0.003    0.000    0.003    0.000 <string>:1(<genexpr>)
+            1    0.000    0.000    0.005    0.005 <string>:1(<module>)
+            1    0.000    0.000    0.005    0.005 {built-in method builtins.exec}
+            1    0.002    0.002    0.005    0.005 {built-in method builtins.sum}
             1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
     
     
@@ -726,7 +764,11 @@ file_name = "techcrunch.csv"
 lines = (line for line in open(file_name))
 list_line = (s.rstrip().split(",") for s in lines)
 cols = next(list_line)
+print(cols)
 ```
+
+    ['permalink', 'company', 'numEmps', 'category', 'city', 'state', 'fundedDate', 'raisedAmt', 'raisedCurrency', 'round']
+
 
 To sum this up, you first create a generator expression lines to yield each line in a file. Next, you iterate through that generator within the definition of another generator expression called list_line, which turns each line into a list of values. Then, you advance the iteration of list_line just once with `next()` to get a list of the column names from your CSV file.
 
@@ -768,11 +810,13 @@ lines = (line for line in open(file_name))
 list_line = (s.rstrip().split(",") for s in lines)
 cols = next(list_line)
 company_dicts = (dict(zip(cols, data)) for data in list_line)
+
 funding = (
     int(company_dict["raisedAmt"])
     for company_dict in company_dicts
     if company_dict["round"] == "a"
 )
+
 total_series_a = sum(funding)
 print(f"Total series A fundraising: ${total_series_a}")
 ```

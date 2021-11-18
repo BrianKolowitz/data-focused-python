@@ -23,7 +23,7 @@ A list can be defined directly by enumerating/listing out all of its elements be
 
 
 ```python
-num_cube=[8,64,216,512,1000]               
+num_cube=[8,64,216,512,1000]
 print(f"num_cube[] = {num_cube}")
 ```
 
@@ -39,7 +39,7 @@ Define an empty list and add elements using built-in method `append()` in a for 
 num_cube_floop=[]
 
 for n in range(1,11):
-    if n%2 == 0:               
+    if n % 2 == 0:
         num_cube_floop.append(n**3)
         
 print(f"num_cube_floop[] = {num_cube_floop}")
@@ -78,13 +78,19 @@ In the below code, `map( )` applies `lambda` expression(calculates a cube of the
 
 ```python
 numbers=[2,4,6,8,10]
-num_cube_map=list(map(lambda n:n**3,numbers))
+num_cube_map=list(map(lambda n: n**3, numbers))
 
 print(f"num_cube_map[] = {num_cube_map}") 
 ```
 
     num_cube_map[] = [8, 64, 216, 512, 1000]
 
+
+
+```python
+def cube_number(num):
+    return numm ** 3
+```
 
 There is yet another way of creating a List using Python’s Comprehension capabilities. It lets us create a List in a single line of code. It may seem a little difficult to understand at first as the syntax can be intimidating but here we are going to break it down for a simpler understanding.
 
@@ -133,11 +139,11 @@ print(f"name_ltr[] = {name_ltr}")
 
 ```python
 # with List Comprehension
-name_ltr_lc=[letter for letter in name]
+name_ltr_lc = [letter for letter in name]
 print(f"With List-Comprehension = {name_ltr_lc}")
 ```
 
-    With List-Comprehension = ['P', 'y', 't', 'h', 'o', 'n', ' ', 'P', 'r', 'o', 'g', 'r', 'a', 'm', 'm', 'i', 'n', 'g']
+    With List-Comprehension = ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
 
 
 In the above example, we need to create a List of all the characters of the string literal. The usual way of achieving this is by defining an empty List and using `append( )` method inside a for loop to add the elements to our List. Here for loop is iterating over the string literal name and `append( )` adds all single characters of the string literal to List `name_ltr`. The same result can be obtained using List Comprehension without even worrying about defining a List or using `append( )`.
@@ -203,7 +209,7 @@ print(f"words[] = {words}")
 ```python
 # with List Comprehension
 
-words_lc=[w for w in statement.split() if w.startswith('P')]
+words_lc = [w for w in statement.split() if w.startswith('P')]
 print(f"With List-Comprehension = {words_lc}")
 ```
 
@@ -227,7 +233,7 @@ Let’s create a List of numbers<10 where we have to calculate square for even n
 square_cube=[]  #creating a List of numbers - even number->square and odd number->cube
 
 for num in range(10):
-    if num%2==0:
+    if num % 2==0:
         square_cube.append(num**2)
     else:
         square_cube.append(num**3)
@@ -235,14 +241,14 @@ for num in range(10):
 print(f"square_cube[] = {square_cube}")
 ```
 
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     square_cube[] = [0, 1, 4, 27, 16, 125, 36, 343, 64, 729]
-    With List-Conprehension = [0, 1, 4, 27, 16, 125, 36, 343, 64, 729]
 
 
 
 ```python
 #with List Comprehension
-square_cube_lc=[n**2 if n%2==0 else n**3 for n in range(10)]
+square_cube_lc = [ n**2 if n%2==0 else n**3 for n in range(10) ]
 print(f"With List-Conprehension = {square_cube_lc}")
 ```
 
@@ -268,11 +274,11 @@ for num in range(10):
     else:
         odd.append(num**3)
 
-numbers.append((even,odd))
+numbers = [even,odd]
 print(f"numbers[] = {numbers}")
 ```
 
-    numbers[] = [([0, 4, 16, 36, 64], [1, 27, 125, 343, 729])]
+    numbers[] = [[0, 4, 16, 36, 64], [1, 27, 125, 343, 729]]
 
 
 
@@ -314,7 +320,8 @@ print(f"cartesian[] = \n {cartesian}")
 
 ```python
 #with List Comprehension
-print(f"With List-Conprehension = \n {[(p,q) for p in char_list for q in int_list]}")
+cartesian_lc = [(x,y) for x in char_list for y in int_list]
+print(f"With List-Conprehension = \n {cartesian_lc}")
 ```
 
     With List-Conprehension = 
@@ -387,7 +394,7 @@ print(f"With List-Conprehension = {person_lc}")
 
 ```python
 #with Set Comprehension
-person_sc={l for p in range(len(person)) for l in person[p]['language']}  
+person_sc = {l for p in range(len(person)) for l in person[p]['language']}
 print(f"With Set-Conprehension = {person_sc}")
 ```
 
@@ -401,7 +408,10 @@ Unlike both List and Set Comprehension, Dictionary Comprehension is used when da
 
 ```python
 numbers=[num for num in range(1,11)]    #creating a List of numbers from 1 to 10
+print(numbers)
 num_cube=[n**3 for n in numbers]        #creating a List of cubes of numbers from 1 to 10     
+print(num_cube)
+
 cubes={}
 
 for (key,value) in zip(numbers,num_cube):
@@ -410,13 +420,15 @@ for (key,value) in zip(numbers,num_cube):
 print(f"cubes = {cubes}")  
 ```
 
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    [1, 8, 27, 64, 125, 216, 343, 512, 729, 1000]
     cubes = {1: 1, 2: 8, 3: 27, 4: 64, 5: 125, 6: 216, 7: 343, 8: 512, 9: 729, 10: 1000}
 
 
 
 ```python
 #with Dictionary Comprehension
-cubes_dc={key:value for (key,value) in zip(numbers,num_cube)}
+cubes_dc = {key:value for (key,value) in zip(numbers,num_cube)}
 print(f"With Dictionary-Comprehension = {cubes_dc}")
 ```
 

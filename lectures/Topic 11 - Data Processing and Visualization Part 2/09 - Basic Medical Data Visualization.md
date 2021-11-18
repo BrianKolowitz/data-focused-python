@@ -1,9 +1,9 @@
 ---
 layout: default
-title: 02 - Basic Medical Data Visualization
-parent: Topic 10 - Data Processing and Visualization Part 1
+title: 09 - Basic Medical Data Visualization
+parent: Topic 11 - Data Processing and Visualization Part 2
 grand_parent: Lectures
-nav_order: 4
+nav_order: 7
 ---
 # Basic Medical Data Exploration Visualization  Heart Diseases
 
@@ -744,7 +744,7 @@ plt.show()
 
 
     
-![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_26_0.png)
+![png](09%20-%20Basic%20Medical%20Data%20Visualization_files/09%20-%20Basic%20Medical%20Data%20Visualization_26_0.png)
     
 
 
@@ -760,7 +760,7 @@ plt.show()
 
 
     
-![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_27_0.png)
+![png](09%20-%20Basic%20Medical%20Data%20Visualization_files/09%20-%20Basic%20Medical%20Data%20Visualization_27_0.png)
     
 
 
@@ -782,7 +782,7 @@ plt.close('all')
 
 
     
-![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_29_0.png)
+![png](09%20-%20Basic%20Medical%20Data%20Visualization_files/09%20-%20Basic%20Medical%20Data%20Visualization_29_0.png)
     
 
 
@@ -796,7 +796,7 @@ plt.show()
 
 
     
-![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_30_0.png)
+![png](09%20-%20Basic%20Medical%20Data%20Visualization_files/09%20-%20Basic%20Medical%20Data%20Visualization_30_0.png)
     
 
 
@@ -820,7 +820,7 @@ plt.show()
 
 
     
-![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_32_0.png)
+![png](09%20-%20Basic%20Medical%20Data%20Visualization_files/09%20-%20Basic%20Medical%20Data%20Visualization_32_0.png)
     
 
 
@@ -834,7 +834,7 @@ plt.show()
 
 
     
-![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_33_0.png)
+![png](09%20-%20Basic%20Medical%20Data%20Visualization_files/09%20-%20Basic%20Medical%20Data%20Visualization_33_0.png)
     
 
 
@@ -859,7 +859,7 @@ plt.show()
 
 
     
-![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_35_0.png)
+![png](09%20-%20Basic%20Medical%20Data%20Visualization_files/09%20-%20Basic%20Medical%20Data%20Visualization_35_0.png)
     
 
 
@@ -875,7 +875,7 @@ plt.show()
 
 
     
-![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_36_0.png)
+![png](09%20-%20Basic%20Medical%20Data%20Visualization_files/09%20-%20Basic%20Medical%20Data%20Visualization_36_0.png)
     
 
 
@@ -895,7 +895,7 @@ plt.show()
 
 
     
-![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_38_0.png)
+![png](09%20-%20Basic%20Medical%20Data%20Visualization_files/09%20-%20Basic%20Medical%20Data%20Visualization_38_0.png)
     
 
 
@@ -984,7 +984,7 @@ plt.show()
 
 
     
-![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_41_0.png)
+![png](09%20-%20Basic%20Medical%20Data%20Visualization_files/09%20-%20Basic%20Medical%20Data%20Visualization_41_0.png)
     
 
 
@@ -1000,7 +1000,7 @@ plt.show()
 
 
     
-![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_43_0.png)
+![png](09%20-%20Basic%20Medical%20Data%20Visualization_files/09%20-%20Basic%20Medical%20Data%20Visualization_43_0.png)
     
 
 
@@ -1021,7 +1021,7 @@ plt.show()
 
 
     
-![png](02%20-%20Basic%20Medical%20Data%20Visualization_files/02%20-%20Basic%20Medical%20Data%20Visualization_45_1.png)
+![png](09%20-%20Basic%20Medical%20Data%20Visualization_files/09%20-%20Basic%20Medical%20Data%20Visualization_45_1.png)
     
 
 

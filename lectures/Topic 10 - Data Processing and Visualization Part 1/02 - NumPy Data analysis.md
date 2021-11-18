@@ -1,9 +1,9 @@
 ---
 layout: default
-title: 03.b - NumPy Data analysis
+title: 02 - NumPy Data analysis
 parent: Topic 10 - Data Processing and Visualization Part 1
 grand_parent: Lectures
-nav_order: 6
+nav_order: 2
 ---
 # NumPy Tutorial: Data analysis with Python
 [Source](https://www.dataquest.io/blog/numpy-tutorial-python/)

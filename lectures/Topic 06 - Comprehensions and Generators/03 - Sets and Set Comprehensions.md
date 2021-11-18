@@ -751,7 +751,7 @@ x.add('quux')
 
     AttributeError                            Traceback (most recent call last)
 
-    /var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/ipykernel_93351/3158252394.py in <module>
+    /var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/ipykernel_22205/3158252394.py in <module>
     ----> 1 x.add('quux')
     
 
@@ -808,7 +808,7 @@ b = {'Even' if i % 2 else 'Odd' for i in range(10)}
 print(b)
 ```
 
-    {'Even', 'Odd'}
+    {'Odd', 'Even'}
 
 
 
