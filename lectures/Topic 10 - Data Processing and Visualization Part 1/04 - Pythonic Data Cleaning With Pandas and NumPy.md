@@ -689,8 +689,12 @@ Let’s see what happens when we run this regex across our dataset:
 
 ```python
 extr = df['Date of Publication'].str.extract(r'^(\d{4})', expand=False)
+print(type(extr))
 extr.head()
 ```
+
+    <class 'pandas.core.series.Series'>
+
 
 
 
@@ -847,9 +851,46 @@ We clean the column as follows:
 ```python
 pub = df['Place of Publication']
 london = pub.str.contains('London')
-london[:5]
-oxford = pub.str.contains('Oxford')
+london.head()
 ```
+
+
+
+
+    Identifier
+    206    True
+    216    True
+    218    True
+    472    True
+    480    True
+    Name: Place of Publication, dtype: bool
+
+
+
+
+```python
+oxford = pub.str.contains('Oxford')
+oxford
+```
+
+
+
+
+    Identifier
+    206        False
+    216        False
+    218        False
+    472        False
+    480        False
+               ...  
+    4158088    False
+    4158128    False
+    4159563    False
+    4159587    False
+    4160339    False
+    Name: Place of Publication, Length: 8287, dtype: bool
+
+
 
 We combine them with `np.where`:
 

@@ -1,9 +1,9 @@
 ---
 layout: default
-title: 04.b - Even More Web Scraping with BeautifulSoup
+title: 08 - Even More Web Scraping with BeautifulSoup
 parent: Topic 12 - Web Scraping
 grand_parent: Lectures
-nav_order: 7
+nav_order: 9
 ---
 # Using Python BeautifulSoup to scrape DataCamp Tutorials & Analyze
 [Source](https://www.datacamp.com/community/tutorials/tutorial-python-beautifulsoup-datacamp-tutorials)
@@ -53,13 +53,77 @@ The following lines of code do just that.
 
 
 ```python
-url = "https://www.datacamp.com/community/tutorials"
+url = "https://www.datacamp.com/community/tutorials?page=1"
 html = urlopen(url)
 soup = BeautifulSoup(html, 'html')
 
 pages = [i.text for i in soup.find_all('a') if 'community/tutorials?page=' in str(i)]
 lastpage = pages[-1]
 ```
+
+
+    ---------------------------------------------------------------------------
+
+    HTTPError                                 Traceback (most recent call last)
+
+    /var/folders/jd/pq0swyt521jb2424d6fvth840000gn/T/ipykernel_66581/1763677122.py in <module>
+          1 url = "https://www.datacamp.com/community/tutorials"
+    ----> 2 html = urlopen(url)
+          3 soup = BeautifulSoup(html, 'html')
+          4 
+          5 pages = [i.text for i in soup.find_all('a') if 'community/tutorials?page=' in str(i)]
+
+
+    ~/opt/miniconda3/envs/cmu39/lib/python3.9/urllib/request.py in urlopen(url, data, timeout, cafile, capath, cadefault, context)
+        212     else:
+        213         opener = _opener
+    --> 214     return opener.open(url, data, timeout)
+        215 
+        216 def install_opener(opener):
+
+
+    ~/opt/miniconda3/envs/cmu39/lib/python3.9/urllib/request.py in open(self, fullurl, data, timeout)
+        521         for processor in self.process_response.get(protocol, []):
+        522             meth = getattr(processor, meth_name)
+    --> 523             response = meth(req, response)
+        524 
+        525         return response
+
+
+    ~/opt/miniconda3/envs/cmu39/lib/python3.9/urllib/request.py in http_response(self, request, response)
+        630         # request was successfully received, understood, and accepted.
+        631         if not (200 <= code < 300):
+    --> 632             response = self.parent.error(
+        633                 'http', request, response, code, msg, hdrs)
+        634 
+
+
+    ~/opt/miniconda3/envs/cmu39/lib/python3.9/urllib/request.py in error(self, proto, *args)
+        559         if http_err:
+        560             args = (dict, 'default', 'http_error_default') + orig_args
+    --> 561             return self._call_chain(*args)
+        562 
+        563 # XXX probably also want an abstract factory that knows when it makes
+
+
+    ~/opt/miniconda3/envs/cmu39/lib/python3.9/urllib/request.py in _call_chain(self, chain, kind, meth_name, *args)
+        492         for handler in handlers:
+        493             func = getattr(handler, meth_name)
+    --> 494             result = func(*args)
+        495             if result is not None:
+        496                 return result
+
+
+    ~/opt/miniconda3/envs/cmu39/lib/python3.9/urllib/request.py in http_error_default(self, req, fp, code, msg, hdrs)
+        639 class HTTPDefaultErrorHandler(BaseHandler):
+        640     def http_error_default(self, req, fp, code, msg, hdrs):
+    --> 641         raise HTTPError(req.full_url, code, msg, hdrs, fp)
+        642 
+        643 class HTTPRedirectHandler(BaseHandler):
+
+
+    HTTPError: HTTP Error 503: Service Temporarily Unavailable
+
 
 
 ```python
@@ -354,7 +418,7 @@ datacamp.groupby([datacamp['publishdate'].dt.year, datacamp['publishdate'].dt.mo
 
 
     
-![png](04.b%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_files/04.b%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_30_1.png)
+![png](08%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_files/08%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_30_1.png)
     
 
 
@@ -380,7 +444,7 @@ data[data["publishdate"]>='2017-01-01'] \
 
 
     
-![png](04.b%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_files/04.b%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_32_1.png)
+![png](08%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_files/08%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_32_1.png)
     
 
 
@@ -406,7 +470,7 @@ data[data["publishdate"]>='2017-01-01']["author"] \
 
 
     
-![png](04.b%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_files/04.b%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_35_1.png)
+![png](08%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_files/08%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_35_1.png)
     
 
 
@@ -560,7 +624,7 @@ ax.xaxis.set_major_formatter(ticker.FixedFormatter(ticklabels))
 
 
     
-![png](04.b%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_files/04.b%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_45_0.png)
+![png](08%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_files/08%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_45_0.png)
     
 
 
@@ -598,7 +662,7 @@ sns.lmplot('posts',
 
 
     
-![png](04.b%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_files/04.b%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_49_1.png)
+![png](08%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_files/08%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup_49_1.png)
     
 
 

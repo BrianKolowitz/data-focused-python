@@ -135,15 +135,30 @@ It’ll be a relatively rudimentary curve, though. You’ll take whatever the av
 
 ```python
 import numpy as np
-CURVE_CENTER = 80
-grades = np.array([72, 35, 64, 88, 51, 90, 74, 12])
 
+CURVE_CENTER = 80
+scores = [72, 35, 64, 88, 51, 90, 74, 12]
+print(type(scores), scores)
+
+grades = np.array(scores)
+print(type(grades), grades)
+```
+
+    <class 'list'> [72, 35, 64, 88, 51, 90, 74, 12]
+    <class 'numpy.ndarray'> [72 35 64 88 51 90 74 12]
+
+
+
+```python
 def curve(grades):
     average = grades.mean()
     change = CURVE_CENTER - average
     new_grades = grades + change
     return np.clip(new_grades, grades, 100)
+```
 
+
+```python
 curve(grades)
 ```
 
@@ -196,8 +211,25 @@ import numpy as np
 temperatures = np.array([
     29.3, 42.1, 18.8, 16.1, 38.0, 12.5,
     12.6, 49.9, 38.6, 31.3, 9.2, 22.2
-    ]).reshape(2, 2, 3)
+    ])
+print(temperatures.shape, temperatures)
 ```
+
+    (12,) [29.3 42.1 18.8 16.1 38.  12.5 12.6 49.9 38.6 31.3  9.2 22.2]
+
+
+
+```python
+temperatures = temperatures.reshape(2, 2, 3)
+print(temperatures.shape, temperatures)
+```
+
+    (2, 2, 3) [[[29.3 42.1 18.8]
+      [16.1 38.  12.5]]
+    
+     [[12.6 49.9 38.6]
+      [31.3  9.2 22.2]]]
+
 
 
 ```python
@@ -266,6 +298,18 @@ table = np.array([
     [4, 3, 2, 0],
 ])
 ```
+
+
+```python
+table.shape
+```
+
+
+
+
+    (4, 4)
+
+
 
 
 ```python
@@ -404,6 +448,19 @@ A + B
 
 
 
+
+```python
+C = A + B
+C.shape
+```
+
+
+
+
+    (4, 6, 8)
+
+
+
 The way broadcasting works is that NumPy duplicates the plane in B three times so that you have a total of four, matching the number of planes in A. It also duplicates the single row in A five times for a total of six, matching the number of rows in B. Then it adds each element in the newly expanded A array to its counterpart in the same location in B. The result of each calculation shows up in the corresponding location of the output.
 
 >Note: This is a good way to create an array from a range using `arange()`!
@@ -440,6 +497,18 @@ square = np.array([
 
 
 ```python
+square.shape
+```
+
+
+
+
+    (4, 4)
+
+
+
+
+```python
 for i in range(4):
     print(square[:, i], square[:, i].sum())
 ```
@@ -453,7 +522,7 @@ for i in range(4):
 
 ```python
 for i in range(4):
-    print(square[i, :], square[i, :].sum())
+    print(square[i,:], square[i,:].sum())
 ```
 
     [16  3  2 13] 34
@@ -607,7 +676,7 @@ rng
 
 
 
-    Generator(PCG64) at 0x7F87B886EE40
+    Generator(PCG64) at 0x7FEF00EA3660
 
 
 
@@ -620,7 +689,7 @@ values[:5]
 
 
 
-    array([0.51634096, 0.5171426 , 0.23453928, 0.90653998, 1.7712652 ])
+    array([ 1.47992428, -0.75488568, -0.03016713,  0.83777657, -0.65697064])
 
 
 
@@ -633,7 +702,7 @@ std
 
 
 
-    0.994851152293371
+    0.9938107021724448
 
 
 
@@ -646,7 +715,7 @@ filtered.size
 
 
 
-    9557
+    9521
 
 
 
@@ -670,14 +739,9 @@ filtered.size / values.size
 
 
 
-    0.9557
+    0.9521
 
 
-
-
-```python
-
-```
 
 Here you use a potentially strange-looking syntax to combine filter conditions: a **binary & operator**. Why would that be the case? It’s because NumPy designates `&` and `|` as the vectorized, element-wise operators to combine Booleans. If you try to do `A and B`, then you’ll get a warning about how the truth value for an array is weird, because the and is operating on the truth value of the whole array, not element by element.
 
@@ -858,6 +922,22 @@ np.concatenate((a, b), axis=None)
 
 
 
+
+```python
+a = np.array([
+    [4, 8],
+    [6, 1]
+])
+print(a.sum())
+print(a.sum(axis=0))
+print(a.sum(axis=1))
+```
+
+    19
+    [10  9]
+    [12  7]
+
+
 Inputs 4 and 5 show the slightly more intuitive functions `hstack()` and `vstack()`. Inputs 6 and 7 show the more generic concatenate(), first without an axis argument and then with `axis=None`. This flattening behavior is similar in form to what you just saw with `sort()`.
 
 One important stumbling block to note is that all these functions take a tuple of arrays as their first argument rather than a variable number of arguments as you might expect. You can tell because there’s an extra pair of parentheses.
@@ -891,6 +971,7 @@ from math import e, factorial
 import numpy as np
 
 fac = np.vectorize(factorial)
+print(fac)
 
 def e_x(x, terms=10):
     """Approximates e^x using a given number of terms of
@@ -899,6 +980,9 @@ def e_x(x, terms=10):
     n = np.arange(terms)
     return np.sum((x ** n) / fac(n))
 ```
+
+    <numpy.vectorize object at 0x7fef00eb0c10>
+
 
 
 ```python

@@ -1,9 +1,9 @@
 ---
 layout: default
-title: 03.c Web scraping with Scrapy
+title: 06 - Web scraping with Scrapy
 parent: Topic 12 - Web Scraping
 grand_parent: Lectures
-nav_order: 5
+nav_order: 7
 ---
 # Web scraping with Scrapy
 
@@ -103,18 +103,18 @@ Start your scraper with the following command:
 !scrapy runspider scrapers/scraper1.py
 ```
 
-    2021-10-21 11:30:37 [scrapy.utils.log] INFO: Scrapy 2.5.1 started (bot: scrapybot)
-    2021-10-21 11:30:37 [scrapy.utils.log] INFO: Versions: lxml 4.6.3.0, libxml2 2.9.10, cssselect 1.1.0, parsel 1.6.0, w3lib 1.22.0, Twisted 21.7.0, Python 3.9.7 (default, Sep 16 2021, 08:50:36) - [Clang 10.0.0 ], pyOpenSSL 21.0.0 (OpenSSL 1.1.1l  24 Aug 2021), cryptography 35.0.0, Platform macOS-10.16-x86_64-i386-64bit
-    2021-10-21 11:30:37 [scrapy.utils.log] DEBUG: Using reactor: twisted.internet.selectreactor.SelectReactor
-    2021-10-21 11:30:37 [scrapy.crawler] INFO: Overridden settings:
+    2021-12-02 09:56:32 [scrapy.utils.log] INFO: Scrapy 2.5.1 started (bot: scrapybot)
+    2021-12-02 09:56:32 [scrapy.utils.log] INFO: Versions: lxml 4.6.3.0, libxml2 2.9.10, cssselect 1.1.0, parsel 1.6.0, w3lib 1.22.0, Twisted 21.7.0, Python 3.9.7 (default, Sep 16 2021, 08:50:36) - [Clang 10.0.0 ], pyOpenSSL 21.0.0 (OpenSSL 1.1.1l  24 Aug 2021), cryptography 35.0.0, Platform macOS-10.16-x86_64-i386-64bit
+    2021-12-02 09:56:32 [scrapy.utils.log] DEBUG: Using reactor: twisted.internet.selectreactor.SelectReactor
+    2021-12-02 09:56:32 [scrapy.crawler] INFO: Overridden settings:
     {'SPIDER_LOADER_WARN_ONLY': True}
-    2021-10-21 11:30:37 [scrapy.extensions.telnet] INFO: Telnet Password: 69d098b24fbe31f9
-    2021-10-21 11:30:37 [scrapy.middleware] INFO: Enabled extensions:
+    2021-12-02 09:56:32 [scrapy.extensions.telnet] INFO: Telnet Password: 87dad0cfba02f504
+    2021-12-02 09:56:32 [scrapy.middleware] INFO: Enabled extensions:
     ['scrapy.extensions.corestats.CoreStats',
      'scrapy.extensions.telnet.TelnetConsole',
      'scrapy.extensions.memusage.MemoryUsage',
      'scrapy.extensions.logstats.LogStats']
-    2021-10-21 11:30:37 [scrapy.middleware] INFO: Enabled downloader middlewares:
+    2021-12-02 09:56:32 [scrapy.middleware] INFO: Enabled downloader middlewares:
     ['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
      'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
      'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
@@ -126,45 +126,45 @@ Start your scraper with the following command:
      'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
      'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
      'scrapy.downloadermiddlewares.stats.DownloaderStats']
-    2021-10-21 11:30:37 [scrapy.middleware] INFO: Enabled spider middlewares:
+    2021-12-02 09:56:32 [scrapy.middleware] INFO: Enabled spider middlewares:
     ['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
      'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
      'scrapy.spidermiddlewares.referer.RefererMiddleware',
      'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
      'scrapy.spidermiddlewares.depth.DepthMiddleware']
-    2021-10-21 11:30:37 [scrapy.middleware] INFO: Enabled item pipelines:
+    2021-12-02 09:56:32 [scrapy.middleware] INFO: Enabled item pipelines:
     []
-    2021-10-21 11:30:37 [scrapy.core.engine] INFO: Spider opened
-    2021-10-21 11:30:37 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
-    2021-10-21 11:30:37 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
-    2021-10-21 11:30:37 [scrapy.core.engine] DEBUG: Crawled (403) <GET http://brickset.com/sets/year-2016> (referer: None)
-    2021-10-21 11:30:37 [scrapy.spidermiddlewares.httperror] INFO: Ignoring response <403 http://brickset.com/sets/year-2016>: HTTP status code is not handled or not allowed
-    2021-10-21 11:30:37 [scrapy.core.engine] INFO: Closing spider (finished)
-    2021-10-21 11:30:37 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+    2021-12-02 09:56:32 [scrapy.core.engine] INFO: Spider opened
+    2021-12-02 09:56:32 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+    2021-12-02 09:56:32 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+    2021-12-02 09:56:32 [scrapy.core.engine] DEBUG: Crawled (403) <GET http://brickset.com/sets/year-2016> (referer: None)
+    2021-12-02 09:56:32 [scrapy.spidermiddlewares.httperror] INFO: Ignoring response <403 http://brickset.com/sets/year-2016>: HTTP status code is not handled or not allowed
+    2021-12-02 09:56:32 [scrapy.core.engine] INFO: Closing spider (finished)
+    2021-12-02 09:56:32 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
     {'downloader/request_bytes': 230,
      'downloader/request_count': 1,
      'downloader/request_method_count/GET': 1,
-     'downloader/response_bytes': 2140,
+     'downloader/response_bytes': 2144,
      'downloader/response_count': 1,
      'downloader/response_status_count/403': 1,
-     'elapsed_time_seconds': 0.198192,
+     'elapsed_time_seconds': 0.234051,
      'finish_reason': 'finished',
-     'finish_time': datetime.datetime(2021, 10, 21, 15, 30, 37, 904414),
+     'finish_time': datetime.datetime(2021, 12, 2, 14, 56, 32, 674044),
      'httpcompression/response_bytes': 3136,
      'httpcompression/response_count': 1,
      'httperror/response_ignored_count': 1,
      'httperror/response_ignored_status_count/403': 1,
      'log_count/DEBUG': 1,
      'log_count/INFO': 11,
-     'memusage/max': 228245504,
-     'memusage/startup': 228245504,
+     'memusage/max': 56471552,
+     'memusage/startup': 56471552,
      'response_received_count': 1,
      'scheduler/dequeued': 1,
      'scheduler/dequeued/memory': 1,
      'scheduler/enqueued': 1,
      'scheduler/enqueued/memory': 1,
-     'start_time': datetime.datetime(2021, 10, 21, 15, 30, 37, 706222)}
-    2021-10-21 11:30:37 [scrapy.core.engine] INFO: Spider closed (finished)
+     'start_time': datetime.datetime(2021, 12, 2, 14, 56, 32, 439993)}
+    2021-12-02 09:56:32 [scrapy.core.engine] INFO: Spider closed (finished)
 
 
 That’s a lot of output, so let’s break it down.
@@ -282,18 +282,18 @@ Save the file as ```scrapers/scraper2.py``` and run the scraper again:
 !scrapy runspider scrapers/scraper2.py
 ```
 
-    2021-10-21 11:30:48 [scrapy.utils.log] INFO: Scrapy 2.5.1 started (bot: scrapybot)
-    2021-10-21 11:30:48 [scrapy.utils.log] INFO: Versions: lxml 4.6.3.0, libxml2 2.9.10, cssselect 1.1.0, parsel 1.6.0, w3lib 1.22.0, Twisted 21.7.0, Python 3.9.7 (default, Sep 16 2021, 08:50:36) - [Clang 10.0.0 ], pyOpenSSL 21.0.0 (OpenSSL 1.1.1l  24 Aug 2021), cryptography 35.0.0, Platform macOS-10.16-x86_64-i386-64bit
-    2021-10-21 11:30:48 [scrapy.utils.log] DEBUG: Using reactor: twisted.internet.selectreactor.SelectReactor
-    2021-10-21 11:30:48 [scrapy.crawler] INFO: Overridden settings:
+    2021-12-02 09:56:39 [scrapy.utils.log] INFO: Scrapy 2.5.1 started (bot: scrapybot)
+    2021-12-02 09:56:39 [scrapy.utils.log] INFO: Versions: lxml 4.6.3.0, libxml2 2.9.10, cssselect 1.1.0, parsel 1.6.0, w3lib 1.22.0, Twisted 21.7.0, Python 3.9.7 (default, Sep 16 2021, 08:50:36) - [Clang 10.0.0 ], pyOpenSSL 21.0.0 (OpenSSL 1.1.1l  24 Aug 2021), cryptography 35.0.0, Platform macOS-10.16-x86_64-i386-64bit
+    2021-12-02 09:56:39 [scrapy.utils.log] DEBUG: Using reactor: twisted.internet.selectreactor.SelectReactor
+    2021-12-02 09:56:39 [scrapy.crawler] INFO: Overridden settings:
     {'SPIDER_LOADER_WARN_ONLY': True}
-    2021-10-21 11:30:48 [scrapy.extensions.telnet] INFO: Telnet Password: 9f07aa540cf71937
-    2021-10-21 11:30:48 [scrapy.middleware] INFO: Enabled extensions:
+    2021-12-02 09:56:39 [scrapy.extensions.telnet] INFO: Telnet Password: 7e770f35f822030d
+    2021-12-02 09:56:39 [scrapy.middleware] INFO: Enabled extensions:
     ['scrapy.extensions.corestats.CoreStats',
      'scrapy.extensions.telnet.TelnetConsole',
      'scrapy.extensions.memusage.MemoryUsage',
      'scrapy.extensions.logstats.LogStats']
-    2021-10-21 11:30:48 [scrapy.middleware] INFO: Enabled downloader middlewares:
+    2021-12-02 09:56:39 [scrapy.middleware] INFO: Enabled downloader middlewares:
     ['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
      'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
      'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
@@ -305,45 +305,45 @@ Save the file as ```scrapers/scraper2.py``` and run the scraper again:
      'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
      'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
      'scrapy.downloadermiddlewares.stats.DownloaderStats']
-    2021-10-21 11:30:48 [scrapy.middleware] INFO: Enabled spider middlewares:
+    2021-12-02 09:56:40 [scrapy.middleware] INFO: Enabled spider middlewares:
     ['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
      'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
      'scrapy.spidermiddlewares.referer.RefererMiddleware',
      'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
      'scrapy.spidermiddlewares.depth.DepthMiddleware']
-    2021-10-21 11:30:48 [scrapy.middleware] INFO: Enabled item pipelines:
+    2021-12-02 09:56:40 [scrapy.middleware] INFO: Enabled item pipelines:
     []
-    2021-10-21 11:30:48 [scrapy.core.engine] INFO: Spider opened
-    2021-10-21 11:30:48 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
-    2021-10-21 11:30:48 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
-    2021-10-21 11:30:48 [scrapy.core.engine] DEBUG: Crawled (403) <GET http://brickset.com/sets/year-2016> (referer: None)
-    2021-10-21 11:30:48 [scrapy.spidermiddlewares.httperror] INFO: Ignoring response <403 http://brickset.com/sets/year-2016>: HTTP status code is not handled or not allowed
-    2021-10-21 11:30:48 [scrapy.core.engine] INFO: Closing spider (finished)
-    2021-10-21 11:30:48 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+    2021-12-02 09:56:40 [scrapy.core.engine] INFO: Spider opened
+    2021-12-02 09:56:40 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+    2021-12-02 09:56:40 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+    2021-12-02 09:56:40 [scrapy.core.engine] DEBUG: Crawled (403) <GET http://brickset.com/sets/year-2016> (referer: None)
+    2021-12-02 09:56:40 [scrapy.spidermiddlewares.httperror] INFO: Ignoring response <403 http://brickset.com/sets/year-2016>: HTTP status code is not handled or not allowed
+    2021-12-02 09:56:40 [scrapy.core.engine] INFO: Closing spider (finished)
+    2021-12-02 09:56:40 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
     {'downloader/request_bytes': 230,
      'downloader/request_count': 1,
      'downloader/request_method_count/GET': 1,
-     'downloader/response_bytes': 2139,
+     'downloader/response_bytes': 2144,
      'downloader/response_count': 1,
      'downloader/response_status_count/403': 1,
-     'elapsed_time_seconds': 0.173081,
+     'elapsed_time_seconds': 0.17013,
      'finish_reason': 'finished',
-     'finish_time': datetime.datetime(2021, 10, 21, 15, 30, 48, 436068),
+     'finish_time': datetime.datetime(2021, 12, 2, 14, 56, 40, 176780),
      'httpcompression/response_bytes': 3136,
      'httpcompression/response_count': 1,
      'httperror/response_ignored_count': 1,
      'httperror/response_ignored_status_count/403': 1,
      'log_count/DEBUG': 1,
      'log_count/INFO': 11,
-     'memusage/max': 226410496,
-     'memusage/startup': 226410496,
+     'memusage/max': 56545280,
+     'memusage/startup': 56545280,
      'response_received_count': 1,
      'scheduler/dequeued': 1,
      'scheduler/dequeued/memory': 1,
      'scheduler/enqueued': 1,
      'scheduler/enqueued/memory': 1,
-     'start_time': datetime.datetime(2021, 10, 21, 15, 30, 48, 262987)}
-    2021-10-21 11:30:48 [scrapy.core.engine] INFO: Spider closed (finished)
+     'start_time': datetime.datetime(2021, 12, 2, 14, 56, 40, 6650)}
+    2021-12-02 09:56:40 [scrapy.core.engine] INFO: Spider closed (finished)
 
 
 ## Step 3 — Crawling Multiple Pages
@@ -415,18 +415,18 @@ Save this as ```scrapers/scraper3.py``` and run the file
 !scrapy runspider scrapers/scraper3.py
 ```
 
-    2021-10-21 11:30:50 [scrapy.utils.log] INFO: Scrapy 2.5.1 started (bot: scrapybot)
-    2021-10-21 11:30:50 [scrapy.utils.log] INFO: Versions: lxml 4.6.3.0, libxml2 2.9.10, cssselect 1.1.0, parsel 1.6.0, w3lib 1.22.0, Twisted 21.7.0, Python 3.9.7 (default, Sep 16 2021, 08:50:36) - [Clang 10.0.0 ], pyOpenSSL 21.0.0 (OpenSSL 1.1.1l  24 Aug 2021), cryptography 35.0.0, Platform macOS-10.16-x86_64-i386-64bit
-    2021-10-21 11:30:50 [scrapy.utils.log] DEBUG: Using reactor: twisted.internet.selectreactor.SelectReactor
-    2021-10-21 11:30:50 [scrapy.crawler] INFO: Overridden settings:
+    2021-12-02 09:56:44 [scrapy.utils.log] INFO: Scrapy 2.5.1 started (bot: scrapybot)
+    2021-12-02 09:56:44 [scrapy.utils.log] INFO: Versions: lxml 4.6.3.0, libxml2 2.9.10, cssselect 1.1.0, parsel 1.6.0, w3lib 1.22.0, Twisted 21.7.0, Python 3.9.7 (default, Sep 16 2021, 08:50:36) - [Clang 10.0.0 ], pyOpenSSL 21.0.0 (OpenSSL 1.1.1l  24 Aug 2021), cryptography 35.0.0, Platform macOS-10.16-x86_64-i386-64bit
+    2021-12-02 09:56:44 [scrapy.utils.log] DEBUG: Using reactor: twisted.internet.selectreactor.SelectReactor
+    2021-12-02 09:56:44 [scrapy.crawler] INFO: Overridden settings:
     {'SPIDER_LOADER_WARN_ONLY': True}
-    2021-10-21 11:30:50 [scrapy.extensions.telnet] INFO: Telnet Password: 49053a2ee67de37f
-    2021-10-21 11:30:50 [scrapy.middleware] INFO: Enabled extensions:
+    2021-12-02 09:56:44 [scrapy.extensions.telnet] INFO: Telnet Password: 78c1dd4be4e0c757
+    2021-12-02 09:56:44 [scrapy.middleware] INFO: Enabled extensions:
     ['scrapy.extensions.corestats.CoreStats',
      'scrapy.extensions.telnet.TelnetConsole',
      'scrapy.extensions.memusage.MemoryUsage',
      'scrapy.extensions.logstats.LogStats']
-    2021-10-21 11:30:50 [scrapy.middleware] INFO: Enabled downloader middlewares:
+    2021-12-02 09:56:44 [scrapy.middleware] INFO: Enabled downloader middlewares:
     ['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
      'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
      'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
@@ -438,45 +438,45 @@ Save this as ```scrapers/scraper3.py``` and run the file
      'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
      'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
      'scrapy.downloadermiddlewares.stats.DownloaderStats']
-    2021-10-21 11:30:50 [scrapy.middleware] INFO: Enabled spider middlewares:
+    2021-12-02 09:56:44 [scrapy.middleware] INFO: Enabled spider middlewares:
     ['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
      'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
      'scrapy.spidermiddlewares.referer.RefererMiddleware',
      'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
      'scrapy.spidermiddlewares.depth.DepthMiddleware']
-    2021-10-21 11:30:50 [scrapy.middleware] INFO: Enabled item pipelines:
+    2021-12-02 09:56:44 [scrapy.middleware] INFO: Enabled item pipelines:
     []
-    2021-10-21 11:30:50 [scrapy.core.engine] INFO: Spider opened
-    2021-10-21 11:30:50 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
-    2021-10-21 11:30:50 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
-    2021-10-21 11:30:51 [scrapy.core.engine] DEBUG: Crawled (403) <GET http://brickset.com/sets/year-2016> (referer: None)
-    2021-10-21 11:30:51 [scrapy.spidermiddlewares.httperror] INFO: Ignoring response <403 http://brickset.com/sets/year-2016>: HTTP status code is not handled or not allowed
-    2021-10-21 11:30:51 [scrapy.core.engine] INFO: Closing spider (finished)
-    2021-10-21 11:30:51 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+    2021-12-02 09:56:44 [scrapy.core.engine] INFO: Spider opened
+    2021-12-02 09:56:44 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+    2021-12-02 09:56:44 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+    2021-12-02 09:56:44 [scrapy.core.engine] DEBUG: Crawled (403) <GET http://brickset.com/sets/year-2016> (referer: None)
+    2021-12-02 09:56:44 [scrapy.spidermiddlewares.httperror] INFO: Ignoring response <403 http://brickset.com/sets/year-2016>: HTTP status code is not handled or not allowed
+    2021-12-02 09:56:44 [scrapy.core.engine] INFO: Closing spider (finished)
+    2021-12-02 09:56:44 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
     {'downloader/request_bytes': 230,
      'downloader/request_count': 1,
      'downloader/request_method_count/GET': 1,
-     'downloader/response_bytes': 2138,
+     'downloader/response_bytes': 2140,
      'downloader/response_count': 1,
      'downloader/response_status_count/403': 1,
-     'elapsed_time_seconds': 0.185113,
+     'elapsed_time_seconds': 0.172374,
      'finish_reason': 'finished',
-     'finish_time': datetime.datetime(2021, 10, 21, 15, 30, 51, 160618),
+     'finish_time': datetime.datetime(2021, 12, 2, 14, 56, 44, 257957),
      'httpcompression/response_bytes': 3136,
      'httpcompression/response_count': 1,
      'httperror/response_ignored_count': 1,
      'httperror/response_ignored_status_count/403': 1,
      'log_count/DEBUG': 1,
      'log_count/INFO': 11,
-     'memusage/max': 228081664,
-     'memusage/startup': 228081664,
+     'memusage/max': 57118720,
+     'memusage/startup': 57118720,
      'response_received_count': 1,
      'scheduler/dequeued': 1,
      'scheduler/dequeued/memory': 1,
      'scheduler/enqueued': 1,
      'scheduler/enqueued/memory': 1,
-     'start_time': datetime.datetime(2021, 10, 21, 15, 30, 50, 975505)}
-    2021-10-21 11:30:51 [scrapy.core.engine] INFO: Spider closed (finished)
+     'start_time': datetime.datetime(2021, 12, 2, 14, 56, 44, 85583)}
+    2021-12-02 09:56:44 [scrapy.core.engine] INFO: Spider closed (finished)
 
 
 ## Conclusion

@@ -1,9 +1,9 @@
 ---
 layout: default
-title: 01. Introduction to Web Scraping
+title: 02 - Introduction to Web Scraping
 parent: Topic 12 - Web Scraping
 grand_parent: Lectures
-nav_order: 1
+nav_order: 3
 ---
 # Introduction to web scraping with python
 [source](https://dev.to/lewiskori/introduction-to-web-scraping-with-python-24li)

@@ -1,9 +1,9 @@
 ---
 layout: default
-title: 02 - Using requests to fetch Healthcare Data
+title: 03 - Using requests to fetch Healthcare Data
 parent: Topic 08 - Making Web Requests
 grand_parent: Lectures
-nav_order: 2
+nav_order: 3
 ---
 ## Using Requests
 

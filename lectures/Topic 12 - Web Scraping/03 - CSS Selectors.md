@@ -1,9 +1,9 @@
 ---
 layout: default
-title: 02. CSS Selectors
+title: 03 - CSS Selectors
 parent: Topic 12 - Web Scraping
 grand_parent: Lectures
-nav_order: 2
+nav_order: 4
 ---
 # How CSS Selectors Work
 

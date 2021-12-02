@@ -74,9 +74,10 @@ permalink: /lectures
 
 ## Topic 08 - Making Web Requests
 
-* [01 - Getting Data From Web Apis](Topic 08 - Making Web Requests/01 - Getting Data from Web APIs.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2008%20-%20Making%20Web%20Requests/01%20-%20Getting%20Data%20from%20Web%20APIs.ipynb)\)
-* [02 - Using Requests To Fetch Healthcare Data](Topic 08 - Making Web Requests/02 - Using requests to fetch Healthcare Data.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2008%20-%20Making%20Web%20Requests/02%20-%20Using%20requests%20to%20fetch%20Healthcare%20Data.ipynb)\)
-* [03 - Additional Reading](Topic 08 - Making Web Requests/03 - Additional Reading.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2008%20-%20Making%20Web%20Requests/03%20-%20Additional%20Reading.ipynb)\)
+* [01 - Python And Apis](Topic 08 - Making Web Requests/01 - Python and APIs.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2008%20-%20Making%20Web%20Requests/01%20-%20Python%20and%20APIs.ipynb)\)
+* [02 - Getting Data From Web Apis](Topic 08 - Making Web Requests/02 - Getting Data from Web APIs.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2008%20-%20Making%20Web%20Requests/02%20-%20Getting%20Data%20from%20Web%20APIs.ipynb)\)
+* [03 - Using Requests To Fetch Healthcare Data](Topic 08 - Making Web Requests/03 - Using requests to fetch Healthcare Data.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2008%20-%20Making%20Web%20Requests/03%20-%20Using%20requests%20to%20fetch%20Healthcare%20Data.ipynb)\)
+* [04 - Additional Reading](Topic 08 - Making Web Requests/04 - Additional Reading.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2008%20-%20Making%20Web%20Requests/04%20-%20Additional%20Reading.ipynb)\)
 
 ## Topic 09 - Interfacing with Databases
 
@@ -101,10 +102,12 @@ permalink: /lectures
 
 ## Topic 12 - Web Scraping
 
-* [01. Introduction To Web Scraping](Topic 12 - Web Scraping/01. Introduction to Web Scraping.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2012%20-%20Web%20Scraping/01.%20Introduction%20to%20Web%20Scraping.ipynb)\)
-* [02. Css Selectors](Topic 12 - Web Scraping/02. CSS Selectors.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2012%20-%20Web%20Scraping/02.%20CSS%20Selectors.ipynb)\)
-* [03.A Web Scraping With Beautiful Soup](Topic 12 - Web Scraping/03.a Web Scraping with Beautiful Soup.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2012%20-%20Web%20Scraping/03.a%20Web%20Scraping%20with%20Beautiful%20Soup.ipynb)\)
-* [03.B Web Scraping Using Selenium](Topic 12 - Web Scraping/03.b Web Scraping Using Selenium.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2012%20-%20Web%20Scraping/03.b%20Web%20Scraping%20Using%20Selenium.ipynb)\)
-* [03.C Web Scraping With Scrapy](Topic 12 - Web Scraping/03.c Web scraping with Scrapy.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2012%20-%20Web%20Scraping/03.c%20Web%20scraping%20with%20Scrapy.ipynb)\)
-* [04.A - More Web Scraping With Beautifulsoup](Topic 12 - Web Scraping/04.a - More Web Scraping with BeautifulSoup.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2012%20-%20Web%20Scraping/04.a%20-%20More%20Web%20Scraping%20with%20BeautifulSoup.ipynb)\)
-* [04.B - Even More Web Scraping With Beautifulsoup](Topic 12 - Web Scraping/04.b - Even More Web Scraping with BeautifulSoup.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2012%20-%20Web%20Scraping/04.b%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup.ipynb)\)
+* [01 - A Practical Introduction To Web Scraping In Python](Topic 12 - Web Scraping/01 - A Practical Introduction to Web Scraping in Python.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2012%20-%20Web%20Scraping/01%20-%20A%20Practical%20Introduction%20to%20Web%20Scraping%20in%20Python.ipynb)\)
+* [01.B - Check Your Understanding](Topic 12 - Web Scraping/01.b - Check Your Understanding.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2012%20-%20Web%20Scraping/01.b%20-%20Check%20Your%20Understanding.ipynb)\)
+* [02 - Introduction To Web Scraping](Topic 12 - Web Scraping/02 - Introduction to Web Scraping.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2012%20-%20Web%20Scraping/02%20-%20Introduction%20to%20Web%20Scraping.ipynb)\)
+* [03 - Css Selectors](Topic 12 - Web Scraping/03 - CSS Selectors.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2012%20-%20Web%20Scraping/03%20-%20CSS%20Selectors.ipynb)\)
+* [04 - Web Scraping With Beautiful Soup](Topic 12 - Web Scraping/04 - Web Scraping with Beautiful Soup.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2012%20-%20Web%20Scraping/04%20-%20Web%20Scraping%20with%20Beautiful%20Soup.ipynb)\)
+* [05 - Web Scraping Using Selenium](Topic 12 - Web Scraping/05 - Web Scraping Using Selenium.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2012%20-%20Web%20Scraping/05%20-%20Web%20Scraping%20Using%20Selenium.ipynb)\)
+* [06 - Web Scraping With Scrapy](Topic 12 - Web Scraping/06 - Web scraping with Scrapy.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2012%20-%20Web%20Scraping/06%20-%20Web%20scraping%20with%20Scrapy.ipynb)\)
+* [07 - More Web Scraping With Beautifulsoup](Topic 12 - Web Scraping/07 - More Web Scraping with BeautifulSoup.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2012%20-%20Web%20Scraping/07%20-%20More%20Web%20Scraping%20with%20BeautifulSoup.ipynb)\)
+* [08 - Even More Web Scraping With Beautifulsoup](Topic 12 - Web Scraping/08 - Even More Web Scraping with BeautifulSoup.md) \([ipynb](https://github.com/BrianKolowitz/data-focused-python/blob/master/lectures/Topic%2012%20-%20Web%20Scraping/08%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup.ipynb)\)

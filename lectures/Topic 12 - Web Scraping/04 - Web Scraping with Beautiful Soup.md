@@ -1,9 +1,9 @@
 ---
 layout: default
-title: 03.a Web Scraping with Beautiful Soup
+title: 04 - Web Scraping with Beautiful Soup
 parent: Topic 12 - Web Scraping
 grand_parent: Lectures
-nav_order: 3
+nav_order: 5
 ---
 # Web Scraping with Beautiful Soup
 
