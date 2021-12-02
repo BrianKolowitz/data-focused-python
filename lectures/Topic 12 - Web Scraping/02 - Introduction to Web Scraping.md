@@ -1,0 +1,236 @@
+---
+layout: default
+title: 02 - Introduction to Web Scraping
+parent: Topic 12 - Web Scraping
+grand_parent: Lectures
+nav_order: 3
+---
+# Introduction to web scraping with python
+[source](https://dev.to/lewiskori/introduction-to-web-scraping-with-python-24li)
+
+## What is web scraping?
+
+This is the process of extracting information from a webpage by taking advantage of patterns in the web page's underlying code.
+
+We can use web scraping to gather unstructured data from the internet, process it and store it in a structured format.
+
+In this walkthrough, we'll be storing our data in a JSON file.
+
+## Alternatives to web scraping
+
+Though web scraping is a useful tool in extracting data from a website, it's not the only means to achieve this task.
+
+Before starting to web scrape, find out if the page you seek to extract data from provides an API.
+
+## robots.txt file
+
+Ensure that you check the robots.txt file of a website before making your scrapper. This file tells if the website allows scraping or if they do not.
+
+To check for the file, simply type the base URL followed by "/robots.txt"
+An example is, "mysite.com/robots.txt".
+
+For more about robots.txt files click [here](https://varvy.com/robottxt.html).
+
+## Getting started
+
+In this tutorial, we'll be extracting data from [books to scrape](http://books.toscrape.com/) which you can use to practise your web scraping.
+
+We'll extract the title, rating, link to more information about the book and the cover image of the book. Code can be found on [GitHub](https://github.com/lewis-kori/webcrawler-tutorial).
+
+###  Importing libraries
+
+The python libraries perform the following tasks.
+
+* requests - will be used to make Http requests to the webpage.
+* json - we'll use this to store the extracted information to a JSON file.
+* BeautifulSoup - for parsing HTML.
+
+
+```python
+import requests
+import json
+from bs4 import BeautifulSoup
+```
+
+### walkthrough
+
+We're initializing three variables here.
+
+* header-HTTP headers provide additional parameters to HTTP transactions. By sending the appropriate HTTP headers, one can access the response data in a different format.
+* base_url - is the webpage we want to scrape since we'll be needing the URL quite often, it's good to have a single initialization and reuse this variable going forward.
+* r - this is the response object returned by the get method. Here, we pass the base_url and header as parameters.
+
+
+```python
+header = {'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'}
+
+base_url = "http://books.toscrape.com/"
+
+r = requests.get(base_url, headers=header)
+```
+
+To ensure our scraper runs when the http response is ok we'll use the if statement as a check. The number 200 is the status code for Ok. To get a list of all codes and their meanings [check out this resource](https://www.restapitutorial.com/httpstatuscodes.html). 
+
+We'll then parse the response object using the BeautifulSoup method and store the new object to a variable called soup.
+
+
+```python
+if r.status_code == 200:
+    soup = BeautifulSoup(r.text, 'html.parser')
+    books = soup.find_all('li',attrs={"class":"col-xs-6 col-sm-4 col-md-3 col-lg-3"})
+    result=[]
+    for book in books:
+        title=book.find('h3').text
+        link=base_url +book.find('a')['href']
+        stars = str(len(book.find_all('i',attrs=  {"class":"icon-star"}))) + " out of 5"
+        price="$"+book.find('p',attrs={'class':'price_color'}).text[2:]
+        picture = base_url + book.find('img')['src']
+        single ={'title':title,'stars':stars,'price':price,'link':link,'picture':picture}
+        result.append(single)
+        
+    with open('books.json','w') as f:
+        json.dump(result,f,indent=4)
+else:
+    print(r.status_code)
+```
+
+
+```python
+import pandas as pd
+
+df = pd.read_json('books.json')
+df.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>title</th>
+      <th>stars</th>
+      <th>price</th>
+      <th>link</th>
+      <th>picture</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A Light in the ...</td>
+      <td>5 out of 5</td>
+      <td>$51.77</td>
+      <td>http://books.toscrape.com/catalogue/a-light-in...</td>
+      <td>http://books.toscrape.com/media/cache/2c/da/2c...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Tipping the Velvet</td>
+      <td>5 out of 5</td>
+      <td>$53.74</td>
+      <td>http://books.toscrape.com/catalogue/tipping-th...</td>
+      <td>http://books.toscrape.com/media/cache/26/0c/26...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Soumission</td>
+      <td>5 out of 5</td>
+      <td>$50.10</td>
+      <td>http://books.toscrape.com/catalogue/soumission...</td>
+      <td>http://books.toscrape.com/media/cache/3e/ef/3e...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Sharp Objects</td>
+      <td>5 out of 5</td>
+      <td>$47.82</td>
+      <td>http://books.toscrape.com/catalogue/sharp-obje...</td>
+      <td>http://books.toscrape.com/media/cache/32/51/32...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Sapiens: A Brief History ...</td>
+      <td>5 out of 5</td>
+      <td>$54.23</td>
+      <td>http://books.toscrape.com/catalogue/sapiens-a-...</td>
+      <td>http://books.toscrape.com/media/cache/be/a5/be...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+Let's take a look at a single record from our webpage to identify the patterns. Once we can see the page, we'll loop through every record in the page as they contain similar traits.
+
+![img1](https://res.cloudinary.com/practicaldev/image/fetch/s--_BwOwR81--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://res.cloudinary.com/practicaldev/image/fetch/s--0vJGh1fH--/c_imagga_scale%2Cf_auto%2Cfl_progressive%2Ch_420%2Cq_auto%2Cw_1000/https://thepracticaldev.s3.amazonaws.com/i/pdfw0kcge1v8le01c1q5.PNG)
+
+From the image above, we'll notice that all books are contained within a list item with the class.
+
+```
+col-xs-6 col-sm-4 col-md-3 col-lg-3
+```
+
+By using the ```find_all()``` method, we can find all references of this HTML tag in the webpage. we pass the tag as the first argument and then using the attrs argument which takes in a python dictionary, we can specify attributes of the HTML tag selected. In this case, it was a class indicated above, but you can even use id as an attribute.
+
+Store the result in a variable, I chose the name books.
+
+
+```python
+title = book.find('h3').text
+link = base_url + book.find('a')['href']
+```
+
+If we observe keenly, we'll notice that each of the elements we want to extract is nested within the list item tag are all contained in similar tags, in the example above. The title of the book is between ```h3``` tags. 
+
+The ```find()``` method returns the first matching tag. 
+
+```text``` will simply return any text found within the tags specified.
+
+For the anchor tags, we'll be extracting the hyper reference link.
+
+As opposed to ```h3``` tag, the ```href``` element is within anchor tags in HTML. Like so:
+
+```html
+<a href="somelink.com"></a>
+```
+
+In this case, the returned object will behave like a dictionary where we have a
+
+```
+dictionary_name[key]
+```
+
+We do this iteratively for all the values we seek to extract because we are taking advantage of the pattern in the underlying code of the webpage. Hence the use of the python for loop.
+
+The extracted elements are then stored in respective variables which we'll put in a dictionary. With this information, we can then comfortably append the dictionary object to the initialized result list set before our for loop.
+
+```python
+single ={'title':title,'stars':stars,'price':price,'link':link,'picture':picture}
+result.append(single)
+with open('books2.json','w') as f:
+    json.dump(result,f,indent=4)
+```
+
+Finally, store the python list in a JSON file by the name "books.json" with an indent of 4 for readability purposes.
+
+
+```python
+
+```

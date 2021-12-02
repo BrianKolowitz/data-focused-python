@@ -1,0 +1,842 @@
+<!DOCTYPE html> <html lang="en-US"> <head> <meta charset="UTF-8"> <meta http-equiv="X-UA-Compatible" content="IE=Edge"> <title>01.b - Grouping Data - Data Focused Python</title> <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"> <link rel="stylesheet" href="/assets/css/just-the-docs-default.css"> <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139655036-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-139655036-1'); </script> <script type="text/javascript" src="/assets/js/just-the-docs.js"></script> <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Begin Jekyll SEO tag v2.7.1 --> <title>01.b - Grouping Data | Data Focused Python</title> <meta name="generator" content="Jekyll v3.9.0" /> <meta property="og:title" content="01.b - Grouping Data" /> <meta property="og:locale" content="en_US" /> <link rel="canonical" href="http://localhost:4000/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/01.b%20-%20Grouping%20Data.html" /> <meta property="og:url" content="http://localhost:4000/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/01.b%20-%20Grouping%20Data.html" /> <meta property="og:site_name" content="Data Focused Python" /> <meta name="twitter:card" content="summary" /> <meta property="twitter:title" content="01.b - Grouping Data" /> <script type="application/ld+json"> {"headline":"01.b - Grouping Data","url":"http://localhost:4000/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/01.b%20-%20Grouping%20Data.html","@type":"WebPage","@context":"https://schema.org"}</script> <!-- End Jekyll SEO tag --> </head> <body> <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"> <symbol id="svg-link" viewBox="0 0 24 24"> <title>Link</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path> </svg> </symbol> <symbol id="svg-search" viewBox="0 0 24 24"> <title>Search</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"> <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line> </svg> </symbol> <symbol id="svg-menu" viewBox="0 0 24 24"> <title>Menu</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"> <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line> </svg> </symbol> <symbol id="svg-arrow-right" viewBox="0 0 24 24"> <title>Expand</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"> <polyline points="9 18 15 12 9 6"></polyline> </svg> </symbol> <symbol id="svg-doc" viewBox="0 0 24 24"> <title>Document</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"> <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline> </svg> </symbol> </svg> <div class="side-bar"> <div class="site-header"> <a href="http://localhost:4000/" class="site-title lh-tight"> Data Focused Python </a> <a href="#" id="menu-button" class="site-button"> <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg> </a> </div> <nav role="navigation" aria-label="Main" id="site-nav" class="site-nav"> <ul class="nav-list"><li class="nav-list-item"><a href="http://localhost:4000/" class="nav-list-link">Data Focused Python</a></li><li class="nav-list-item active"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/lectures" class="nav-list-link">Lectures</a><ul class="nav-list "><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/lectures/Topic%2001%20-%20Getting%20Started.html" class="nav-list-link">Topic 01 - Getting Started</a><ul class="nav-list"><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2001%20-%20Getting%20Started/01%20-%20Getting%20Started.html" class="nav-list-link">01 - Getting Started</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2001%20-%20Getting%20Started/02%20-%20Running%20Python.html" class="nav-list-link">02 - Running Python</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2001%20-%20Getting%20Started/03%20-%20Your%20First%20Python%20Program.html" class="nav-list-link">03 - Your First Python Program</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2001%20-%20Getting%20Started/04%20-%20Python%20Modules%20and%20Packages.html" class="nav-list-link">04 - Python Modules and Packages</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2001%20-%20Getting%20Started/05%20-%20Start%20a%20process%20in%20Python.html" class="nav-list-link">05 - Start a process in Python</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2001%20-%20Getting%20Started/06.a%20-%20Writing%20Terminal%20Application.html" class="nav-list-link">06.a - Writing Terminal Application</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2001%20-%20Getting%20Started/06.b%20-%20Argparse.html" class="nav-list-link">06.b - Argparse</a> </li></ul></li><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/lectures/Topic%2002%20-%20Python%20basics.html" class="nav-list-link">Topic 02 - Python basics</a><ul class="nav-list"><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2002%20-%20Python%20basics/01%20-%20Decision%20Structures%20and%20Boolean%20Logic.html" class="nav-list-link">01 - Decision Structures and Boolean Logic</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2002%20-%20Python%20basics/02%20-%20Python%20Tuples.html" class="nav-list-link">02 - Python Tuples</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2002%20-%20Python%20basics/03%20-%20Loops.html" class="nav-list-link">03 - Loops</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2002%20-%20Python%20basics/04%20-%20Python%20Functions.html" class="nav-list-link">04 - Python Functions</a> </li></ul></li><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/lectures/Topic%2003%20-%20Generating%20Data.html" class="nav-list-link">Topic 03 - Generating Data</a><ul class="nav-list"><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2003%20-%20Generating%20Data/01%20-%20Generating%20Fake%20Data.html" class="nav-list-link">01 - Generating Fake Data</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2003%20-%20Generating%20Data/02%20-%20Using%20Faker.html" class="nav-list-link">02 - Using Faker</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2003%20-%20Generating%20Data/03%20-%20Generating%20Synthetic%20Healthcare%20Data.html" class="nav-list-link">03 - Generating Synthetic Healthcare Data</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2003%20-%20Generating%20Data/04%20-%20Using%20Synthea.html" class="nav-list-link">04 - Using Synthea</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2003%20-%20Generating%20Data/05%20-%20Generating%20Other%20Synthetic%20Data.html" class="nav-list-link">05 - Generating Other Synthetic Data</a> </li></ul></li><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/lectures/Topic%2004%20-%20Writing%20Testable%20Code.html" class="nav-list-link">Topic 04 - Writing Testable Code</a><ul class="nav-list"><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2004%20-%20Writing%20Testable%20Code/01%20-%20Python%20Code%20Quality%20Tools%20and%20Best%20Practices.html" class="nav-list-link">01 - Python Code Quality Tools and Best Practices</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2004%20-%20Writing%20Testable%20Code/02%20-%20Python%20Testing.html" class="nav-list-link">02 - Python Testing</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2004%20-%20Writing%20Testable%20Code/03%20-%20Getting%20Started%20With%20Testing%20in%20Python.html" class="nav-list-link">03 - Getting Started With Testing in Python</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2004%20-%20Writing%20Testable%20Code/04-%20Choosing%20a%20Test%20Runner.html" class="nav-list-link">04- Choosing a Test Runner</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2004%20-%20Writing%20Testable%20Code/05%20-%20Writing%20Your%20First%20Test.html" class="nav-list-link">05 - Writing Your First Test</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2004%20-%20Writing%20Testable%20Code/06%20-%20Writing%20Integration%20Tests.html" class="nav-list-link">06 - Writing Integration Tests</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2004%20-%20Writing%20Testable%20Code/07%20-%20Testing%20in%20Multiple%20Environments.html" class="nav-list-link">07 - Testing in Multiple Environments</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2004%20-%20Writing%20Testable%20Code/08%20-%20Introducing%20Linters%20Into%20Your%20Application.html" class="nav-list-link">08 - Introducing Linters Into Your Application</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2004%20-%20Writing%20Testable%20Code/09%20-%20Testing%20for%20Performance%20Degradation%20Between%20Changes.html" class="nav-list-link">09 - Testing for Performance Degradation Between Changes</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2004%20-%20Writing%20Testable%20Code/10%20-%20Testing%20for%20Security%20Flaws%20in%20Your%20Application.html" class="nav-list-link">10 - Testing for Security Flaws in Your Application</a> </li></ul></li><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/lectures/Topic%2005%20-%20Processing%20files.html" class="nav-list-link">Topic 05 - Processing files</a><ul class="nav-list"><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2005%20-%20Processing%20files/01.a%20-%20File%20Processing.html" class="nav-list-link">01.a - File Processing</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2005%20-%20Processing%20files/01.b%20-%20CSV%20Files.html" class="nav-list-link">01.b - CSV Files</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2005%20-%20Processing%20files/01.c%20-%20JSON%20Files.html" class="nav-list-link">01.c - JSON Files</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2005%20-%20Processing%20files/01.d%20-%20XML%20Files.html" class="nav-list-link">01.d - XML Files</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2005%20-%20Processing%20files/03%20-%20Using%20fhirclient%20to%20parse%20Healthcare%20Data.html" class="nav-list-link">03 - Using fhirclient to parse Healthcare Data</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2005%20-%20Processing%20files/04%20-%20Reading%20synthea%20data.html" class="nav-list-link">04 - Reading synthea data</a> </li></ul></li><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/lectures/Topic%2006%20-%20Comprehensions%20and%20Generators.html" class="nav-list-link">Topic 06 - Comprehensions and Generators</a><ul class="nav-list"><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2006%20-%20Comprehensions%20and%20Generators/02%20-%20Lists%20and%20List%20Comprehensions.html" class="nav-list-link">02 - Lists and List Comprehensions</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2006%20-%20Comprehensions%20and%20Generators/03%20-%20Sets%20and%20Set%20Comprehensions.html" class="nav-list-link">03 - Sets and Set Comprehensions</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2006%20-%20Comprehensions%20and%20Generators/04.a%20-%20Dictionaries.html" class="nav-list-link">04.a - Dictionaries</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2006%20-%20Comprehensions%20and%20Generators/04.b%20-%20Dictionary%20Comprehensions.html" class="nav-list-link">04.b - Dictionary Comprehensions</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2006%20-%20Comprehensions%20and%20Generators/05%20-%20Python%20Generators.html" class="nav-list-link">05 - Python Generators</a> </li></ul></li><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/lectures/Topic%2007%20-%20Classes.html" class="nav-list-link">Topic 07 - Classes</a><ul class="nav-list"><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2007%20-%20Classes/01%20-%20Python%20Classes.html" class="nav-list-link">01 - Python Classes</a> </li></ul></li><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/lectures/Topic%2008%20-%20Making%20Web%20Requests.html" class="nav-list-link">Topic 08 - Making Web Requests</a><ul class="nav-list"><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2008%20-%20Making%20Web%20Requests/03%20-%20Using%20requests%20to%20fetch%20Healthcare%20Data.html" class="nav-list-link">03 - Using requests to fetch Healthcare Data</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2008%20-%20Making%20Web%20Requests/05%20-%20Getting%20Data%20from%20Web%20APIs.html" class="nav-list-link">05 - Getting Data from Web APIs</a> </li></ul></li><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/lectures/Topic%2009%20-%20Interfacing%20with%20Databases.html" class="nav-list-link">Topic 09 - Interfacing with Databases</a><ul class="nav-list"></ul></li><li class="nav-list-item active"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201.html" class="nav-list-link">Topic 10 - Data Processing and Visualization Part 1</a><ul class="nav-list"><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/01.a%20-%20Cleaning%20and%20Transforming%20Data.html" class="nav-list-link">01.a - Cleaning and Transforming Data</a> </li><li class="nav-list-item active"> <a href="http://localhost:4000/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/01.b%20-%20Grouping%20Data.html" class="nav-list-link active">01.b - Grouping Data</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/01.c%20-%20Descriptive%20Statistics.html" class="nav-list-link">01.c - Descriptive Statistics</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/02%20-%20Basic%20Medical%20Data%20Visualization.html" class="nav-list-link">02 - Basic Medical Data Visualization</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/03.a%20-%20NumPy%20Introduction.html" class="nav-list-link">03.a - NumPy Introduction</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201/03.b%20-%20NumPy%20Data%20analysis.html" class="nav-list-link">03.b - NumPy Data analysis</a> </li></ul></li><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/lectures/Topic%2011%20-%20Data%20Processing%20and%20Visualization%20Part%202.html" class="nav-list-link">Topic 11 - Data Processing and Visualization Part 2</a><ul class="nav-list"><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2011%20-%20Data%20Processing%20and%20Visualization%20Part%202/00%20-%20Additional%20Links.html" class="nav-list-link">00 - Additional Links</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2011%20-%20Data%20Processing%20and%20Visualization%20Part%202/01%20-%20Pandas%20Introduction.html" class="nav-list-link">01 - Pandas Introduction</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2011%20-%20Data%20Processing%20and%20Visualization%20Part%202/02.a%20-%20Pandas%20Data%20analysis%20Part%201.html" class="nav-list-link">02.a - Pandas Data analysis Part 1</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2011%20-%20Data%20Processing%20and%20Visualization%20Part%202/02.b%20-%20Pandas%20Data%20analysis%20Part%202.html" class="nav-list-link">02.b - Pandas Data analysis Part 2</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2011%20-%20Data%20Processing%20and%20Visualization%20Part%202/03%20-%20Matplotlib%20Tutorial%20Python%20Plotting.html" class="nav-list-link">03 - Matplotlib Tutorial Python Plotting</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2011%20-%20Data%20Processing%20and%20Visualization%20Part%202/04%20-%20The%20Ultimate%20Python%20Seaborn%20Tutorial.html" class="nav-list-link">04 - The Ultimate Python Seaborn Tutorial</a> </li></ul></li><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/lectures/Topic%2012%20-%20Web%20Scraping.html" class="nav-list-link">Topic 12 - Web Scraping</a><ul class="nav-list"><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2012%20-%20Web%20Scraping/01.%20Introduction%20to%20Web%20Scraping.html" class="nav-list-link">01. Introduction to Web Scraping</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2012%20-%20Web%20Scraping/02.%20CSS%20Selectors.html" class="nav-list-link">02. CSS Selectors</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2012%20-%20Web%20Scraping/03.a%20Web%20Scraping%20with%20Beautiful%20Soup.html" class="nav-list-link">03.a Web Scraping with Beautiful Soup</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2012%20-%20Web%20Scraping/03.b%20Web%20Scraping%20Using%20Selenium.html" class="nav-list-link">03.b Web Scraping Using Selenium</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2012%20-%20Web%20Scraping/03.c%20Web%20scraping%20with%20Scrapy.html" class="nav-list-link">03.c Web scraping with Scrapy</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2012%20-%20Web%20Scraping/04.a%20-%20More%20Web%20Scraping%20with%20BeautifulSoup.html" class="nav-list-link">04.a - More Web Scraping with BeautifulSoup</a> </li><li class="nav-list-item "> <a href="http://localhost:4000/lectures/Topic%2012%20-%20Web%20Scraping/04.b%20-%20Even%20More%20Web%20Scraping%20with%20BeautifulSoup.html" class="nav-list-link">04.b - Even More Web Scraping with BeautifulSoup</a> </li></ul></li></ul></li><li class="nav-list-item"><a href="http://localhost:4000/resources" class="nav-list-link">Resources</a></li></ul> </nav> <footer class="site-footer"> This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll. </footer> </div> <div class="main" id="top"> <div id="main-header" class="main-header"> </div> <div id="main-content-wrap" class="main-content-wrap"> <nav aria-label="Breadcrumb" class="breadcrumb-nav"> <ol class="breadcrumb-nav-list"> <li class="breadcrumb-nav-list-item"><a href="http://localhost:4000/lectures">Lectures</a></li> <li class="breadcrumb-nav-list-item"><a href="http://localhost:4000/lectures/Topic%2010%20-%20Data%20Processing%20and%20Visualization%20Part%201.html">Topic 10 - Data Processing and Visualization Part 1</a></li> <li class="breadcrumb-nav-list-item"><span>01.b - Grouping Data</span></li> </ol> </nav> <div id="main-content" class="main-content" role="main"> <h1 id="grouping-data-using-python"> <a href="#grouping-data-using-python" class="anchor-heading" aria-labelledby="grouping-data-using-python"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Grouping data using python </h1> <p>In this tutorial we’re going to learn how to use basic python funtionality to group datasets.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># recall, opening the file and reading the data
+</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reader</span><span class="p">):</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">break</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'ADDRESS': '657 Heathcote Divide',
+ 'BIRTHDATE': '2015-07-12',
+ 'BIRTHPLACE': 'Newton  Massachusetts  US',
+ 'CITY': 'Fitchburg',
+ 'DEATHDATE': '',
+ 'DRIVERS': '',
+ 'ETHNICITY': 'polish',
+ 'FIRST': 'Victor265',
+ 'GENDER': 'M',
+ 'Id': '3287bb9c-e395-4146-8dd5-1fc3d887d220',
+ 'LAST': 'Kilback373',
+ 'MAIDEN': '',
+ 'MARITAL': '',
+ 'PASSPORT': '',
+ 'PREFIX': '',
+ 'RACE': 'white',
+ 'SSN': '999-82-9751',
+ 'STATE': 'Massachusetts',
+ 'SUFFIX': '',
+ 'ZIP': '01420'}
+{'ADDRESS': '419 Mraz Ranch Apt 13',
+ 'BIRTHDATE': '2003-04-15',
+ 'BIRTHPLACE': 'Ipswich  Massachusetts  US',
+ 'CITY': 'Saugus',
+ 'DEATHDATE': '',
+ 'DRIVERS': 'S99990332',
+ 'ETHNICITY': 'puerto_rican',
+ 'FIRST': 'Reena181',
+ 'GENDER': 'F',
+ 'Id': 'e118c014-fef7-4fbd-8c5d-fe42e9e16d84',
+ 'LAST': 'Dooley940',
+ 'MAIDEN': '',
+ 'MARITAL': '',
+ 'PASSPORT': '',
+ 'PREFIX': '',
+ 'RACE': 'hispanic',
+ 'SSN': '999-57-7583',
+ 'STATE': 'Massachusetts',
+ 'SUFFIX': '',
+ 'ZIP': '01906'}
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># then we're going to parse out a group, e.g. Gender
+# recall, opening the file and reading the data
+</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reader</span><span class="p">):</span>
+        <span class="n">patient_gender</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s">'GENDER'</span><span class="p">]</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">patient_gender</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">break</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>M
+F
+F
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># how do we know what the unique genders are?
+# let's iterate over them and create a set
+</span><span class="n">patient_genders</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reader</span><span class="p">):</span>
+        <span class="n">patient_gender</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s">'GENDER'</span><span class="p">]</span>
+        <span class="n">patient_genders</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">patient_gender</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">patient_genders</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'F', 'M'}
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># okay, we have 2 genders let's create 2 lists
+</span><span class="n">male_patients</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">female_patients</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reader</span><span class="p">):</span>
+        <span class="n">patient_gender</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s">'GENDER'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">patient_gender</span> <span class="o">==</span> <span class="s">'M'</span><span class="p">:</span>
+            <span class="n">male_patients</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">patient_gender</span> <span class="o">==</span> <span class="s">'F'</span><span class="p">:</span>
+            <span class="n">female_patients</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">'Unknown Gender'</span><span class="p">)</span>
+
+<span class="n">pprint</span><span class="p">(</span><span class="n">male_patients</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">female_patients</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'ADDRESS': '657 Heathcote Divide',
+ 'BIRTHDATE': '2015-07-12',
+ 'BIRTHPLACE': 'Newton  Massachusetts  US',
+ 'CITY': 'Fitchburg',
+ 'DEATHDATE': '',
+ 'DRIVERS': '',
+ 'ETHNICITY': 'polish',
+ 'FIRST': 'Victor265',
+ 'GENDER': 'M',
+ 'Id': '3287bb9c-e395-4146-8dd5-1fc3d887d220',
+ 'LAST': 'Kilback373',
+ 'MAIDEN': '',
+ 'MARITAL': '',
+ 'PASSPORT': '',
+ 'PREFIX': '',
+ 'RACE': 'white',
+ 'SSN': '999-82-9751',
+ 'STATE': 'Massachusetts',
+ 'SUFFIX': '',
+ 'ZIP': '01420'}
+{'ADDRESS': '419 Mraz Ranch Apt 13',
+ 'BIRTHDATE': '2003-04-15',
+ 'BIRTHPLACE': 'Ipswich  Massachusetts  US',
+ 'CITY': 'Saugus',
+ 'DEATHDATE': '',
+ 'DRIVERS': 'S99990332',
+ 'ETHNICITY': 'puerto_rican',
+ 'FIRST': 'Reena181',
+ 'GENDER': 'F',
+ 'Id': 'e118c014-fef7-4fbd-8c5d-fe42e9e16d84',
+ 'LAST': 'Dooley940',
+ 'MAIDEN': '',
+ 'MARITAL': '',
+ 'PASSPORT': '',
+ 'PREFIX': '',
+ 'RACE': 'hispanic',
+ 'SSN': '999-57-7583',
+ 'STATE': 'Massachusetts',
+ 'SUFFIX': '',
+ 'ZIP': '01906'}
+</code></pre></div></div> <h2 id="can-we-do-better"> <a href="#can-we-do-better" class="anchor-heading" aria-labelledby="can-we-do-better"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Can we do better? </h2> <p>What’s wrong with the code above?</p> <ol> <li>Multiple iterations over the file</li> <li>Brittle… not resilient to new genders</li> </ol> <p>What can we do?</p> <ol> <li>Use a dictionary to store the groupings</li> <li>Make the code case insensitive</li> </ol> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># patients by gender
+</span><span class="n">patients_by_gender</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">patients_by_gender</span><span class="p">[</span><span class="s">'F'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">'patient1'</span><span class="p">,</span> <span class="s">'patient3'</span><span class="p">]</span>
+<span class="n">patients_by_gender</span><span class="p">[</span><span class="s">'M'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">'patient2'</span><span class="p">,</span> <span class="s">'patient4'</span><span class="p">]</span>
+
+<span class="n">pprint</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'F': ['patient1', 'patient3'], 'M': ['patient2', 'patient4']}
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">.</span><span class="n">keys</span><span class="p">())</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dict_keys(['F', 'M'])
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">.</span><span class="n">values</span><span class="p">())</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dict_values([['patient1', 'patient3'], ['patient2', 'patient4']])
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">.</span><span class="n">items</span><span class="p">())</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dict_items([('F', ['patient1', 'patient3']), ('M', ['patient2', 'patient4'])])
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># check if a gender is in the dictionary
+</span><span class="k">print</span><span class="p">(</span><span class="s">'F'</span> <span class="ow">in</span> <span class="n">patients_by_gender</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'f'</span> <span class="ow">in</span> <span class="n">patients_by_gender</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># let's group using a dictionary
+</span><span class="n">patients_by_gender</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="n">patient_gender</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s">'GENDER'</span><span class="p">].</span><span class="n">upper</span><span class="p">()</span> <span class="c1"># let's store the keys as uppercase
+</span>        
+        <span class="c1"># check to see if the key exists, if not
+</span>        <span class="k">if</span> <span class="n">patient_gender</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">patients_by_gender</span><span class="p">:</span>
+            <span class="c1"># add the key
+</span>            <span class="n">patients_by_gender</span><span class="p">[</span><span class="n">patient_gender</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># create an empty list
+</span>
+        <span class="c1"># append the patient as a new row to the correct grouping
+</span>        <span class="n">patients_by_gender</span><span class="p">[</span><span class="n">patient_gender</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">.</span><span class="n">keys</span><span class="p">())</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dict_keys(['M', 'F'])
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">[</span><span class="s">'F'</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[{'ADDRESS': '419 Mraz Ranch Apt 13',
+  'BIRTHDATE': '2003-04-15',
+  'BIRTHPLACE': 'Ipswich  Massachusetts  US',
+  'CITY': 'Saugus',
+  'DEATHDATE': '',
+  'DRIVERS': 'S99990332',
+  'ETHNICITY': 'puerto_rican',
+  'FIRST': 'Reena181',
+  'GENDER': 'F',
+  'Id': 'e118c014-fef7-4fbd-8c5d-fe42e9e16d84',
+  'LAST': 'Dooley940',
+  'MAIDEN': '',
+  'MARITAL': '',
+  'PASSPORT': '',
+  'PREFIX': '',
+  'RACE': 'hispanic',
+  'SSN': '999-57-7583',
+  'STATE': 'Massachusetts',
+  'SUFFIX': '',
+  'ZIP': '01906'},
+ {'ADDRESS': '570 Gleichner Branch Suite 81',
+  'BIRTHDATE': '2008-06-26',
+  'BIRTHPLACE': 'Danvers  Massachusetts  US',
+  'CITY': 'Lynn',
+  'DEATHDATE': '',
+  'DRIVERS': '',
+  'ETHNICITY': 'english',
+  'FIRST': 'Brinda322',
+  'GENDER': 'F',
+  'Id': '4a2a4a0b-0c4a-47b3-9b93-ce82048a41e6',
+  'LAST': 'Harber290',
+  'MAIDEN': '',
+  'MARITAL': '',
+  'PASSPORT': '',
+  'PREFIX': '',
+  'RACE': 'white',
+  'SSN': '999-57-3145',
+  'STATE': 'Massachusetts',
+  'SUFFIX': '',
+  'ZIP': '01901'}]
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">[</span><span class="s">'F'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'LAST'</span><span class="p">])</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Dooley940
+</code></pre></div></div> <h2 id="lets-make-the-code-reusable"> <a href="#lets-make-the-code-reusable" class="anchor-heading" aria-labelledby="lets-make-the-code-reusable"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Let’s make the code reusable </h2> <ol> <li>Create a function</li> <li>Externalize parameters that will change from the function</li> </ol> <p>What’s common?</p> <ol> <li>The csv processing</li> <li>The grouping logic</li> </ol> <p>What’s different?</p> <ol> <li>The file name</li> <li>The groupby parameters</li> </ol> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># define the function
+</span><span class="k">def</span> <span class="nf">group_patient</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">groupby</span><span class="p">):</span>
+    <span class="k">pass</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># call the function
+</span><span class="n">patients_by_gender</span> <span class="o">=</span> <span class="n">group_patient</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="s">'GENDER'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>None
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># now let's implement the function
+</span><span class="k">def</span> <span class="nf">group_patient</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">groupby</span><span class="p">):</span>
+    <span class="n">patients_by_group</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+            <span class="c1"># note : we renamed the variable to _attribute
+</span>            <span class="n">patient_attribute</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">groupby</span><span class="p">].</span><span class="n">upper</span><span class="p">()</span>
+
+            <span class="c1"># check to see if the key exists, if not
+</span>            <span class="k">if</span> <span class="n">patient_attribute</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">patients_by_group</span><span class="p">:</span>
+                <span class="c1"># add the key
+</span>                <span class="n">patients_by_group</span><span class="p">[</span><span class="n">patient_attribute</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># create an empty list
+</span>
+            <span class="c1"># append the patient as a new row to the correct grouping
+</span>            <span class="n">patients_by_group</span><span class="p">[</span><span class="n">patient_attribute</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">patients_by_group</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">patients_by_gender</span> <span class="o">=</span> <span class="n">group_patient</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="s">'GENDER'</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">[</span><span class="s">'F'</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[{'ADDRESS': '419 Mraz Ranch Apt 13',
+  'BIRTHDATE': '2003-04-15',
+  'BIRTHPLACE': 'Ipswich  Massachusetts  US',
+  'CITY': 'Saugus',
+  'DEATHDATE': '',
+  'DRIVERS': 'S99990332',
+  'ETHNICITY': 'puerto_rican',
+  'FIRST': 'Reena181',
+  'GENDER': 'F',
+  'Id': 'e118c014-fef7-4fbd-8c5d-fe42e9e16d84',
+  'LAST': 'Dooley940',
+  'MAIDEN': '',
+  'MARITAL': '',
+  'PASSPORT': '',
+  'PREFIX': '',
+  'RACE': 'hispanic',
+  'SSN': '999-57-7583',
+  'STATE': 'Massachusetts',
+  'SUFFIX': '',
+  'ZIP': '01906'},
+ {'ADDRESS': '570 Gleichner Branch Suite 81',
+  'BIRTHDATE': '2008-06-26',
+  'BIRTHPLACE': 'Danvers  Massachusetts  US',
+  'CITY': 'Lynn',
+  'DEATHDATE': '',
+  'DRIVERS': '',
+  'ETHNICITY': 'english',
+  'FIRST': 'Brinda322',
+  'GENDER': 'F',
+  'Id': '4a2a4a0b-0c4a-47b3-9b93-ce82048a41e6',
+  'LAST': 'Harber290',
+  'MAIDEN': '',
+  'MARITAL': '',
+  'PASSPORT': '',
+  'PREFIX': '',
+  'RACE': 'white',
+  'SSN': '999-57-3145',
+  'STATE': 'Massachusetts',
+  'SUFFIX': '',
+  'ZIP': '01901'}]
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># but wait... is there anything patient specific???
+# let's refactor the code to make it more extensible 
+# and easier to read
+</span><span class="k">def</span> <span class="nf">group</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">groupby</span><span class="p">):</span>
+    <span class="n">grouped_data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+            <span class="n">attribute</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">groupby</span><span class="p">].</span><span class="n">upper</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">attribute</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">grouped_data</span><span class="p">:</span>
+                <span class="n">grouped_data</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">grouped_data</span><span class="p">[</span><span class="n">attribute</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">grouped_data</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">patients_by_gender</span> <span class="o">=</span> <span class="n">group</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="s">'GENDER'</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">[</span><span class="s">'F'</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'ADDRESS': '419 Mraz Ranch Apt 13',
+ 'BIRTHDATE': '2003-04-15',
+ 'BIRTHPLACE': 'Ipswich  Massachusetts  US',
+ 'CITY': 'Saugus',
+ 'DEATHDATE': '',
+ 'DRIVERS': 'S99990332',
+ 'ETHNICITY': 'puerto_rican',
+ 'FIRST': 'Reena181',
+ 'GENDER': 'F',
+ 'Id': 'e118c014-fef7-4fbd-8c5d-fe42e9e16d84',
+ 'LAST': 'Dooley940',
+ 'MAIDEN': '',
+ 'MARITAL': '',
+ 'PASSPORT': '',
+ 'PREFIX': '',
+ 'RACE': 'hispanic',
+ 'SSN': '999-57-7583',
+ 'STATE': 'Massachusetts',
+ 'SUFFIX': '',
+ 'ZIP': '01906'}
+</code></pre></div></div> <h2 id="what-if-we-want-multiple-grouping-levels"> <a href="#what-if-we-want-multiple-grouping-levels" class="anchor-heading" aria-labelledby="what-if-we-want-multiple-grouping-levels"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> What if we want multiple grouping levels? </h2> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># single level grouping by gender
+</span><span class="p">{</span>
+    <span class="s">"F"</span><span class="p">:</span> <span class="p">[</span> <span class="s">'patient1'</span><span class="p">,</span> <span class="s">'patient2'</span><span class="p">],</span>
+    <span class="s">"M"</span><span class="p">:</span> <span class="p">[</span> <span class="s">'patient3'</span><span class="p">,</span> <span class="s">'patient4'</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'F': ['patient1', 'patient2'], 'M': ['patient3', 'patient4']}
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># multi level grouping by gender and race
+</span><span class="p">{</span>
+    <span class="s">"F"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"WHITE"</span><span class="p">:</span> <span class="p">[</span><span class="s">'patient1'</span><span class="p">,</span> <span class="s">'patient2'</span><span class="p">],</span>
+        <span class="s">"HISPANIC"</span><span class="p">:</span> <span class="p">[</span><span class="s">'patient3'</span><span class="p">]</span> 
+    <span class="p">},</span>
+    <span class="s">"M"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"WHITE"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s">"HISPANIC"</span><span class="p">:</span> <span class="p">[</span><span class="s">'patient4'</span><span class="p">,</span> <span class="s">'patient5'</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'F': {'WHITE': ['patient1', 'patient2'], 'HISPANIC': ['patient3']},
+ 'M': {'WHITE': [], 'HISPANIC': ['patient4', 'patient5']}}
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">group_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">groupby</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">group</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="n">groupby</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">group</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">groupby</span><span class="p">):</span>
+    <span class="n">grouped_data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+        <span class="n">attribute</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="n">groupby</span><span class="p">].</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">attribute</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">grouped_data</span><span class="p">:</span>
+            <span class="n">grouped_data</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">grouped_data</span><span class="p">[</span><span class="n">attribute</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">grouped_data</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">patients_by_gender</span> <span class="o">=</span> <span class="n">group_file</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="s">'GENDER'</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">patients_by_gender</span><span class="p">[</span><span class="s">'F'</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'ADDRESS': '419 Mraz Ranch Apt 13',
+ 'BIRTHDATE': '2003-04-15',
+ 'BIRTHPLACE': 'Ipswich  Massachusetts  US',
+ 'CITY': 'Saugus',
+ 'DEATHDATE': '',
+ 'DRIVERS': 'S99990332',
+ 'ETHNICITY': 'puerto_rican',
+ 'FIRST': 'Reena181',
+ 'GENDER': 'F',
+ 'Id': 'e118c014-fef7-4fbd-8c5d-fe42e9e16d84',
+ 'LAST': 'Dooley940',
+ 'MAIDEN': '',
+ 'MARITAL': '',
+ 'PASSPORT': '',
+ 'PREFIX': '',
+ 'RACE': 'hispanic',
+ 'SSN': '999-57-7583',
+ 'STATE': 'Massachusetts',
+ 'SUFFIX': '',
+ 'ZIP': '01906'}
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># patients by gender and race
+# here we'll use a dictionary to represent the 2nd level
+</span><span class="n">patients_by_gender_and_race</span> <span class="o">=</span> <span class="n">group_file</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="s">'GENDER'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">gender</span> <span class="ow">in</span> <span class="n">patients_by_gender_and_race</span><span class="p">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">patients_by_gender_and_race</span><span class="p">[</span><span class="n">gender</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">patients_by_gender_and_race</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'F': {}, 'M': {}}
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># now let's perform the groupings
+</span><span class="n">patients_by_gender_and_race</span> <span class="o">=</span> <span class="n">group_file</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="s">'GENDER'</span><span class="p">)</span>
+<span class="c1"># print(patients_by_gender_and_race)
+</span><span class="k">for</span> <span class="n">gender</span> <span class="ow">in</span> <span class="n">patients_by_gender_and_race</span><span class="p">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">patients_by_gender_and_race</span><span class="p">[</span><span class="n">gender</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span><span class="p">(</span><span class="n">patients_by_gender_and_race</span><span class="p">[</span><span class="n">gender</span><span class="p">],</span> <span class="s">'RACE'</span><span class="p">)</span>
+<span class="c1"># print(patients_by_gender)
+</span></code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># finally let's print the unique genders and races
+</span><span class="k">for</span> <span class="n">gender</span> <span class="ow">in</span> <span class="n">patients_by_gender_and_race</span><span class="p">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">race</span> <span class="ow">in</span> <span class="n">patients_by_gender_and_race</span><span class="p">[</span><span class="n">gender</span><span class="p">].</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">gender</span><span class="p">,</span> <span class="n">race</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>M WHITE
+M ASIAN
+M NATIVE
+M HISPANIC
+M BLACK
+F HISPANIC
+F WHITE
+F BLACK
+F NATIVE
+F ASIAN
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># as a sanity check let's look over the dataset again
+</span><span class="n">gender</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">race</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="n">gender</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s">'GENDER'</span><span class="p">])</span>
+        <span class="n">race</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s">'RACE'</span><span class="p">])</span>    
+<span class="k">print</span><span class="p">(</span><span class="n">gender</span><span class="p">,</span> <span class="n">race</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'F', 'M'} {'black', 'white', 'asian', 'native', 'hispanic'}
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># what about 3 levels of grouping?
+</span><span class="n">grouped_patients</span> <span class="o">=</span> <span class="n">group_file</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="s">'GENDER'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">gender</span> <span class="ow">in</span> <span class="n">grouped_patients</span><span class="p">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">grouped_patients</span><span class="p">[</span><span class="n">gender</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">[</span><span class="n">gender</span><span class="p">],</span> <span class="s">'RACE'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">race</span> <span class="ow">in</span> <span class="n">grouped_patients</span><span class="p">[</span><span class="n">gender</span><span class="p">].</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">grouped_patients</span><span class="p">[</span><span class="n">gender</span><span class="p">][</span><span class="n">race</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">[</span><span class="n">gender</span><span class="p">][</span><span class="n">race</span><span class="p">],</span> <span class="s">'ETHNICITY'</span><span class="p">)</span>
+        
+<span class="c1"># print(grouped_patients)
+</span></code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># let's print the unique genders and races
+</span><span class="k">for</span> <span class="n">gender</span> <span class="ow">in</span> <span class="n">grouped_patients</span><span class="p">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">race</span> <span class="ow">in</span> <span class="n">grouped_patients</span><span class="p">[</span><span class="n">gender</span><span class="p">].</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">ethnicity</span> <span class="ow">in</span> <span class="n">grouped_patients</span><span class="p">[</span><span class="n">gender</span><span class="p">][</span><span class="n">race</span><span class="p">].</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">gender</span><span class="p">,</span> <span class="n">race</span><span class="p">,</span> <span class="n">ethnicity</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>M WHITE POLISH
+M WHITE PORTUGUESE
+M WHITE IRISH
+M WHITE FRENCH_CANADIAN
+M WHITE ITALIAN
+M WHITE GREEK
+M WHITE SCOTTISH
+M WHITE ENGLISH
+M WHITE AMERICAN
+M WHITE FRENCH
+M WHITE GERMAN
+M ASIAN CHINESE
+M ASIAN ASIAN_INDIAN
+M NATIVE AMERICAN_INDIAN
+M HISPANIC PUERTO_RICAN
+M HISPANIC SOUTH_AMERICAN
+M HISPANIC MEXICAN
+M BLACK DOMINICAN
+M BLACK WEST_INDIAN
+F HISPANIC PUERTO_RICAN
+F WHITE ENGLISH
+F WHITE FRENCH
+F WHITE ITALIAN
+F WHITE GERMAN
+F WHITE FRENCH_CANADIAN
+F WHITE IRISH
+F WHITE PORTUGUESE
+F WHITE SCOTTISH
+F WHITE POLISH
+F BLACK DOMINICAN
+F NATIVE AMERICAN_INDIAN
+F ASIAN CHINESE
+</code></pre></div></div> <h2 id="what-about-4-levels-of-grouping"> <a href="#what-about-4-levels-of-grouping" class="anchor-heading" aria-labelledby="what-about-4-levels-of-grouping"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> What about 4 levels of grouping? </h2> <p>I think we should refactor again. This time using <a href="https://realpython.com/python-thinking-recursively/">recursion</a>. This time we’ll support any number of groupings.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">group_file_by_list</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">groupings</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">grouped_data</span> <span class="o">=</span> <span class="n">group</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="n">groupings</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">groupings</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">group_by_list</span><span class="p">(</span><span class="n">grouped_data</span><span class="p">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">grouped_data</span><span class="p">,</span> <span class="n">groupings</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="k">return</span> <span class="n">grouped_data</span>
+    
+<span class="k">def</span> <span class="nf">group_by_list</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">grouped_data</span><span class="p">,</span> <span class="n">groupings</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+        <span class="n">grouped_data</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span><span class="p">(</span><span class="n">grouped_data</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="n">groupings</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">groupings</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">group_by_list</span><span class="p">(</span><span class="n">grouped_data</span><span class="p">[</span><span class="n">item</span><span class="p">].</span><span class="n">keys</span><span class="p">(),</span> <span class="n">grouped_data</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="n">groupings</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="k">return</span> <span class="n">grouped_data</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">groupings</span> <span class="o">=</span> <span class="p">[</span><span class="s">'GENDER'</span><span class="p">,</span> <span class="s">'RACE'</span><span class="p">,</span> <span class="s">'ETHNICITY'</span><span class="p">,</span> <span class="s">'BIRTHPLACE'</span><span class="p">]</span>
+<span class="n">grouped_patients</span> <span class="o">=</span> <span class="n">group_file_by_list</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="n">groupings</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">gender</span> <span class="ow">in</span> <span class="n">grouped_patients</span><span class="p">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">race</span> <span class="ow">in</span> <span class="n">grouped_patients</span><span class="p">[</span><span class="n">gender</span><span class="p">].</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">ethnicity</span> <span class="ow">in</span> <span class="n">grouped_patients</span><span class="p">[</span><span class="n">gender</span><span class="p">][</span><span class="n">race</span><span class="p">].</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">gender</span><span class="p">,</span> <span class="n">race</span><span class="p">,</span> <span class="n">ethnicity</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>M WHITE POLISH
+M WHITE PORTUGUESE
+M WHITE IRISH
+M WHITE FRENCH_CANADIAN
+M WHITE ITALIAN
+M WHITE GREEK
+M WHITE SCOTTISH
+M WHITE ENGLISH
+M WHITE AMERICAN
+M WHITE FRENCH
+M WHITE GERMAN
+M ASIAN CHINESE
+M ASIAN ASIAN_INDIAN
+M NATIVE AMERICAN_INDIAN
+M HISPANIC PUERTO_RICAN
+M HISPANIC SOUTH_AMERICAN
+M HISPANIC MEXICAN
+M BLACK DOMINICAN
+M BLACK WEST_INDIAN
+F HISPANIC PUERTO_RICAN
+F WHITE ENGLISH
+F WHITE FRENCH
+F WHITE ITALIAN
+F WHITE GERMAN
+F WHITE FRENCH_CANADIAN
+F WHITE IRISH
+F WHITE PORTUGUESE
+F WHITE SCOTTISH
+F WHITE POLISH
+F BLACK DOMINICAN
+F NATIVE AMERICAN_INDIAN
+F ASIAN CHINESE
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># let's create a recursive print
+</span><span class="k">def</span> <span class="nf">print_keys</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">print_keys2</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">k</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">print_keys2</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">print_keys2</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">l</span> <span class="o">+</span> <span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">' '</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">l</span><span class="p">))</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
+    
+<span class="n">print_keys</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>M WHITE POLISH NEWTON  MASSACHUSETTS  US
+M WHITE POLISH ADAMS  MASSACHUSETTS  US
+M WHITE POLISH BOSTON  MASSACHUSETTS  US
+M WHITE POLISH HOLYOKE  MASSACHUSETTS  US
+M WHITE PORTUGUESE PORTO  DOURO LITORAL  PT
+M WHITE PORTUGUESE BRAGA  MINHO  PT
+M WHITE PORTUGUESE YARMOUTH  MASSACHUSETTS  US
+M WHITE IRISH CHICOPEE  MASSACHUSETTS  US
+M WHITE IRISH WORCESTER  MASSACHUSETTS  US
+M WHITE IRISH WESTPORT  MASSACHUSETTS  US
+M WHITE IRISH WEYMOUTH TOWN  MASSACHUSETTS  US
+M WHITE IRISH MASHPEE  MASSACHUSETTS  US
+M WHITE IRISH PITTSFIELD  MASSACHUSETTS  US
+M WHITE FRENCH_CANADIAN LENOX  MASSACHUSETTS  US
+M WHITE FRENCH_CANADIAN BOSTON  MASSACHUSETTS  US
+M WHITE FRENCH_CANADIAN SHERBORN  MASSACHUSETTS  US
+M WHITE FRENCH_CANADIAN HUDSON  MASSACHUSETTS  US
+M WHITE FRENCH_CANADIAN SANDWICH  MASSACHUSETTS  US
+M WHITE FRENCH_CANADIAN WORCESTER  MASSACHUSETTS  US
+M WHITE ITALIAN FALL RIVER  MASSACHUSETTS  US
+M WHITE ITALIAN HAVERHILL  MASSACHUSETTS  US
+M WHITE ITALIAN BOSTON  MASSACHUSETTS  US
+M WHITE ITALIAN SUDBURY  MASSACHUSETTS  US
+M WHITE ITALIAN SOMERVILLE  MASSACHUSETTS  US
+M WHITE ITALIAN MANSFIELD  MASSACHUSETTS  US
+M WHITE ITALIAN BELCHERTOWN  MASSACHUSETTS  US
+M WHITE ITALIAN NORTH ATTLEBOROUGH  MASSACHUSETTS  US
+M WHITE ITALIAN FAIRHAVEN  MASSACHUSETTS  US
+M WHITE ITALIAN MIDDLETON  MASSACHUSETTS  US
+M WHITE ITALIAN BEVERLY  MASSACHUSETTS  US
+M WHITE GREEK ARLINGTON  MASSACHUSETTS  US
+M WHITE GREEK WORCESTER  MASSACHUSETTS  US
+M WHITE SCOTTISH PITTSFIELD  MASSACHUSETTS  US
+M WHITE ENGLISH HAVERHILL  MASSACHUSETTS  US
+M WHITE ENGLISH BOSTON  MASSACHUSETTS  US
+M WHITE ENGLISH SHARON  MASSACHUSETTS  US
+M WHITE ENGLISH BEVERLY  MASSACHUSETTS  US
+M WHITE ENGLISH ATTLEBORO  MASSACHUSETTS  US
+M WHITE ENGLISH NEW BEDFORD  MASSACHUSETTS  US
+M WHITE ENGLISH WORCESTER  MASSACHUSETTS  US
+M WHITE ENGLISH SOMERVILLE  MASSACHUSETTS  US
+M WHITE ENGLISH CHICOPEE  MASSACHUSETTS  US
+M WHITE ENGLISH REVERE  MASSACHUSETTS  US
+M WHITE ENGLISH RUTLAND  MASSACHUSETTS  US
+M WHITE ENGLISH PLYMOUTH  MASSACHUSETTS  US
+M WHITE ENGLISH NORTHAMPTON  MASSACHUSETTS  US
+M WHITE ENGLISH DARTMOUTH  MASSACHUSETTS  US
+M WHITE ENGLISH NATICK  MASSACHUSETTS  US
+M WHITE ENGLISH WHATELY  MASSACHUSETTS  US
+M WHITE ENGLISH SOUTHWICK  MASSACHUSETTS  US
+M WHITE AMERICAN SPRINGFIELD  MASSACHUSETTS  US
+M WHITE FRENCH SHREWSBURY  MASSACHUSETTS  US
+M WHITE GERMAN WALTHAM  MASSACHUSETTS  US
+M ASIAN CHINESE QUINCY  MASSACHUSETTS  US
+M ASIAN ASIAN_INDIAN ROCKLAND  MASSACHUSETTS  US
+M NATIVE AMERICAN_INDIAN NEW BEDFORD  MASSACHUSETTS  US
+M HISPANIC PUERTO_RICAN TEMPLETON  MASSACHUSETTS  US
+M HISPANIC PUERTO_RICAN LOWELL  MASSACHUSETTS  US
+M HISPANIC PUERTO_RICAN BAYAMON  PUERTO RICO  PR
+M HISPANIC PUERTO_RICAN PONCE  PUERTO RICO  PR
+M HISPANIC PUERTO_RICAN CAROLINA  PUERTO RICO  PR
+M HISPANIC SOUTH_AMERICAN RIO DE JANERIO  RIO DE JANERIO  BR
+M HISPANIC MEXICAN LA PAZ  BAJA CALIFORNIA  MX
+M BLACK DOMINICAN UXBRIDGE  MASSACHUSETTS  US
+M BLACK DOMINICAN DARTMOUTH  MASSACHUSETTS  US
+M BLACK WEST_INDIAN SANTIAGO DE LOS CABALLEROS  SANTIAGO  DO
+M BLACK WEST_INDIAN KINGSTON  KINGSTON  JM
+F HISPANIC PUERTO_RICAN IPSWICH  MASSACHUSETTS  US
+F HISPANIC PUERTO_RICAN BAYAMON  PUERTO RICO  PR
+F HISPANIC PUERTO_RICAN CAROLINA  PUERTO RICO  PR
+F WHITE ENGLISH DANVERS  MASSACHUSETTS  US
+F WHITE ENGLISH BELCHERTOWN  MASSACHUSETTS  US
+F WHITE ENGLISH HARVARD  MASSACHUSETTS  US
+F WHITE ENGLISH STERLING  MASSACHUSETTS  US
+F WHITE ENGLISH NATICK  MASSACHUSETTS  US
+F WHITE ENGLISH HOPKINTON  MASSACHUSETTS  US
+F WHITE FRENCH CHICOPEE  MASSACHUSETTS  US
+F WHITE FRENCH STOUGHTON  MASSACHUSETTS  US
+F WHITE FRENCH BOSTON  MASSACHUSETTS  US
+F WHITE FRENCH SALEM  MASSACHUSETTS  US
+F WHITE FRENCH CONCORD  MASSACHUSETTS  US
+F WHITE ITALIAN MILFORD  MASSACHUSETTS  US
+F WHITE ITALIAN SPRINGFIELD  MASSACHUSETTS  US
+F WHITE ITALIAN MILTON  MASSACHUSETTS  US
+F WHITE ITALIAN DRACUT  MASSACHUSETTS  US
+F WHITE ITALIAN PALERMO  SICILY  IT
+F WHITE ITALIAN NEW BEDFORD  MASSACHUSETTS  US
+F WHITE ITALIAN SOUTHWICK  MASSACHUSETTS  US
+F WHITE GERMAN NORTH ADAMS  MASSACHUSETTS  US
+F WHITE GERMAN ATTLEBORO  MASSACHUSETTS  US
+F WHITE GERMAN EASTHAMPTON TOWN  MASSACHUSETTS  US
+F WHITE GERMAN QUINCY  MASSACHUSETTS  US
+F WHITE GERMAN REVERE  MASSACHUSETTS  US
+F WHITE FRENCH_CANADIAN BILLERICA  MASSACHUSETTS  US
+F WHITE FRENCH_CANADIAN STONEHAM  MASSACHUSETTS  US
+F WHITE FRENCH_CANADIAN HOLYOKE  MASSACHUSETTS  US
+F WHITE FRENCH_CANADIAN ROCKLAND  MASSACHUSETTS  US
+F WHITE FRENCH_CANADIAN AGAWAM TOWN  MASSACHUSETTS  US
+F WHITE FRENCH_CANADIAN WEST SPRINGFIELD TOWN  MASSACHUSETTS  US
+F WHITE FRENCH_CANADIAN BOSTON  MASSACHUSETTS  US
+F WHITE FRENCH_CANADIAN LOWELL  MASSACHUSETTS  US
+F WHITE FRENCH_CANADIAN PALMER TOWN  MASSACHUSETTS  US
+F WHITE IRISH LYNN  MASSACHUSETTS  US
+F WHITE IRISH FRAMINGHAM  MASSACHUSETTS  US
+F WHITE IRISH PALMER TOWN  MASSACHUSETTS  US
+F WHITE IRISH BOSTON  MASSACHUSETTS  US
+F WHITE IRISH BRAINTREE TOWN  MASSACHUSETTS  US
+F WHITE IRISH SOMERSET  MASSACHUSETTS  US
+F WHITE PORTUGUESE FUNCHAL  MADEIRA  PT
+F WHITE PORTUGUESE BELMONT  MASSACHUSETTS  US
+F WHITE PORTUGUESE PORTO  DOURO LITORAL  PT
+F WHITE PORTUGUESE MARSHFIELD  MASSACHUSETTS  US
+F WHITE PORTUGUESE FARO  ALGARVE  PT
+F WHITE SCOTTISH EAST LONGMEADOW  MASSACHUSETTS  US
+F WHITE SCOTTISH WINDSOR  MASSACHUSETTS  US
+F WHITE SCOTTISH BOSTON  MASSACHUSETTS  US
+F WHITE POLISH TAUNTON  MASSACHUSETTS  US
+F WHITE POLISH CONCORD  MASSACHUSETTS  US
+F BLACK DOMINICAN SALISBURY  SAINT JOSEPH PARISH  DM
+F BLACK DOMINICAN FALL RIVER  MASSACHUSETTS  US
+F BLACK DOMINICAN MARIGOT  SAINT ANDREW PARISH  DM
+F NATIVE AMERICAN_INDIAN STONEHAM  MASSACHUSETTS  US
+F ASIAN CHINESE WENHAM  MASSACHUSETTS  US
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># lets try it out on a few examples
+</span></code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped_patients</span> <span class="o">=</span> <span class="n">group_file_by_list</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="p">[</span><span class="s">'GENDER'</span><span class="p">])</span>
+<span class="n">print_keys</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>M
+F
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped_patients</span> <span class="o">=</span> <span class="n">group_file_by_list</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="p">[</span><span class="s">'RACE'</span><span class="p">])</span>
+<span class="n">print_keys</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WHITE
+HISPANIC
+ASIAN
+NATIVE
+BLACK
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped_patients</span> <span class="o">=</span> <span class="n">group_file_by_list</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="p">[</span><span class="s">'GENDER'</span><span class="p">,</span> <span class="s">'RACE'</span><span class="p">])</span>
+<span class="n">print_keys</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>M WHITE
+M ASIAN
+M NATIVE
+M HISPANIC
+M BLACK
+F HISPANIC
+F WHITE
+F BLACK
+F NATIVE
+F ASIAN
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped_patients</span> <span class="o">=</span> <span class="n">group_file_by_list</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="p">[</span><span class="s">'RACE'</span><span class="p">,</span> <span class="s">'GENDER'</span><span class="p">])</span>
+<span class="n">print_keys</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WHITE M
+WHITE F
+HISPANIC F
+HISPANIC M
+ASIAN M
+ASIAN F
+NATIVE M
+NATIVE F
+BLACK M
+BLACK F
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped_patients</span> <span class="o">=</span> <span class="n">group_file_by_list</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="p">[</span><span class="s">'ETHNICITY'</span><span class="p">])</span>
+<span class="n">print_keys</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POLISH
+PUERTO_RICAN
+ENGLISH
+FRENCH
+ITALIAN
+PORTUGUESE
+IRISH
+GERMAN
+CHINESE
+FRENCH_CANADIAN
+AMERICAN_INDIAN
+SCOTTISH
+DOMINICAN
+SOUTH_AMERICAN
+GREEK
+AMERICAN
+WEST_INDIAN
+MEXICAN
+ASIAN_INDIAN
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped_patients</span> <span class="o">=</span> <span class="n">group_file_by_list</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="p">[</span><span class="s">'RACE'</span><span class="p">,</span> <span class="s">'ETHNICITY'</span><span class="p">])</span>
+<span class="n">print_keys</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WHITE POLISH
+WHITE ENGLISH
+WHITE FRENCH
+WHITE ITALIAN
+WHITE PORTUGUESE
+WHITE IRISH
+WHITE GERMAN
+WHITE FRENCH_CANADIAN
+WHITE SCOTTISH
+WHITE GREEK
+WHITE AMERICAN
+HISPANIC PUERTO_RICAN
+HISPANIC SOUTH_AMERICAN
+HISPANIC MEXICAN
+ASIAN CHINESE
+ASIAN ASIAN_INDIAN
+NATIVE AMERICAN_INDIAN
+BLACK DOMINICAN
+BLACK WEST_INDIAN
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grouped_patients</span> <span class="o">=</span> <span class="n">group_file_by_list</span><span class="p">(</span><span class="s">'../data/csv/patients.csv'</span><span class="p">,</span> <span class="p">[</span><span class="s">'RACE'</span><span class="p">,</span> <span class="s">'ETHNICITY'</span><span class="p">,</span> <span class="s">'BIRTHPLACE'</span><span class="p">,</span> <span class="s">'GENDER'</span><span class="p">])</span>
+<span class="n">print_keys</span><span class="p">(</span><span class="n">grouped_patients</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WHITE POLISH NEWTON  MASSACHUSETTS  US M
+WHITE POLISH TAUNTON  MASSACHUSETTS  US F
+WHITE POLISH ADAMS  MASSACHUSETTS  US M
+WHITE POLISH BOSTON  MASSACHUSETTS  US M
+WHITE POLISH CONCORD  MASSACHUSETTS  US F
+WHITE POLISH HOLYOKE  MASSACHUSETTS  US M
+WHITE ENGLISH DANVERS  MASSACHUSETTS  US F
+WHITE ENGLISH BELCHERTOWN  MASSACHUSETTS  US F
+WHITE ENGLISH HAVERHILL  MASSACHUSETTS  US M
+WHITE ENGLISH BOSTON  MASSACHUSETTS  US M
+WHITE ENGLISH SHARON  MASSACHUSETTS  US M
+WHITE ENGLISH BEVERLY  MASSACHUSETTS  US M
+WHITE ENGLISH HARVARD  MASSACHUSETTS  US F
+WHITE ENGLISH ATTLEBORO  MASSACHUSETTS  US M
+WHITE ENGLISH NEW BEDFORD  MASSACHUSETTS  US M
+WHITE ENGLISH STERLING  MASSACHUSETTS  US F
+WHITE ENGLISH WORCESTER  MASSACHUSETTS  US M
+WHITE ENGLISH SOMERVILLE  MASSACHUSETTS  US M
+WHITE ENGLISH NATICK  MASSACHUSETTS  US F
+WHITE ENGLISH NATICK  MASSACHUSETTS  US M
+WHITE ENGLISH HOPKINTON  MASSACHUSETTS  US F
+WHITE ENGLISH CHICOPEE  MASSACHUSETTS  US M
+WHITE ENGLISH REVERE  MASSACHUSETTS  US M
+WHITE ENGLISH RUTLAND  MASSACHUSETTS  US M
+WHITE ENGLISH PLYMOUTH  MASSACHUSETTS  US M
+WHITE ENGLISH NORTHAMPTON  MASSACHUSETTS  US M
+WHITE ENGLISH DARTMOUTH  MASSACHUSETTS  US M
+WHITE ENGLISH WHATELY  MASSACHUSETTS  US M
+WHITE ENGLISH SOUTHWICK  MASSACHUSETTS  US M
+WHITE FRENCH CHICOPEE  MASSACHUSETTS  US F
+WHITE FRENCH STOUGHTON  MASSACHUSETTS  US F
+WHITE FRENCH SHREWSBURY  MASSACHUSETTS  US M
+WHITE FRENCH BOSTON  MASSACHUSETTS  US F
+WHITE FRENCH SALEM  MASSACHUSETTS  US F
+WHITE FRENCH CONCORD  MASSACHUSETTS  US F
+WHITE ITALIAN MILFORD  MASSACHUSETTS  US F
+WHITE ITALIAN SPRINGFIELD  MASSACHUSETTS  US F
+WHITE ITALIAN FALL RIVER  MASSACHUSETTS  US M
+WHITE ITALIAN HAVERHILL  MASSACHUSETTS  US M
+WHITE ITALIAN BOSTON  MASSACHUSETTS  US M
+WHITE ITALIAN SUDBURY  MASSACHUSETTS  US M
+WHITE ITALIAN SOMERVILLE  MASSACHUSETTS  US M
+WHITE ITALIAN MANSFIELD  MASSACHUSETTS  US M
+WHITE ITALIAN BELCHERTOWN  MASSACHUSETTS  US M
+WHITE ITALIAN NORTH ATTLEBOROUGH  MASSACHUSETTS  US M
+WHITE ITALIAN FAIRHAVEN  MASSACHUSETTS  US M
+WHITE ITALIAN MIDDLETON  MASSACHUSETTS  US M
+WHITE ITALIAN MILTON  MASSACHUSETTS  US F
+WHITE ITALIAN BEVERLY  MASSACHUSETTS  US M
+WHITE ITALIAN DRACUT  MASSACHUSETTS  US F
+WHITE ITALIAN PALERMO  SICILY  IT F
+WHITE ITALIAN NEW BEDFORD  MASSACHUSETTS  US F
+WHITE ITALIAN SOUTHWICK  MASSACHUSETTS  US F
+WHITE PORTUGUESE PORTO  DOURO LITORAL  PT M
+WHITE PORTUGUESE PORTO  DOURO LITORAL  PT F
+WHITE PORTUGUESE BRAGA  MINHO  PT M
+WHITE PORTUGUESE FUNCHAL  MADEIRA  PT F
+WHITE PORTUGUESE BELMONT  MASSACHUSETTS  US F
+WHITE PORTUGUESE MARSHFIELD  MASSACHUSETTS  US F
+WHITE PORTUGUESE FARO  ALGARVE  PT F
+WHITE PORTUGUESE YARMOUTH  MASSACHUSETTS  US M
+WHITE IRISH CHICOPEE  MASSACHUSETTS  US M
+WHITE IRISH WORCESTER  MASSACHUSETTS  US M
+WHITE IRISH LYNN  MASSACHUSETTS  US F
+WHITE IRISH WESTPORT  MASSACHUSETTS  US M
+WHITE IRISH FRAMINGHAM  MASSACHUSETTS  US F
+WHITE IRISH PALMER TOWN  MASSACHUSETTS  US F
+WHITE IRISH BOSTON  MASSACHUSETTS  US F
+WHITE IRISH WEYMOUTH TOWN  MASSACHUSETTS  US M
+WHITE IRISH MASHPEE  MASSACHUSETTS  US M
+WHITE IRISH PITTSFIELD  MASSACHUSETTS  US M
+WHITE IRISH BRAINTREE TOWN  MASSACHUSETTS  US F
+WHITE IRISH SOMERSET  MASSACHUSETTS  US F
+WHITE GERMAN NORTH ADAMS  MASSACHUSETTS  US F
+WHITE GERMAN ATTLEBORO  MASSACHUSETTS  US F
+WHITE GERMAN EASTHAMPTON TOWN  MASSACHUSETTS  US F
+WHITE GERMAN QUINCY  MASSACHUSETTS  US F
+WHITE GERMAN REVERE  MASSACHUSETTS  US F
+WHITE GERMAN WALTHAM  MASSACHUSETTS  US M
+WHITE FRENCH_CANADIAN BILLERICA  MASSACHUSETTS  US F
+WHITE FRENCH_CANADIAN LENOX  MASSACHUSETTS  US M
+WHITE FRENCH_CANADIAN STONEHAM  MASSACHUSETTS  US F
+WHITE FRENCH_CANADIAN BOSTON  MASSACHUSETTS  US M
+WHITE FRENCH_CANADIAN BOSTON  MASSACHUSETTS  US F
+WHITE FRENCH_CANADIAN SHERBORN  MASSACHUSETTS  US M
+WHITE FRENCH_CANADIAN HUDSON  MASSACHUSETTS  US M
+WHITE FRENCH_CANADIAN SANDWICH  MASSACHUSETTS  US M
+WHITE FRENCH_CANADIAN WORCESTER  MASSACHUSETTS  US M
+WHITE FRENCH_CANADIAN HOLYOKE  MASSACHUSETTS  US F
+WHITE FRENCH_CANADIAN ROCKLAND  MASSACHUSETTS  US F
+WHITE FRENCH_CANADIAN AGAWAM TOWN  MASSACHUSETTS  US F
+WHITE FRENCH_CANADIAN WEST SPRINGFIELD TOWN  MASSACHUSETTS  US F
+WHITE FRENCH_CANADIAN LOWELL  MASSACHUSETTS  US F
+WHITE FRENCH_CANADIAN PALMER TOWN  MASSACHUSETTS  US F
+WHITE SCOTTISH EAST LONGMEADOW  MASSACHUSETTS  US F
+WHITE SCOTTISH PITTSFIELD  MASSACHUSETTS  US M
+WHITE SCOTTISH WINDSOR  MASSACHUSETTS  US F
+WHITE SCOTTISH BOSTON  MASSACHUSETTS  US F
+WHITE GREEK ARLINGTON  MASSACHUSETTS  US M
+WHITE GREEK WORCESTER  MASSACHUSETTS  US M
+WHITE AMERICAN SPRINGFIELD  MASSACHUSETTS  US M
+HISPANIC PUERTO_RICAN IPSWICH  MASSACHUSETTS  US F
+HISPANIC PUERTO_RICAN TEMPLETON  MASSACHUSETTS  US M
+HISPANIC PUERTO_RICAN BAYAMON  PUERTO RICO  PR F
+HISPANIC PUERTO_RICAN BAYAMON  PUERTO RICO  PR M
+HISPANIC PUERTO_RICAN CAROLINA  PUERTO RICO  PR F
+HISPANIC PUERTO_RICAN CAROLINA  PUERTO RICO  PR M
+HISPANIC PUERTO_RICAN LOWELL  MASSACHUSETTS  US M
+HISPANIC PUERTO_RICAN PONCE  PUERTO RICO  PR M
+HISPANIC SOUTH_AMERICAN RIO DE JANERIO  RIO DE JANERIO  BR M
+HISPANIC MEXICAN LA PAZ  BAJA CALIFORNIA  MX M
+ASIAN CHINESE QUINCY  MASSACHUSETTS  US M
+ASIAN CHINESE WENHAM  MASSACHUSETTS  US F
+ASIAN ASIAN_INDIAN ROCKLAND  MASSACHUSETTS  US M
+NATIVE AMERICAN_INDIAN NEW BEDFORD  MASSACHUSETTS  US M
+NATIVE AMERICAN_INDIAN STONEHAM  MASSACHUSETTS  US F
+BLACK DOMINICAN UXBRIDGE  MASSACHUSETTS  US M
+BLACK DOMINICAN SALISBURY  SAINT JOSEPH PARISH  DM F
+BLACK DOMINICAN FALL RIVER  MASSACHUSETTS  US F
+BLACK DOMINICAN DARTMOUTH  MASSACHUSETTS  US M
+BLACK DOMINICAN MARIGOT  SAINT ANDREW PARISH  DM F
+BLACK WEST_INDIAN SANTIAGO DE LOS CABALLEROS  SANTIAGO  DO M
+BLACK WEST_INDIAN KINGSTON  KINGSTON  JM M
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div> </div> </div> </div> </body> </html>

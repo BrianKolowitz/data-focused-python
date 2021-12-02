@@ -157,3 +157,6 @@ geckodriver.log
 
 # bundler
 vendor
+
+# dotenv files
+*.env

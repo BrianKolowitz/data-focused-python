@@ -1,0 +1,239 @@
+---
+layout: default
+title: 03 - CSS Selectors
+parent: Topic 12 - Web Scraping
+grand_parent: Lectures
+nav_order: 4
+---
+# How CSS Selectors Work
+
+[source](https://css-tricks.com/how-css-selectors-work/)
+
+Are you new to CSS? This article is for you! Perhaps the biggest key to understanding CSS is understanding selectors. Selectors are what allows you to target specific HTML elements and apply style to them. Let's not think about style right now though, let's just focus on the selecting.
+
+In the examples below, the CSS would be in a file called something like style.css that is referenced from an HTML document called something like index.html. They are separate files, which is the great thing about CSS, keeping the design away from the document.
+
+Here's what that HTML file would be like:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>We're learning selectors!</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  
+  <h1 id="yay">Yay</h1>
+
+<body>
+</html>
+```
+
+And the CSS file would contain just the selector blocks like you'll see below.
+
+**CSS**
+
+```css
+#happy-cake {
+
+}
+```
+
+**HTML**
+
+```html
+<!-- WILL match -->
+<div id="happy-cake"></div>
+
+<!-- WILL match -->
+<aside id="happy-cake"></aside>
+
+<!-- Will NOT match -->
+<div id="sad-cake">Wrong ID!</div>
+
+<!-- Will NOT match -->
+<div class="happy-cake">That's not an ID!</div>
+```
+
+ID selectors are the most powerful type of selector in terms of [CSS specificity](https://css-tricks.com/specifics-on-css-specificity/). Meaning that they beat out other types of selectors and the styles defined within win. That sounds good, but that's typically [considered bad](https://css-tricks.com/a-line-in-the-sand/), because it's nice to have lower-specificity selectors that are easier to override when needed.
+
+## Class Selector
+
+**CSS**
+```css
+.module {
+
+}
+```
+
+**HTML***
+```html
+<!-- WILL match -->
+<div class="module"></div>
+
+<!-- WILL match -->
+<aside class="country module iceland"></aside>
+
+<!-- Will NOT match -->
+<div class=".module">The dot is for CSS, not HTML</div>
+
+<!-- Will NOT match -->
+<div class="bigmodule">Wrong class</div>
+
+```
+
+Class selectors are your friend. They are probably the most useful and versatile selectors out there. In part because they are well supported in all browsers. In part because you can add multiple classes (just separated by a space) on HTML elements. In part because there are JavaScript things you can do specifically for manipulating classes.
+
+## Tag Selector
+
+**CSS**
+```css
+h2 {
+
+}
+```
+
+**HTML**
+```html
+<!-- WILL match -->
+<h2>Hi, Mom</h2>
+
+<main>
+  <div>
+     <!-- WILL match -->
+     <h2>Anywhere</h2>
+  </div>
+</main>
+
+<!-- Will NOT match -->
+<div class="h2">Wrong tag, can't trick it</div>
+
+<!-- Will NOT match -->
+<h2class="yolo">Make sure that tag has a space after it!</h2>
+```
+
+Tag selectors are at their most useful when changing properties that are unique to that HTML element. Like setting the ```list-style``` on a ```<ul>``` or ```tab-size``` on a ```<pre>```. Also in [reset stylesheets](https://css-tricks.com/poll-results-what-css-reset-do-you-use/) where you are specifically trying to unset styles that browsers apply to certain elements.
+
+Don't rely on them too much though. It's typically more useful to have a class define styling that you can use on any HTML element.
+
+## Attribute Selector
+
+**CSS**
+```css
+[data-modal="open"] {
+
+}
+```
+
+**HTML**
+```html
+<!-- WILL match -->
+<div data-modal="open"></div>
+
+<!-- WILL match -->
+<aside class='closed' data-modal='open'></aside>
+
+<!-- Will NOT match -->
+<div data-modal="false">Wrong value</div>
+
+<!-- Will NOT match -->
+<div data-modal>No value</div>
+
+<!-- Will NOT match -->
+<div data-modal-open>Wrong attribute</div>
+```
+
+You might argue that [attribute selectors](https://css-tricks.com/attribute-selectors/) are even more useful than classes because they have the same [specificity value](https://css-tricks.com/specifics-on-css-specificity/), but can be any attribute not just ```class```, plus they can have a value you can select by.
+
+Hardly an issue anymore, but attribute selectors aren't supported in IE 6.
+
+## Positional Selectors
+
+**CSS**
+```css
+:nth-child(2) {
+
+}
+```
+
+**HTML**
+```html
+<ul>
+  <li>nope</li>
+  <!-- WILL match -->
+  <li>yep, I'm #2</li>
+  <li>nope</li>
+</ul>
+```
+
+There are several different positional selectors beyond [:nth-child](https://css-tricks.com/how-nth-child-works/). Using simple expressions (like 3n = "every third") you can select elements based on their position in the HTML. You can [play with that idea here](https://css-tricks.com/examples/nth-child-tester/) or check out [some useful recipes](https://css-tricks.com/useful-nth-child-recipies/).
+
+## Other Pseudo Selectors
+
+**CSS**
+```css
+:empty {
+
+}
+```
+
+**HTML**
+```html
+<!-- WILL match -->
+<div></div>
+
+<!-- WILL match -->
+<aside data-blah><!-- nothin' --></aside>
+
+<!-- Will NOT match -->
+<div> </div>
+
+<!-- Will NOT match -->
+<div>
+</div>
+```
+
+```:empty``` is one of many [pseudo selectors](https://css-tricks.com/pseudo-class-selectors/), which you can recognize by the colon (```:```) in them. They typically represent something that you couldn't know by just the element and attributes alone.
+
+Note that these are slightly different than [pseudo elements](https://css-tricks.com/pseudo-element-roundup/), which you can recognize by the double colon (```::```). They are responsible for adding things to the page by the things they select.
+
+## More on Selectors
+
+Selectors can be combined together. For instance:
+
+```css
+.module.news {  
+  /* Selects elements with BOTH of those classes */
+}
+#site-footer::after {
+  /* Adds content after an element with that ID */
+}
+section[data-open] {
+  /* Selects only section elements if they have this attribute */
+}
+
+```
+
+There are also [selector combinators](https://css-tricks.com/child-and-sibling-selectors/) like ```~``` and ```+``` and ```>``` that affect selectors, like:
+
+```css
+.module > h2 {
+  /* Select h2 elements that are direct children of an element with that class */
+} 
+h2 + p {
+  /* Select p elements that are directly following an h2 element */
+}
+li ~ li {
+  /* Select li elements that are siblings (and following) another li element. */
+}
+```
+
+On CSS-Tricks there is [an entire Almanac](https://css-tricks.com/almanac/) that covers all the selectors in CSS, as well as properties.
+
+
+```python
+
+```
