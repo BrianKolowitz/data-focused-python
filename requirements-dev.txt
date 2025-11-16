@@ -1,0 +1,4 @@
+# Developer tooling for linting and testing.
+-r requirements.txt
+pytest>=8.0
+ruff>=0.3

@@ -14,6 +14,30 @@ development life-cycle: planning, development, testing, implementation and maint
 
 *Note: The course schedule and assignments are subject to change. Please see your Enterprise Learning Management System (e.g. Canvas, Blackboard, Desire2Learn) for the official schedule.*
 
+## Working with the code samples
+
+The notebooks, scripts, and exercises in this repository now target **Python 3.12**, the latest stable CPython release. To install the required libraries, create and activate a virtual environment and then run:
+
+```
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+For contributors, the developer tooling (pytest and Ruff) can be installed with:
+
+```
+pip install -r requirements-dev.txt
+```
+
+Always run the test suite and the linter before opening a pull request:
+
+```
+ruff check .
+pytest
+```
+
+Both commands are also executed automatically in CI.
+
 ## Lectures
 
 Lectures will contain a mixture of content form this site and others.

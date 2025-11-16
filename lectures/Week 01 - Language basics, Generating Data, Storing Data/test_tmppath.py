@@ -1,5 +1,4 @@
 # content of test_tmp_path.py
-import os
 
 CONTENT = u"content"
 

@@ -1,14 +1,14 @@
+"""Second Scrapy example that extracts the set name with the modern API."""
+
 import scrapy
+
 
 class BrickSetSpider(scrapy.Spider):
     name = "brickset_spider"
-    start_urls = ['http://brickset.com/sets/year-2016']
+    start_urls = ["http://brickset.com/sets/year-2016"]
 
     def parse(self, response):
-        SET_SELECTOR = '.set'
-        for brickset in response.css(SET_SELECTOR):
-
-            NAME_SELECTOR = 'h1 ::text'
-            yield {
-                'name': brickset.css(NAME_SELECTOR).extract_first(),
-            }
+        set_selector = ".set"
+        for brickset in response.css(set_selector):
+            name_selector = "h1 ::text"
+            yield {"name": brickset.css(name_selector).get()}

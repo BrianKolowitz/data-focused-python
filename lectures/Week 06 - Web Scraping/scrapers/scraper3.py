@@ -1,29 +1,27 @@
+"""Full spider that paginates through the Brickset catalogue."""
+
 import scrapy
 
 
 class BrickSetSpider(scrapy.Spider):
-    name = 'brick_spider'
-    start_urls = ['http://brickset.com/sets/year-2016']
+    name = "brick_spider"
+    start_urls = ["http://brickset.com/sets/year-2016"]
 
     def parse(self, response):
-        SET_SELECTOR = '.set'
-        for brickset in response.css(SET_SELECTOR):
-
-            NAME_SELECTOR = 'h1 ::text'
-            PIECES_SELECTOR = './/dl[dt/text() = "Pieces"]/dd/a/text()'
-            MINIFIGS_SELECTOR = './/dl[dt/text() = "Minifigs"]/dd[2]/a/text()'
-            IMAGE_SELECTOR = 'img ::attr(src)'
+        set_selector = ".set"
+        for brickset in response.css(set_selector):
+            name_selector = "h1 ::text"
+            pieces_selector = './/dl[dt/text() = "Pieces"]/dd/a/text()'
+            minifigs_selector = './/dl[dt/text() = "Minifigs"]/dd[2]/a/text()'
+            image_selector = "img ::attr(src)"
             yield {
-                'name': brickset.css(NAME_SELECTOR).extract_first(),
-                'pieces': brickset.xpath(PIECES_SELECTOR).extract_first(),
-                'minifigs': brickset.xpath(MINIFIGS_SELECTOR).extract_first(),
-                'image': brickset.css(IMAGE_SELECTOR).extract_first(),
+                "name": brickset.css(name_selector).get(),
+                "pieces": brickset.xpath(pieces_selector).get(),
+                "minifigs": brickset.xpath(minifigs_selector).get(),
+                "image": brickset.css(image_selector).get(),
             }
 
-        NEXT_PAGE_SELECTOR = '.next a ::attr(href)'
-        next_page = response.css(NEXT_PAGE_SELECTOR).extract_first()
+        next_page_selector = ".next a ::attr(href)"
+        next_page = response.css(next_page_selector).get()
         if next_page:
-            yield scrapy.Request(
-                response.urljoin(next_page),
-                callback=self.parse
-            )
+            yield response.follow(next_page, callback=self.parse)
