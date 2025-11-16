@@ -1,9 +1,11 @@
-# content of test_class.py
-class TestClass(object):
+"""Simple tests demonstrating pytest's class-based style."""
+
+
+class TestClass:
     def test_one(self):
         x = "this"
-        assert 'h' in x
+        assert "h" in x
 
     def test_two(self):
         x = "hello"
-        assert hasattr(x, 'check')
+        assert hasattr(x, "lower")

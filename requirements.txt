@@ -1,0 +1,14 @@
+# Runtime dependencies for the code samples in this repository.
+# The stack targets Python 3.12 or newer.
+numpy>=1.26
+pandas>=2.2
+matplotlib>=3.8
+seaborn>=0.13
+plotly>=5.19
+cufflinks>=0.17.3
+requests>=2.31
+scrapy>=2.11
+scikit-learn>=1.4
+sympy>=1.12
+umap-learn>=0.5
+scipy>=1.11
